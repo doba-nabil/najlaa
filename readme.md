@@ -2,7 +2,9 @@
 php artisan serve
 
 #to update composer and get vendor file :
-composer update
+composer install
+ or 
+ composer update
 
 #to get dataTables on sql : 
 php artisan migrate
