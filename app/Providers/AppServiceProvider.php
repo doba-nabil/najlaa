@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Moderator;
 use App\Models\Option;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -39,6 +41,16 @@ class AppServiceProvider extends ServiceProvider
                 $option->andriod = 'https://play.google.com/';
                 $option->active = 1;
                 $option->save();
+            }
+            $admin = Moderator::find(1);
+            if(!isset($admin)){
+                $admin = new Moderator();
+                $admin->id = 1;
+                $admin->name = 'Admin';
+                $admin->email = 'admin@gmail.com';
+                $admin->password = Hash::make('123456789');
+                $admin->status = 1;
+                $admin->save();
             }
         }
     }
