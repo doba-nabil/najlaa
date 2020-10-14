@@ -513,6 +513,7 @@ class ComposerStaticInit821c9aec49eab32805d5e1902bf4987d
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Admin\\AddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AddressController.php',
         'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
         'App\\Http\\Controllers\\Admin\\AdminauthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminauthController.php',
         'App\\Http\\Controllers\\Admin\\BrandController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BrandController.php',
@@ -530,6 +531,7 @@ class ComposerStaticInit821c9aec49eab32805d5e1902bf4987d
         'App\\Http\\Controllers\\Admin\\SizeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SizeController.php',
         'App\\Http\\Controllers\\Admin\\SubcategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SubcategoryController.php',
         'App\\Http\\Controllers\\Admin\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UserController.php',
+        'App\\Http\\Controllers\\Api\\SignController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/SignController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -546,6 +548,7 @@ class ComposerStaticInit821c9aec49eab32805d5e1902bf4987d
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\AddressRequest' => __DIR__ . '/../..' . '/app/Http/Requests/AddressRequest.php',
         'App\\Http\\Requests\\BrandRequest' => __DIR__ . '/../..' . '/app/Http/Requests/BrandRequest.php',
         'App\\Http\\Requests\\CategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryRequest.php',
         'App\\Http\\Requests\\CityRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CityRequest.php',

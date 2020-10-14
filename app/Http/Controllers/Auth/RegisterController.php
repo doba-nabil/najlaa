@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -68,6 +70,39 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        event(new Registered($user));
+        $this->guard()->login($user);
+        /*UserVerification::generate($user);
+        UserVerification::send($user, 'تفعيل عضويتك');*/
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $user->generateToken();
+        response()->json(['data' => $user->toArray()], 201);
+    }
+
+    public function registerapi(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        event(new Registered($user));
+        $this->guard()->login($user);
+        /*UserVerification::generate($user);
+        UserVerification::send($user, 'تفعيل عضويتك');*/
+        $this->registered($request, $user) ?: redirect($this->redirectPath());
+        return response()->json([
+            'status' =>true,
+            'data' => $user,
+            'code' =>200,
         ]);
     }
 }
