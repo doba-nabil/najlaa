@@ -12,6 +12,7 @@ use App\Models\Size;
 use App\Models\WishList;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -20,6 +21,37 @@ class ProductController extends Controller
         // $this->middleware('auth:api');
         $this->middleware('auth:api')->except('show', 'similar', 'views' ,'types', 'materials' , 'brands',
             'sizes','colors');
+    }
+
+    public function favourites()
+    {
+        try{
+            $products = WishList::where('user_id' , Auth::user()->id)->with(array('product' => function ($query) {
+                $query->select(
+                    'id',
+                    'subcategory_id',
+                    'price',
+                    'discount_price',
+                    'percentage_discount',
+                    'min_qty',
+                    'max_qty',
+                    'code',
+                    'name_'.app()->getLocale().' as name',
+                    'chosen'
+                )->active();
+            }))->get();
+            return response()->json([
+                'status' => true,
+                'data' => $products,
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ',
+                'code' => 400,
+            ]);
+        }
     }
 
     public function show($id, Request $request)

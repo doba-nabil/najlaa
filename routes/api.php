@@ -29,6 +29,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('home/category', 'HomeController@categories');
     Route::get('home/sliders', 'HomeController@sliders');
     Route::resource('all-products', 'ProductController');
+    Route::get('favourites', 'ProductController@favourites');
     Route::get('similar/product/{id}', 'ProductController@similar');
     Route::get('last-views/product/{id}', 'ProductController@views');
 
