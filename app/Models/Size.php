@@ -22,4 +22,9 @@ class Size extends Model
         return  $this->active == 1 ? 'Active' : 'Unactive';
     }
 
+    public function productDetails()
+    {
+        return $this->hasMany('App\Models\ProductDetail');
+    }
+
 }

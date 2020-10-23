@@ -28,9 +28,17 @@ class Category extends Model
     {
         return $query->where('active' , 1);
     }
+    public function scopeHome($query)
+    {
+        return $query->where('home_page' , 1);
+    }
     public function getActive()
     {
         return  $this->active == 1 ? 'Active' : 'Unactive';
+    }
+    public function getHome()
+    {
+        return  $this->home_page == 1 ? 'Shown' : 'Unshown';
     }
     public function parentCategory()
     {
@@ -56,6 +64,6 @@ class Category extends Model
     }
     public function subcategory_products()
     {
-        return $this->hasMany('App\Models\Media' , 'subcategory_id' , 'id')->active();
+        return $this->hasMany('App\Models\Product' , 'subcategory_id' , 'id')->active();
     }
 }

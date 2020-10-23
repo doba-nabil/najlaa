@@ -250,7 +250,12 @@
                                         @enderror
                                     </div>
                                     <div class="text-center">
-                                        <img id="blah" class="mt-3" src="{{ asset('pictures/products/' . $product->mainImage->image) }}"/>
+                                        @if(isset($product->mainImage))
+                                            <img id="blah" class="mt-3" src="{{ asset('pictures/products/' . $product->mainImage->image) }}"/>
+                                        @else
+                                            <img id="blah" class="mt-3" src="{{ asset('backend/assets/images/empty.jpg') }}"/>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +277,7 @@
                                                 <img width="100" height="100" src="{{ asset('pictures/products/' . $image->image) }}">
                                                 <a  style="width: 100px;border-radius: 0;text-align: center" title="" onclick="return false;" object_id="{{ $image->id }}"
                                                     delete_url="/delete_product_image/" class="btn btn-danger edit-btn-table delete_event_image" href="#">
-                                                    حذف
+                                                    Delete
                                                 </a>
                                             </div>
                                         @endforeach

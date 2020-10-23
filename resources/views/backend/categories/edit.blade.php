@@ -61,6 +61,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox"
+                                           @if($category->home_page == 1) checked="" @endif
+                                           name="home_page" class="custom-control-input" id="customCheck2" checked="">
+                                    <label class="custom-control-label" for="customCheck2">Show in Home Page</label>
+                                </div>
+                            </div>
+                        </div>
                         <button class="btn btn-primary" type="submit">Submit</button>
                     </form>
                 </div>

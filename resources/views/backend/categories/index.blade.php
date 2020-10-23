@@ -27,6 +27,7 @@
                             <th>Image</th>
                             <th>Name</th>
                             <th>Active</th>
+                            <th>Home Page</th>
                             <th>Sub Categories</th>
                             <th>Options</th>
                         </tr>
@@ -44,6 +45,7 @@
                                 </td>
                                 <td>{{ $category->name_ar }} / {{ $category->name_en }}</td>
                                 <td>{{ $category->getActive() }}</td>
+                                <td>{{ $category->getHome() }}</td>
                                 <td>{{ count($category->subcategories) }}</td>
                                 <td>
                                     <a href="{{ route('categories.edit' , $category->slug) }}"

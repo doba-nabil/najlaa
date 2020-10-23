@@ -87,6 +87,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('sliders.index') }}" class="waves-effect">
+                        <i class="fas fa-images"></i>
+                        <span>Advertising banners</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('indexo') }}" class="waves-effect">
                         <i class="fas fa-envelope"></i>
                         <span>User Messages</span>

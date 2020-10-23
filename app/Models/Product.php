@@ -22,8 +22,9 @@ class Product extends Model
         'created_at','updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+        'created_at', 'updated_at','subcategory_id' , 'brand_id' , 'material_id'
     ];
+
     public function scopeActive($query)
     {
         return $query->where('active' , 1);
@@ -64,5 +65,9 @@ class Product extends Model
     public function subImages()
     {
         return $this->morphMany('App\Models\Image', 'imageable', 'imageable_type', 'imageable_id')->where('type' , 'sub');
+    }
+    public function wishes()
+    {
+        return $this->hasMany('App\Models\WishList');
     }
 }

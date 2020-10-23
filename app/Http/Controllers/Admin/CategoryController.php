@@ -64,6 +64,11 @@ class CategoryController extends Controller
             } else {
                 $category->active = 0;
             }
+            if ($request->home_page) {
+                $category->home_page = 1;
+            } else {
+                $category->home_page = 0;
+            }
             $category->save();
             if ($request->hasFile('image')) {
                 $this->saveimage($request->image, 'pictures/categories', $category->id , Category::class, 'main');
@@ -119,6 +124,11 @@ class CategoryController extends Controller
                 $category->active = 1;
             } else {
                 $category->active = 0;
+            }
+            if ($request->home_page) {
+                $category->home_page = 1;
+            } else {
+                $category->home_page = 0;
             }
             $category->save();
             if ($request->hasFile('image')) {

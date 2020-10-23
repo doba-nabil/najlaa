@@ -68,6 +68,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('currencies', 'CurrencyController', ['except' => ['show']]);
     Route::delete('delete_currencies', 'CurrencyController@delete_currencies')->name('delete_currencies');
     /*********** end currencies route ***********/
+    /***********  ad Banners route ***********/
+    Route::resource('sliders', 'SliderController', ['except' => ['show']]);
+    Route::delete('delete_sliders', 'SliderController@delete_sliders')->name('delete_sliders');
+    /*********** end ad Banners route ***********/
     /***********  pages route ***********/
     Route::resource('pages', 'PageController', ['except' => ['show']]);
     Route::delete('delete_pages', 'PageController@delete_pages')->name('delete_pages');
@@ -99,8 +103,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     /*********** end options route ***********/
     Route::resource('moderators', 'ModeratorController', ['except' => ['show']]);
     //***********  moderator route ***********/
+
 });
 /************* ajax select routes ******************/
 Route::get('/ajax-subcats', 'Admin\AdminController@getsubcategories');
 Route::post('read', 'Admin\AdminController@readNotification');
+
+
 
