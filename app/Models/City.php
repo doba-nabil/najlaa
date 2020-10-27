@@ -10,7 +10,7 @@ class City extends Model
         'name_ar', 'name_en','country_id', 'active' ,'created_at' , 'updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+        'created_at', 'updated_at','country_id',
     ];
     public function scopeActive($query)
     {

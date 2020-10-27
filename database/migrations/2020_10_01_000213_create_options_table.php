@@ -19,6 +19,9 @@ class CreateOptionsTable extends Migration
             $table->string('insta');
             $table->string('whats');
             $table->string('phone');
+            $table->string('email');
+            $table->string('address_ar');
+            $table->string('address_en');
             $table->string('ios');
             $table->string('andriod');
             $table->tinyInteger('active')->default(1);

@@ -20,38 +20,7 @@ class ProductController extends Controller
     {
         // $this->middleware('auth:api');
         $this->middleware('auth:api')->except('show', 'similar', 'views' ,'types', 'materials' , 'brands',
-            'sizes','colors');
-    }
-
-    public function favourites()
-    {
-        try{
-            $products = WishList::where('user_id' , Auth::user()->id)->with(array('product' => function ($query) {
-                $query->select(
-                    'id',
-                    'subcategory_id',
-                    'price',
-                    'discount_price',
-                    'percentage_discount',
-                    'min_qty',
-                    'max_qty',
-                    'code',
-                    'name_'.app()->getLocale().' as name',
-                    'chosen'
-                )->active();
-            }))->get();
-            return response()->json([
-                'status' => true,
-                'data' => $products,
-                'code' => 200,
-            ]);
-        }catch (\Exception $e){
-            return response()->json([
-                'status' => false,
-                'msg' => 'يوجد خطأ',
-                'code' => 400,
-            ]);
-        }
+            'sizes','colors','search');
     }
 
     public function show($id, Request $request)
@@ -110,6 +79,8 @@ class ProductController extends Controller
                     );
                 })
             )->first();
+        $product->views = $product->views + 1;
+        $product->save();
         $products = [];
         if ($request->bearerToken()) {
             $user = User::where('api_token', $request->bearerToken())->first();
@@ -269,6 +240,12 @@ class ProductController extends Controller
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
                 )->with('wishes')->active();
             }))->select(
                 'id',
@@ -302,6 +279,12 @@ class ProductController extends Controller
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
                 )->with('wishes')->active();
             }))->select(
                 'id',
@@ -340,6 +323,12 @@ class ProductController extends Controller
                         'code',
                         'name_'.app()->getLocale().' as name',
                         'chosen'
+                    )->with(array('mainImage' => function ($query) {
+                            $query->select(
+                                'image',
+                                'imageable_id'
+                            );
+                        })
                     );
                 }));
             }))->active()->get();
@@ -376,12 +365,54 @@ class ProductController extends Controller
                         'code',
                         'name_'.app()->getLocale().' as name',
                         'chosen'
+                    )->with(array('mainImage' => function ($query) {
+                            $query->select(
+                                'image',
+                                'imageable_id'
+                            );
+                        })
                     );
                 }));
             }))->active()->get();
             return response()->json([
                 'status' => true,
                 'data' => $categories,
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try{
+            $word = $request->word;
+            $products =  Product::where('name_ar', 'LIKE', "%$word%")->orWhere('name_en', 'LIKE', "%$word%")->select(
+                'id',
+                'subcategory_id',
+                'price',
+                'discount_price',
+                'percentage_discount',
+                'min_qty',
+                'max_qty',
+                'code',
+                'name_'.app()->getLocale().' as name',
+                'chosen'
+            )->with(array('mainImage' => function ($query) {
+                    $query->select(
+                        'image',
+                        'imageable_id'
+                    );
+                })
+            )->active()->get();
+            return response()->json([
+                'status' => true,
+                'data' => $products,
                 'code' => 200,
             ]);
         }catch (\Exception $e){

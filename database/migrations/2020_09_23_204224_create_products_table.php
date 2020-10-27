@@ -35,6 +35,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('material_id')->unsigned()->index();
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
             $table->tinyInteger('active')->default(0);
+            $table->integer('views')->default(0);
             $table->tinyInteger('chosen')->default(0);
             $table->timestamps();
         });

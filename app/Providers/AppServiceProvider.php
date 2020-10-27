@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Moderator;
 use App\Models\Option;
+use App\Models\Page;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -37,6 +38,9 @@ class AppServiceProvider extends ServiceProvider
                 $option->insta = 'instagram.com';
                 $option->phone = '99999900000000';
                 $option->whats = '99999900000000';
+                $option->email = 'najla@gmail.com';
+                $option->address_ar = '123 sharp Rd , Doha , Qatar';
+                $option->address_en = '123 sharp Rd , Doha , Qatar';
                 $option->ios = 'https://apps.apple.com/';
                 $option->andriod = 'https://play.google.com/';
                 $option->active = 1;
@@ -51,6 +55,28 @@ class AppServiceProvider extends ServiceProvider
                 $admin->password = Hash::make('123456789');
                 $admin->status = 1;
                 $admin->save();
+            }
+            $page = Page::find(1);
+            if(!isset($page)){
+                $page = new Page();
+                $page->id = 1;
+                $page->name_ar = 'Legal Information';
+                $page->name_en = 'Legal Information';
+                $page->body_ar = 'Legal Information body';
+                $page->body_en = 'Legal Information body';
+                $page->slug = 'legal-information';
+                $page->active = 1;
+                $page->save();
+
+                $page = new Page();
+                $page->id = 2;
+                $page->name_ar = 'Privacy Policy';
+                $page->name_en = 'Privacy Policy';
+                $page->body_ar = 'Privacy Policy body';
+                $page->body_en = 'Privacy Policy body';
+                $page->slug = 'privacy-policy';
+                $page->active = 1;
+                $page->save();
             }
         }
     }

@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','created_at' , 'updated_at','active'
     ];
     public function generateToken()
     {
@@ -50,5 +50,9 @@ class User extends Authenticatable
     public function getActive()
     {
         return  $this->active == 1 ? 'Unblocked' : 'Blocked';
+    }
+    public function addresses()
+    {
+        return $this->hasMany('App\Models\Address');
     }
 }

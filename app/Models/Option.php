@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Option extends Model
 {
     protected $fillable = [
-        'face', 'insta','whats' ,'phone' , 'active' , 'ios' , 'andriod','created_at' , 'updated_at'
+        'face', 'insta','whats' ,'phone' , 'active' , 'ios' , 'andriod','email','address_ar','address_en','created_at' , 'updated_at'
     ];
     protected $hidden = [
         'created_at', 'updated_at',

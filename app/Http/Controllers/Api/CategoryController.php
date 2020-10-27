@@ -84,6 +84,12 @@ class CategoryController extends Controller
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
                 )->with('wishes')->active();
             }))->select(
                     'id',

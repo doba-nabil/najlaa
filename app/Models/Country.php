@@ -26,7 +26,7 @@ class Country extends Model
     }
     public function currency()
     {
-        return $this->belongsTo('App\Models\Currency');
+        return $this->hasMany('App\Models\Currency' , 'country_id');
     }
 
 }

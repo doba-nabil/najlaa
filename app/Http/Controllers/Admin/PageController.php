@@ -128,7 +128,12 @@ class PageController extends Controller
     {
         try {
             $page = Page::find($id);
-            $page->delete();
+            if($page->id > 2){
+                $page->delete();
+            }else{
+                return redirect()->back()->with('error', 'you can\'t delete this pages');
+            }
+
             return response()->json([
                 'success' => 'Record deleted successfully!'
             ]);
@@ -141,7 +146,7 @@ class PageController extends Controller
     public function delete_pages()
     {
         try {
-            $pages = Page::all();
+            $pages = Page::where('id' , '>' , 2)->get();
             if (count($pages) > 0) {
                 foreach ($pages as $page) {
                     $page->delete();

@@ -10,7 +10,7 @@ class Address extends Model
         'fullname', 'street_address','building_no', 'active' , 'city_id' ,'user_id' ,'area' , 'phone','created_at' , 'updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+        'created_at', 'updated_at' , 'city_id' , 'user_id',
     ];
     public function scopeActive($query)
     {

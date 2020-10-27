@@ -89,7 +89,7 @@
                 <li>
                     <a href="{{ route('sliders.index') }}" class="waves-effect">
                         <i class="fas fa-images"></i>
-                        <span>Advertising banners</span>
+                        <span>Ad banners ( Slider )</span>
                     </a>
                 </li>
                 <li>

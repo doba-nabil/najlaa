@@ -3,18 +3,67 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class CountriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function cities()
+    {
+        try{
+           $cities = City::active()->select(
+               'id',
+               'country_id',
+               'name_' . app()->getLocale() . ' as name'
+           )->with(array('country' => function ($query) {
+                $query->select(
+                    'id',
+                    'code',
+                    'name_' . app()->getLocale() . ' as name'
+                );
+            }))->orderBy('id' , 'desc')->get();
+            return response()->json([
+                'status' => true,
+                'data' => $cities,
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
+
     public function index()
     {
-        //
+        try{
+            $countries = Country::active()->select(
+                'id',
+                'name_' . app()->getLocale() . ' as name'
+            )->with(array('currency' => function ($query) {
+                $query->select(
+                    'id',
+                    'code',
+                    'equal',
+                    'country_id',
+                    'name_' . app()->getLocale() . ' as name'
+                )->active();
+            }))->orderBy('id' , 'desc')->get();
+            return response()->json([
+                'status' => true,
+                'data' => $countries,
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
     }
 
     /**
