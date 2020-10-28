@@ -17,6 +17,7 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
+            $table->string('slug');
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });

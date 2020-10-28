@@ -55,7 +55,7 @@ class BrandController extends Controller
      */
     public function store(BrandRequest $request)
     {
-        try {
+
             $brand = new Brand();
             $brand->name_ar = $request->name_ar;
             $brand->name_en = $request->name_en;
@@ -69,9 +69,7 @@ class BrandController extends Controller
                 $this->saveimage($request->image, 'pictures/brands', $brand->id , Brand::class, 'main');
             }
             return redirect()->route('brands.index')->with('done', 'Added Successfully ....');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
     }
 
     /**
