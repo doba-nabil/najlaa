@@ -48,7 +48,7 @@ class CountryController extends Controller
      */
     public function store(CountryRequest $request)
     {
-        try {
+
             $country = new Country();
             $country->name_ar = $request->name_ar;
             $country->name_en = $request->name_en;
@@ -63,9 +63,7 @@ class CountryController extends Controller
                 $this->saveimage($request->image, 'pictures/countries', $country->id , Country::class, 'main');
             }
             return redirect()->route('countries.index')->with('done', 'Added Successfully ....');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
     }
 
     /**

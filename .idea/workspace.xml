@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/backend/assets/images/logo-dark.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/backend/assets/images/logo-dark.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/backend/assets/images/logo-light.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/backend/assets/images/logo-light.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/backend/assets/images/logo-sm-dark.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/backend/assets/images/logo-sm-dark.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/backend/assets/images/logo-sm-light.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/backend/assets/images/logo-sm-light.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/header.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,15 +58,20 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="header.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/header.blade.php">
+      <file leaf-file-name="head.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/head.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-              <folding>
-                <element signature="n#style#0;n#img#0;n#span#1;n#a#0;n#div#0;n#div#0;n#div#0;n#header#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#span#1;n#a#1;n#div#0;n#div#0;n#div#0;n#header#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="138">
+              <caret line="6" column="85" selection-start-line="6" selection-start-column="85" selection-end-line="6" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CityController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/CityController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -122,8 +120,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/backend/categories/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/backend/categories/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/Category.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/categories/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/CategoryController.php" />
@@ -173,6 +169,8 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/CountriesController.php" />
         <option value="$PROJECT_DIR$/app/Models/Currency.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/layout/header.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/backend/layout/head.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/CityController.php" />
       </list>
     </option>
   </component>
@@ -319,28 +317,28 @@
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -405,16 +403,15 @@
       <workItem from="1603116063836" duration="6939000" />
       <workItem from="1603460483564" duration="6210000" />
       <workItem from="1603720007112" duration="15283000" />
-      <workItem from="1603812380453" duration="14269000" />
+      <workItem from="1603812380453" duration="15059000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184871000" />
+    <option name="totallyTimeSpent" value="185661000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23600605" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
@@ -465,18 +462,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Models/Color.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://H:/laravel blogs 2/tajerz2 new/app/Http/Controllers/Api/apicontroller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-87" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/choose_country.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
@@ -795,17 +780,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_09_23_205127_create_product_details_table.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+        <state relative-caret-position="184">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
           <folding>
             <element signature="n#style#0;n#img#0;n#span#1;n#a#0;n#div#0;n#div#0;n#div#0;n#header#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#span#1;n#a#1;n#div#0;n#div#0;n#div#0;n#header#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_09_23_205127_create_product_details_table.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/head.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="85" selection-start-line="6" selection-start-column="85" selection-end-line="6" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/CityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="13" />
         </state>
       </provider>
     </entry>
