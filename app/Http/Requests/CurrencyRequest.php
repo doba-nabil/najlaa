@@ -26,7 +26,7 @@ class CurrencyRequest extends FormRequest
         return [
             'name_ar' => 'required|max:100|min:1|string',
             'name_en' => 'required|max:100|min:1|string',
-            'country_id' => 'required',
+            'country_id' => 'required|unique:currencies',
             'code' => 'required',
         ];
     }

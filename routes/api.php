@@ -77,4 +77,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::post('contact', 'HomeController@contact');
     /* search */
     Route::post('search', 'ProductController@search');
+    /* country */
+    Route::post('chose_country', 'CountriesController@choose_country');
+    Route::post('change_country', 'CountriesController@change_country');
 });

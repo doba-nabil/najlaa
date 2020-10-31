@@ -1,6 +1,5 @@
 /node_modules
 /storage/*.key
-/public/pictures
 /public/hot
 /public/storage
 /public/storage_old

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ChooseConuntry;
 use App\Models\Color;
+use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Material;
 use App\Models\Product;
 use App\Models\Size;
@@ -93,6 +96,26 @@ class ProductController extends Controller
         } else {
             $product['isFav'] = 0;
         }
+        $chose_country = ChooseConuntry::where('device_token' , $request->header('device_token'))->first();
+        if(isset($chose_country)){
+            $currency = Currency::where('country_id' , $chose_country->country_id)->first();
+        }else{
+            $currency = Currency::find(3);
+        }
+
+        if(empty($currency->equal) && $currency->country_id != 2){
+            $url = "https://www.google.com/search?q=QAR+to+".$currency->code;
+            $get = file_get_contents($url);
+            $data = preg_split('/\D\s(.*?)\s=\s/',$get);
+            $exhangeRate = (float) substr($data[1],0,7);
+            $result = round($exhangeRate , 3);
+            $result;
+        }elseif($currency->country_id == 2){
+            $result = 1;
+        };
+        $product['price'] = round($product->price * $result);
+        $product['discount_price'] = round($product->discount_price * $result);
+        $product['currency_code'] = $currency->code;
         array_push($products, $product);
         if (isset($product)) {
             return response()->json([
