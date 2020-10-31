@@ -23,11 +23,31 @@ class CurrencyRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name_ar' => 'required|max:100|min:1|string',
-            'name_en' => 'required|max:100|min:1|string',
-            'country_id' => 'required|unique:currencies',
-            'code' => 'required',
-        ];
+        $rules = [];
+        switch($this->method())
+        {
+            case 'POST':
+                {
+                    $rules = [
+                        'name_ar' => 'required|max:100|min:1|string',
+                        'name_en' => 'required|max:100|min:1|string',
+                        'country_id' => 'required|unique:currencies',
+                        'code' => 'required',
+                    ];
+                }
+                break;
+            case 'PATCH':
+                {
+                    $rules = [
+                        'name_ar' => 'required|max:100|min:1|string',
+                        'name_en' => 'required|max:100|min:1|string',
+                        'code' => 'required',
+                    ];
+                }
+                break;
+            default:
+                break;
+        }
+        return $rules;
     }
 }

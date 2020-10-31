@@ -112,7 +112,7 @@ class CategoryController extends Controller
     public function subcategory($id)
     {
         try{
-            $category = Category::where('id' , $id)->whereNotNull('parent_id')->with('products.wishes')->with(array('subcategory_products'=>function($query){
+            $category = Category::where('id' , $id)->whereNotNull('parent_id')->with('subcategory_products.wishes')->with(array('subcategory_products'=>function($query){
                     $query->select(
                         'id',
                         'subcategory_id',

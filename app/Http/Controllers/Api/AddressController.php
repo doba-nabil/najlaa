@@ -60,7 +60,7 @@ class AddressController extends Controller
     }
     public function store(Request $request)
     {
-        try{
+
             $user = User::where('api_token', $request->bearerToken())->first();
             $userID = $user->id;
             $address = new Address();
@@ -87,13 +87,7 @@ class AddressController extends Controller
                 'data' => $address,
                 'code' => 200,
             ]);
-        }catch (\Exception $e){
-            return response()->json([
-                'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
-                'code' => 400,
-            ]);
-        }
+
     }
     public function show(Request $request ,$id)
     {

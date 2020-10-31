@@ -61,15 +61,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="validationCustom03">Country</label>
-                                    <select name="country_id" class="form-control select2" id="validationCustom03"
-                                            required>
-                                        @foreach($countries as $country)
-                                            <option
-                                                    @if($country->id == $currency->country_id) selected @endif
-                                            value="{{ $country->id }}">{{ $country->name_ar }}
-                                                / {{ $country->name_en }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input class="form-control select2" id="validationCustom03" value="{{ $currency->country->name_ar }}/ {{ $currency->country->name_ar }}" readonly="">
                                     @error('country_id')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
