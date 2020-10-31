@@ -26,12 +26,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        try {
+
             $categories = Category::whereNull('parent_id')->orWhere('parent_id', '=', 0)->orderBy('id', 'desc')->get();
             return view('backend.categories.index',compact('categories'));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
     }
     /**
      * Show the form for creating a new resource.
@@ -40,11 +38,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        try {
+
             return view('backend.categories.create');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
     }
 
     /**
@@ -114,7 +110,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        try {
+
             $category = Category::find($id);
             $category->name_ar = $request->name_ar;
             $category->name_en = $request->name_en;
@@ -133,9 +129,7 @@ class CategoryController extends Controller
                 $this->editimage($request->image , 'pictures/categories' , $category->id , Category::class , 'main');
             }
             return redirect()->route('categories.index')->with('done', 'Edited Successfully');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
 
     }
 
@@ -147,16 +141,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        try {
+
             $category = Category::find($id);
             $this->deleteimages($category->id , 'pictures/categories/' , Category::class);
             $category->delete();
             return response()->json([
                 'success' => 'Record deleted successfully!'
             ]);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
 
     }
 
