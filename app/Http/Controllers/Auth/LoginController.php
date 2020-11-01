@@ -56,7 +56,7 @@ class LoginController extends Controller
             $userr = $user->select('id' , 'name' , 'email' , 'active','api_token')->first();
             return response()->json([
                 'status' => true,
-                'data' => $userr,
+                'data' => $user,
                 'code' => 200,
             ]);
         }
