@@ -295,7 +295,7 @@
                                     <input
                                             @if($product->chosen == 1) checked="" @endif
                                             type="checkbox" name="chosen" class="custom-control-input" id="customCheck2"
-                                           checked="">
+                                           value="1">
                                     <label class="custom-control-label" for="customCheck2">Chosen</label>
                                 </div>
                             </div>

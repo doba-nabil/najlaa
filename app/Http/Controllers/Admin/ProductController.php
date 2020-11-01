@@ -102,7 +102,7 @@ class ProductController extends Controller
             if ($request->colors) {
                 $this->saveDetails($request->colors, $product->id , 'color');
             }
-            return redirect()->route('products.index')->with('done', 'Added Successfully ....');
+            return redirect()->route('products.show' , $product->slug)->with('done', 'Added Successfully ....');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -218,7 +218,7 @@ class ProductController extends Controller
             if ($request->colors) {
                 $this->editDetails($request->colors, $product->id , 'color');
             }
-            return redirect()->route('products.index')->with('done', 'Added Successfully ....');
+            return redirect()->route('products.show' , $product->slug)->with('done', 'Edited Successfully ....');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }

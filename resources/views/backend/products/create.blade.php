@@ -250,7 +250,7 @@
                             <div class="col-md-4">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" name="chosen" class="custom-control-input" id="customCheck2"
-                                           checked="">
+                                           checked="" value="1">
                                     <label class="custom-control-label" for="customCheck2">Chosen</label>
                                 </div>
                             </div>

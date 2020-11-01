@@ -62,7 +62,8 @@ class HomeController extends Controller
                         'imageable_id'
                     );
                 })
-            )->active()->paginate(3);
+            )->active()->get(3);
+            $categories = $categories->slice(0,3);
             return response()->json([
                 'status' => true,
                 'data' => $categories,
