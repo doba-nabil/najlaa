@@ -54,6 +54,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('whatsapp', 'OptionsController@whatsapp');
     Route::get('facebook', 'OptionsController@facebook');
     Route::get('instagram', 'OptionsController@insta');
+    Route::get('social', 'OptionsController@social');
     /* address */
     Route::get('addresses', 'AddressController@index');
     Route::get('address/{id}', 'AddressController@show');
