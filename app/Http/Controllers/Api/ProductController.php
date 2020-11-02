@@ -123,7 +123,6 @@ class ProductController extends Controller
                 'discount_price',
                 'percentage_discount'
             )->active()->where('id', '!=', $id)->orderBy('id', 'desc')->get();
-
             $products = [];
             foreach($similar_products as $one_product){
                 $product = $one_product;

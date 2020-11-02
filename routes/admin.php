@@ -87,7 +87,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     /*********** end addresses route ***********/
     /***********  users route ***********/
     Route::resource('users', 'UserController');
-    Route::get('users/blocked', 'UserController@blocked')->name('blocked');
+    Route::get('blocked', 'UserController@blocked')->name('blocked');
     Route::get('users/blocked_btn/{id}', 'UserController@block_user')->name('blocked_btn');
     Route::delete('delete_users', 'UserController@delete_users')->name('delete_users');
     /*********** end users route ***********/

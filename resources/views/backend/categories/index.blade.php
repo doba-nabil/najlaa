@@ -29,6 +29,7 @@
                             <th>Active</th>
                             <th>Home Page</th>
                             <th>Sub Categories</th>
+                            <th>Products</th>
                             <th>Options</th>
                         </tr>
                         </thead>
@@ -47,6 +48,7 @@
                                 <td>{{ $category->getActive() }}</td>
                                 <td>{{ $category->getHome() }}</td>
                                 <td>{{ count($category->subcategories) }}</td>
+                                <td>{{ count($category->category_products) }}</td>
                                 <td>
                                     <a href="{{ route('categories.edit' , $category->slug) }}"
                                        class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
