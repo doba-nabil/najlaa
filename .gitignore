@@ -1,6 +1,8 @@
 /node_modules
 /storage/*.key
 /public/hot
+/public/pictures
+/public/pictures/*
 /public/storage
 /public/storage_old
 /vendor
@@ -13,5 +15,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 composer.lock
-
-.idea/

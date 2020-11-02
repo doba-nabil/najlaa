@@ -45,25 +45,72 @@ class CategoryController extends Controller
     }
     public function show($id)
     {
-        $category = Category::whereNull('parent_id')->with(array('subCategories'=>function($query){ $query->select(
-            'id',
-            'parent_id',
-            'name_'.app()->getLocale().' as name'
-        )->active();}))
-            ->where('id',$id)->select(
-            'id',
-            'name_'.app()->getLocale().' as name'
-        )->active()->first();
-        if(isset($category)) {
-            return response()->json([
-                'status' => true,
-                'data' => $category,
-                'code' => 200,
-            ]);
+        $categoryy = Category::find($id);
+        if(count($categoryy->subCategories) > 0){
+            $category = Category::whereNull('parent_id')->with(array('subCategories'=>function($query){ $query->select(
+                'id',
+                'parent_id',
+                'name_'.app()->getLocale().' as name'
+            )->active();}))
+                ->where('id',$id)->select(
+                    'id',
+                    'name_'.app()->getLocale().' as name'
+                )->active()->first();
+            if(isset($category)) {
+                return response()->json([
+                    'status' => true,
+                    'data' => $category,
+                    'code' => 200,
+                ]);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'تصنيف غير موجودة',
+                    'code' => 400,
+                ]);
+            }
+        }elseif(count($categoryy->category_products) > 0 && count($categoryy->subCategories) == 0){
+            $category = Category::whereNull('parent_id')->with(array('category_products'=>function($query){
+                $query->select(
+                    'id',
+                    'category_id',
+                    'price',
+                    'discount_price',
+                    'percentage_discount',
+                    'min_qty',
+                    'max_qty',
+                    'code',
+                    'name_'.app()->getLocale().' as name',
+                    'chosen'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->with('wishes')->active()->paginate(10);
+            }))
+                ->where('id',$id)->select(
+                    'id',
+                    'name_'.app()->getLocale().' as name'
+                )->active()->withCount('category_products')->first();
+            if(isset($category)) {
+                return response()->json([
+                    'status' => true,
+                    'data' => $category,
+                    'code' => 200,
+                ]);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'تصنيف غير موجودة',
+                    'code' => 400,
+                ]);
+            }
         }else{
             return response()->json([
                 'status' => false,
-                'msg' => 'تصنيف غير موجودة',
+                'msg' => 'لا يوجد محتوى',
                 'code' => 400,
             ]);
         }
@@ -90,7 +137,7 @@ class CategoryController extends Controller
                             'imageable_id'
                         );
                     })
-                )->with('wishes')->active();
+                )->with('wishes')->active()->withCount('subcategory_products')->paginate(10);
             }))->select(
                     'id',
                     'name_'.app()->getLocale().' as name'

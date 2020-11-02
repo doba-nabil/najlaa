@@ -48,8 +48,11 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('privacy', 'HomeController@privacy');
     Route::get('legal', 'HomeController@legal');
     Route::get('home/hot_offers', 'HomeController@hot_offers');
+    Route::get('home/all_hot_offers', 'HomeController@all_hot_offers');
     Route::get('home/chosen', 'HomeController@chosen');
+    Route::get('home/all_chosen', 'HomeController@all_chosen');
     Route::get('home/interests', 'HomeController@interests');
+    Route::get('home/all_interests', 'HomeController@all_interests');
     Route::get('wish-list', 'WishListController@favourites');
     Route::get('whatsapp', 'OptionsController@whatsapp');
     Route::get('facebook', 'OptionsController@facebook');
