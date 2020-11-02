@@ -2,6 +2,7 @@
 /storage/*.key
 /public/hot
 /public/pictures
+/public/pictures/*
 /public/storage
 /public/storage_old
 /vendor
