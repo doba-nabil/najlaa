@@ -137,11 +137,11 @@ class CategoryController extends Controller
                             'imageable_id'
                         );
                     })
-                )->with('wishes')->active()->withCount('subcategory_products')->paginate(10);
+                )->with('wishes')->active()->paginate(10);
             }))->select(
                     'id',
                     'name_'.app()->getLocale().' as name'
-            )->active()->get();
+            )->active()->withCount('subcategory_products')->get();
             return response()->json([
                 'status' => true,
                 'data' => $categories,
