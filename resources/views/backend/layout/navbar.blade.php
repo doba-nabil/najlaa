@@ -77,7 +77,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('users.index') }}">All Users</a></li>
-                        <li><a href="{{ route('blocked') }}">Blocked users</a></li>
+                        <li><a href="{{ route('blocked') }}">Blocked Users</a></li>
                     </ul>
                 </li>
                 <li>
