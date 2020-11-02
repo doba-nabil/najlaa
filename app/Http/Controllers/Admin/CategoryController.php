@@ -55,7 +55,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        try {
+
             $category = new Category();
             $category->name_ar = $request->name_ar;
             $category->name_en = $request->name_en;
@@ -74,9 +74,7 @@ class CategoryController extends Controller
                 $this->saveimage($request->image, 'pictures/categories', $category->id , Category::class, 'main');
             }
             return redirect()->route('categories.index')->with('done', 'Added Successfully ....');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
     }
 
     /**
