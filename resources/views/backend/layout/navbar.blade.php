@@ -33,6 +33,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('categories.index') }}">Main Categories</a></li>
                         <li><a href="{{ route('subcategories.index') }}">Sub Categories</a></li>
+                        <li><a href="{{ route('category_sliders.index') }}">Categories Slider</a></li>
                     </ul>
                 </li>
                 <li>

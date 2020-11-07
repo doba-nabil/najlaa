@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -65,5 +66,21 @@ class LoginController extends Controller
             'msg' => 'مستخدم غير موجود',
             'code' => 400,
         ]);
+    }
+    public function logoutapi(Request $request){
+        if ($request->bearerToken()) {
+            Auth::logout();
+            return response()->json([
+                'status' => true,
+                'msg' => 'تم تسجيل الخروج',
+                'code' => 200,
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ',
+                'code' => 400,
+            ]);
+        }
     }
 }

@@ -72,10 +72,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('sliders', 'SliderController', ['except' => ['show']]);
     Route::delete('delete_sliders', 'SliderController@delete_sliders')->name('delete_sliders');
     /*********** end ad Banners route ***********/
+    /***********  category Banners route ***********/
+    Route::resource('category_sliders', 'CategorySliderController', ['except' => ['show']]);
+    Route::delete('delete_category_sliders', 'CategorySliderController@delete_category_sliders')->name('delete_category_sliders');
+    /*********** end category Banners route ***********/
     /***********  pages route ***********/
     Route::resource('pages', 'PageController', ['except' => ['show']]);
     Route::delete('delete_pages', 'PageController@delete_pages')->name('delete_pages');
     /*********** end pages route ***********/
+    /***********  faqs route ***********/
+    Route::resource('faqs', 'FaqController', ['except' => ['show']]);
+    Route::delete('delete_faqs', 'FaqController@delete_faqs')->name('delete_faqs');
+    /*********** end faqs route ***********/
     /***********  addresses route ***********/
     Route::get('addresses/create/{userId}', 'AddressController@create')->name('addresses_create');
     Route::post('addresses/create_form/{userId}', 'AddressController@store')->name('create_form');

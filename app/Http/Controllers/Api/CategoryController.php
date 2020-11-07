@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\CategorySlider;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -11,7 +12,61 @@ class CategoryController extends Controller
     public function __construct()
     {
         // $this->middleware('auth:api');
-        $this->middleware('auth:api')->except('index' , 'show' , 'subcategories' , 'subcategory');
+        $this->middleware('auth:api')->except('index' , 'show' , 'subcategories' , 'subcategory','category_sliders');
+    }
+    public function category_sliders()
+    {
+        try{
+            $sliders = CategorySlider::select(
+                'id',
+                'title_'.app()->getLocale().' as title',
+                'category_id',
+                'subtitle_'.app()->getLocale().' as subtitle'
+            )->active()->with(array('mainImage'=>function($query){
+                    $query->select(
+                        'image',
+                        'imageable_id'
+                    );
+                })
+            )->get();
+            $sliderss = [];
+            foreach ($sliders as $slider){
+                if(!empty($slider->category_id)){
+                    $category = Category::where('id' , $slider->category_id)->first();
+                    if($category->active == 1){
+                        array_push($sliderss , $slider);
+                        if(empty($category->parent_id)){
+                            $slider['link'] = \Request::root().'/api/all-categories/' . $slider->category_id;
+                            $slider['kind'] = 'category';
+                        }elseif(!empty($category->parent_id)){
+                            $slider['link'] = \Request::root().'/api/subcategory/' . $slider->category_id;
+                            $slider['kind'] = 'subcategory';
+                        }
+                    }
+                }else{
+                    array_push($sliderss , $slider);
+                }
+            }
+            if(count($sliderss) > 0){
+                return response()->json([
+                    'status' => true,
+                    'data' => $sliderss,
+                    'code' => 200,
+                ]);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'لا يوجد عروض متوفرة',
+                    'code' => 400,
+                ]);
+            }
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
     }
     public function index()
     {

@@ -20,9 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register', 'Auth\RegisterController@registerapi');
 Route::post('login', 'Auth\LoginController@loginapi');
-
+Route::group(['middleware' => 'localization'], function () {
+    /********* logout **************/
+    Route::post('/logout', 'Auth\LoginController@logoutapi');
+});
 Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function () {
     Route::resource('page', 'PageController', ['only' => ['index', 'show']]);
+    Route::get('faq', 'PageController@faq');
     Route::resource('all-categories', 'CategoryController', ['only' => ['index', 'show']]);
     Route::get('all-subcategories', 'CategoryController@subcategories');
     Route::get('subcategory/{id}', 'CategoryController@subcategory');
@@ -42,8 +46,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('all-sizes', 'ProductController@sizes');
     Route::get('all-colors', 'ProductController@colors');
 
-    /******** new get **************/
-    /******** new get **************/
     /******** new get **************/
     Route::get('privacy', 'HomeController@privacy');
     Route::get('legal', 'HomeController@legal');
@@ -66,7 +68,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('contact-phone', 'HomeController@contact_phone');
     Route::get('all-cities', 'CountriesController@cities');
     Route::get('all-countries', 'CountriesController@index');
-
+    Route::get('cat-slider', 'CategoryController@category_sliders');
     /******** post ************************************************************/
     /* add and delet from wishlist */
     Route::post('add_delete_wishlist', 'WishListController@add_delete_wishlist');
@@ -84,4 +86,5 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     /* country */
     Route::post('chose_country', 'CountriesController@choose_country');
     Route::post('change_country', 'CountriesController@change_country');
+
 });
