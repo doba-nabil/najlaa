@@ -11,12 +11,15 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Pages</h4>
+                    <h4 class="card-title">Faq Elements</h4>
                     <div style="display: flex;justify-content: space-between;">
-                        <a href="{{ route('pages.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> Add
-                            New</a>
+                        <a href="{{ route('faqs.create') }}" class="btn btn-success mb-2">
+                            <i class="mdi mdi-plus mr-2"></i>
+                            Add New</a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_pages/"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
+                           delete_url="/delete_faqs/"><i class="mdi mdi-trash-can-outline mr-2"></i>
+                            Delete All
+                        </a>
                     </div>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
@@ -24,34 +27,33 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Active</th>
+                            <th>Title <small>OR</small> Question</th>
+                            <th>kind</th>
                             <th>Options</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>التعليمات /  Faq</td>
-                            <td>Active</td>
-                            <td>
-                                <a href="{{ route('faqs.index') }}"
-                                   class="mr-3 text-primary"><i class="mdi mdi-eye font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        @foreach($pages as $page)
+                        @foreach($faqs as $faq)
                             <tr>
-                                <td>{{ $loop->index + 2 }}</td>
-                                <td>{{ $page->name_ar }} / {{ $page->name_en }}</td>
-                                <td>{{ $page->getActive() }}</td>
+                                <td>{{ $loop->index + 1 }}</td>
+                                <td>{{ $faq->title_ar }} / {{ $faq->title_en }}</td>
                                 <td>
-                                    <a href="{{ route('pages.edit' , $page->slug) }}"
-                                       class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                    @if($page->id > 2)
-                                    <a title="" onclick="return false;" object_id="{{ $page->id }}"
-                                       delete_url="/pages/" class="text-danger remove-alert" href="#"><i
-                                                class="mdi mdi-trash-can font-size-18"></i></a>
+                                    @if($faq->kind==1)
+                                        <span class="text-primary">
+                                            Faq Topics <small>( Title )</small>
+                                        </span>
+                                    @else
+                                        <span class="text-danger">
+                                            Popular Faq <small>( Question )</small>
+                                        </span>
                                     @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('faqs.edit' , $faq->id) }}"
+                                       class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                    <a title="" onclick="return false;" object_id="{{ $faq->id }}"
+                                       delete_url="/faqs/" class="text-danger remove-alert" href="#"><i
+                                                class="mdi mdi-trash-can font-size-18"></i></a>
                                 </td>
                             </tr>
                         @endforeach

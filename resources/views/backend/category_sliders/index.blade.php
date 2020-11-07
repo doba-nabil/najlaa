@@ -11,12 +11,12 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Pages</h4>
+                    <h4 class="card-title">Category banners</h4>
                     <div style="display: flex;justify-content: space-between;">
-                        <a href="{{ route('pages.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> Add
+                        <a href="{{ route('category_sliders.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> Add
                             New</a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_pages/"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
+                           delete_url="/delete_category_sliders/"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
                     </div>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
@@ -24,34 +24,39 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Title</th>
                             <th>Active</th>
+                            <th>Category</th>
                             <th>Options</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>التعليمات /  Faq</td>
-                            <td>Active</td>
-                            <td>
-                                <a href="{{ route('faqs.index') }}"
-                                   class="mr-3 text-primary"><i class="mdi mdi-eye font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        @foreach($pages as $page)
+                        @foreach($sliders as $slider)
                             <tr>
-                                <td>{{ $loop->index + 2 }}</td>
-                                <td>{{ $page->name_ar }} / {{ $page->name_en }}</td>
-                                <td>{{ $page->getActive() }}</td>
-                                <td>
-                                    <a href="{{ route('pages.edit' , $page->slug) }}"
-                                       class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                    @if($page->id > 2)
-                                    <a title="" onclick="return false;" object_id="{{ $page->id }}"
-                                       delete_url="/pages/" class="text-danger remove-alert" href="#"><i
-                                                class="mdi mdi-trash-can font-size-18"></i></a>
+                                <td>{{ $loop->index + 1 }}</td>
+                                <td width="100" height="100">
+                                    @if(isset($slider->mainImage))
+                                        <img style="width: 100%;border-radius: 10px" src="{{ asset('pictures/categories_slider/' . $slider->mainImage->image) }}"/>
+                                    @else
+                                        <img style="width: 100%;border-radius: 10px" src="{{ asset('backend/assets/images/empty.jpg') }}"/>
                                     @endif
+                                </td>
+                                <td>{{ $slider->title_ar }} / {{ $slider->title_en }}</td>
+                                <td>{{ $slider->getActive() }}</td>
+                                <td>
+                                    @if(!empty($slider->category_id))
+                                        {{ $slider->category->name_ar }} / {{ $slider->category->name_en }}
+                                    @else
+                                        <span class="text-danger">Without</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('category_sliders.edit' , $slider->id) }}"
+                                       class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                    <a title="" onclick="return false;" object_id="{{ $slider->id }}"
+                                       delete_url="/category_sliders/" class="text-danger remove-alert" href="#"><i
+                                                class="mdi mdi-trash-can font-size-18"></i></a>
                                 </td>
                             </tr>
                         @endforeach

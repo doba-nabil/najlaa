@@ -6,9 +6,9 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Advertising banner " {{ $slider->title_en }} "</h4>
+                    <h4 class="card-title">Edit Category banner " {{ $slider->title_en }} "</h4>
                     <p class="card-title-desc"></p>
-                    <form method="post" action="{{ route('sliders.update' , $slider->id) }}" class="needs-validation" novalidate
+                    <form method="post" action="{{ route('category_sliders.update' , $slider->id) }}" class="needs-validation" novalidate
                           enctype="multipart/form-data">
                         @csrf
                         {{ method_field('PATCH') }}
@@ -35,8 +35,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="subtitle_ar">Subtitle in Arabic (Optional)</label>
-                                    <input type="text" name="subtitle_ar" class="form-control" id="subtitle_ar" placeholder="Subtitle in Arabic" value="{{ $slider->subtitle_ar }}">
+                                    <label for="subtitle_ar">Subtitle in Arabic</label>
+                                    <input type="text" name="subtitle_ar" class="form-control" id="subtitle_ar" placeholder="Subtitle in Arabic" value="{{ $slider->subtitle_ar }}" required>
                                     @error('subtitle_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -44,8 +44,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="subtitle_en">Subtitle in English (Optional)</label>
-                                    <input type="text" name="subtitle_en" class="form-control" id="subtitle_en" placeholder="Subtitle in English" value="{{ $slider->subtitle_en }}">
+                                    <label for="subtitle_en">Subtitle in English</label>
+                                    <input type="text" name="subtitle_en" class="form-control" id="subtitle_en" placeholder="Subtitle in English" value="{{ $slider->subtitle_en }}" required>
                                     @error('subtitle_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -55,9 +55,18 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="link">Link (Optional)</label>
-                                    <input type="text" name="link" class="form-control" id="link" placeholder="Link" value="{{ $slider->link }}">
-                                    @error('link')
+                                    <label for="validationCustom03">Category (Optional)</label>
+                                    <select name="category_id" class="form-control select2" id="validationCustom03">
+                                        @if(empty($slider->category_id))
+                                            <option selected disabled hidden value="">---- Select Category ----</option>
+                                        @endif
+                                        @foreach($categories as $category)
+                                            <option
+                                                    @if($category->id == $slider->category_id) selected @endif
+                                                    value="{{ $category->id }}">{{ $category->name_ar }} / {{ $category->name_en }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -74,7 +83,7 @@
                                 </div>
                                 <div class="text-center">
                                     @if(isset($slider->mainImage))
-                                        <img id="blah" class="mt-3" src="{{ asset('pictures/sliders/' . $slider->mainImage->image) }}"/>
+                                        <img id="blah" class="mt-3" src="{{ asset('pictures/categories_slider/' . $slider->mainImage->image) }}"/>
                                     @else
                                         <img id="blah" class="mt-3" src="{{ asset('backend/assets/images/empty.jpg') }}"/>
                                     @endif
