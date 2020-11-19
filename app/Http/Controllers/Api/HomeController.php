@@ -36,7 +36,7 @@ class HomeController extends Controller
                 'title_'.app()->getLocale().' as title',
                 'subtitle_'.app()->getLocale().' as subtitle',
                 'link'
-            )->active()->get();
+            )->active()->with('mainImage')->get();
             if(count($sliders) > 0){
                 return response()->json([
                     'status' => true,
