@@ -93,6 +93,7 @@
       <find>socia</find>
       <find>social</find>
       <find>page</find>
+      <find>sliders</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
