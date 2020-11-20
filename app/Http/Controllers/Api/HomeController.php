@@ -79,6 +79,13 @@ class HomeController extends Controller
                 })
             )->active()->withCount('category_products')->get();
             $categories = $categories->slice(0,3);
+            foreach ($categories as $category){
+                if(isset($category->mainImage->image)){
+                    $category['image'] = \Request::root() .'/pictures/categories/'.$category->mainImage->image;
+                }else{
+                    $category['image'] = null;
+                }
+            }
             if(count($categories) > 0){
                 return response()->json([
                     'status' => true,
