@@ -122,6 +122,12 @@ class ProductController extends Controller
                 'price',
                 'discount_price',
                 'percentage_discount'
+            )->with(array('mainImage' => function ($query) {
+                    $query->select(
+                        'image',
+                        'imageable_id'
+                    );
+                })
             )->active()->where('id', '!=', $id)->orderBy('id', 'desc')->get();
             $products = [];
             foreach($similar_products as $one_product){
@@ -170,6 +176,12 @@ class ProductController extends Controller
                 'price',
                 'discount_price',
                 'percentage_discount'
+            )->with(array('mainImage' => function ($query) {
+                    $query->select(
+                        'image',
+                        'imageable_id'
+                    );
+                })
             )->active()->where('id', '!=', $id)->orderBy('id', 'desc')->get();
             if (count($last_views) > 0) {
                 return response()->json([
@@ -208,6 +220,12 @@ class ProductController extends Controller
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
                 )->with('wishes')->active();
             }))->select(
                 'id',
