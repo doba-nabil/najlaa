@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     protected $hidden = [
-        'created_at', 'updated_at','imageable_id'
+        'created_at', 'updated_at','imageable_id','image'
     ];
     protected $appends = ['image_url'];
     public function getImageUrlAttribute()
