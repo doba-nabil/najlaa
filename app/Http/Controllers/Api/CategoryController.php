@@ -71,11 +71,7 @@ class CategoryController extends Controller
     public function index()
     {
         try{
-            $categories = Category::whereNull('parent_id')->with(array('subCategories'=>function($query){ $query->select(
-                'id',
-                'parent_id',
-                'name_'.app()->getLocale().' as name'
-            )->active();}))->with(array('mainImage'=>function($query){
+            $categories = Category::whereNull('parent_id')->with(array('mainImage'=>function($query){
                     $query->select(
                         'image',
                         'imageable_id'
@@ -84,9 +80,10 @@ class CategoryController extends Controller
             )->select(
                 'id',
                 'name_'.app()->getLocale().' as name'
-            )->active()->withCount('category_products')->get();
+            )->active()->withCount('category_products')->paginate(5);
             return response()->json([
                 'status' => true,
+                'categories_count' => $categories->count(),
                 'data' => $categories,
                 'code' => 200,
             ]);
@@ -101,7 +98,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $categoryy = Category::find($id);
-        if(count($categoryy->subCategories) > 0){
+        if(\Request::is('api/all-categories/*')){
             $category = Category::whereNull('parent_id')->with(array('subCategories'=>function($query){ $query->select(
                 'id',
                 'parent_id',
@@ -124,7 +121,7 @@ class CategoryController extends Controller
                     'code' => 400,
                 ]);
             }
-        }elseif(count($categoryy->category_products) > 0 && count($categoryy->subCategories) == 0){
+        }elseif(\Request::is('api/home-category/*')){
             $category = Category::whereNull('parent_id')->with(array('category_products'=>function($query){
                 $query->select(
                     'id',
@@ -143,7 +140,7 @@ class CategoryController extends Controller
                             'imageable_id'
                         );
                     })
-                )->with('wishes')->active()->paginate(10);
+                )->with('wishes')->active()->paginate(5);
             }))
                 ->where('id',$id)->select(
                     'id',

@@ -89,12 +89,12 @@ class ProductController extends Controller
             $user = User::where('api_token', $request->bearerToken())->first();
             $found = WishList::where('product_id', $product->id)->where('user_id', $user->id)->first();
             if (isset($found)) {
-                $product['isFav'] = 1;
+                $product['isFav'] = true;
             } else {
-                $product['isFav'] = 0;
+                $product['isFav'] = false;
             }
         } else {
-            $product['isFav'] = 0;
+            $product['isFav'] = false;
         }
         array_push($products, $product);
         if (isset($product)) {
@@ -136,12 +136,12 @@ class ProductController extends Controller
                     $user= User::where('api_token', $request->bearerToken())->first();
                     $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
                     if (isset($found)) {
-                        $product['isFav'] = 1;
+                        $product['isFav'] = true;
                     } else {
-                        $product['isFav'] = 0;
+                        $product['isFav'] = false;
                     }
                 } else {
-                    $product['isFav'] = 0;
+                    $product['isFav'] = false;
                 }
                 array_push($products,$product);
             }
