@@ -124,12 +124,12 @@ class HomeController extends Controller
                     $user= User::where('api_token', $request->bearerToken())->first();
                     $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
                     if (isset($found)) {
-                        $product['isFav'] = 1;
+                        $product['isFav'] = true;
                     } else {
-                        $product['isFav'] = 0;
+                        $product['isFav'] = false;
                     }
                 } else {
-                    $product['isFav'] = 0;
+                    $product['isFav'] = false;
                 }
                 array_push($products,$product);
                 $productss = $hot_offers->slice(0,5);
@@ -177,12 +177,12 @@ class HomeController extends Controller
                     $user= User::where('api_token', $request->bearerToken())->first();
                     $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
                     if (isset($found)) {
-                        $product['isFav'] = 1;
+                        $product['isFav'] = true;
                     } else {
-                        $product['isFav'] = 0;
+                        $product['isFav'] = false;
                     }
                 } else {
-                    $product['isFav'] = 0;
+                    $product['isFav'] = false;
                 }
                 array_push($products,$product);
             }
@@ -268,12 +268,12 @@ class HomeController extends Controller
                         $user= User::where('api_token', $request->bearerToken())->first();
                         $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
                         if (isset($found)) {
-                            $product['isFav'] = 1;
+                            $product['isFav'] = true;
                         } else {
-                            $product['isFav'] = 0;
+                            $product['isFav'] = false;
                         }
                     } else {
-                        $product['isFav'] = 0;
+                        $product['isFav'] = false;
                     }
                     array_push($products,$product);
                 }
@@ -358,12 +358,12 @@ class HomeController extends Controller
                         $user= User::where('api_token', $request->bearerToken())->first();
                         $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
                         if (isset($found)) {
-                            $product['isFav'] = 1;
+                            $product['isFav'] = true;
                         } else {
-                            $product['isFav'] = 0;
+                            $product['isFav'] = false;
                         }
                     } else {
-                        $product['isFav'] = 0;
+                        $product['isFav'] = false;
                     }
                     array_push($products,$product);
                 }
@@ -413,12 +413,12 @@ class HomeController extends Controller
                     $user= User::where('api_token', $request->bearerToken())->first();
                     $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
                     if (isset($found)) {
-                        $product['isFav'] = 1;
+                        $product['isFav'] = true;
                     } else {
-                        $product['isFav'] = 0;
+                        $product['isFav'] = false;
                     }
                 } else {
-                    $product['isFav'] = 0;
+                    $product['isFav'] = false;
                 }
                 array_push($products,$product);
             }
@@ -466,12 +466,12 @@ class HomeController extends Controller
                     $user= User::where('api_token', $request->bearerToken())->first();
                     $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
                     if (isset($found)) {
-                        $product['isFav'] = 1;
+                        $product['isFav'] = true;
                     } else {
-                        $product['isFav'] = 0;
+                        $product['isFav'] = false;
                     }
                 } else {
-                    $product['isFav'] = 0;
+                    $product['isFav'] = false;
                 }
                 array_push($products,$product);
             }
@@ -499,14 +499,10 @@ class HomeController extends Controller
     public function privacy()
     {
         try{
-            $page = Page::where('id' , 2)->select(
-                'id',
-                'name_'.app()->getLocale().' as name',
-                'body_'.app()->getLocale().' as body'
-            )->active()->get();
+            $page = Page::where('id' , 2)->active()->first();
             return response()->json([
                 'status' => true,
-                'data' => $page,
+                'data' => [$page['body_'.app()->getLocale()]],
                 'code' => 200,
             ]);
         }catch (\Exception $e){
@@ -520,14 +516,10 @@ class HomeController extends Controller
     public function legal()
     {
         try{
-            $page = Page::where('id' , 1)->select(
-                'id',
-                'name_'.app()->getLocale().' as name',
-                'body_'.app()->getLocale().' as body'
-            )->active()->get();
+            $page = Page::where('id' , 1)->active()->first();
             return response()->json([
                 'status' => true,
-                'data' => $page,
+                'data' => [$page['body_'.app()->getLocale()]],
                 'code' => 200,
             ]);
         }catch (\Exception $e){

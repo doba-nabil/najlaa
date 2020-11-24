@@ -60,7 +60,7 @@ class AddressController extends Controller
     }
     public function store(Request $request)
     {
-
+        try{
             $user = User::where('api_token', $request->bearerToken())->first();
             $userID = $user->id;
             $address = new Address();
@@ -82,12 +82,33 @@ class AddressController extends Controller
             }
             $address->user_id = $userID;
             $address->save();
+            $addresss = Address::where('id', $address->id)->with(array('city'=>function($query)
+                {
+                    $query->select(
+                        'id',
+                        'country_id',
+                        'name_' . app()->getLocale() . ' as name'
+                    )->active()->with(array('country'=>function($query){
+                            $query->select(
+                                'id',
+                                'name_' . app()->getLocale() . ' as name'
+                            )->active();
+                        })
+                    );
+                })
+            )->first();
             return response()->json([
                 'status' => true,
-                'data' => $address,
+                'data' => $addresss,
                 'code' => 200,
             ]);
-
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
     }
     public function show(Request $request ,$id)
     {
@@ -109,9 +130,24 @@ class AddressController extends Controller
                     );
                 })
             )->where('user_id' , $userID)->orderBy('id' , 'desc')->first();
+            $addresss = Address::where('id', $address->id)->with(array('city'=>function($query)
+                {
+                    $query->select(
+                        'id',
+                        'country_id',
+                        'name_' . app()->getLocale() . ' as name'
+                    )->active()->with(array('country'=>function($query){
+                            $query->select(
+                                'id',
+                                'name_' . app()->getLocale() . ' as name'
+                            )->active();
+                        })
+                    );
+                })
+            )->first();
             return response()->json([
                 'status' => true,
-                'data' => $address,
+                'data' => $addresss,
                 'code' => 200,
             ]);
         }catch (\Exception $e){
@@ -146,9 +182,24 @@ class AddressController extends Controller
             }
             $address->user_id = $userID;
             $address->save();
+            $addresss = Address::where('id', $address->id)->with(array('city'=>function($query)
+                {
+                    $query->select(
+                        'id',
+                        'country_id',
+                        'name_' . app()->getLocale() . ' as name'
+                    )->active()->with(array('country'=>function($query){
+                            $query->select(
+                                'id',
+                                'name_' . app()->getLocale() . ' as name'
+                            )->active();
+                        })
+                    );
+                })
+            )->first();
             return response()->json([
                 'status' => true,
-                'data' => $address,
+                'data' => $addresss,
                 'code' => 200,
             ]);
         }catch (\Exception $e){
