@@ -81,6 +81,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::post('main/address/{id}', 'AddressController@main');
     /* profile */
     Route::post('edit/profile', 'ProfileController@edit_info');
+    Route::post('change_password', 'ProfileController@change_pass');
     Route::post('contact', 'HomeController@contact');
     /* search */
     Route::post('search', 'ProductController@search');
