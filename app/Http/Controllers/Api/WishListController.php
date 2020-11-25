@@ -70,13 +70,21 @@ class WishListController extends Controller
             $found = WishList::where('product_id', $productID)->where('user_id', $userID)->count();
             if ($found > 0) {
                 WishList::where('product_id', $productID)->where('user_id', $userID)->delete();
-                return response()->json(['status' => 'removed']);
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'Product deleted from wishlist.',
+                    'code' => 400,
+                ], 400);
             } else {
                 $wish = new WishList;
                 $wish->product_id = $productID;
                 $wish->user_id = $userID;
                 $wish->save();
-                return response()->json(['status' => 'added'], 200);
+                return response()->json([
+                    'status' => true,
+                    'msg' => 'Product Added to wishlist.',
+                    'code' => 200,
+                ], 200);
             }
         }catch (\Exception $e){
             return response()->json([
