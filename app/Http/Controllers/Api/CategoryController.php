@@ -80,7 +80,7 @@ class CategoryController extends Controller
             )->select(
                 'id',
                 'name_'.app()->getLocale().' as name'
-            )->active()->withCount('category_products')->paginate(5);
+            )->active()->withCount('category_products')->get();
             return response()->json([
                 'status' => true,
                 'categories_count' => $categories->count(),
