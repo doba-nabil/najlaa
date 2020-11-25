@@ -71,10 +71,10 @@ class WishListController extends Controller
             if ($found > 0) {
                 WishList::where('product_id', $productID)->where('user_id', $userID)->delete();
                 return response()->json([
-                    'status' => false,
+                    'status' => true,
                     'msg' => 'Product deleted from wishlist.',
-                    'code' => 400,
-                ], 400);
+                    'code' => 200,
+                ], 200);
             } else {
                 $wish = new WishList;
                 $wish->product_id = $productID;
