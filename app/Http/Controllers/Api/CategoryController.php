@@ -81,9 +81,9 @@ class CategoryController extends Controller
                 'id',
                 'name_'.app()->getLocale().' as name'
             )->active()->withCount('category_products')->get();
+            $categories['categories_count'] = $categories->count();
             return response()->json([
                 'status' => true,
-                'categories_count' => $categories->count(),
                 'data' => $categories,
                 'code' => 200,
             ]);
