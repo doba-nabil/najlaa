@@ -13,7 +13,7 @@ class Image extends Model
     public function getImageUrlAttribute()
     {
         if(isset($this->image)){
-            if(\Request::is('api/home/category') || \Request::is('api/all-categories')){
+            if(\Request::is('api/home/category') || \Request::is('api/all-categories')|| \Request::is('api/categories-page')){
                 return  \URL::asset('/pictures/categories/'.$this->image);
             }elseif(\Request::is('api/all-colors') || \Request::is('api/all-subcategories') || \Request::is('api/subcategory/*')
                 || \Request::is('api/all-categories/*') || \Request::is('api/all-products/*')|| \Request::is('api/similar/product/*')

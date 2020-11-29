@@ -28,6 +28,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::resource('page', 'PageController', ['only' => ['index', 'show']]);
     Route::get('faq', 'PageController@faq');
     Route::resource('all-categories', 'CategoryController', ['only' => ['index', 'show']]);
+    Route::get('categories-page', 'CategoryController@categories_page');
     Route::get('home-category/{id}', 'CategoryController@show');
     Route::get('all-subcategories', 'CategoryController@subcategories');
     Route::get('subcategory/{id}', 'CategoryController@subcategory');

@@ -12,7 +12,8 @@ class CategoryController extends Controller
     public function __construct()
     {
         // $this->middleware('auth:api');
-        $this->middleware('auth:api')->except('index' , 'show' , 'subcategories' , 'subcategory','category_sliders');
+        $this->middleware('auth:api')->except('index' , 'show' , 'subcategories' , 'subcategory',
+            'category_sliders','categories_page');
     }
     public function category_sliders()
     {
@@ -81,6 +82,37 @@ class CategoryController extends Controller
                 'id',
                 'name_'.app()->getLocale().' as name'
             )->active()->withCount('category_products')->get();
+            return response()->json([
+                'status' => true,
+                'categories_count' => $categories->count(),
+                'data' => $categories,
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
+    public function categories_page()
+    {
+        try{
+            $categories = Category::whereNull('parent_id')->with(array('mainImage'=>function($query){
+                    $query->select(
+                        'image',
+                        'imageable_id'
+                    );
+                })
+            )->select(
+                'id',
+                'name_'.app()->getLocale().' as name'
+            )->active()->with(array('subCategories'=>function($query){ $query->select(
+                'id',
+                'parent_id',
+                'name_'.app()->getLocale().' as name'
+            )->active();}))->withCount('category_products')->get();
             return response()->json([
                 'status' => true,
                 'categories_count' => $categories->count(),
