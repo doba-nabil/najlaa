@@ -16,10 +16,10 @@ class Product extends Model
         if(isset($country_id)){
             $country_id = $country_id;
         }else{
-            $country_id = 2;
+            $country_id = 1;
         }
         $currency = Currency::where('country_id' , $country_id)->first();
-        if(!empty($currency->code)){
+        if(isset($currency)){
             return $currency->code;
         }else{
             return null;
