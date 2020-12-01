@@ -19,7 +19,11 @@ class Product extends Model
             $country_id = 2;
         }
         $currency = Currency::where('country_id' , $country_id)->first();
-        return $currency->code;
+        if(!empty($currency->code)){
+            return $currency->code;
+        }else{
+            return null;
+        }
     }
     public function getCurrencyCountAttribute()
     {
