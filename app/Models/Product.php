@@ -9,49 +9,7 @@ use Illuminate\Http\Request;
 class Product extends Model
 {
     use Sluggable;
-    protected $appends = ['currency' , 'currency_count'];
-    public function getCurrencyAttribute()
-    {
-        $country_id = app('request')->header('country_id');
-        if(isset($country_id)){
-            $country_id = $country_id;
-        }else{
-            $country_id = 1;
-        }
-        $currency = Currency::where('country_id' , $country_id)->first();
-        if(isset($currency)){
-            return $currency->code;
-        }else{
-            return null;
-        }
-    }
-    public function getCurrencyCountAttribute()
-    {
-        $country_id = app('request')->header('country_id');
-        if(isset($country_id)){
-            $country_id = $country_id;
-        }else{
-            $country_id = 2;
-        }
-        $currency = Currency::where('country_id' , $country_id)->first();
-        $fromCurrency = $currency->code;
-        $toCurrency = 'QAR';
-        if($fromCurrency == $toCurrency){
-            $result =  1;
-            return "$result";
-        }else{
-            try{
-                $url = "https://www.google.com/search?q=".$fromCurrency."+to+".$toCurrency;
-                $get = file_get_contents($url);
-                $data = preg_split('/\D\s(.*?)\s=\s/',$get);
-                $exhangeRate = (float) substr($data[1],0,7);
-                $result = round($exhangeRate , 3);
-                return "$result";
-            }catch (\Exception $e){
-                return null;
-            }
-        }
-    }
+
     public function sluggable()
     {
         return [
