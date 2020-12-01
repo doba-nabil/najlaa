@@ -36,7 +36,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="code">Country Code<small> <a href="{{ asset('backend/assets/files/codes.xlsx') }}">( click to visit codes file )</a> </small></label>
-                                    <input type="text" name="code" class="form-control" id="code" placeholder="Country Code" value="{{ $country->name_en }}" required>
+                                    <input type="text" name="code" class="form-control" id="code" placeholder="Country Code" value="{{ $country->code }}" required>
                                     @error('code')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
