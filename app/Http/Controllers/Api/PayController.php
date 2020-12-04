@@ -20,7 +20,7 @@ class PayController extends Controller
 
     public function pay_product(Request $request)
     {
-        try{
+
             $user = User::where('api_token', $request->bearerToken())->first();
             $main_address = Address::where(['user_id' => $user->id, 'active' => 1])->first();
             $mytime = Carbon::now();
@@ -110,13 +110,7 @@ class PayController extends Controller
                     'code' => 400,
                 ]);
             }
-        }catch (\Exception $e){
-            return response()->json([
-                'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
-                'code' => 400,
-            ]);
-        }
+
     }
 
     public function orders(Request $request)
