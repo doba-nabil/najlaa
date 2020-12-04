@@ -50,6 +50,12 @@ class CountriesController extends Controller
             $countries = Country::whereIn('id' , $country_ids)->active()->select(
                 'id',
                 'name_' . app()->getLocale() . ' as name'
+            )->with(array('mainImage' => function ($query) {
+                    $query->select(
+                        'image',
+                        'imageable_id'
+                    );
+                })
             )->orderBy('id' , 'desc')->get();
             return response()->json([
                 'status' => true,

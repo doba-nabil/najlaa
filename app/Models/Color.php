@@ -10,7 +10,7 @@ class Color extends Model
         'name_ar', 'name_en','active' ,'color','created_at' , 'updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+        'created_at', 'updated_at','active'
     ];
 
     public function scopeActive($query)
