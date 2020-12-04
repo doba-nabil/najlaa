@@ -15,7 +15,7 @@ class ProductDetail extends Model
         return $this->belongsTo('App\Models\Color');
     }
     protected $hidden = [
-        'created_at', 'updated_at','type','product_id','color_id' , 'size_id'
+        'created_at', 'updated_at','type','product_id','color_id' , 'size_id','id'
     ];
     public function product()
     {

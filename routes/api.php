@@ -91,4 +91,9 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::post('chose_country', 'CountriesController@choose_country');
     Route::post('change_country', 'CountriesController@change_country');
 
+    /************ pay / orders ************/
+    Route::post('pay', 'PayController@pay_product');
+    Route::get('orders', 'PayController@orders');
+    Route::get('order/{orderID}', 'PayController@order');
+
 });

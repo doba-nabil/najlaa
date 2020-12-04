@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Moderator;
 use App\Models\Option;
 use App\Models\Page;
@@ -77,6 +79,27 @@ class AppServiceProvider extends ServiceProvider
                 $page->slug = 'privacy-policy';
                 $page->active = 1;
                 $page->save();
+            }
+            $country = Country::find(1);
+            if(!isset($country)){
+                $country = new Country();
+                $country->id = 1;
+                $country->name_ar = 'قطر';
+                $country->name_en = 'QATAR';
+                $country->code = 'QAR';
+                $country->active = 1;
+                $country->save();
+            }
+            $currency = Currency::find(1);
+            if(!isset($currency)){
+                $currency = new Currency();
+                $currency->id = 1;
+                $currency->name_ar = 'ريال قطري';
+                $currency->name_en = 'Riyal QATAR';
+                $currency->code = 'QAR';
+                $currency->active = 1;
+                $currency->country_id = 1;
+                $currency->save();
             }
         }
     }
