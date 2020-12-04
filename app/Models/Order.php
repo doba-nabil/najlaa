@@ -17,7 +17,7 @@ class Order extends Model
     }
     public function city()
     {
-        return $this->belongsTo('App\Models\city');
+        return $this->belongsTo('App\Models\City');
     }
     public function pays()
     {
