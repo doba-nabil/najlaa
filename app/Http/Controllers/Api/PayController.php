@@ -67,6 +67,7 @@ class PayController extends Controller
                         )->with(array('color' => function ($query) {
                                 $query->select(
                                     'id',
+                                    'color',
                                     'name_' . app()->getLocale() . ' as name'
                                 );
                             })
@@ -135,6 +136,7 @@ class PayController extends Controller
                     )->with(array('color' => function ($query) {
                             $query->select(
                                 'id',
+                                'color',
                                 'name_' . app()->getLocale() . ' as name'
                             );
                         })
@@ -225,6 +227,7 @@ class PayController extends Controller
                     )->with(array('color' => function ($query) {
                             $query->select(
                                 'id',
+                                'color',
                                 'name_' . app()->getLocale() . ' as name'
                             );
                         })
@@ -315,6 +318,7 @@ class PayController extends Controller
                     )->with(array('color' => function ($query) {
                             $query->select(
                                 'id',
+                                'color',
                                 'name_' . app()->getLocale() . ' as name'
                             );
                         })
@@ -405,6 +409,7 @@ class PayController extends Controller
                     )->with(array('color' => function ($query) {
                             $query->select(
                                 'id',
+                                'color',
                                 'name_' . app()->getLocale() . ' as name'
                             );
                         })
