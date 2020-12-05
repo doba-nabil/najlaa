@@ -97,4 +97,11 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('pending/orders', 'PayController@pending_orders');
     Route::get('confirmed/orders', 'PayController@confirmed_orders');
     Route::get('order/{orderID}', 'PayController@order');
+
+    /************ cart ************/
+    Route::post('add/cart', 'CartController@add_cart');
+    Route::get('cart', 'CartController@cart');
+    Route::post('edit/cart/{cartID}', 'CartController@edit_cart');
+    Route::get('remove/all-cart', 'CartController@remove_all');
+    Route::get('remove/single-cart/{cartID}', 'CartController@remove_single');
 });
