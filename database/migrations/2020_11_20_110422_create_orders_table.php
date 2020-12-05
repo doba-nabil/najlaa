@@ -31,6 +31,12 @@ class CreateOrdersTable extends Migration
             $table->string('phone');
             $table->string('total_price');
             $table->string('order_no');
+            /********** dates *************/
+            $table->string('processed')->nullable();
+            $table->string('shipped')->nullable();
+            $table->string('out_to_delivery')->nullable();
+            $table->string('delivered')->nullable();
+            /********** end dates *************/
             $table->timestamps();
         });
     }

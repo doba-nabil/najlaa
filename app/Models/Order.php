@@ -9,7 +9,7 @@ class Order extends Model
 {
     use Notifiable;
     protected $hidden = [
-        'created_at', 'updated_at','user_id','city_id','new','status','paid'
+        'created_at', 'updated_at','user_id','city_id','new','paid','processed','shipped','out_to_delivery','delivered'
     ];
     public function user()
     {
