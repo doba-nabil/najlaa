@@ -17,6 +17,7 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->text('token');
             $table->string('count');
+            $table->string('price');
             $table->bigInteger('color_id')->unsigned()->index();
             $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
             $table->bigInteger('size_id')->unsigned()->index();
