@@ -28,7 +28,7 @@ class PayController extends Controller
                 $order = new Order();
                 $order->order_no = rand();
                 /*******************/
-                $order->status = 1;
+                $order->status = 0;
                 $order->processed = Carbon::now();
                 /******** address **********/
                 $order->fullname = $main_address->fullname;
@@ -173,6 +173,42 @@ class PayController extends Controller
                 })
             )->orderBy('id', 'desc')->get();
             foreach($orders as $order){
+                if($order->status == 0){
+                    $order['status_color'] = '#33AFFF';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'تم استلام الطلب';
+                    }else{
+                        $order['status'] = 'signed';
+                    }
+                }elseif($order->status == 1){
+                    $order['status_color'] = '#9333FF';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري التحضير';
+                    }else{
+                        $order['status'] = 'processed';
+                    }
+                }elseif($order->status == 2){
+                    $order['status_color'] = '#FF33FC';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري الشحن';
+                    }else{
+                        $order['status'] = 'shipped';
+                    }
+                }elseif($order->status == 3){
+                    $order['status_color'] = '#FF3352';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري التوصيل';
+                    }else{
+                        $order['status'] = 'out to delivery';
+                    }
+                }elseif($order->status == 4){
+                    $order['status_color'] = '#33FF3C';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'تم التوصيل';
+                    }else{
+                        $order['status'] = 'delivered';
+                    }
+                }
                 if($order->status == 0 || $order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4){
                     $order['signed_date'] = Carbon::parse($order->date)->format('d M Y');
                     $order['signed_time'] = Carbon::parse($order->time)->format('h:i A');
@@ -265,6 +301,42 @@ class PayController extends Controller
                 })
             )->orderBy('id', 'desc')->get();
             foreach($orders as $order){
+                if($order->status == 0){
+                    $order['status_color'] = '#33AFFF';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'تم استلام الطلب';
+                    }else{
+                        $order['status'] = 'signed';
+                    }
+                }elseif($order->status == 1){
+                    $order['status_color'] = '#9333FF';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري التحضير';
+                    }else{
+                        $order['status'] = 'processed';
+                    }
+                }elseif($order->status == 2){
+                    $order['status_color'] = '#FF33FC';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري الشحن';
+                    }else{
+                        $order['status'] = 'shipped';
+                    }
+                }elseif($order->status == 3){
+                    $order['status_color'] = '#FF3352';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري التوصيل';
+                    }else{
+                        $order['status'] = 'out to delivery';
+                    }
+                }elseif($order->status == 4){
+                    $order['status_color'] = '#33FF3C';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'تم التوصيل';
+                    }else{
+                        $order['status'] = 'delivered';
+                    }
+                }
                 if($order->status == 0 || $order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4){
                     $order['signed_date'] = Carbon::parse($order->date)->format('d M Y');
                     $order['signed_time'] = Carbon::parse($order->time)->format('h:i A');
@@ -357,6 +429,42 @@ class PayController extends Controller
                 })
             )->orderBy('id', 'desc')->get();
             foreach($orders as $order){
+                if($order->status == 0){
+                    $order['status_color'] = '#33AFFF';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'تم استلام الطلب';
+                    }else{
+                        $order['status'] = 'signed';
+                    }
+                }elseif($order->status == 1){
+                    $order['status_color'] = '#9333FF';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري التحضير';
+                    }else{
+                        $order['status'] = 'processed';
+                    }
+                }elseif($order->status == 2){
+                    $order['status_color'] = '#FF33FC';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري الشحن';
+                    }else{
+                        $order['status'] = 'shipped';
+                    }
+                }elseif($order->status == 3){
+                    $order['status_color'] = '#FF3352';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري التوصيل';
+                    }else{
+                        $order['status'] = 'out to delivery';
+                    }
+                }elseif($order->status == 4){
+                    $order['status_color'] = '#33FF3C';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'تم التوصيل';
+                    }else{
+                        $order['status'] = 'delivered';
+                    }
+                }
                 if($order->status == 0 || $order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4){
                     $order['signed_date'] = Carbon::parse($order->date)->format('d M Y');
                     $order['signed_time'] = Carbon::parse($order->time)->format('h:i A');
@@ -448,6 +556,42 @@ class PayController extends Controller
                     );
                 })
             )->first();
+            if($order->status == 0){
+                $order['status_color'] = '#33AFFF';
+                if(app()->getLocale() == 'ar'){
+                    $order['status'] = 'تم استلام الطلب';
+                }else{
+                    $order['status'] = 'signed';
+                }
+            }elseif($order->status == 1){
+                $order['status_color'] = '#9333FF';
+                if(app()->getLocale() == 'ar'){
+                    $order['status'] = 'جاري التحضير';
+                }else{
+                    $order['status'] = 'processed';
+                }
+            }elseif($order->status == 2){
+                $order['status_color'] = '#FF33FC';
+                if(app()->getLocale() == 'ar'){
+                    $order['status'] = 'جاري الشحن';
+                }else{
+                    $order['status'] = 'shipped';
+                }
+            }elseif($order->status == 3){
+                $order['status_color'] = '#FF3352';
+                if(app()->getLocale() == 'ar'){
+                    $order['status'] = 'جاري التوصيل';
+                }else{
+                    $order['status'] = 'out to delivery';
+                }
+            }elseif($order->status == 4){
+                $order['status_color'] = '#33FF3C';
+                if(app()->getLocale() == 'ar'){
+                    $order['status'] = 'تم التوصيل';
+                }else{
+                    $order['status'] = 'delivered';
+                }
+            }
             if($order->status == 0 || $order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4){
                 $order['signed_date'] = Carbon::parse($order->date)->format('d M Y');
                 $order['signed_time'] = Carbon::parse($order->time)->format('h:i A');
