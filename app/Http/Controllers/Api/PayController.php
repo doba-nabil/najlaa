@@ -60,6 +60,7 @@ class PayController extends Controller
                 $order = Order::where('id', $order->id)->with(array('pays' => function ($query) {
                         $query->select(
                             'id',
+                            'count',
                             'order_id',
                             'color_id',
                             'size_id',
@@ -129,6 +130,7 @@ class PayController extends Controller
             $orders = Order::where('user_id', $user->id)->with(array('pays' => function ($query) {
                     $query->select(
                         'id',
+                        'count',
                         'order_id',
                         'color_id',
                         'size_id',
@@ -220,6 +222,7 @@ class PayController extends Controller
             $orders = Order::where('status' , 4)->where('user_id', $user->id)->with(array('pays' => function ($query) {
                     $query->select(
                         'id',
+                        'count',
                         'order_id',
                         'color_id',
                         'size_id',
@@ -311,6 +314,7 @@ class PayController extends Controller
             $orders = Order::where('status','!=' , 4)->where('user_id', $user->id)->with(array('pays' => function ($query) {
                     $query->select(
                         'id',
+                        'count',
                         'order_id',
                         'color_id',
                         'size_id',
@@ -402,6 +406,7 @@ class PayController extends Controller
             $order = Order::where('user_id', $user->id)->where('id',$orderID)->with(array('pays' => function ($query) {
                     $query->select(
                         'id',
+                        'count',
                         'order_id',
                         'color_id',
                         'size_id',
