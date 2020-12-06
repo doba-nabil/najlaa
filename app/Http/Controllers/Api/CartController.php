@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -70,6 +71,11 @@ class CartController extends Controller
 
             $cart = Cart::where('id' , $cartID)->where('token' , $token)->first();
             $cart->count = $request->count;
+            if(empty($cart->product->discount_price)){
+                $cart->price = $request->count * $cart->product->price;
+            }elseif(!empty($cart->product->discount_price)){
+                $cart->price = $request->count * $cart->product->discount_price;
+            }
             $cart->save();
 
             $cartt = Cart::where('id' , $cart->id)->where('token' , $token)->with(array('color' => function ($query) {
@@ -126,8 +132,13 @@ class CartController extends Controller
     {
         try{
             $token = \Request::header('token');
-
+            $product = Product::where('id' , $request->product_id)->first();
             $cart = new Cart();
+            if(empty($product->discount_price)){
+                $cart->price = $request->count * $product->price;
+            }elseif(!empty($product->discount_price)){
+                $cart->price = $request->count * $product->discount_price;
+            }
             $cart->product_id = $request->product_id;
             $cart->size_id = $request->size_id;
             $cart->color_id = $request->color_id;

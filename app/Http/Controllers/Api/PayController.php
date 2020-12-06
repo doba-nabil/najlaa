@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Address;
+use App\Models\Cart;
 use App\Models\Product;
 use App\User;
 use App\Models\Order;
@@ -41,21 +42,40 @@ class PayController extends Controller
                 $order->time = $mytime->toTimeString();
                 $order->date = $mytime->toDateString();
                 $order->user_id = $user->id;
-                $order->total_price = $request->total_price;
+                /********************** price ************/
+                $token = \Request::header('token');
+                $carts = Cart::where('token' , $token)->get();
+                if(count($carts) > 0){
+                    foreach ($carts as $cart){
+                        $order->total_price = $cart->sum('price');
+                    }
+                }else{
+                    $order->total_price = 0;
+                }
+                /********************** end price ************/
                 $order->save();
                 /****** pay table get products *******/
                 $productIds = [];
-                $products = $request->products;
-                $json = $products;
-                foreach ($json as $value) {
-                    $pay = new Pay();
-                    $pay->order_id = $order->id;
-                    $pay->product_id = $value['id'];
-                    $pay->count = $value['count'];
-                    $pay->color_id = $value['color_id'];
-                    $pay->size_id = $value['size_id'];
-                    $pay->save();
-                    array_push($productIds, $value['id']);
+
+                if(count($carts) > 0){
+                    foreach ($carts as $value) {
+                        $pay = new Pay();
+                        $pay->order_id = $order->id;
+                        $pay->product_id = $value->product_id;
+                        $pay->count = $value->count;
+                        $pay->color_id = $value->color_id;
+                        $pay->size_id = $value->size_id;
+                        $pay->save();
+                        array_push($productIds, $value['id']);
+                        $value->delete();
+                    }
+                }else{
+                    $order->delete();
+                    return response()->json([
+                        'status' => false,
+                        'msg' => 'عفوا السلة فارغة',
+                        'code' => 400,
+                    ]);
                 }
                 $order = Order::where('id', $order->id)->with(array('pays' => function ($query) {
                         $query->select(
@@ -102,6 +122,62 @@ class PayController extends Controller
                         );
                     })
                 )->first();
+                if($order->status == 0){
+                    $order['status_color'] = '#33AFFF';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'تم استلام الطلب';
+                    }else{
+                        $order['status'] = 'signed';
+                    }
+                }elseif($order->status == 1){
+                    $order['status_color'] = '#9333FF';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري التحضير';
+                    }else{
+                        $order['status'] = 'processed';
+                    }
+                }elseif($order->status == 2){
+                    $order['status_color'] = '#FF33FC';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري الشحن';
+                    }else{
+                        $order['status'] = 'shipped';
+                    }
+                }elseif($order->status == 3){
+                    $order['status_color'] = '#FF3352';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'جاري التوصيل';
+                    }else{
+                        $order['status'] = 'out to delivery';
+                    }
+                }elseif($order->status == 4){
+                    $order['status_color'] = '#33FF3C';
+                    if(app()->getLocale() == 'ar'){
+                        $order['status'] = 'تم التوصيل';
+                    }else{
+                        $order['status'] = 'delivered';
+                    }
+                }
+                if($order->status == 0 || $order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4){
+                    $order['signed_date'] = Carbon::parse($order->date)->format('d M Y');
+                    $order['signed_time'] = Carbon::parse($order->time)->format('h:i A');
+                }
+                if($order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4){
+                    $order['processed_date'] = Carbon::parse($order->processed)->format('d M Y');
+                    $order['processed_time'] = Carbon::parse($order->processed)->format('h:i A');
+                }
+                if($order->status == 2 || $order->status == 3 || $order->status == 4){
+                    $order['shipped_date'] = Carbon::parse($order->shipped)->format('d M Y');
+                    $order['shipped_time'] = Carbon::parse($order->shipped)->format('h:i A');
+                }
+                if($order->status == 3 || $order->status == 4){
+                    $order['out_to_delivery_date'] = Carbon::parse($order->out_to_delivery)->format('d M Y');
+                    $order['out_to_delivery_time'] = Carbon::parse($order->out_to_delivery)->format('h:i A');
+                }
+                if($order->status == 4){
+                    $order['delivered_date'] = Carbon::parse($order->delivered)->format('d M Y');
+                    $order['delivered_time'] = Carbon::parse($order->delivered)->format('h:i A');
+                }
                 return response()->json([
                     'status' => true,
                     'data' => $order,
