@@ -58,6 +58,46 @@ class AddressController extends Controller
             ]);
         }
     }
+    public function main_address(Request $request)
+    {
+        try{
+            $user = User::where('api_token', $request->bearerToken())->first();
+            $userID = $user->id;
+            $address = Address::with(array('city'=>function($query){
+                    $query->select(
+                        'id',
+                        'country_id',
+                        'name_' . app()->getLocale() . ' as name'
+                    )->active()->with(array('country'=>function($query){
+                            $query->select(
+                                'id',
+                                'name_' . app()->getLocale() . ' as name'
+                            )->active();
+                        })
+                    );
+                })
+            )->where('user_id' , $userID)->active()->first();
+            if(isset($address)){
+                return response()->json([
+                    'status' => true,
+                    'data' => $address,
+                    'code' => 200,
+                ]);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'عنوان غير موجود',
+                    'code' => 400,
+                ]);
+            }
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
     public function store(Request $request)
     {
         try{
