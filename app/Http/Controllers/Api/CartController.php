@@ -5,56 +5,103 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
+use App\User;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function cart()
+    public function cart(Request $request)
     {
         try{
             $token = \Request::header('token');
-
-            $carts = Cart::where('token' , $token)->with(array('color' => function ($query) {
-                    $query->select(
-                        'id',
-                        'color',
-                        'name_' . app()->getLocale() . ' as name'
-                    );
-                })
-            )->with(array('size' => function ($query) {
-                    $query->select(
-                        'id',
-                        'code'
-                    );
-                })
-            )->with(array('product' => function ($query) {
-                    $query->select(
-                        'id',
-                        'name_' . app()->getLocale() . ' as name',
-                        'price',
-                        'discount_price',
-                        'percentage_discount'
-                    )->with(array('mainImage' => function ($query) {
-                            $query->select(
-                                'image',
-                                'imageable_id'
-                            );
-                        })
-                    );
-                })
-            )->orderBy('id' , 'desc')->get();
-            if(count($carts) > 0){
-                return response()->json([
-                    'status' => true,
-                    'data' => $carts,
-                    'code' => 200,
-                ]);
+            $api_token = $request->bearerToken();
+            if(isset($api_token)){
+                $user = User::where('api_token' , $request->bearerToken())->first();
+                $carts = Cart::where('user_id' , $user->id)->with(array('color' => function ($query) {
+                        $query->select(
+                            'id',
+                            'color',
+                            'name_' . app()->getLocale() . ' as name'
+                        );
+                    })
+                )->with(array('size' => function ($query) {
+                        $query->select(
+                            'id',
+                            'code'
+                        );
+                    })
+                )->with(array('product' => function ($query) {
+                        $query->select(
+                            'id',
+                            'name_' . app()->getLocale() . ' as name',
+                            'price',
+                            'discount_price',
+                            'percentage_discount'
+                        )->with(array('mainImage' => function ($query) {
+                                $query->select(
+                                    'image',
+                                    'imageable_id'
+                                );
+                            })
+                        );
+                    })
+                )->orderBy('id' , 'desc')->get();
+                if(count($carts) > 0){
+                    return response()->json([
+                        'status' => true,
+                        'data' => $carts,
+                        'code' => 200,
+                    ]);
+                }else{
+                    return response()->json([
+                        'status' => false,
+                        'msg' => 'السلة فارغة',
+                        'code' => 400,
+                    ]);
+                }
             }else{
-                return response()->json([
-                    'status' => false,
-                    'msg' => 'السلة فارغة',
-                    'code' => 400,
-                ]);
+                $carts = Cart::where('token' , $token)->with(array('color' => function ($query) {
+                        $query->select(
+                            'id',
+                            'color',
+                            'name_' . app()->getLocale() . ' as name'
+                        );
+                    })
+                )->with(array('size' => function ($query) {
+                        $query->select(
+                            'id',
+                            'code'
+                        );
+                    })
+                )->with(array('product' => function ($query) {
+                        $query->select(
+                            'id',
+                            'name_' . app()->getLocale() . ' as name',
+                            'price',
+                            'discount_price',
+                            'percentage_discount'
+                        )->with(array('mainImage' => function ($query) {
+                                $query->select(
+                                    'image',
+                                    'imageable_id'
+                                );
+                            })
+                        );
+                    })
+                )->orderBy('id' , 'desc')->get();
+                if(count($carts) > 0){
+                    return response()->json([
+                        'status' => true,
+                        'data' => $carts,
+                        'code' => 200,
+                    ]);
+                }else{
+                    return response()->json([
+                        'status' => false,
+                        'msg' => 'السلة فارغة',
+                        'code' => 400,
+                    ]);
+                }
             }
         }catch (\Exception $e){
             return response()->json([
@@ -68,46 +115,61 @@ class CartController extends Controller
     {
         try{
             $token = \Request::header('token');
-
-            $cart = Cart::where('id' , $cartID)->where('token' , $token)->first();
-            $cart->count = $request->count;
-            if(empty($cart->product->discount_price)){
-                $cart->price = $request->count * $cart->product->price;
-            }elseif(!empty($cart->product->discount_price)){
-                $cart->price = $request->count * $cart->product->discount_price;
+            $api_token = $request->bearerToken();
+            if(isset($api_token)){
+                $user = User::where('api_token' , $request->bearerToken())->first();
+                $cart = Cart::where('id' , $cartID)->where('user_id' , $user->id)->first();
+                if(isset($cart)){
+                    $cart->count = $request->count;
+                    if(empty($cart->product->discount_price)){
+                        $cart->price = $request->count * $cart->product->price;
+                    }elseif(!empty($cart->product->discount_price)){
+                        $cart->price = $request->count * $cart->product->discount_price;
+                    }
+                    $cart->save();
+                }
+            }else{
+                $cart = Cart::where('id' , $cartID)->where('token' , $token)->first();
+               if(isset($cart)){
+                   $cart->count = $request->count;
+                   if(empty($cart->product->discount_price)){
+                       $cart->price = $request->count * $cart->product->price;
+                   }elseif(!empty($cart->product->discount_price)){
+                       $cart->price = $request->count * $cart->product->discount_price;
+                   }
+                   $cart->save();
+               }
             }
-            $cart->save();
-
-            $cartt = Cart::where('id' , $cart->id)->where('token' , $token)->with(array('color' => function ($query) {
-                    $query->select(
-                        'id',
-                        'color',
-                        'name_' . app()->getLocale() . ' as name'
-                    );
-                })
-            )->with(array('size' => function ($query) {
-                    $query->select(
-                        'id',
-                        'code'
-                    );
-                })
-            )->with(array('product' => function ($query) {
-                    $query->select(
-                        'id',
-                        'name_' . app()->getLocale() . ' as name',
-                        'price',
-                        'discount_price',
-                        'percentage_discount'
-                    )->with(array('mainImage' => function ($query) {
-                            $query->select(
-                                'image',
-                                'imageable_id'
-                            );
-                        })
-                    );
-                })
-            )->first();
-            if(isset($cartt)){
+            if(isset($cart)){
+                $cartt = Cart::where('id' , $cart->id)->with(array('color' => function ($query) {
+                        $query->select(
+                            'id',
+                            'color',
+                            'name_' . app()->getLocale() . ' as name'
+                        );
+                    })
+                )->with(array('size' => function ($query) {
+                        $query->select(
+                            'id',
+                            'code'
+                        );
+                    })
+                )->with(array('product' => function ($query) {
+                        $query->select(
+                            'id',
+                            'name_' . app()->getLocale() . ' as name',
+                            'price',
+                            'discount_price',
+                            'percentage_discount'
+                        )->with(array('mainImage' => function ($query) {
+                                $query->select(
+                                    'image',
+                                    'imageable_id'
+                                );
+                            })
+                        );
+                    })
+                )->first();
                 return response()->json([
                     'status' => true,
                     'data' => $cartt,
@@ -134,6 +196,15 @@ class CartController extends Controller
             $token = \Request::header('token');
             $product = Product::where('id' , $request->product_id)->first();
             $cart = new Cart();
+            $api_token = $request->bearerToken();
+            if(isset($api_token)){
+                $user = User::where('api_token' , $request->bearerToken())->first();
+                if(isset($user)){
+                    $cart->user_id = $user->id;
+                }
+            }else{
+                $cart->token = $token;
+            }
             if(empty($product->discount_price)){
                 $cart->price = $request->count * $product->price;
             }elseif(!empty($product->discount_price)){
@@ -143,38 +214,71 @@ class CartController extends Controller
             $cart->size_id = $request->size_id;
             $cart->color_id = $request->color_id;
             $cart->count = $request->count;
-            $cart->token = $token;
             $cart->save();
-
-            $cartt = Cart::where('id',$cart->id)->where('token' , $token)->with(array('color' => function ($query) {
-                    $query->select(
-                        'id',
-                        'color',
-                        'name_' . app()->getLocale() . ' as name'
-                    );
-                })
-            )->with(array('size' => function ($query) {
-                    $query->select(
-                        'id',
-                        'code'
-                    );
-                })
-            )->with(array('product' => function ($query) {
-                    $query->select(
-                        'id',
-                        'name_' . app()->getLocale() . ' as name',
-                        'price',
-                        'discount_price',
-                        'percentage_discount'
-                    )->with(array('mainImage' => function ($query) {
+            if(isset($api_token)){
+                $user = User::where('api_token' , $request->bearerToken())->first();
+                if(isset($user)){
+                    $cartt = Cart::where('id',$cart->id)->where('user_id' , $user->id)->with(array('color' => function ($query) {
                             $query->select(
-                                'image',
-                                'imageable_id'
+                                'id',
+                                'color',
+                                'name_' . app()->getLocale() . ' as name'
                             );
                         })
-                    );
-                })
-            )->first();
+                    )->with(array('size' => function ($query) {
+                            $query->select(
+                                'id',
+                                'code'
+                            );
+                        })
+                    )->with(array('product' => function ($query) {
+                            $query->select(
+                                'id',
+                                'name_' . app()->getLocale() . ' as name',
+                                'price',
+                                'discount_price',
+                                'percentage_discount'
+                            )->with(array('mainImage' => function ($query) {
+                                    $query->select(
+                                        'image',
+                                        'imageable_id'
+                                    );
+                                })
+                            );
+                        })
+                    )->first();
+                }
+            }else{
+                $cartt = Cart::where('id',$cart->id)->where('token' , $token)->with(array('color' => function ($query) {
+                        $query->select(
+                            'id',
+                            'color',
+                            'name_' . app()->getLocale() . ' as name'
+                        );
+                    })
+                )->with(array('size' => function ($query) {
+                        $query->select(
+                            'id',
+                            'code'
+                        );
+                    })
+                )->with(array('product' => function ($query) {
+                        $query->select(
+                            'id',
+                            'name_' . app()->getLocale() . ' as name',
+                            'price',
+                            'discount_price',
+                            'percentage_discount'
+                        )->with(array('mainImage' => function ($query) {
+                                $query->select(
+                                    'image',
+                                    'imageable_id'
+                                );
+                            })
+                        );
+                    })
+                )->first();
+            }
             return response()->json([
                 'status' => true,
                 'data' => $cartt,
@@ -188,12 +292,35 @@ class CartController extends Controller
             ]);
         }
     }
-    public function remove_single($cartID)
+    public function remove_single(Request $request , $cartID)
     {
         try{
             $token = \Request::header('token');
-            $cart = Cart::where('id' , $cartID)->where('token' , $token)->first();
-            $cart->delete();
+            $api_token = $request->bearerToken();
+            if(isset($api_token)){
+                $user = User::where('api_token' , $request->bearerToken())->first();
+                $cart = Cart::where('id' , $cartID)->where('user_id' , $user->id)->first();
+                if(isset($cart)){
+                    $cart->delete();
+                }else{
+                    return response()->json([
+                        'status' => false,
+                        'msg' => 'لا يوجد مايتم حذفة',
+                        'code' => 400,
+                    ]);
+                }
+            }else{
+                $cart = Cart::where('id' , $cartID)->where('token' , $token)->first();
+                if(isset($cart)){
+                    $cart->delete();
+                }else{
+                    return response()->json([
+                        'status' => false,
+                        'msg' => 'لا يوجد مايتم حذفة',
+                        'code' => 400,
+                    ]);
+                }
+            }
             return response()->json([
                 'status' => true,
                 'msg' => 'تم الحذف من السلة بنجاح',
@@ -207,11 +334,19 @@ class CartController extends Controller
             ]);
         }
     }
-    public function remove_all()
+    public function remove_all(Request $request)
     {
         try{
             $token = \Request::header('token');
-            $carts = Cart::where('token' , $token)->get();
+            $api_token = $request->bearerToken();
+            if(isset($api_token)){
+                $user = User::where('api_token' , $request->bearerToken())->first();
+                if(isset($user)){
+                    $carts = Cart::where('user_id' , $user->id)->get();
+                }
+            }else{
+                $carts = Cart::where('token' , $token)->get();
+            }
             foreach ($carts as $cart){
                 $cart->delete();
             }

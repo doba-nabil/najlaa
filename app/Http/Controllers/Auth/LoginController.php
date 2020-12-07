@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -55,6 +56,15 @@ class LoginController extends Controller
             $user = $this->guard()->user();
             $user->generateToken();
             $userr = $user->select('id' , 'name' , 'email' , 'active','api_token')->first();
+            $token = \Request::header('token');
+            $carts = Cart::where('token' , $token)->get();
+            if(count($carts) > 0){
+                foreach ($carts as $cart){
+                    $cart->user_id = $user->id;
+                    $cart->token = null;
+                    $cart->save();
+                }
+            }
             return response()->json([
                 'status' => true,
                 'data' => $user,

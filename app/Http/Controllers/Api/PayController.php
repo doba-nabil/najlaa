@@ -43,8 +43,7 @@ class PayController extends Controller
                 $order->date = $mytime->toDateString();
                 $order->user_id = $user->id;
                 /********************** price ************/
-                $token = \Request::header('token');
-                $carts = Cart::where('token', $token)->get();
+                $carts = Cart::where('user_id', $user->id)->get();
                 if (count($carts) > 0) {
                     foreach ($carts as $cart) {
                         $order->total_price = $cart->sum('price');
@@ -56,7 +55,6 @@ class PayController extends Controller
                 $order->save();
                 /****** pay table get products *******/
                 $productIds = [];
-
                 if (count($carts) > 0) {
                     foreach ($carts as $value) {
                         $pay = new Pay();
