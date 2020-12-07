@@ -75,6 +75,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     /* add and delet from wishlist */
     Route::post('add_delete_wishlist', 'WishListController@add_delete_wishlist');
     /* address */
+    Route::get('main/address', 'AddressController@main_address');
     Route::post('add/address', 'AddressController@store');
     Route::post('edit/address/{id}', 'AddressController@update');
     Route::post('delete/address/{id}', 'AddressController@destroy');
