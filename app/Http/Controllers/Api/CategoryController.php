@@ -202,7 +202,7 @@ class CategoryController extends Controller
 
     public function subcategories()
     {
-        try{
+
             $categories = Category::whereNotNull('parent_id')->with(array('subcategory_products'=>function($query){
                 $query->select(
                     'id',
@@ -231,13 +231,7 @@ class CategoryController extends Controller
                 'data' => $categories,
                 'code' => 200,
             ]);
-        }catch (\Exception $e){
-            return response()->json([
-                'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
-                'code' => 400,
-            ]);
-        }
+
     }
 
     public function subcategory($id)
