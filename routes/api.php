@@ -101,7 +101,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('order/{orderID}', 'PayController@order');
     Route::get('truck_order/{orderID}', 'PayController@truck_order');
     /************ currencies ************/
-    Route::get('currencies_api', 'CountryController@currencies_api');
+    Route::get('currencies_api', 'CountriesController@currencies_api');
     /************ cart ************/
     Route::post('add/cart', 'CartController@add_cart');
     Route::get('cart', 'CartController@cart');
