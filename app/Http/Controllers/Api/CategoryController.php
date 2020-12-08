@@ -172,7 +172,7 @@ class CategoryController extends Controller
                             'imageable_id'
                         );
                     })
-                )->with('wishes')->active()->paginate(5);
+                )->active()->paginate(5);
             }))
                 ->where('id',$id)->select(
                     'id',
@@ -221,7 +221,7 @@ class CategoryController extends Controller
                             'imageable_id'
                         );
                     })
-                )->with('wishes')->active()->paginate(10);
+                )->active()->paginate(10);
             }))->select(
                     'id',
                     'name_'.app()->getLocale().' as name'

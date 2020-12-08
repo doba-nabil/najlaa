@@ -26,13 +26,13 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('orders.index') }}">All Orders</a></li>
-                        <li>
+                        <li class="{{ Request::is('new/orders')? 'mm-active': '' }}">
                             <a href="{{ route('new_orders') }}">
                                 <span class="badge badge-pill badge-danger float-right">{{ \App\Models\Order::where('new' , 1)->count() }}</span>
                                 Unshown Orders
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ Request::is('old/orders')? 'mm-active': '' }}">
                             <a href="{{ route('old_orders') }}">
                                 <span class="badge badge-pill badge-soft-danger float-right">{{ \App\Models\Order::where('new' , 0)->count() }}</span>
                                 Shown Orders
@@ -93,7 +93,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('users.index') }}">All Users</a></li>
-                        <li><a href="{{ route('blocked') }}">Blocked Users</a></li>
+                        <li class="{{ Request::is('admin/blocked')? 'mm-active': '' }}"><a  href="{{ route('blocked') }}">Blocked Users</a></li>
                     </ul>
                 </li>
                 <li>
