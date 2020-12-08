@@ -33,24 +33,18 @@ class Product extends Model
     public function getCurrencyCodeAttribute()
     {
         $country_id = \request()->header('country_id');
-        if(isset($country_id)){
+
             $currency = Currency::where('country_id' , $country_id)->first();
-        }else{
-            $country_id = 1;
-            $currency = Currency::where('country_id' , $country_id)->first();
-        }
+
 
             return $currency->code;
     }
     public function getCurrencyValueAttribute()
     {
         $country_id = \request()->header('country_id');
-        if(isset($country_id)){
+
             $currency = Currency::where('country_id' , $country_id)->first();
-        }else{
-            $country_id = 1;
-            $currency = Currency::where('country_id' , $country_id)->first();
-        }
+
         if(empty($currency->equal)){
 
                 $fromCurrency = $currency->code;
