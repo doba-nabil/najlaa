@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class Product extends Model
         'created_at', 'updated_at','subcategory_id' , 'brand_id' , 'material_id','category_id'
     ];
 
-    protected $appends = ['currency_code' , 'currency_value'];
+    protected $appends = ['currency_code' , 'currency_value', 'isFav'];
 
     public function getCurrencyCodeAttribute()
     {
@@ -93,6 +94,21 @@ class Product extends Model
             }
         }else{
             return $currency->equal;
+        }
+    }
+
+    public function getIsFavAttribute()
+    {
+        if (\request()->bearerToken()) {
+            $user = User::where('api_token', \request()->bearerToken())->first();
+            $found = WishList::where('product_id', $this->id)->where('user_id', $user->id)->first();
+            if (isset($found)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 
