@@ -24,7 +24,7 @@ class Product extends Model
         'created_at','updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at','subcategory_id' , 'brand_id' , 'material_id'
+        'created_at', 'updated_at','subcategory_id' , 'brand_id' , 'material_id','category_id'
     ];
 
     protected $appends = ['currency_code' , 'currency_value'];

@@ -81,6 +81,11 @@ class Order extends Model
         }
     }
 
+    public function getPaidType()
+    {
+        return  $this->paid == 1 ? 'E-payment' : 'Payment on Receipt';
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');

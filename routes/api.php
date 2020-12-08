@@ -99,6 +99,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('pending/orders', 'PayController@pending_orders');
     Route::get('confirmed/orders', 'PayController@confirmed_orders');
     Route::get('order/{orderID}', 'PayController@order');
+    Route::get('truck_order/{orderID}', 'PayController@truck_order');
 
     /************ cart ************/
     Route::post('add/cart', 'CartController@add_cart');

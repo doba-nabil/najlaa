@@ -28,7 +28,12 @@ class ProductController extends Controller
 
     public function show($id, Request $request)
     {
-        $product = Product::with(array('subcategory' => function ($query) {
+        $product = Product::with(array('category' => function ($query) {
+            $query->select(
+                'id',
+                'name_' . app()->getLocale() . ' as name'
+            )->active();
+        }))->with(array('subcategory' => function ($query) {
             $query->select(
                 'id',
                 'name_' . app()->getLocale() . ' as name'
@@ -58,6 +63,7 @@ class ProductController extends Controller
             ->where('id', $id)->select(
                 'id',
                 'subcategory_id',
+                'category_id',
                 'brand_id',
                 'material_id',
                 'price',

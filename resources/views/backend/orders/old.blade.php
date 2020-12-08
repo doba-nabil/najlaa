@@ -11,10 +11,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">All Orders</h4>
+                    <h4 class="card-title">All Old Orders</h4>
                     <div style="display: flex;justify-content: space-between;">
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_orders/"><i class="mdi mdi-trash-can-outline mr-2"></i>
+                           delete_url="/delete_old_orders/"><i class="mdi mdi-trash-can-outline mr-2"></i>
                             Delete All
                         </a>
                     </div>
@@ -28,7 +28,6 @@
                             <th>Paid</th>
                             <th>Phone</th>
                             <th>Shipping status</th>
-                            <th>New Order</th>
                             <th>Order Time</th>
                             <th>Options</th>
                         </tr>
@@ -63,13 +62,6 @@
                                         out to delivery
                                     @elseif($order->status == 4)
                                         delivered
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($order->new == 1)
-                                        <i class="fa fa-check text-success"></i>
-                                    @else
-                                        <i class="fa fa-times text-danger"></i>
                                     @endif
                                 </td>
                                 <td>
