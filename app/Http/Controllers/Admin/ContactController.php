@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:contact-index|contact-show|contact-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:contact-delete', ['only' => ['destroy' , 'delete_contacts']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,19 +19,9 @@ class ContactController extends Controller
             $contacts = Contact::orderBy('id', 'desc')->get();
             return view('backend.contacts.index', compact('contacts'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'يوجد خطأ يرجى المحاولة مرة اخرى');
+            return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
-    public function newContact()
-    {
-        try {
-            $contacts = Contact::read()->orderBy('id', 'desc')->get();
-            return view('backend.contacts.indexo', compact('contacts'));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'يوجد خطأ يرجى المحاولة مرة اخرى');
-        }
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -67,11 +52,9 @@ class ContactController extends Controller
     {
         $contact = Contact::find($id);
         if(isset($contact)) {
-            $contact->new = 1;
-            $contact->save();
             return view('backend.contacts.show', compact('contact'));
         } else {
-            return redirect()->back()->with('error', 'يوجد خطأ يرجى المحاولة مرة اخرى');
+            return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
 
@@ -113,7 +96,7 @@ class ContactController extends Controller
                 'success' => 'Record deleted successfully!'
             ]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'يوجد خطأ يرجى المحاولة مرة اخرى');
+            return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
     public function delete_contacts()
@@ -133,7 +116,7 @@ class ContactController extends Controller
                 ]);
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'يوجد خطأ يرجى المحاولة مرة اخرى');
+            return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
 }

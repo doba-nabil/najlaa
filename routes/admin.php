@@ -99,19 +99,28 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('users/blocked_btn/{id}', 'UserController@block_user')->name('blocked_btn');
     Route::delete('delete_users', 'UserController@delete_users')->name('delete_users');
     /*********** end users route ***********/
-    Route::resource('orders', 'OrderController', ['only' => ['index']]);
-    Route::get('messages', 'OrderController@indexo')->name('indexo');
+    /***********  orders route ***********/
+    Route::resource('orders', 'OrderController', ['only' => ['index','show' ,'update' ,'destroy']]);
+    Route::get('old/orders', 'OrderController@old')->name('old_orders');
+    Route::get('new/orders', 'OrderController@new')->name('new_orders');
+    Route::delete('delete_orders', 'OrderController@delete_orders')->name('delete_orders');
+    Route::delete('delete_old_orders', 'OrderController@delete_old_orders')->name('delete_old_orders');
+    Route::delete('delete_new_orders', 'OrderController@delete_new_orders')->name('delete_new_orders');
+    /*********** end orders route ***********/
     /***********  contact route ***********/
     Route::resource('contacts', 'ContactController', ['only' => ['index', 'show', 'destroy']]);
-    Route::get('new/contacts', 'ContactController@newContact')->name('new_contact');
     Route::delete('delete_contacts', 'ContactController@delete_contacts')->name('delete_contacts');
     /*********** end contact route ***********/
     /***********  options route ***********/
     Route::resource('options', 'OptionController', ['only' => ['edit', 'update']]);
     /*********** end options route ***********/
+    //*********** start  moderator route ***********/
     Route::resource('moderators', 'ModeratorController', ['except' => ['show']]);
-    //***********  moderator route ***********/
-
+    //*********** end  moderator route ***********/
+    //*********** send message route ***********/
+    Route::get('send/page', 'MessageController@message')->name('send_form');
+    Route::post('send/message', 'MessageController@send_message')->name('send');
+    //*********** end send message route ***********/
 });
 /************* ajax select routes ******************/
 Route::get('/ajax-subcats', 'Admin\AdminController@getsubcategories');

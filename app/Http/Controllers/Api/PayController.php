@@ -872,5 +872,51 @@ class PayController extends Controller
             ]);
         }
     }
+    public function truck_order($orderID, Request $request)
+    {
+        try {
+            $user = User::where('api_token', $request->bearerToken())->first();
+            $order = Order::where('user_id', $user->id)->where('id', $orderID)->select('status')->first();
+            if ($order->status == 0 || $order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4) {
+                $order['signed_date'] = Carbon::parse($order->date)->format('d M Y');
+                $order['signed_time'] = Carbon::parse($order->time)->format('h:i A');
+            }
+            if ($order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4) {
+                $order['processed_date'] = Carbon::parse($order->processed)->format('d M Y');
+                $order['processed_time'] = Carbon::parse($order->processed)->format('h:i A');
+            }
+            if ($order->status == 2 || $order->status == 3 || $order->status == 4) {
+                $order['shipped_date'] = Carbon::parse($order->shipped)->format('d M Y');
+                $order['shipped_time'] = Carbon::parse($order->shipped)->format('h:i A');
+            }
+            if ($order->status == 3 || $order->status == 4) {
+                $order['out_to_delivery_date'] = Carbon::parse($order->out_to_delivery)->format('d M Y');
+                $order['out_to_delivery_time'] = Carbon::parse($order->out_to_delivery)->format('h:i A');
+            }
+            if ($order->status == 4) {
+                $order['delivered_date'] = Carbon::parse($order->delivered)->format('d M Y');
+                $order['delivered_time'] = Carbon::parse($order->delivered)->format('h:i A');
+            }
+            if (isset($order)) {
+                return response()->json([
+                    'status' => true,
+                    'data' => $order,
+                    'code' => 200,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'طلب غير موجود',
+                    'code' => 400,
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
 }
 

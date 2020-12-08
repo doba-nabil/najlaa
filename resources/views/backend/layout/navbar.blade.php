@@ -20,10 +20,25 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('orders.index') }}" class="waves-effect">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-cart-plus"></i>
                         <span>Orders</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('orders.index') }}">All Orders</a></li>
+                        <li>
+                            <a href="{{ route('new_orders') }}">
+                                <span class="badge badge-pill badge-danger float-right">{{ \App\Models\Order::where('new' , 1)->count() }}</span>
+                                Unshown Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('old_orders') }}">
+                                <span class="badge badge-pill badge-soft-danger float-right">{{ \App\Models\Order::where('new' , 0)->count() }}</span>
+                                Shown Orders
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -94,9 +109,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('indexo') }}" class="waves-effect">
+                    <a href="{{ route('contacts.index') }}" class="waves-effect">
                         <i class="fas fa-envelope"></i>
                         <span>User Messages</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('send_form') }}" class="waves-effect">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Send Email Message</span>
                     </a>
                 </li>
             </ul>
