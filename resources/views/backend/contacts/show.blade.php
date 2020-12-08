@@ -22,20 +22,20 @@
     <div class="card" style="width:100%;">
         <div class="card-body">
             <h6>
-                عنوان الرسالة : {{ $contact->title }}
+                Message frome email ( {{ $contact->email }} )
             </h6>
-            <h5 class="card-title">اسم الراسل : {{ $contact->name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">بريد الراسل : {{ $contact->email }}</h6>
+            <h5 class="card-title">Name : {{ $contact->name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Email : {{ $contact->email }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Phone : {{ $contact->email }}</h6>
             <hr>
             <p class="card-text">
-                الرسالة :
-                {{ $contact->email }}
+                Message :
+                {{ $contact->message }}
             </p>
-            <a class="card-link">نوع الرسالة : {{ $contact->kind }}</a>
         </div>
     </div>
     <div class="col-md-12">
-        <a href="{{ route('contacts.index') }}" style="width: 100%" class="btn btn-primary">رجوع الى الرسائل</a>
+        <a href="{{ route('contacts.index') }}" style="width: 100%" class="btn btn-primary">Back</a>
     </div>
 @endsection
 @section('backend-footer')

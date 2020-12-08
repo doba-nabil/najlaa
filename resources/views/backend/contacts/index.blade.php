@@ -32,7 +32,6 @@
                         <tbody>
                         @foreach($contacts as $contact)
                             <tr class="delete-all-cats">
-                                <td hidden></td>
                                 <td>
                                     {{ $loop->index + 1 }}
                                 </td>
