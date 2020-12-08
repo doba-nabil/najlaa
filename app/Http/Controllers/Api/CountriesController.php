@@ -119,4 +119,21 @@ class CountriesController extends Controller
             ]);
         }
     }
+    public function currencies_api()
+    {
+        try{
+            $currencies = Currency::all();
+            return response()->json([
+                'status' => true,
+                'data' => $currencies,
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
 }
