@@ -30,9 +30,9 @@ class Product extends Model
 
     protected $appends = ['currency_code' , 'currency_value', 'isFav'];
 
-    public function getCurrencyCodeAttribute()
+    public function getCurrencyCodeAttribute(Request $request)
     {
-        $country_id = \request()->header('country_id');
+        $country_id = $request->header('country_id');
         if(isset($country_id)){
             $currency = Currency::where('country_id' , $country_id)->first();
         }else{
@@ -46,9 +46,9 @@ class Product extends Model
             return $currency->code;
         }
     }
-    public function getCurrencyValueAttribute()
+    public function getCurrencyValueAttribute(Request $request)
     {
-        $country_id = \request()->header('country_id');
+        $country_id = $request->header('country_id');
         if(isset($country_id)){
             $currency = Currency::where('country_id' , $country_id)->first();
         }else{
