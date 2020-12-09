@@ -42,7 +42,7 @@
                                 <td>{{ $currency->country->name_ar }} / {{ $currency->country->name_en }}</td>
                                 <td>
                                     @if(!empty($currency->equal))
-                                        {{ $currency->equal }}
+                                        {{ $currency->equal }} QAR
                                     @else
                                         <?php
                                         $fromCurrency = $currency->code;
@@ -52,7 +52,7 @@
                                             echo $result . ' QAR';
                                         }else{
                                             try{
-                                                $url = "https://www.google.com/search?q=".$toCurrency."+to+".$fromCurrency;
+                                                $url = "https://www.google.com/search?q=".$fromCurrency."+to+".$toCurrency;
                                                 $get = file_get_contents($url);
                                                 $data = preg_split('/\D\s(.*?)\s=\s/',$get);
                                                 $exhangeRate = (float) substr($data[1],0,7);
