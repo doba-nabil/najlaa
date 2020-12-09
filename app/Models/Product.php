@@ -39,12 +39,8 @@ class Product extends Model
             $country_id = 1;
             $currency = Currency::where('country_id' , $country_id)->first();
         }
-        try{
-            return $currency->code;
-        }catch (\Exception $e){
-            $currency = Currency::where('country_id' , 1)->first();
-            return $currency->code;
-        }
+        return $currency->code;
+
     }
     public function getCurrencyValueAttribute()
     {
