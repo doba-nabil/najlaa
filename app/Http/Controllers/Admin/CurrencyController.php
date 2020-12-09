@@ -49,17 +49,12 @@ class CurrencyController extends Controller
     public function store(CurrencyRequest $request)
     {
         try {
-            $currency = new Currency();
-            $currency->name_ar = $request->name_ar;
-            $currency->name_en = $request->name_en;
-            $currency->code = $request->code;
-            $currency->country_id = $request->country_id;
             if($request->active){
-                $currency->active = 1;
+                $request->request->add(['active' => 1]);
             }else{
-                $currency->active = 0;
+                $request->request->add(['active' => 0]);
             }
-            $currency->save();
+            Currency::create($request->all());
             return redirect()->route('currencies.index')->with('done', 'Added Successfully ....');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
@@ -104,18 +99,13 @@ class CurrencyController extends Controller
     public function update(CurrencyRequest $request, $id)
     {
         try{
-            $currency = Currency::find($id);
-            $currency->name_ar = $request->name_ar;
-            $currency->name_en = $request->name_en;
-            $currency->code = $request->code;
-            $currency->equal = $request->equal;
-            $currency->country_id = $request->country_id;
+            $currncy = Currency::find($id);
             if($request->active){
-                $currency->active = 1;
+                $request->request->add(['active' => 1]);
             }else{
-                $currency->active = 0;
+                $request->request->add(['active' => 0]);
             }
-            $currency->save();
+            $currncy->update($request->all());
             return redirect()->route('currencies.index')->with('done' , 'Edited Successfully ....');
         }catch (\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');
