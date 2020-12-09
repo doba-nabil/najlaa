@@ -52,7 +52,7 @@
                                             echo $result . ' QAR';
                                         }else{
                                             try{
-                                                echo   $url = "https://www.google.com/search?q=".$fromCurrency."+to+".$toCurrency;
+                                                $url = "https://www.google.com/search?q=".$toCurrency."+to+".$fromCurrency;
                                                 $get = file_get_contents($url);
                                                 $data = preg_split('/\D\s(.*?)\s=\s/',$get);
                                                 $exhangeRate = (float) substr($data[1],0,7);
