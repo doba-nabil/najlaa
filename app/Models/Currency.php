@@ -10,7 +10,7 @@ class Currency extends Model
         'name_ar', 'name_en','equal','code','country_id', 'active' ,'created_at' , 'updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at','country_id'
+        'created_at', 'updated_at'
     ];
     public function scopeActive($query)
     {
