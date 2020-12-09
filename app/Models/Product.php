@@ -30,30 +30,30 @@ class Product extends Model
 
     protected $appends = ['currency_code' , 'currency_value', 'isFav'];
 
-    public function getCurrencyCodeAttribute(Request $request)
+    public function getCurrencyCodeAttribute()
     {
-        $country_id = $request->header('country_id');
+        $country_id = \request()->header('country_id');
         if(isset($country_id)){
-            $currency = Currency::where('country_id' , $country_id)->first();
+            $currency = \App\Models\Currency::where('country_id' , $country_id)->first();
         }else{
             $country_id = 1;
-            $currency = Currency::where('country_id' , $country_id)->first();
+            $currency = \App\Models\Currency::where('country_id' , $country_id)->first();
         }
         try{
             return $currency->code;
         }catch (\Exception $e){
-            $currency = Currency::where('country_id' , 1)->first();
+            $currency = \App\Models\Currency::where('country_id' , 1)->first();
             return $currency->code;
         }
     }
-    public function getCurrencyValueAttribute(Request $request)
+    public function getCurrencyValueAttribute()
     {
-        $country_id = $request->header('country_id');
+        $country_id = \request()->header('country_id');
         if(isset($country_id)){
-            $currency = Currency::where('country_id' , $country_id)->first();
+            $currency = \App\Models\Currency::where('country_id' , $country_id)->first();
         }else{
             $country_id = 1;
-            $currency = Currency::where('country_id' , $country_id)->first();
+            $currency = \App\Models\Currency::where('country_id' , $country_id)->first();
         }
         if(empty($currency->equal)){
             try{
@@ -74,7 +74,7 @@ class Product extends Model
                     }
                 }
             }catch (\Exception $e){
-                $currency = Currency::where('country_id' , 1)->first();
+                $currency = \App\Models\Currency::where('country_id' , 1)->first();
                 $fromCurrency = $currency->code;
                 $toCurrency = 'QAR';
                 if($fromCurrency == $toCurrency){
@@ -101,7 +101,7 @@ class Product extends Model
     {
         if (\request()->bearerToken()) {
             $user = User::where('api_token', \request()->bearerToken())->first();
-            $found = WishList::where('product_id', $this->id)->where('user_id', $user->id)->first();
+            $found = \App\Models\WishList::where('product_id', $this->id)->where('user_id', $user->id)->first();
             if (isset($found)) {
                 return true;
             } else {
