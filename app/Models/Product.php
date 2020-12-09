@@ -32,16 +32,19 @@ class Product extends Model
 
     public function getCurrencyCodeAttribute()
     {
-        return  $country_id = \request()->header('country_id');
+        $country_id = \request()->header('country_id');
         if(isset($country_id)){
             $currency = Currency::where('country_id' , $country_id)->first();
         }else{
             $country_id = 1;
             $currency = Currency::where('country_id' , $country_id)->first();
         }
-
+        try{
             return $currency->code;
-
+        }catch (\Exception $e){
+            $currency = Currency::where('country_id' , 1)->first();
+            return $currency->code;
+        }
     }
     public function getCurrencyValueAttribute()
     {
@@ -53,7 +56,7 @@ class Product extends Model
             $currency = Currency::where('country_id' , $country_id)->first();
         }
         if(empty($currency->equal)){
-
+            try{
                 $fromCurrency = $currency->code;
                 $toCurrency = 'QAR';
                 if($fromCurrency == $toCurrency){
@@ -70,7 +73,25 @@ class Product extends Model
                         return 1;
                     }
                 }
-
+            }catch (\Exception $e){
+                $currency = Currency::where('country_id' , 1)->first();
+                $fromCurrency = $currency->code;
+                $toCurrency = 'QAR';
+                if($fromCurrency == $toCurrency){
+                    return 1;
+                }else{
+                    try{
+                        $url = "https://www.google.com/search?q=".$fromCurrency."+to+".$toCurrency;
+                        $get = file_get_contents($url);
+                        $data = preg_split('/\D\s(.*?)\s=\s/',$get);
+                        $exhangeRate = (float) substr($data[1],0,7);
+                        $result = round($exhangeRate , 3);
+                        return $result;
+                    }catch (\Exception $e){
+                        return 1;
+                    }
+                }
+            }
         }else{
             return $currency->equal;
         }
