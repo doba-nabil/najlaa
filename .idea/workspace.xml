@@ -37,8 +37,8 @@
       <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/backend/ordercontacts/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="52" column="76" selection-start-line="52" selection-start-column="76" selection-end-line="52" selection-end-column="76" />
+            <state relative-caret-position="109">
+              <caret line="84" column="74" selection-start-line="84" selection-start-column="74" selection-end-line="84" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -409,18 +409,17 @@
       <workItem from="1607353503868" duration="59000" />
       <workItem from="1607359670144" duration="25201000" />
       <workItem from="1607453270558" duration="9312000" />
-      <workItem from="1607607342785" duration="5243000" />
+      <workItem from="1607607342785" duration="5495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="359606000" />
+    <option name="totallyTimeSpent" value="359858000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25642964" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25642964" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -429,7 +428,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.33333334" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.33333334" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -814,8 +813,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/ordercontacts/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="52" column="76" selection-start-line="52" selection-start-column="76" selection-end-line="52" selection-end-column="76" />
+        <state relative-caret-position="109">
+          <caret line="84" column="74" selection-start-line="84" selection-start-column="74" selection-end-line="84" selection-end-column="74" />
         </state>
       </provider>
     </entry>

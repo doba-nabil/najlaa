@@ -28,7 +28,7 @@
             <h5 class="card-title">Type : {{ $contact->getType() }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Email : {{ $contact->email }}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Phone : {{ $contact->phone }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Order no : {{ $contact->order->order_no }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Order no : <a target="_blank" href="{{ route('orders.show' , $contact->order->id) }}">{{ $contact->order->order_no }}</a> </h6>
             <hr>
             <p class="card-text">
                 Message :
