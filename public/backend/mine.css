@@ -1,7 +1,7 @@
 .blah_create{
     display: none;
 }
-#blah{
+#blah , #blah2{
     width: 200px;
     border-radius: 10px;
 }

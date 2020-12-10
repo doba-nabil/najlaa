@@ -21,7 +21,7 @@ class HomeController extends Controller
         // $this->middleware('auth:api');
         $this->middleware('auth:api')->except('categories', 'sliders','hot_offers','all_hot_offers',
             'interests','all_interests','contact_phone' ,'contact_email' , 'contact_address' , 'contact' , 'legal' ,
-            'privacy' , 'chosen','all_chosen');
+            'privacy' , 'chosen','all_chosen','delivery_return');
     }
     /**
      * Display a listing of the resource.
@@ -517,6 +517,23 @@ class HomeController extends Controller
     {
         try{
             $page = Page::where('id' , 1)->active()->first();
+            return response()->json([
+                'status' => true,
+                'data' => [$page['body_'.app()->getLocale()]],
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
+    public function delivery_return()
+    {
+        try{
+            $page = Page::where('id' , 3)->active()->first();
             return response()->json([
                 'status' => true,
                 'data' => [$page['body_'.app()->getLocale()]],

@@ -245,6 +245,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Sizes Image</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="size_image" class="custom-file-input" id="customFile2"
+                                               onchange="readURL2(this);" required>
+                                        <label class="custom-file-label" for="customFile2">Sizes Image</label>
+                                        @error('size_image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="text-center">
+                                        <img id="blah2" class="blah_create mt-3" src=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4">

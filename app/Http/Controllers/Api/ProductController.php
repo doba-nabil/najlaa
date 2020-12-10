@@ -81,6 +81,12 @@ class ProductController extends Controller
                         'imageable_id'
                     );
                 })
+            )->with(array('sizeImage' => function ($query) {
+                    $query->select(
+                        'image',
+                        'imageable_id'
+                    );
+                })
             )->with(array('subImages' => function ($query) {
                     $query->select(
                         'image',
@@ -88,8 +94,9 @@ class ProductController extends Controller
                     );
                 })
             )->first();
-        $product->views = $product->views + 1;
-        $product->save();
+        $pro = Product::find($id);
+        $pro->views = $pro->views + 1 ;
+        $pro->save();
         $products = [];
         if ($request->bearerToken()) {
             $user = User::where('api_token', $request->bearerToken())->first();

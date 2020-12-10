@@ -93,6 +93,9 @@ class ProductController extends Controller
             if ($request->hasFile('image')) {
                 $this->saveimage($request->image, 'pictures/products', $product->id , Product::class, 'main');
             }
+            if ($request->hasFile('size_image')) {
+                $this->saveimage($request->size_image, 'pictures/products', $product->id , Product::class, 'size');
+            }
             if ($request->hasFile('images')) {
                 $this->saveimages($request->images, 'pictures/products', $product->id , Product::class, 'sub');
             }
@@ -208,6 +211,9 @@ class ProductController extends Controller
             $product->save();
             if ($request->hasFile('image')) {
                 $this->editimage($request->image, 'pictures/products', $product->id , Product::class, 'main');
+            }
+            if ($request->hasFile('size_image')) {
+                $this->editimage($request->size_image, 'pictures/products', $product->id , Product::class, 'size');
             }
             if ($request->hasFile('images')) {
                 $this->saveimages($request->images, 'pictures/products', $product->id , Product::class, 'sub');

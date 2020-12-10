@@ -100,6 +100,17 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+function readURL2(input) {
+    $('#blah2').fadeIn();
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#blah2')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 /********** end upload image ****************/
 
 /*********** start upload multi images *************/

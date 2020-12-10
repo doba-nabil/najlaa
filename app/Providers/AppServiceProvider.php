@@ -59,6 +59,8 @@ class AppServiceProvider extends ServiceProvider
                 $admin->save();
             }
             $page = Page::find(1);
+            $page2 = Page::find(2);
+            $page3 = Page::find(3);
             if(!isset($page)){
                 $page = new Page();
                 $page->id = 1;
@@ -69,7 +71,8 @@ class AppServiceProvider extends ServiceProvider
                 $page->slug = 'legal-information';
                 $page->active = 1;
                 $page->save();
-
+            }
+            if(!isset($page2)) {
                 $page = new Page();
                 $page->id = 2;
                 $page->name_ar = 'Privacy Policy';
@@ -77,6 +80,17 @@ class AppServiceProvider extends ServiceProvider
                 $page->body_ar = 'Privacy Policy body';
                 $page->body_en = 'Privacy Policy body';
                 $page->slug = 'privacy-policy';
+                $page->active = 1;
+                $page->save();
+            }
+            if(!isset($page3)){
+                $page = new Page();
+                $page->id = 3;
+                $page->name_ar = 'Delivery and return info';
+                $page->name_en = 'Delivery and return info';
+                $page->body_ar = 'Delivery and return info body';
+                $page->body_en = 'Delivery and return info body';
+                $page->slug = 'delivery-return';
                 $page->active = 1;
                 $page->save();
             }
