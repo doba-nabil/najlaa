@@ -111,6 +111,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('contacts', 'ContactController', ['only' => ['index', 'show', 'destroy']]);
     Route::delete('delete_contacts', 'ContactController@delete_contacts')->name('delete_contacts');
     /*********** end contact route ***********/
+    /***********  order feedback route ***********/
+    Route::resource('ordercontacts', 'ContactOrderController', ['only' => ['index', 'show', 'destroy']]);
+    Route::delete('delete_ordercontacts', 'ContactOrderController@delete_contacts')->name('delete_ordercontacts');
+    /*********** end order feedback route ***********/
     /***********  options route ***********/
     Route::resource('options', 'OptionController', ['only' => ['edit', 'update']]);
     /*********** end options route ***********/
