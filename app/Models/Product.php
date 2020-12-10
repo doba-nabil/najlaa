@@ -20,7 +20,7 @@ class Product extends Model
         ];
     }
     protected $fillable = [
-        'name_ar', 'name_en','image', 'images' , 'sizes' ,'colors' , 'category_id','subcategory_id','material_id' ,
+        'name_ar', 'name_en','image','size_image', 'images' , 'sizes' ,'colors' , 'category_id','subcategory_id','material_id' ,
         'brand_id' ,'price' ,'discount_price' , 'max_qty' ,'min_qty' , 'code' , 'body_ar' ,'body_en','active','chosen',
         'created_at','updated_at'
     ];
@@ -148,6 +148,10 @@ class Product extends Model
     public function mainImage()
     {
         return $this->morphOne('App\Models\Image', 'imageable', 'imageable_type', 'imageable_id')->where('type' , 'main');
+    }
+    public function sizeImage()
+    {
+        return $this->morphOne('App\Models\Image', 'imageable', 'imageable_type', 'imageable_id')->where('type' , 'size');
     }
     public function subImages()
     {

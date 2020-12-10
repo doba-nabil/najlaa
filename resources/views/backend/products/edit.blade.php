@@ -288,6 +288,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Size Image</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="size_image" class="custom-file-input" id="customFile2"
+                                               onchange="readURL2(this);">
+                                        <label class="custom-file-label" for="customFile">Chose Size Image</label>
+                                        @error('size_image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="text-center">
+                                        @if(isset($product->sizeImage))
+                                            <img id="blah2" class="mt-3" src="{{ asset('pictures/products/' . $product->sizeImage->image) }}"/>
+                                        @else
+                                            <img id="blah2" class="mt-3" src="{{ asset('backend/assets/images/empty.jpg') }}"/>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4">

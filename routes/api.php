@@ -51,6 +51,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     /******** new get **************/
     Route::get('privacy', 'HomeController@privacy');
     Route::get('legal', 'HomeController@legal');
+    Route::get('delivery-return', 'HomeController@delivery_return');
     Route::get('home/hot_offers', 'HomeController@hot_offers');
     Route::get('home/all_hot_offers', 'HomeController@all_hot_offers');
     Route::get('home/chosen', 'HomeController@chosen');
