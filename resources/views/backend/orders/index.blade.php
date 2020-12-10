@@ -29,6 +29,7 @@
                             <th>Phone</th>
                             <th>Shipping status</th>
                             <th>New Order</th>
+                            <th>Order No</th>
                             <th>Order Time</th>
                             <th>Options</th>
                         </tr>
@@ -71,6 +72,9 @@
                                     @else
                                         <i class="fa fa-times text-danger"></i>
                                     @endif
+                                </td>
+                                <td>
+                                    {{ $order->order_no }}
                                 </td>
                                 <td>
                                     {{ $order->date }} / {{ $order->time }}

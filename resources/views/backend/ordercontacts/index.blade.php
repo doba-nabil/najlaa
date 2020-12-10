@@ -11,12 +11,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">All New Orders</h4>
+                    <h4 class="card-title">Order Feedbacks</h4>
                     <div style="display: flex;justify-content: space-between;">
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_new_orders/"><i class="mdi mdi-trash-can-outline mr-2"></i>
-                            Delete All
-                        </a>
+                           delete_url="/delete_ordercontacts/"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
                     </div>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
@@ -24,59 +22,33 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>User Name</th>
-                            <th>Paid</th>
+                            <th>Name</th>
+                            <th>Email</th>
                             <th>Phone</th>
-                            <th>Shipping status</th>
-                            <th>Order Time</th>
+                            <th>Created At</th>
                             <th>Order no</th>
+                            <th>Type</th>
                             <th>Options</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($orders as $order)
+                        @foreach($contacts as $contact)
                             <tr>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $order->user->name }}</td>
-                                <td>{{ $order->getPaidType() }}</td>
-                                <td>{{ $order->phone }}</td>
-                                <td style="background:
-                                    @if($order->status == 0)
-                                        #33AFFF
-                                    @elseif($order->status == 1)
-                                        #9333FF
-                                    @elseif($order->status == 2)
-                                        #FF33FC
-                                    @elseif($order->status == 3)
-                                        #FF3352
-                                    @elseif($order->status == 4)
-                                        #33FF3C
-                                    @endif"
-                                >
-                                    @if($order->status == 0)
-                                        signed
-                                    @elseif($order->status == 1)
-                                        processed
-                                    @elseif($order->status == 2)
-                                        shipped
-                                    @elseif($order->status == 3)
-                                        out to delivery
-                                    @elseif($order->status == 4)
-                                        delivered
-                                    @endif
-                                </td>
                                 <td>
-                                    {{ $order->date }} / {{ $order->time }}
+                                    {{ $loop->index + 1 }}
                                 </td>
+                                <td>{{ $contact->name }}</td>
+                                <td>{{ $contact->email }}</td>
+                                <td>{{ $contact->phone }}</td>
+                                <td>{{ $contact->created_at->toDateString() }}</td>
+                                <td>{{ $contact->order->order_no }}</td>
+                                <td>{{ $contact->getType() }}</td>
                                 <td>
-                                    {{ $order->order_no }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('orders.show' , $order->id) }}"
-                                       class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                    <a title="" onclick="return false;" object_id="{{ $order->id }}"
-                                       delete_url="/orders/" class="text-danger remove-alert" href="#"><i
-                                                class="mdi mdi-trash-can font-size-18"></i></a>
+                                    <a href="{{ route('ordercontacts.show' , $contact->id) }}"
+                                       class="mr-3 text-primary"><i class="fa fa-eye"></i></a>
+                                    <a title="" onclick="return false;" object_id="{{ $contact->id }}"
+                                       delete_url="/ordercontacts/" class="text-danger remove-alert" href="#">
+                                        <i class="mdi mdi-trash-can font-size-18"></i></a>
                                 </td>
                             </tr>
                         @endforeach

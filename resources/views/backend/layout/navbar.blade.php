@@ -109,6 +109,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('ordercontacts.index') }}" class="waves-effect">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Orders Feedbacks</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('contacts.index') }}" class="waves-effect">
                         <i class="fas fa-envelope"></i>
                         <span>User Messages</span>

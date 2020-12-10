@@ -29,6 +29,7 @@
                             <th>Phone</th>
                             <th>Shipping status</th>
                             <th>Order Time</th>
+                            <th>Order no</th>
                             <th>Options</th>
                         </tr>
                         </thead>
@@ -66,6 +67,9 @@
                                 </td>
                                 <td>
                                     {{ $order->date }} / {{ $order->time }}
+                                </td>
+                                <td>
+                                    {{ $order->order_no }}
                                 </td>
                                 <td>
                                     <a href="{{ route('orders.show' , $order->id) }}"
