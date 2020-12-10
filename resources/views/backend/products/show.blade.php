@@ -226,7 +226,7 @@
                                         <div class="tab-pane fade" id="pills-contact" role="tabpanel"
                                              aria-labelledby="pills-contact-tab">
                                             <img style="width: 100%;height: 330px"
-                                                 src="{{ asset('backend/assets/images/sizes.png') }}">
+                                                 src="{{ asset('pictures/products/' . $product->sizeImage->image) }}">
                                         </div>
                                     </div>
                                 </div>
