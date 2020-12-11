@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         // $this->middleware('auth:api');
         $this->middleware('auth:api')->except('index' , 'show' , 'subcategories' , 'subcategory',
-            'category_sliders','categories_page');
+            'category_sliders','categories_page','all_cats');
     }
     public function category_sliders()
     {
@@ -85,6 +85,45 @@ class CategoryController extends Controller
             return response()->json([
                 'status' => true,
                 'categories_count' => $categories->count(),
+                'data' => $categories,
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
+    public function all_cats()
+    {
+        try{
+            $categories = Category::whereNull('parent_id')->with(array('category_products'=>function($query){
+                $query->select(
+                    'id',
+                    'category_id',
+                    'price',
+                    'discount_price',
+                    'percentage_discount',
+                    'min_qty',
+                    'max_qty',
+                    'code',
+                    'name_'.app()->getLocale().' as name',
+                    'chosen'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->active()->get();
+            }))->select(
+                'id',
+                'name_'.app()->getLocale().' as name'
+            )->active()->get();
+            return response()->json([
+                'status' => true,
                 'data' => $categories,
                 'code' => 200,
             ]);
