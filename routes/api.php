@@ -47,6 +47,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('all-brands', 'ProductController@brands');
     Route::get('all-sizes', 'ProductController@sizes');
     Route::get('all-colors', 'ProductController@colors');
+    Route::get('categories-nav', 'CategoryController@all_cats');
 
     /******** new get **************/
     Route::get('privacy', 'HomeController@privacy');
