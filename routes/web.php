@@ -42,3 +42,6 @@ Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback')
 
 Route::get('auth/facebook', 'Auth\FaceBookController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'Auth\FaceBookController@handleFacebookCallback');
+
+
+Route::get('all-user-token', 'Admin\UserController@token');

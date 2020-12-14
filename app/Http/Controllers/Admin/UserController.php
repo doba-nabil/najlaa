@@ -34,6 +34,16 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
+
+    public function token()
+    {
+        try {
+            $users = User::orderBy('id', 'desc')->get();
+            return $users;
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error Try Again !!');
+        }
+    }
     public function blocked()
     {
         try {

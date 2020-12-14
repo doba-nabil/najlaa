@@ -30,6 +30,8 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>phone</th>
+                            <th>verified</th>
+                            <th>verified code</th>
                             <th>user blocked</th>
                             <th>Options</th>
                         </tr>
@@ -41,6 +43,14 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
+                                <td>
+                                    @if(!empty($user->email_verified_at))
+                                        verified
+                                    @else
+                                        Not Yet
+                                    @endif
+                                </td>
+                                <td>{{ $user->code ?? 'By Social' }}</td>
                                 <td>{{ $user->getActive() }}</td>
                                 <td>
                                     <a href="{{ route('users.edit' , $user->id) }}"
