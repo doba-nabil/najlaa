@@ -23,6 +23,9 @@ Route::group(['middleware' => 'localization'], function () {
     Route::post('register', 'Auth\RegisterController@registerapi');
     /********* logout **************/
     Route::post('/logout', 'Auth\LoginController@logoutapi');
+    /****** reset pass *******/
+    Route::post('reset_password_without_token', 'Auth/AccountsController@validatePasswordRequest');
+    Route::post('reset_password_with_token', 'Auth/AccountsController@resetPassword');
 });
 Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function () {
     Route::resource('page', 'PageController', ['only' => ['index', 'show']]);

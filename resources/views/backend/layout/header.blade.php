@@ -70,7 +70,7 @@
                                         </span>
                                         </div>
                                         <div class="media-body">
-                                            <h6 class="mt-0 mb-1">New Order From User " {{ $user->name }} "</h6>
+                                            <h6 class="mt-0 mb-1">New Order From User " {{ $user->name ?? '' }} "</h6>
                                             <div class="font-size-12 text-muted">
                                                 <p class="mb-1">Click To Visit order Information</p>
                                                 <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
@@ -110,7 +110,7 @@
                                                     </span>
                                             </div>
                                             <div class="media-body">
-                                                <h6 class="mt-0 mb-1">New Order FeedBack From " {{ $user->name }} "</h6>
+                                                <h6 class="mt-0 mb-1">New Order FeedBack From " {{ $user->name ?? '' }} "</h6>
                                                 <div class="font-size-12 text-muted">
                                                     <p class="mb-1">Click To Show FeedBack Information</p>
                                                     <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
@@ -131,7 +131,7 @@
                                                     </span>
                                             </div>
                                             <div class="media-body">
-                                                <h6 class="mt-0 mb-1">New User " {{ $user->name }} "</h6>
+                                                <h6 class="mt-0 mb-1">New User " {{ $user->name ?? '' }} "</h6>
                                                 <div class="font-size-12 text-muted">
                                                     <p class="mb-1">Click Show User Information</p>
                                                     <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
