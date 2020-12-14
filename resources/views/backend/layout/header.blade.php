@@ -36,94 +36,119 @@
                     <i class="ri-fullscreen-line"></i>
                 </button>
             </div>
+            {{--   notifications  --}}
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item noti-icon waves-effect"
+                        id="page-header-notifications-dropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="ri-notification-3-line"></i>
+                    @if(count($ordersNots) + count($contactNots) + count($contactOrderNots) + count($userNots) > 0)
+                        <span class="noti-dot"></span>
+                    @endif
+                </button>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+                     aria-labelledby="page-header-notifications-dropdown">
+                    <div class="p-3">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="m-0"> Notifications </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-simplebar style="max-height: 230px;">
+                        @if(count(Auth::user()->unreadNotifications) > 0)
+                        @foreach (Auth::user()->unreadNotifications as $notification)
+                            @if(isset($notification->data['order']))
+                                <?php
+                                $user = \App\User::find($notification->data['user']['id']);
+                                ?>
+                                <a href="{{ route('orders.show' ,$notification->data['order']['id'] ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
+                                    <div class="media">
+                                        <div class="avatar-xs mr-3">
+                                        <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                            <i class="ri-shopping-cart-line"></i>
+                                        </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="mt-0 mb-1">New Order From User " {{ $user->name }} "</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1">Click To Visit order Information</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endif
+                                @if(isset($notification->data['contact']))
+                                    <a href="{{ route('contacts.show' ,$notification->data['contact']['id'] ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
+                                        <div class="media">
+                                            <div class="avatar-xs mr-3">
+                                                    <span class="avatar-title bg-success rounded-circle font-size-16">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="mt-0 mb-1">New Message From " {{ $notification->data['contact']['name'] }} "</h6>
+                                                <div class="font-size-12 text-muted">
+                                                    <p class="mb-1">Click To Visit order Information</p>
+                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endif
+                                @if(isset($notification->data['ordercontact']))
+                                    <?php
+                                    $contact = \App\Models\ContactOrder::find($notification->data['ordercontact']['id']);
+                                    $user = \App\User::find($contact->user_id);
+                                    ?>
+                                    <a href="{{ route('ordercontacts.show' ,$notification->data['ordercontact']['id'] ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
+                                        <div class="media">
+                                            <div class="avatar-xs mr-3">
+                                                    <span class="avatar-title bg-danger rounded-circle font-size-16">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="mt-0 mb-1">New Order FeedBack From " {{ $user->name }} "</h6>
+                                                <div class="font-size-12 text-muted">
+                                                    <p class="mb-1">Click To Show FeedBack Information</p>
+                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endif
+                                @if(isset($notification->data['user']))
+                                    <?php
+                                    $user = \App\User::find($notification->data['user']['id']);
+                                    ?>
+                                    <a href="{{ route('users.edit' ,$notification->data['user']['id'] ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
+                                        <div class="media">
+                                            <div class="avatar-xs mr-3">
+                                                    <span class="avatar-title bg-warning rounded-circle font-size-16">
+                                                        <i class="fas fa-user-plus"></i>
+                                                    </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="mt-0 mb-1">New User " {{ $user->name }} "</h6>
+                                                <div class="font-size-12 text-muted">
+                                                    <p class="mb-1">Click Show User Information</p>
+                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endif
+                        @endforeach
+                        @else
+                            <h5 class="alert alert-warning text-center">Nothing New .... </h5>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            {{-- end notifications  --}}
 
-            {{--<div class="dropdown d-inline-block">--}}
-            {{--<button type="button" class="btn header-item noti-icon waves-effect"--}}
-            {{--id="page-header-notifications-dropdown"--}}
-            {{--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-            {{--<i class="ri-notification-3-line"></i>--}}
-            {{--<span class="noti-dot"></span>--}}
-            {{--</button>--}}
-            {{--<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"--}}
-            {{--aria-labelledby="page-header-notifications-dropdown">--}}
-            {{--<div class="p-3">--}}
-            {{--<div class="row align-items-center">--}}
-            {{--<div class="col">--}}
-            {{--<h6 class="m-0"> Notifications </h6>--}}
-            {{--</div>--}}
-            {{--<div class="col-auto">--}}
-            {{--<a href="#!" class="small"> View All</a>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--<div data-simplebar style="max-height: 230px;">--}}
-            {{--<a href="#" class="text-reset notification-item">--}}
-            {{--<div class="media">--}}
-            {{--<div class="avatar-xs mr-3">--}}
-            {{--<span class="avatar-title bg-primary rounded-circle font-size-16">--}}
-            {{--<i class="ri-shopping-cart-line"></i>--}}
-            {{--</span>--}}
-            {{--</div>--}}
-            {{--<div class="media-body">--}}
-            {{--<h6 class="mt-0 mb-1">Your order is placed</h6>--}}
-            {{--<div class="font-size-12 text-muted">--}}
-            {{--<p class="mb-1">If several languages coalesce the grammar</p>--}}
-            {{--<p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</a>--}}
-            {{--<a href="#" class="text-reset notification-item">--}}
-            {{--<div class="media">--}}
-            {{--<img src="{{ asset('backend') }}/assets/images/users/avatar-3.jpg"--}}
-            {{--class="mr-3 rounded-circle avatar-xs" alt="user-pic">--}}
-            {{--<div class="media-body">--}}
-            {{--<h6 class="mt-0 mb-1">James Lemire</h6>--}}
-            {{--<div class="font-size-12 text-muted">--}}
-            {{--<p class="mb-1">It will seem like simplified English.</p>--}}
-            {{--<p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</a>--}}
-            {{--<a href="#" class="text-reset notification-item">--}}
-            {{--<div class="media">--}}
-            {{--<div class="avatar-xs mr-3">--}}
-            {{--<span class="avatar-title bg-success rounded-circle font-size-16">--}}
-            {{--<i class="ri-checkbox-circle-line"></i>--}}
-            {{--</span>--}}
-            {{--</div>--}}
-            {{--<div class="media-body">--}}
-            {{--<h6 class="mt-0 mb-1">Your item is shipped</h6>--}}
-            {{--<div class="font-size-12 text-muted">--}}
-            {{--<p class="mb-1">If several languages coalesce the grammar</p>--}}
-            {{--<p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</a>--}}
-
-            {{--<a href="#" class="text-reset notification-item">--}}
-            {{--<div class="media">--}}
-            {{--<img src="{{ asset('backend') }}/assets/images/users/avatar-4.jpg"--}}
-            {{--class="mr-3 rounded-circle avatar-xs" alt="user-pic">--}}
-            {{--<div class="media-body">--}}
-            {{--<h6 class="mt-0 mb-1">Salena Layfield</h6>--}}
-            {{--<div class="font-size-12 text-muted">--}}
-            {{--<p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>--}}
-            {{--<p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</a>--}}
-            {{--</div>--}}
-            {{--<div class="p-2 border-top">--}}
-            {{--<a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">--}}
-            {{--<i class="mdi mdi-arrow-right-circle mr-1"></i> View More..--}}
-            {{--</a>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
             <div class="dropdown d-none d-lg-inline-block ml-1">
                 <button class="btn header-item noti-icon waves-effect">
                     <a href="{{ route('options.edit' , 1) }}">

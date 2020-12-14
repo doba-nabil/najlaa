@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\Moderator;
 use App\Models\Product;
+use App\Notifications\NewOrder;
 use App\User;
 use App\Models\Order;
 use App\Models\Pay;
@@ -74,6 +76,10 @@ class PayController extends Controller
                         'msg' => 'عفوا السلة فارغة',
                         'code' => 400,
                     ]);
+                }
+                $admins = Moderator::where('status' , 1)->get();
+                foreach ($admins as $admin){
+                    $admin->notify(new NewOrder($order,$user));
                 }
                 $order = Order::where('id', $order->id)->with(array('pays' => function ($query) {
                         $query->select(

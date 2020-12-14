@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\VerifyMail;
+use App\Mail\VerifyMailAr;
+use App\Models\Moderator;
+use App\Notifications\NewUser;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -72,6 +77,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'birth' => $data['birth'],
+            'code' => rand(10000,99999),
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -82,8 +88,6 @@ class RegisterController extends Controller
         $user = $this->create($request->all());
         event(new Registered($user));
         $this->guard()->login($user);
-        /*UserVerification::generate($user);
-        UserVerification::send($user, 'تفعيل عضويتك');*/
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
 
@@ -99,8 +103,26 @@ class RegisterController extends Controller
         $user = $this->create($request->all());
         event(new Registered($user));
         $this->guard()->login($user);
-        /*UserVerification::generate($user);
-        UserVerification::send($user, 'تفعيل عضويتك');*/
+        if(empty($user->email_verified_at)){
+            if(app()->getLocale() == 'ar'){
+                \Mail::to($user->email)->send(new VerifyMailAr($user , $user->code));
+            }elseif(app()->getLocale() == 'en'){
+                \Mail::to($user->email)->send(new VerifyMail($user , $user->code));
+            }
+        }
+        $token = \Request::header('token');
+        if(isset($token)){
+            DB::table('token_users')->insert(
+                array(
+                    'user_id'     =>   $user->id,
+                    'device_token'   =>  $token
+                )
+            );
+        }
+        $admins = Moderator::where('status' , 1)->get();
+        foreach ($admins as $admin){
+            $admin->notify(new NewUser($user));
+        }
         $this->registered($request, $user) ?: redirect($this->redirectPath());
         return response()->json([
             'status' =>true,

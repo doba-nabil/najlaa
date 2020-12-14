@@ -7,19 +7,19 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class newCobon extends Notification
+class NewContactOrder extends Notification
 {
     use Queueable;
-    protected $cobon;
+    protected $contact;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($cobon)
+    public function __construct($contact)
     {
-        $this->cobon = $cobon;
+        $this->ordercontact = $contact;
     }
 
     /**
@@ -42,7 +42,7 @@ class newCobon extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'cobon' => $this->cobon,
+            'ordercontact' => $this->ordercontact,
         ];
     }
 

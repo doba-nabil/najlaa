@@ -51,12 +51,12 @@
                         <li><a href="{{ route('category_sliders.index') }}">Categories Slider</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="{{ route('brands.index') }}" class="waves-effect">
-                        <i class="fab fa-centos"></i>
-                        <span>Brands</span>
-                    </a>
-                </li>
+                {{--<li>--}}
+                    {{--<a href="{{ route('brands.index') }}" class="waves-effect">--}}
+                        {{--<i class="fab fa-centos"></i>--}}
+                        {{--<span>Brands</span>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-file-search-line"></i>

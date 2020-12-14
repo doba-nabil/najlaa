@@ -12,6 +12,19 @@
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="{{ asset('backend') }}/assets/js/pages/dashboard.init.js"></script>
+<script>
+    var base_url = $('#base_url').val();
+    $('.deletenot').click(function() {
+        var token = $(this).data('token');
+        var id = $(this).attr('notification');
+        $.ajax({
+            url: base_url + '/read',
+            type: 'post',
+            data: '_token=' + token + '&notificationID=' + id,
+            dataType: 'json',
+        });
+    });
+</script>
 @section('backend-footer')
 @show
 <script src="{{ asset('backend') }}/assets/js/app.js"></script>

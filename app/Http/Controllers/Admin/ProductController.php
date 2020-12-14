@@ -74,7 +74,7 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->subcategory_id = $request->subcategory_id;
             $product->material_id = $request->material_id;
-            $product->brand_id = $request->brand_id;
+//            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
             $product->discount_price = $request->discount_price;
             if($request->discount_price){
@@ -193,7 +193,7 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->subcategory_id = $request->subcategory_id;
             $product->material_id = $request->material_id;
-            $product->brand_id = $request->brand_id;
+//            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
             $product->discount_price = $request->discount_price;
             if($request->discount_price){
