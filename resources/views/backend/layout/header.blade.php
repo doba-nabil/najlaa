@@ -121,9 +121,9 @@
                                 @endif
                                 @if(isset($notification->data['user']))
                                     <?php
-                                    $user = \App\User::find($notification->data['user']['id']);
+                                        $user = \App\User::where('email' , $notification->data['user']['email']);
                                     ?>
-                                    <a href="{{ route('users.edit' ,$notification->data['user']['id'] ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
+                                    <a href="{{ route('users.edit' , $user->id ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
                                         <div class="media">
                                             <div class="avatar-xs mr-3">
                                                     <span class="avatar-title bg-warning rounded-circle font-size-16">
@@ -131,7 +131,7 @@
                                                     </span>
                                             </div>
                                             <div class="media-body">
-                                                <h6 class="mt-0 mb-1">New User " {{ $notification->data['user']['id'] }} "</h6>
+                                                <h6 class="mt-0 mb-1">New User " {{ $user->name }} "</h6>
                                                 <div class="font-size-12 text-muted">
                                                     <p class="mb-1">Click Show User Information</p>
                                                     <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
