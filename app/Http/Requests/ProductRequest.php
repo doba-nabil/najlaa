@@ -59,7 +59,7 @@ class ProductRequest extends FormRequest
                         'colors' => 'required',
                         'category_id' => 'required',
                         'material_id' => 'required',
-                        'brand_id' => 'required',
+//                        'brand_id' => 'required',
                         'code' => 'required',
                         'min_qty' => 'required|numeric',
                         'max_qty' => 'required|numeric',
