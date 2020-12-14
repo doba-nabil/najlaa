@@ -121,7 +121,7 @@
                                 @endif
                                 @if(isset($notification->data['user']))
                                     <?php
-                                        $user = \App\User::where('email' , $notification->data['user']['email']);
+                                        $user = \App\User::where('email' , $notification->data['user']['email'])->first();
                                     ?>
                                     <a href="{{ route('users.edit' , $user->id ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
                                         <div class="media">
