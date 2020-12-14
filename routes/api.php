@@ -24,7 +24,7 @@ Route::group(['middleware' => 'localization'], function () {
     /********* logout **************/
     Route::post('/logout', 'Auth\LoginController@logoutapi');
     /****** reset pass *******/
-    Route::post('reset/password', 'Auth\AccountsController@sendReseteCode');
+    Route::post('reset/code', 'Auth\AccountsController@sendReseteCode');
     Route::post('check/reset/code', 'Auth\AccountsController@checkReseteCode');
     Route::post('reset/{email}', 'Auth\AccountsController@resetPass');
 });
