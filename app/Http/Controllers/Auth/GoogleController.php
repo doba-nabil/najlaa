@@ -53,13 +53,14 @@ class GoogleController extends Controller
                     'code' => 200,
                 ]);
             }else{
+                $pass = '123456789';
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
                     'provider_id'=> $user->id,
                     'email_verified_at'=> Carbon::now(),
                     'provider'=> 'google',
-                    'password' => Hash::make('123456789')
+                    'password' => Hash::make($pass),
                 ]);
                 $newUser->generateToken();
 

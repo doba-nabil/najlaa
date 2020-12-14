@@ -53,12 +53,13 @@ class FaceBookController extends Controller
     function createUser($getInfo){
         $user = User::where('provider_id', $getInfo->id)->where('provider' , 'facebook')->first();
         if (!$user) {
+            $pass = '123456789';
             $user = User::create([
                 'name'     => $getInfo->name,
                 'email'    => $getInfo->email,
                 'provider' => 'facebook',
                 'email_verified_at'=> Carbon::now(),
-                'password' => Hash::make('123456789'),
+                'password' => Hash::make($pass),
                 'provider_id' => $getInfo->id
             ]);
             $admins = Moderator::where('status' , 1)->get();
