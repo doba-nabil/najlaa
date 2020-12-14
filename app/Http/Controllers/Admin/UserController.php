@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\Address;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -86,6 +88,7 @@ class UserController extends Controller
             }else{
                 $request->request->add(['active' => 0]);
             }
+            $request->request->add(['email_verified_at' => Carbon::now()]);
             User::create($request->all());
             return redirect()->route('users.index')->with('done', 'Added Successfully ....');
         } catch (\Exception $e) {
@@ -138,12 +141,16 @@ class UserController extends Controller
     {
         try {
             $user = User::find($id);
-            if($request->active){
-                $request->request->add(['active' => 1]);
+            $user->birth = $request->birth;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            if($request->password){
+                $user->name = Hash::make($request->password);
             }else{
-                $request->request->add(['active' => 0]);
+                $user->name = $user->name;
             }
-            $user->update($request->all());
+            $user->email_verified_at = Carbon::now();
+            $user->save();
             return redirect()->route('users.index')->with('done', 'Edited Successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
