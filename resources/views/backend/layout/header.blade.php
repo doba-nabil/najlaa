@@ -123,7 +123,7 @@
                                     <?php
                                         $user = \App\User::where('email' , $notification->data['user']['email'])->first();
                                     ?>
-                                    <a href="{{ route('users.edit' , $user->id ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
+                                    <a href="@if(isset($user)){{ route('users.edit' , $user->id ) }}@else / @endif" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
                                         <div class="media">
                                             <div class="avatar-xs mr-3">
                                                     <span class="avatar-title bg-warning rounded-circle font-size-16">
