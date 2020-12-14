@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AccountsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AccountsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-    </list>
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,11 +23,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1219">
+            <state relative-caret-position="2721">
               <caret line="674" column="33" selection-start-line="674" selection-start-column="25" selection-end-line="674" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/backend/users/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -90,17 +95,17 @@
       <find>/assets</find>
       <find>about.html</find>
       <find>news</find>
-      <find>a href</find>
+      <find />
       <find>href</find>
       <find>content</find>
-      <find>&lt;div class=&quot;content&quot;&gt;</find>
+      <find />
       <find>../assets/img/som_logo-small.png../assets/img/som_logo.svg</find>
       <find>../assets/img/som_logo-small.png</find>
       <find>assets/img/som_logo-small.png</find>
       <find>@index</find>
       <find>asset/</find>
       <find>credi</find>
-      <find>&lt;div class=&quot;image&quot; data-original=&quot;/FILE/24487/contact_som_london_670x430_nickguttridge_01.jpg&quot;&gt;</find>
+      <find />
       <find>cred</find>
       <find>projects</find>
       <find>logo</find>
@@ -120,7 +125,7 @@
     </findStrings>
     <replaceStrings>
       <replace>assets/</replace>
-      <replace>&lt;div class=&quot;image&quot; data-original=&quot;FILE/24487/contact_som_london_670x430_nickguttridge_01.jpg&quot;&gt;</replace>
+      <replace />
       <replace>#</replace>
       <replace>/index.html</replace>
     </replaceStrings>
@@ -327,28 +332,28 @@
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -451,15 +456,15 @@
       <workItem from="1607737511455" duration="17970000" />
       <workItem from="1607858433931" duration="9000" />
       <workItem from="1607905573345" duration="4804000" />
-      <workItem from="1607941811586" duration="27540000" />
+      <workItem from="1607941811586" duration="27804000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="428400000" />
+    <option name="totallyTimeSpent" value="428664000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20877458" />
@@ -742,13 +747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/users/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -870,8 +868,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1219">
+        <state relative-caret-position="2721">
           <caret line="674" column="33" selection-start-line="674" selection-start-column="25" selection-end-line="674" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/users/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
         </state>
       </provider>
     </entry>
