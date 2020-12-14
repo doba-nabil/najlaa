@@ -136,7 +136,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-
+        try {
             $user = User::find($id);
             if($request->active){
                 $request->request->add(['active' => 1]);
@@ -145,7 +145,9 @@ class UserController extends Controller
             }
             $user->update($request->all());
             return redirect()->route('users.index')->with('done', 'Edited Successfully');
-
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error Try Again !!');
+        }
 
     }
 
