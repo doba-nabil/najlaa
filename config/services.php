@@ -39,6 +39,6 @@ return [
     'facebook' => [
         'client_id'     => '2797712193777321',
         'client_secret' => 'de007e0a49e71f931d28db38d243b024',
-        'redirect'      => 'http://46.101.138.138/auth/facebook/callback'
+        'redirect'      => 'https://najlaboutique.qa/auth/facebook/callback'
     ],
 ];
