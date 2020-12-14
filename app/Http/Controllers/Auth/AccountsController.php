@@ -85,7 +85,7 @@ class AccountsController extends Controller
         try{
             $user = User::where('email',$email)->first();
             if(isset($user)){
-                if($request->password == $request->password_confirmation){
+                if($request->password == $request->password_confirmation && !empty($request->password)){
                     $user->password = Hash::make($request->password);
                     $user->save();
                     return response()->json([
@@ -95,14 +95,14 @@ class AccountsController extends Controller
                     ]);
                 }else{
                     return response()->json([
-                        "msg" => trans('passwords.failed'),
+                        "msg" => trans('auth.failed'),
                         'status' => false,
                         'code' => 400,
                     ]);
                 }
             }else{
                 return response()->json([
-                    "msg" => trans('passwords.failed'),
+                    "msg" => trans('auth.failed'),
                     'status' => false,
                     'code' => 400,
                 ]);
