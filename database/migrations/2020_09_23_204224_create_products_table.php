@@ -30,7 +30,7 @@ class CreateProductsTable extends Migration
             $table->text('body_ar');
             $table->text('body_en');
             $table->string('slug');
-            $table->bigInteger('brand_id')->unsigned()->index();
+            $table->bigInteger('brand_id')->unsigned()->index()->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->bigInteger('material_id')->unsigned()->index();
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');

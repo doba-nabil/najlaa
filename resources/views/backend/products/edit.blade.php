@@ -174,23 +174,23 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="control-label">Select Brand</label>
-                                    <select name="brand_id" class="form-control select2" required>
-                                        <option>Select</option>
-                                        @foreach($brands as $brand)
-                                            <option
-                                                    @if($brand->id == $product->brand_id) selected @endif
-                                                    value="{{ $brand->id }}">{{ $brand->name_en }}
-                                                / {{ $brand->name_ar }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('brand_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+                            {{--<div class="col-lg-6">--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label class="control-label">Select Brand</label>--}}
+                                    {{--<select name="brand_id" class="form-control select2" required>--}}
+                                        {{--<option>Select</option>--}}
+                                        {{--@foreach($brands as $brand)--}}
+                                            {{--<option--}}
+                                                    {{--@if($brand->id == $product->brand_id) selected @endif--}}
+                                                    {{--value="{{ $brand->id }}">{{ $brand->name_en }}--}}
+                                                {{--/ {{ $brand->name_ar }}</option>--}}
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
+                                    {{--@error('brand_id')--}}
+                                    {{--<span class="text-danger">{{ $message }}</span>--}}
+                                    {{--@enderror--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                         </div>
                         <div class="row">
                             <div class="col-md-6">

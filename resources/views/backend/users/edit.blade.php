@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit User " {{ $user->name_en }} "</h4>
+                    <h4 class="card-title">Edit User " {{ $user->name }} "</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('users.update' , $user->id) }}" class="needs-validation" novalidate>
                         @csrf
@@ -34,8 +34,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom03">PASSWORD</label>
-                                    <input type="password" name="password" class="form-control" id="validationCustom03" placeholder="password" value="{{ $user->password }}" required>
+                                    <label for="validationCustom03">PASSWORD ( In case of change )</label>
+                                    <input type="password" name="password" class="form-control" id="validationCustom03" placeholder="password ( In case of change )">
                                     @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

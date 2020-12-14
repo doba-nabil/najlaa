@@ -37,3 +37,8 @@ Route::get('/view-clear', function() {
     return 'View cache cleared';
 });
 
+Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
+
+Route::get('auth/facebook', 'Auth\FaceBookController@redirectToFacebook');
+Route::get('auth/facebook/callback', 'Auth\FaceBookController@handleFacebookCallback');

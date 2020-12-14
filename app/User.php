@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone','birth','active','password','created_at' , 'updated_at'
+        'name', 'email', 'phone','birth','active','password','created_at' , 'updated_at','provider' ,'provider_id','email_verified_at','code'
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','created_at' , 'updated_at','active'
+        'password', 'remember_token','created_at' , 'updated_at','active','code','provider' ,'provider_id'
     ];
     public function generateToken()
     {

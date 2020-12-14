@@ -187,11 +187,11 @@
                                                     <div class="col-sm-12 mt-5 mb-4">
                                                         {{ $product->body_en }}
                                                     </div>
-                                                    <div class="col-sm-6 mt-4">
-                                                        BRAND
-                                                        <br>
-                                                        {{ $product->brand->name_en }}
-                                                    </div>
+                                                    {{--<div class="col-sm-6 mt-4">--}}
+                                                        {{--BRAND--}}
+                                                        {{--<br>--}}
+                                                        {{--{{ $product->brand->name_en }}--}}
+                                                    {{--</div>--}}
                                                     <div class="col-sm-6 mt-4 text-right">
                                                         SKU
                                                         <br>

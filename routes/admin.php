@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 /*******************************************************/
-View::creator('backend.layout.navbar', function ($view) {
-//    $view->with('eventcount' , \App\Models\Event::count());
-});
 View::creator('backend.layout.header', function ($view) {
+    $view->with('admin' , \App\Models\Moderator::find(Auth::user()->id));
+
+    $view->with('ordersNots' , \App\Models\Notification::where('notifiable_id' , Auth::user()->id)->where('type' , 'App\Notifications\NewOrder')->orderBy('created_at' ,'desc')->get());
+    $view->with('contactNots' , \App\Models\Notification::where('notifiable_id' , Auth::user()->id)->where('type' , 'App\Notifications\NewContact')->orderBy('created_at' ,'desc')->get());
+    $view->with('contactOrderNots' , \App\Models\Notification::where('notifiable_id' , Auth::user()->id)->where('type' , 'App\Notifications\NewContactOrder')->orderBy('created_at' ,'desc')->get());
+    $view->with('userNots' , \App\Models\Notification::where('notifiable_id' , Auth::user()->id)->where('type' , 'App\Notifications\NewUser')->orderBy('created_at' ,'desc')->get());
 });
 /*************** backend routes *************/
 Route::get('admin/login', 'Admin\AdminauthController@showLoginFrom')->name('backendLogin');

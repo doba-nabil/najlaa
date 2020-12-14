@@ -7,8 +7,9 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Media;
 use App\Models\Moderator;
+use App\Models\Notification;
 use App\Models\Question;
-use App\Notification;
+
 use App\User;
 use Request;
 use Response;

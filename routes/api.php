@@ -18,9 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', 'Auth\RegisterController@registerapi');
 Route::post('login', 'Auth\LoginController@loginapi');
 Route::group(['middleware' => 'localization'], function () {
+    Route::post('register', 'Auth\RegisterController@registerapi');
     /********* logout **************/
     Route::post('/logout', 'Auth\LoginController@logoutapi');
 });
@@ -34,6 +34,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('subcategory/{id}', 'CategoryController@subcategory');
     Route::get('home/category', 'HomeController@categories');
     Route::get('home/sliders', 'HomeController@sliders');
+    Route::post('filter', 'HomeController@filter');
 
     Route::resource('all-products', 'ProductController');
 
@@ -43,10 +44,15 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('cart', 'CartController@cart');
 
     Route::get('all-types', 'ProductController@types');
+    Route::get('all-types/{id}', 'ProductController@type');
     Route::get('all-materials', 'ProductController@materials');
+    Route::get('all-materials/{id}', 'ProductController@material');
     Route::get('all-brands', 'ProductController@brands');
+    Route::get('all-brands/{id}', 'ProductController@brand');
     Route::get('all-sizes', 'ProductController@sizes');
+    Route::get('all-sizes/{id}', 'ProductController@size');
     Route::get('all-colors', 'ProductController@colors');
+    Route::get('all-colors/{id}', 'ProductController@color');
     Route::get('categories-nav', 'CategoryController@all_cats');
 
     /******** new get **************/
@@ -113,4 +119,16 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::post('edit/cart/{cartID}', 'CartController@edit_cart');
     Route::get('remove/all-cart', 'CartController@remove_all');
     Route::get('remove/single-cart/{cartID}', 'CartController@remove_single');
+    /************ verified ************/
+    Route::get('check/verified', 'VerifiedController@check_verified');
+    Route::post('verified', 'VerifiedController@verified');
+    Route::get('send/verified/code', 'VerifiedController@verified_code');
+    /******** recentrly **********/
+    Route::get('recently/search', 'HomeController@recently_search');
+    Route::get('delete/recently/search', 'HomeController@delete_recently_search');
+
+    Route::get('recently/products', 'HomeController@recently_products');
+    Route::get('delete/recently/products', 'HomeController@delete_recently_products');
+
+    Route::get('delete/recently/{id}', 'HomeController@delete_recently');
 });

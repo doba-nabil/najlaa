@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactOrder;
+use App\Models\Moderator;
+use App\Notifications\NewContactOrder;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -28,7 +30,10 @@ class ContactOrderController extends Controller
                 $contact->user_id = $user->id;
                 $contact->message = $request->message;
                 $contact->save();
-
+                $admins = Moderator::where('status' , 1)->get();
+                foreach ($admins as $admin){
+                    $admin->notify(new NewContactOrder($contact));
+                }
                 $contactt = ContactOrder::where('id' , $contact->id)->with(array('user' => function ($query) {
                         $query->select(
                             'name',

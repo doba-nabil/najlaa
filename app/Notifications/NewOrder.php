@@ -10,16 +10,17 @@ use Illuminate\Notifications\Messages\MailMessage;
 class NewOrder extends Notification
 {
     use Queueable;
-    protected $order;
+    protected $order,$user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($order,$user)
     {
         $this->order = $order;
+        $this->user = $user;
     }
 
     /**
@@ -43,7 +44,7 @@ class NewOrder extends Notification
     {
         return [
             'order' => $this->order,
-            'user' => $notifiable
+            'user' => $this->user
         ];
     }
 
