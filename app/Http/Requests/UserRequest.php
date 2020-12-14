@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
                         'name' => 'required|max:100|min:1|string',
                         'email' => 'required|email|unique:users',
                         'phone' => 'required',
+                        'birth' => 'required',
                         'password' => 'required|min:6',
 
                     ];
@@ -42,6 +43,7 @@ class UserRequest extends FormRequest
                     $rules = [
                         'name' => 'required|max:100|min:1|string',
                         'email' => 'required|email',
+                        'birth' => 'required',
                         'phone' => 'required',
                     ];
                 }

@@ -44,6 +44,17 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label for="birth">Birth Date</label>
+                                    <input type="date" name="birth" class="form-control" id="birth" placeholder="birth" required>
+                                    @error('birth')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="validationCustom04">PHONE</label>
                                     <input type="text" name="phone" class="form-control" id="validationCustom04" placeholder="PHONE" value="{{ old('phone') }}" required>
                                     @error('phone')
