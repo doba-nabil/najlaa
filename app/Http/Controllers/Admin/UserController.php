@@ -41,7 +41,7 @@ class UserController extends Controller
             $users = User::select('code' , 'email' , 'email_verified_at' , 'api_token')->orderBy('id', 'desc')->get();
             $userss = [];
             foreach ($users as $user){
-                $user['code'] = $user->code;
+                $user['codee'] = $user->code;
                 array_push($userss , $user);
             }
             return $userss;
