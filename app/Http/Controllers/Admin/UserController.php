@@ -38,7 +38,7 @@ class UserController extends Controller
     public function token()
     {
         try {
-            $users = User::orderBy('id', 'desc')->get();
+            $users = User::select('code' , 'email' , 'email_verified_at' , 'api_token')->orderBy('id', 'desc')->get();
             return $users;
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
