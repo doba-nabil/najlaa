@@ -46,7 +46,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="birth">Birth Date</label>
-                                    <input type="date" name="birth" class="form-control" id="birth" placeholder="birth" required>
+                                    <input type="date" name="birth" class="form-control" id="birth" value="{{ $user->birth }}" placeholder="birth" required>
                                     @error('birth')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
