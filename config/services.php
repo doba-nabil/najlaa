@@ -31,14 +31,14 @@ return [
     ],
 
     'google' => [
-        'client_id'     => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect'      => env('GOOGLE_REDIRECT')
+        'client_id'     => '134240189270-moom87592d0vs9fks6rf9d9o5hafi87p.apps.googleusercontent.com',
+        'client_secret' => '2qt6AGRcLo2T7dJ40hUFNKhu',
+        'redirect'      => 'https://najlaboutique.qa/auth/google/callback'
     ],
 
     'facebook' => [
-        'client_id'     => env('FACEBOOK_CLIENT_ID'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect'      => env('FACEBOOK_REDIRECT')
+        'client_id'     => '2797712193777321',
+        'client_secret' => 'de007e0a49e71f931d28db38d243b024',
+        'redirect'      => 'http://46.101.138.138/auth/facebook/callback'
     ],
 ];
