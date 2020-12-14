@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\Pay;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -76,6 +78,25 @@ class OrderController extends Controller
             $order = Order::find($id);
             $order->new = 0;
             $order->save();
+            $user = User::where('id' , $order->user_id)->first();
+            if(isset($user->device_token)) {
+                $serviceAccount = ServiceAccount::fromJsonFile(_DIR_ . '/arabunandroidapplication-firebase-adminsdk-35zml-a7a33a335a.json');
+                $firebase = (new Factory)
+                    ->withServiceAccount($serviceAccount)
+                    ->withDatabaseUri('https://arbun-afaea.firebaseio.com')
+                    ->create();
+                $messaging = $firebase->getMessaging();
+                $deviceToken = $user->device_token;
+                $notification = Notification::create('عربون', 'لديك رسالة جديدة من ادارة الموقع');
+                $data = [
+                    'id' => $msg->id,
+                    'type' => "1"
+                ];
+                $message = CloudMessage::withTarget('token', $deviceToken)
+                    ->withNotification($notification)
+                    ->withData($data);
+                $messaging->send($message);
+            }
             $pays = Pay::where('order_id' , $id)->get();
             return view('backend.orders.show' , compact('order','pays'));
         }catch (\Exception $e){

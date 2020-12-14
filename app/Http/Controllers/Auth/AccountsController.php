@@ -80,10 +80,10 @@ class AccountsController extends Controller
             ]);
         }
     }
-    public function resetPass(Request $request,$email)
+    public function resetPass(Request $request)
     {
         try{
-            $user = User::where('email',$email)->first();
+            $user = User::where('email',$request->email)->first();
             if(isset($user)){
                 if($request->password == $request->password_confirmation && !empty($request->password)){
                     $user->password = Hash::make($request->password);
