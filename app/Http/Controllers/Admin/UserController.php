@@ -144,6 +144,7 @@ class UserController extends Controller
             $user->birth = $request->birth;
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->phone = $request->phone;
             if($request->password){
                 $user->name = Hash::make($request->password);
             }else{
