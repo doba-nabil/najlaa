@@ -39,7 +39,12 @@ class UserController extends Controller
     {
         try {
             $users = User::select('code' , 'email' , 'email_verified_at' , 'api_token')->orderBy('id', 'desc')->get();
-            return $users;
+            $userss = [];
+            foreach ($users as $user){
+                $user['code'] = $user->code;
+                array_push($userss , $user);
+            }
+            return $userss;
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
