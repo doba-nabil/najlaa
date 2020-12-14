@@ -91,9 +91,9 @@
                                                 <span class="mx-1 py-1 px-2" style="background: white;border-radius: 10px;border: 1px solid black;border-radius: 50%">{{ $size->size->code }}</span>
                                             @endforeach
                                             <hr>
-                                            Brand :
-                                            {{ $product->brand->name_en }}
-                                            <hr>
+                                            {{--Brand :--}}
+                                            {{--{{ $product->brand->name_en }}--}}
+                                            {{--<hr>--}}
                                             Material :
                                             {{ $product->material->name_en }}
                                         </div>
