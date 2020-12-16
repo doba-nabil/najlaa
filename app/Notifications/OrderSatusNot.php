@@ -7,19 +7,19 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class OrderStatus extends Notification
+class OrderSatusNot extends Notification
 {
     use Queueable;
-    protected $code;
+    protected $order;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($code)
+    public function __construct($order)
     {
-        $this->code = $code;
+        $this->orderstatus = $order;
     }
 
     /**
@@ -30,7 +30,7 @@ class OrderStatus extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -39,13 +39,11 @@ class OrderStatus extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toDatabase($notifiable)
     {
-        return (new MailMessage)
-            ->greeting('مرحبا / Hello')
-            ->line('تم تغيير حالة الطلب الخاص بك / Status of Your order changed')
-            ->line($this->code)
-            ->line('شكرا لتعاملكم معنا! / Thanks For Used Najla');
+        return [
+            'orderstatus' => $this->orderstatus,
+        ];
     }
 
     /**

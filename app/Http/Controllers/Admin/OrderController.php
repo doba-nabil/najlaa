@@ -6,9 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\Order;
 use App\Models\Pay;
+use App\Notifications\OrderSatusNot;
+use App\Notifications\OrderStatus;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\ServiceAccount;
 
 class OrderController extends Controller
 {
@@ -78,25 +83,7 @@ class OrderController extends Controller
             $order = Order::find($id);
             $order->new = 0;
             $order->save();
-            $user = User::where('id' , $order->user_id)->first();
-            if(isset($user->device_token)) {
-                $serviceAccount = ServiceAccount::fromJsonFile(_DIR_ . '/arabunandroidapplication-firebase-adminsdk-35zml-a7a33a335a.json');
-                $firebase = (new Factory)
-                    ->withServiceAccount($serviceAccount)
-                    ->withDatabaseUri('https://arbun-afaea.firebaseio.com')
-                    ->create();
-                $messaging = $firebase->getMessaging();
-                $deviceToken = $user->device_token;
-                $notification = Notification::create('عربون', 'لديك رسالة جديدة من ادارة الموقع');
-                $data = [
-                    'id' => $msg->id,
-                    'type' => "1"
-                ];
-                $message = CloudMessage::withTarget('token', $deviceToken)
-                    ->withNotification($notification)
-                    ->withData($data);
-                $messaging->send($message);
-            }
+
             $pays = Pay::where('order_id' , $id)->get();
             return view('backend.orders.show' , compact('order','pays'));
         }catch (\Exception $e){
@@ -148,6 +135,50 @@ class OrderController extends Controller
                 $order->delivered =  Carbon::now();
             }
             $order->save();
+
+           $firebaseToken = DB::table('token_users')->where('user_id' , $order->user_id)->pluck('device_token')->all();
+
+            $SERVER_API_KEY = 'AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr';
+
+            $data = [
+                "registration_ids" => $firebaseToken,
+                "notification" => [
+                    "title" => 'Najlaa Boutique',
+                    "body" => 'Your Order Status Changed' . $order->code,
+                ]
+            ];
+            $dataString = json_encode($data);
+
+            $headers = [
+                'Authorization: key=' . $SERVER_API_KEY,
+                'Content-Type: application/json',
+            ];
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+            curl_exec($ch);
+
+            if($request->status == 0){
+                $code =  'signed';
+            }elseif($request->status == 1){
+                $code =  'processed';
+            }elseif($request->status == 2){
+                $code =  'shipped';
+            }elseif($request->status == 3){
+                $code =  'out_to_delivery';
+            }elseif($request->status == 4){
+                $code =  'delivered';
+            }
+            $user = User::find($order->user_id);
+            $user->notify(new OrderStatus($code));
+
+            $user->notify(new OrderSatusNot($order));
             return redirect()->back()->with('done' , 'Order Updated Successfully');
         }catch (\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');

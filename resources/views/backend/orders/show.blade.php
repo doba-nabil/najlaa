@@ -170,4 +170,26 @@
     <script src="{{ asset('backend') }}/mine.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/select2/js/select2.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/form-advanced.init.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyDq86Bkx3Y2zaZbAQCNSc6FeeJ_8A_fwzo",
+            authDomain: "najlaboutique2021.firebaseapp.com",
+            databaseURL: "https://najlaboutique2021.firebaseio.com",
+            projectId: "najlaboutique2021",
+            storageBucket: "najlaboutique2021.appspot.com",
+            messagingSenderId: "134240189270",
+            appId: "1:134240189270:web:b2caa55ba1151926e634f7",
+            measurementId: "G-WVYRCNK7DK"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
 @endsection
