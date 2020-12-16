@@ -25,6 +25,12 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('.alert-danger').fadeIn('fast').delay(1200).fadeOut('slow');
+        $('.alert-success').fadeIn('fast').delay(1200).fadeOut('slow');
+    });
+</script>
 @section('backend-footer')
 @show
 <script src="{{ asset('backend') }}/assets/js/app.js"></script>
