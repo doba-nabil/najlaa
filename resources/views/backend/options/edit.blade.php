@@ -51,7 +51,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email">email</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="email" value="{{ old('email') }}" required>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="email" value="{{ $option->email }}" required>
                                     @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -60,7 +60,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="address_ar">address in arabic</label>
-                                    <input type="address" name="address_ar" class="form-control" id="address_ar" placeholder="address in arabic" value="{{ old('address_ar') }}" required>
+                                    <input type="address" name="address_ar" class="form-control" id="address_ar" placeholder="address in arabic" value="{{ $option->address_ar }}" required>
                                     @error('address_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -69,7 +69,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="address_en">address in english</label>
-                                    <input type="address" name="address_en" class="form-control" id="address_en" placeholder="address in english" value="{{ old('address_en') }}" required>
+                                    <input type="address" name="address_en" class="form-control" id="address_en" placeholder="address in english" value="{{ $option->address_en }}" required>
                                     @error('address_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
