@@ -135,7 +135,7 @@ class ProductController extends Controller
 
     public function similar($id,Request $request)
     {
-        try {
+
             $product = Product::where('id', $id)->first();
             if(isset($product)){
                 $similar_products = Product::where('subcategory_id', $product->subcategory_id)->orWhere('category_id' , $product->category_id)->select(
@@ -186,13 +186,7 @@ class ProductController extends Controller
                     'code' => 400,
                 ]);
             }
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'msg' => 'يوجد خطأ',
-                'code' => 400,
-            ]);
-        }
+
 
     }
     public function views($id)
