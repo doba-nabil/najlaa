@@ -138,7 +138,7 @@ class ProductController extends Controller
         try {
             $product = Product::where('id', $id)->first();
             if(isset($product)){
-                $similar_products = Product::where('subcategory_id', $product->subcategory_id)->select(
+                $similar_products = Product::where('subcategory_id', $product->subcategory_id)->orWhere('category_id' , $product->category_id)->select(
                     'id',
                     'name_' . app()->getLocale() . ' as name',
                     'price',
