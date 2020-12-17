@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     use UploadTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +27,7 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            $products = Product::orderBy('id' , 'desc')->get();
+            $products = Product::orderBy('id', 'desc')->get();
             return view('backend.products.index', compact('products'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
@@ -46,7 +47,7 @@ class ProductController extends Controller
             $brands = Brand::all();
             $colors = Color::all();
             $sizes = Size::all();
-            return view('backend.products.create' , compact('categories','materials' , 'brands' , 'colors' , 'sizes'));
+            return view('backend.products.create', compact('categories', 'materials', 'brands', 'colors', 'sizes'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -55,13 +56,13 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $request)
     {
         try {
-            if($request->discount_price){
+            if ($request->discount_price) {
                 $offerprice = $request->price;
                 $offerdisc = $request->discount_price;
                 $offerRate = $offerdisc / $offerprice * 100;
@@ -77,9 +78,9 @@ class ProductController extends Controller
 //            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
             $product->discount_price = $request->discount_price;
-            if($request->discount_price){
+            if ($request->discount_price) {
                 $product->percentage_discount = round($offerRate) . ' % ';
-            }else{
+            } else {
                 $product->percentage_discount = 0;
             }
             $product->max_qty = $request->max_qty;
@@ -87,25 +88,33 @@ class ProductController extends Controller
             $product->code = $request->code;
             $product->body_ar = $request->body_ar;
             $product->body_en = $request->body_en;
-            if ($request->active == 1) { $product->active = 1; } else { $product->active = 0; }
-            if ($request->chosen == 1) { $product->chosen = 1; } else { $product->chosen = 0; }
+            if ($request->active == 1) {
+                $product->active = 1;
+            } else {
+                $product->active = 0;
+            }
+            if ($request->chosen == 1) {
+                $product->chosen = 1;
+            } else {
+                $product->chosen = 0;
+            }
             $product->save();
             if ($request->hasFile('image')) {
-                $this->saveimage($request->image, 'pictures/products', $product->id , Product::class, 'main');
+                $this->saveimage($request->image, 'pictures/products', $product->id, Product::class, 'main');
             }
             if ($request->hasFile('size_image')) {
-                $this->saveimage($request->size_image, 'pictures/products', $product->id , Product::class, 'size');
+                $this->saveimage($request->size_image, 'pictures/products', $product->id, Product::class, 'size');
             }
             if ($request->hasFile('images')) {
-                $this->saveimages($request->images, 'pictures/products', $product->id , Product::class, 'sub');
+                $this->saveimages($request->images, 'pictures/products', $product->id, Product::class, 'sub');
             }
             if ($request->sizes) {
-                $this->saveDetails($request->sizes, $product->id , 'size');
+                $this->saveDetails($request->sizes, $product->id, 'size');
             }
             if ($request->colors) {
-                $this->saveDetails($request->colors, $product->id , 'color');
+                $this->saveDetails($request->colors, $product->id, 'color');
             }
-            return redirect()->route('products.show' , $product->slug)->with('done', 'Added Successfully ....');
+            return redirect()->route('products.show', $product->slug)->with('done', 'Added Successfully ....');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -114,25 +123,26 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
     {
         try {
-            $product = Product::where('slug' , $slug)->first();
-            return view('backend.products.show' , compact('product'));
+            $product = Product::where('slug', $slug)->first();
+            return view('backend.products.show', compact('product'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
+
     public function accept($slug)
     {
         try {
-            $product = Product::where('slug' , $slug)->first();
-            if($product->active == 1){
+            $product = Product::where('slug', $slug)->first();
+            if ($product->active == 1) {
                 $product->active = 0;
-            }else{
+            } else {
                 $product->active = 1;
             }
             $product->save();
@@ -141,28 +151,29 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($slug)
     {
         try {
-            $product = Product::where('slug' , $slug)->first();
-            if(isset($product)){
+            $product = Product::where('slug', $slug)->first();
+            if (isset($product)) {
                 $categories = Category::whereNull('parent_id')->get();
                 $subcategories = Category::whereNotNull('parent_id')->get();
-                $selected_sizes = ProductDetail::where('product_id', $product->id)->where('type' , 'size')->get();
-                $selected_colors = ProductDetail::where('product_id', $product->id)->where('type' , 'color')->get();
+                $selected_sizes = ProductDetail::where('product_id', $product->id)->where('type', 'size')->get();
+                $selected_colors = ProductDetail::where('product_id', $product->id)->where('type', 'color')->get();
                 $materials = Material::all();
                 $brands = Brand::all();
                 $colors = Color::all();
                 $sizes = Size::all();
-                return view('backend.products.edit' , compact('product' , 'categories' , 'colors' ,
-                    'materials' , 'brands' , 'sizes' , 'subcategories' , 'selected_colors' , 'selected_sizes'));
-            }else{
+                return view('backend.products.edit', compact('product', 'categories', 'colors',
+                    'materials', 'brands', 'sizes', 'subcategories', 'selected_colors', 'selected_sizes'));
+            } else {
                 return redirect()->back()->with('error', 'Error Try Again !!');
             }
         } catch (\Exception $e) {
@@ -173,14 +184,14 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(ProductRequest $request, $id)
     {
         try {
-            if($request->discount_price){
+            if ($request->discount_price) {
                 $offerprice = $request->price;
                 $offerdisc = $request->discount_price;
                 $offerRate = $offerdisc / $offerprice * 100;
@@ -196,9 +207,9 @@ class ProductController extends Controller
 //            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
             $product->discount_price = $request->discount_price;
-            if($request->discount_price){
+            if ($request->discount_price) {
                 $product->percentage_discount = round($offerRate) . ' % ';
-            }else{
+            } else {
                 $product->percentage_discount = 0;
             }
             $product->max_qty = $request->max_qty;
@@ -206,25 +217,33 @@ class ProductController extends Controller
             $product->code = $request->code;
             $product->body_ar = $request->body_ar;
             $product->body_en = $request->body_en;
-            if ($request->active == 1) { $product->active = 1; } else { $product->active = 0; }
-            if ($request->chosen == 1) { $product->chosen = 1; } else { $product->chosen = 0; }
+            if ($request->active == 1) {
+                $product->active = 1;
+            } else {
+                $product->active = 0;
+            }
+            if ($request->chosen == 1) {
+                $product->chosen = 1;
+            } else {
+                $product->chosen = 0;
+            }
             $product->save();
             if ($request->hasFile('image')) {
-                $this->editimage($request->image, 'pictures/products', $product->id , Product::class, 'main');
+                $this->editimage($request->image, 'pictures/products', $product->id, Product::class, 'main');
             }
             if ($request->hasFile('size_image')) {
-                $this->editimage($request->size_image, 'pictures/products', $product->id , Product::class, 'size');
+                $this->editimage($request->size_image, 'pictures/products', $product->id, Product::class, 'size');
             }
             if ($request->hasFile('images')) {
-                $this->saveimages($request->images, 'pictures/products', $product->id , Product::class, 'sub');
+                $this->saveimages($request->images, 'pictures/products', $product->id, Product::class, 'sub');
             }
             if ($request->sizes) {
-                $this->editDetails($request->sizes, $product->id , 'size');
+                $this->editDetails($request->sizes, $product->id, 'size');
             }
             if ($request->colors) {
-                $this->editDetails($request->colors, $product->id , 'color');
+                $this->editDetails($request->colors, $product->id, 'color');
             }
-            return redirect()->route('products.show' , $product->slug)->with('done', 'Edited Successfully ....');
+            return redirect()->route('products.show', $product->slug)->with('done', 'Edited Successfully ....');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -233,67 +252,78 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         try {
             $product = Product::find($id);
-            if(isset($product)){
-                $this->deleteimages($product->id , 'pictures/products/' , Product::class);
-                foreach ($product->subImages as $image){
-                    @unlink('pictures/products/' . $image->image);
-                    $image->delete();
+            if (isset($product)) {
+                if (count($product->pays) == 0) {
+                    $this->deleteimages($product->id, 'pictures/products/', Product::class);
+                    foreach ($product->subImages as $image) {
+                        @unlink('pictures/products/' . $image->image);
+                        $image->delete();
+                    }
+                    $product->delete();
+                    return response()->json([
+                        'success' => 'Record deleted successfully!'
+                    ]);
+                } else {
+                    return response()->json([
+                        'error' => 'Cannot delete Product, In Order'
+                    ], 422);
                 }
-                $product->delete();
-                return response()->json([
-                    'success' => 'Record deleted successfully!'
-                ]);
-            }else{
+
+            } else {
                 return redirect()->back()->with('error', 'Error Try Again !!');
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
 
     public function delete_products()
     {
-        try{
+        try {
             $products = Product::all();
-            if(count($products) > 0){
-                foreach ($products as $product){
-                    $this->deleteimages($product->id , 'pictures/products/' , Product::class);
-                    foreach ($product->subImages as $image){
-                        @unlink('pictures/products/' . $image->image);
-                        $image->delete();
+            if (count($products) > 0) {
+                foreach ($products as $product) {
+                    if (count($product->pays) == 0) {
+                        $this->deleteimages($product->id, 'pictures/products/', Product::class);
+                        foreach ($product->subImages as $image) {
+                            @unlink('pictures/products/' . $image->image);
+                            $image->delete();
+                        }
+                        $product->delete();
                     }
-                    $product->delete();
                 }
                 return response()->json([
-                    'success' => 'Record deleted successfully!'
+                    'success' => 'Deleted Not purchased Porducts'
                 ]);
-            }else{
+            } else {
                 return response()->json([
                     'error' => 'NO Record TO DELETE'
-                ]);
+                ],422);
             }
-        }catch(\Exception $e){
-            return redirect()->back()->with('error', 'Error Try Again !!');
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error Try Again !!'
+            ],422);
         }
     }
 
     public function delete_images($imgID)
     {
-        try{
+        try {
             $image = Image::find($imgID);
             @unlink('pictures/products/' . $image->image);
             $image->delete();
             return response()->json([
                 'success' => 'Record deleted successfully!'
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }

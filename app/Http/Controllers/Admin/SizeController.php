@@ -118,10 +118,16 @@ class SizeController extends Controller
     {
         try{
             $size = Size::find($id);
-            $size->delete();
-            return response()->json([
-                'success' => 'Record deleted successfully!'
-            ]);
+            if(count($size->productDetails) > 0){
+                return response()->json([
+                    'error' => 'Cannot delete,Existing products in It',
+                ],422);
+            }else{
+                $size->delete();
+                return response()->json([
+                    'success' => 'Record deleted successfully!',
+                ],200);
+            }
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -131,16 +137,18 @@ class SizeController extends Controller
         try{
             $sizes = Size::all();
             if(count($sizes) > 0){
-                foreach ($sizes as $size){
-                    $size->delete();
+                foreach ($sizes as $size) {
+                    if(count($size->productDetails) == 0){
+                        $size->delete();
+                    }
                 }
                 return response()->json([
-                    'success' => 'Record deleted successfully!'
-                ]);
+                    'success' => 'Deleted the Empty Sizes',
+                ],200);
             }else{
                 return response()->json([
                     'error' => 'NO THING TO DELETE'
-                ]);
+                ],422);
             }
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');

@@ -130,10 +130,16 @@ class SubcategoryController extends Controller
     {
         try{
             $category = Category::find($id);
-            $category->delete();
-            return response()->json([
-                'success' => 'Record deleted successfully!'
-            ]);
+            if(count($category->subcategory_products) > 0){
+                return response()->json([
+                    'error' => 'Cannot delete,Existing products in this category',
+                ],422);
+            }else{
+                $category->delete();
+                return response()->json([
+                    'success' => 'Category deleted successfully!',
+                ],200);
+            }
         }catch(\Exception $e){
             return redirect()->back()->with('error' , 'Error Try Again....');
         }
@@ -144,17 +150,19 @@ class SubcategoryController extends Controller
     {
         try{
             $categories = Category::whereNotNull('parent_id')->get();
-            if(count($categories) > 0){
-                foreach ($categories as $category){
-                    $category->delete();
+            if (count($categories) > 0) {
+                foreach ($categories as $category) {
+                    if(count($category->subcategory_products) == 0){
+                        $category->delete();
+                    }
                 }
                 return response()->json([
-                    'success' => 'Record deleted successfully!'
-                ]);
-            }else{
+                    'success' => 'Deleted the Empty Categories',
+                ],200);
+            } else {
                 return response()->json([
-                    'error' => 'NO Record TO DELETE'
-                ]);
+                    'error' => 'NO Categories TO DELETE'
+                ],422);
             }
         }catch(\Exception $e){
             return redirect()->back()->with('error' , 'Error Try Again....');

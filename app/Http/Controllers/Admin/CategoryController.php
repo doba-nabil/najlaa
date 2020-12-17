@@ -151,11 +151,17 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::find($id);
-            $this->deleteimages($category->id , 'pictures/categories/' , Category::class);
-            $category->delete();
-            return response()->json([
-                'success' => 'Record deleted successfully!'
-            ]);
+            if(count($category->category_products) > 0){
+                return response()->json([
+                    'error' => 'Cannot delete,Existing products in this category',
+                ],422);
+            }else{
+                $this->deleteimages($category->id , 'pictures/categories/' , Category::class);
+                $category->delete();
+                return response()->json([
+                    'success' => 'Category deleted successfully!',
+                ],200);
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -168,16 +174,18 @@ class CategoryController extends Controller
             $categories = Category::whereNull('parent_id')->get();
             if (count($categories) > 0) {
                 foreach ($categories as $category) {
-                    $this->deleteimages($category->id , 'pictures/categories/' , Category::class);
-                    $category->delete();
+                   if(count($category->category_products) == 0){
+                        $this->deleteimages($category->id , 'pictures/categories/' , Category::class);
+                        $category->delete();
+                    }
                 }
                 return response()->json([
-                    'success' => 'Record deleted successfully!'
-                ]);
+                    'success' => 'Deleted the Empty Categories',
+                ],200);
             } else {
                 return response()->json([
-                    'error' => 'NO EVENTS TO DELETE'
-                ]);
+                    'error' => 'NO Categories TO DELETE'
+                ],422);
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');

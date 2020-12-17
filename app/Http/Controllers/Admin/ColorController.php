@@ -118,10 +118,16 @@ class ColorController extends Controller
     {
         try{
             $color = Color::find($id);
-            $color->delete();
-            return response()->json([
-                'success' => 'Record deleted successfully!'
-            ]);
+            if(count($color->productDetails) > 0){
+                return response()->json([
+                    'error' => 'Cannot delete,Existing products in It',
+                ],422);
+            }else{
+                $color->delete();
+                return response()->json([
+                    'success' => 'Record deleted successfully!',
+                ],200);
+            }
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -131,16 +137,18 @@ class ColorController extends Controller
         try{
             $colors = Color::all();
             if(count($colors) > 0){
-                foreach ($colors as $color){
-                    $color->delete();
+                foreach ($colors as $color) {
+                    if(count($color->productDetails) == 0){
+                        $color->delete();
+                    }
                 }
                 return response()->json([
-                    'success' => 'Record deleted successfully!'
-                ]);
+                    'success' => 'Deleted the Empty Colors',
+                ],200);
             }else{
                 return response()->json([
                     'error' => 'NO THING TO DELETE'
-                ]);
+                ],422);
             }
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');

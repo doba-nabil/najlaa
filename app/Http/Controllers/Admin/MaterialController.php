@@ -119,10 +119,16 @@ class MaterialController extends Controller
     {
         try{
             $material = Material::find($id);
-            $material->delete();
-            return response()->json([
-                'success' => 'Record deleted successfully!'
-            ]);
+            if(count($material->products) > 0){
+                return response()->json([
+                    'error' => 'Cannot delete,Existing products in It',
+                ],422);
+            }else{
+                $material->delete();
+                return response()->json([
+                    'success' => 'Record deleted successfully!',
+                ],200);
+            }
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -132,16 +138,18 @@ class MaterialController extends Controller
         try{
             $materials = Material::all();
             if(count($materials) > 0){
-                foreach ($materials as $material){
-                    $material->delete();
+                foreach ($materials as $material) {
+                    if(count($material->products) == 0){
+                        $material->delete();
+                    }
                 }
                 return response()->json([
-                    'success' => 'Record deleted successfully!'
-                ]);
+                    'success' => 'Deleted the Empty Materials',
+                ],200);
             }else{
                 return response()->json([
                     'error' => 'NO THING TO DELETE'
-                ]);
+                ],422);
             }
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');
