@@ -108,9 +108,17 @@ $(document).on('click', '.remove-alert', function(e) {
                     elem.remove();
                     swalWithBootstrapButtons.fire({
                         icon: 'success',
-                        title: 'Deleted Successfully....',
+                        title: result.success,
                         showConfirmButton: false,
                         timer: 1000
+                    });
+                },
+                error: function (xhr) {
+                    swalWithBootstrapButtons.fire({
+                        icon: 'error',
+                        title: JSON.parse(xhr.responseText).error,
+                        showConfirmButton: false,
+                        timer: 3000
                     });
                 }
             });
@@ -230,9 +238,17 @@ $(document).on('click', '.delete-all', function(e) {
                     $(".pagination").remove();
                     swalWithBootstrapButtons.fire({
                         icon: 'success',
-                        title: 'Deleted Successfully....',
+                        title: result.success,
                         showConfirmButton: false,
-                        timer: 1000
+                        timer: 2000
+                    });
+                },
+                error: function (xhr) {
+                    swalWithBootstrapButtons.fire({
+                        icon: 'error',
+                        title: JSON.parse(xhr.responseText).error,
+                        showConfirmButton: false,
+                        timer: 3000
                     });
                 }
             });

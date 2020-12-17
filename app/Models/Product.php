@@ -161,4 +161,8 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\WishList');
     }
+    public function pays()
+    {
+        return $this->hasMany('App\Models\Pay');
+    }
 }

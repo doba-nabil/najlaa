@@ -184,12 +184,20 @@ class UserController extends Controller
     {
         try {
             $user = User::find($id);
-            $user->delete();
-            return response()->json([
-                'success' => 'Record deleted successfully!'
-            ]);
+            if(count($user->orders) > 0){
+                return response()->json([
+                    'error' => 'Cannot delete,Existing Orders To This User',
+                ],422);
+            }else{
+                $user->delete();
+                return response()->json([
+                    'success' => 'User deleted successfully!',
+                ],200);
+            }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
+            return response()->json([
+                'error' => 'Error Try Again !!'
+            ],422);
         }
 
     }
@@ -200,18 +208,22 @@ class UserController extends Controller
             $users = User::all();
             if (count($users) > 0) {
                 foreach ($users as $user) {
-                    $user->delete();
+                    if(count($user->orders) == 0){
+                        $user->delete();
+                    }
                 }
                 return response()->json([
-                    'success' => 'Record deleted successfully!'
-                ]);
+                    'success' => 'Deleted Users has not orders',
+                ],200);
             } else {
                 return response()->json([
-                    'error' => 'NO EVENTS TO DELETE'
-                ]);
+                    'error' => 'NO Users TO DELETE'
+                ],422);
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
+            return response()->json([
+                'error' => 'Error Try Again !!'
+            ],422);
         }
     }
 }
