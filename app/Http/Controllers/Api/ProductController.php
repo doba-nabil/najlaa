@@ -137,47 +137,55 @@ class ProductController extends Controller
     {
         try {
             $product = Product::where('id', $id)->first();
-            $similar_products = Product::where('subcategory_id', $product->subcategory_id)->select(
-                'id',
-                'name_' . app()->getLocale() . ' as name',
-                'price',
-                'discount_price',
-                'percentage_discount'
-            )->with(array('mainImage' => function ($query) {
-                    $query->select(
-                        'image',
-                        'imageable_id'
-                    );
-                })
-            )->active()->where('id', '!=', $id)->orderBy('id', 'desc')->get();
-            $products = [];
-            foreach($similar_products as $one_product){
-                $product = $one_product;
-                if ($request->bearerToken()) {
-                    $user= User::where('api_token', $request->bearerToken())->first();
-                    $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
-                    if (isset($found)) {
-                        $product['isFav'] = true;
+            if(isset($product)){
+                $similar_products = Product::where('subcategory_id', $product->subcategory_id)->select(
+                    'id',
+                    'name_' . app()->getLocale() . ' as name',
+                    'price',
+                    'discount_price',
+                    'percentage_discount'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->active()->where('id', '!=', $id)->orderBy('id', 'desc')->get();
+                $products = [];
+                foreach($similar_products as $one_product){
+                    $product = $one_product;
+                    if ($request->bearerToken()) {
+                        $user= User::where('api_token', $request->bearerToken())->first();
+                        $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
+                        if (isset($found)) {
+                            $product['isFav'] = true;
+                        } else {
+                            $product['isFav'] = false;
+                        }
                     } else {
                         $product['isFav'] = false;
                     }
-                } else {
-                    $product['isFav'] = false;
+                    array_push($products,$product);
                 }
-                array_push($products,$product);
-            }
-            if (count($similar_products) > 0) {
+                if (count($similar_products) > 0) {
+                    return response()->json([
+                        'status' => true,
+                        'data' => $products,
+                        'code' => 200,
+                    ]);
+                }
                 return response()->json([
-                    'status' => true,
-                    'data' => $products,
-                    'code' => 200,
+                    'status' => false,
+                    'msg' => 'لا يوجد منتجات متشابهة',
+                    'code' => 400,
+                ]);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'منتج غير متاح',
+                    'code' => 400,
                 ]);
             }
-            return response()->json([
-                'status' => false,
-                'msg' => 'لا يوجد منتجات متشابهة',
-                'code' => 400,
-            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
