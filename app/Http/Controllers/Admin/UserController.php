@@ -161,9 +161,9 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->phone = $request->phone;
             if($request->password){
-                $user->name = Hash::make($request->password);
+                $user->password = Hash::make($request->password);
             }else{
-                $user->name = $user->name;
+                $user->password = $user->password;
             }
             $user->email_verified_at = Carbon::now();
             $user->save();
