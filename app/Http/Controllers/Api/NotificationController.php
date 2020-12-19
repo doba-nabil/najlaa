@@ -67,12 +67,19 @@ class NotificationController extends Controller
                 }
                 array_push($nots , $ntification);
             }
-
-            return response()->json([
-                "date" => $nots,
-                'status' => true,
-                'code' => 200,
-            ]);
+            if(count($nots) > 0){
+                return response()->json([
+                    "date" => $nots,
+                    'status' => true,
+                    'code' => 200,
+                ]);
+            }else{
+                return response()->json([
+                    "msg" => 'لا يوجد اشعارات',
+                    'status' => false,
+                    'code' => 400,
+                ]);
+            }
         }catch (\Exception $e){
             return response()->json([
                 "msg" => trans('validation.error'),
@@ -133,11 +140,19 @@ class NotificationController extends Controller
                 array_push($nots , $ntification);
             }
 
-            return response()->json([
-                "date" => $nots,
-                'status' => true,
-                'code' => 200,
-            ]);
+            if(count($nots) > 0){
+                return response()->json([
+                    "date" => $nots,
+                    'status' => true,
+                    'code' => 200,
+                ]);
+            }else{
+                return response()->json([
+                    "msg" => 'لا يوجد اشعارات',
+                    'status' => false,
+                    'code' => 400,
+                ]);
+            }
         }catch (\Exception $e){
             return response()->json([
                 "msg" => trans('validation.error'),
@@ -198,11 +213,19 @@ class NotificationController extends Controller
                 array_push($nots , $ntification);
             }
 
-            return response()->json([
-                "date" => $nots,
-                'status' => true,
-                'code' => 200,
-            ]);
+            if(count($nots) > 0){
+                return response()->json([
+                    "date" => $nots,
+                    'status' => true,
+                    'code' => 200,
+                ]);
+            }else{
+                return response()->json([
+                    "msg" => 'لا يوجد اشعارات',
+                    'status' => false,
+                    'code' => 400,
+                ]);
+            }
         }catch (\Exception $e){
             return response()->json([
                 "msg" => trans('validation.error'),
