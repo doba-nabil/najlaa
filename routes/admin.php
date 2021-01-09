@@ -133,5 +133,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 Route::get('/ajax-subcats', 'Admin\AdminController@getsubcategories');
 Route::post('read', 'Admin\AdminController@readNotification');
 
-
+Route::get('/apple-app-site-association', function () {
+    $json = file_get_contents('apple-app-site-association.txt');
+    return response($json, 200)
+        ->header('Content-Type', 'application/json');
+});
 
