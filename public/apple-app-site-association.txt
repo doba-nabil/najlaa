@@ -4,7 +4,7 @@
     "details": [
     {
       "appID": "462K6BLVF3.com.Ahmed.naj.Najlaa",
-      "paths": ["*"]
+      "paths": ["http://46.101.138.138/admin/*"]
     }
     ]
   }
