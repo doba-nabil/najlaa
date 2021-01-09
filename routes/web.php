@@ -34,3 +34,9 @@ Route::get('auth/facebook/callback', 'Auth\FaceBookController@handleFacebookCall
 
 
 Route::get('all-user-token', 'Admin\UserController@token');
+
+Route::get('/apple-app-site-association', function () {
+    $json = file_get_contents('apple-app-site-association.txt');
+    return response($json, 200)
+        ->header('Content-Type', 'application/json');
+});
