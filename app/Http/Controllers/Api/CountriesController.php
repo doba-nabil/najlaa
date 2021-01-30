@@ -73,7 +73,45 @@ class CountriesController extends Controller
             ]);
         }
     }
-
+    public function check_country(Request $request)
+    {
+        try{
+            $user = User::where('api_token', $request->bearerToken())->first();
+            $old_chose = ChoseCountry::where('user_id' , $user->id)->first();
+            if(isset($old_chose)){
+                $country = Country::select(
+                    'id',
+                    'code',
+                    'call_code as calling_code',
+                    'name_' . app()->getLocale() . ' as name'
+                )->where('id' , $old_chose->country_id)->first();
+            }else{
+                $country = Country::select(
+                    'id',
+                    'code',
+                    'call_code as calling_code',
+                    'name_' . app()->getLocale() . ' as name'
+                )->where('id' , 1)->first();
+            }
+            $currency = Currency::select(
+                'id',
+                'code',
+                'name_' . app()->getLocale() . ' as name'
+            )->where('country_id' , $country->id)->first();
+            return response()->json([
+                'status' => true,
+                'country' => $country,
+                'currency' => $currency,
+                'code' => 200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
     public function choose_country(Request $request)
     {
         try{
