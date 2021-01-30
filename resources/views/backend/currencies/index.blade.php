@@ -29,7 +29,6 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Country</th>
-                            <th>Country Calling Code</th>
                             <th>For the Qatar Riyal</th>
                             <th>Active</th>
                             <th>Options</th>
@@ -41,7 +40,6 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $currency->name_ar }} / {{ $currency->name_en }}</td>
                                 <td>{{ $currency->country->name_ar }} / {{ $currency->country->name_en }}</td>
-                                <td>{{ $currency->calling_code }}</td>
                                 <td>
                                     @if(!empty($currency->equal))
                                         {{ $currency->equal }}

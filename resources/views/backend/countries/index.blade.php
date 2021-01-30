@@ -28,7 +28,7 @@
                             <th>Name</th>
                             <th>Active</th>
                             <th>Country Code</th>
-                            {{--<th>Currency</th>--}}
+                            <th>Country Calling Code</th>
                             <th>Options</th>
                         </tr>
                         </thead>
@@ -46,7 +46,7 @@
                                 <td>{{ $country->name_ar }} / {{ $country->name_en }}</td>
                                 <td>{{ $country->getActive() }}</td>
                                 <td>{{ $country->code }}</td>
-                                {{--<td>{{ $country->currency->name_en ?? 'Not Has Currency' }}</td>--}}
+                                <td>{{ $country->call_code }}</td>
                                 <td>
                                     <a href="{{ route('countries.edit' , $country->id) }}"
                                        class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>

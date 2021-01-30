@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChooseConuntriesTable extends Migration
+class CreateChoseCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateChooseConuntriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('choose_conuntries', function (Blueprint $table) {
+        Schema::create('chose_countries', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('country_id')->unsigned()->index();
+            $table->bigInteger('country_id')->unsigned()->index()->nullable();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->bigInteger('device_token');
+            $table->bigInteger('user_id')->unsigned()->index()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateChooseConuntriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('choose_conuntries');
+        Schema::dropIfExists('chose_countries');
     }
 }

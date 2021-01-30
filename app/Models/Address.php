@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     protected $fillable = [
-        'fullname', 'street_address','building_no', 'active' , 'city_id' ,'user_id' ,'area' , 'phone','created_at' , 'updated_at'
+        'fullname', 'lat' , 'lng','street_address','building_no', 'active' , 'city_id' ,'user_id' ,'area' , 'phone','created_at' , 'updated_at'
     ];
     protected $hidden = [
         'created_at', 'updated_at' , 'city_id' , 'user_id',

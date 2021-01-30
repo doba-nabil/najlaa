@@ -107,6 +107,8 @@ class AddressController extends Controller
             $address->fullname = $request->fullname;
             $address->street_address = $request->street_address;
             $address->building_no = $request->building_no;
+            $address->lat = $request->lat;
+            $address->lng = $request->lng;
             $address->city_id = $request->city_id;
             $address->area = $request->area;
             $address->phone = $request->phone;
@@ -210,6 +212,8 @@ class AddressController extends Controller
             $address->city_id = $request->city_id;
             $address->area = $request->area;
             $address->phone = $request->phone;
+            $address->lat = $request->lat;
+            $address->lng = $request->lng;
             if($request->active){
                 $addresses = $user->addresses;
                 foreach ($addresses as $old_address){
