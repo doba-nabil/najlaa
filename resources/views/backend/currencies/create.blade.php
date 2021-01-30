@@ -45,6 +45,17 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label for="call_code">Calling Code</label>
+                                    <input type="text" name="call_code" class="form-control" id="call_code" placeholder="Calling Code" value="{{ old('call_code') }}" required>
+                                    @error('call_code')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="validationCustom03">Country</label>
                                     <select name="country_id" class="form-control select2" id="validationCustom03" required>
                                         <option selected disabled hidden value="">---- Select Country ----</option>
