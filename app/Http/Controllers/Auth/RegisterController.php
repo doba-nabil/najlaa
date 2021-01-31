@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\VerifyMail;
 use App\Mail\VerifyMailAr;
+use App\Models\ChoseCountry;
+use App\Models\Country;
 use App\Models\Moderator;
 use App\Notifications\NewUser;
 use App\Providers\RouteServiceProvider;
@@ -101,6 +103,12 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
+        /** start chose country */
+        $chose_country = new ChoseCountry();
+        $chose_country->user_id = $user->id;
+        $chose_country->country_id = $request->country_id;
+        $chose_country->save();
+        /** end chose country */
         event(new Registered($user));
         $this->guard()->login($user);
         if(empty($user->email_verified_at)){
@@ -124,6 +132,18 @@ class RegisterController extends Controller
             $admin->notify(new NewUser($user));
         }
         $this->registered($request, $user) ?: redirect($this->redirectPath());
+        $user['country'] = Country::where('id' , $chose_country->country_id)->select(
+            'id',
+            'code',
+            'call_code as calling_code',
+            'name_' . app()->getLocale() . ' as name'
+        )->with(array('mainImage' => function ($query) {
+                $query->select(
+                    'image',
+                    'imageable_id'
+                );
+            })
+        )->first();
         return response()->json([
             'status' =>true,
             'data' => $user,
