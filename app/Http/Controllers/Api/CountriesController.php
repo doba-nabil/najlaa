@@ -52,7 +52,7 @@ class CountriesController extends Controller
             $countries = Country::whereIn('id' , $country_ids)->active()->select(
                 'id',
                 'name_' . app()->getLocale() . ' as name',
-                'call_code as Calling_code'
+                'call_code as calling_code'
             )->with(array('mainImage' => function ($query) {
                     $query->select(
                         'image',
@@ -84,24 +84,35 @@ class CountriesController extends Controller
                     'code',
                     'call_code as calling_code',
                     'name_' . app()->getLocale() . ' as name'
-                )->where('id' , $old_chose->country_id)->first();
+                )->where('id' , $old_chose->country_id)->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->first();
             }else{
                 $country = Country::select(
                     'id',
                     'code',
                     'call_code as calling_code',
                     'name_' . app()->getLocale() . ' as name'
-                )->where('id' , 1)->first();
+                )->where('id' , 1)->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->first();
             }
-            $currency = Currency::select(
+            $country['currency'] = Currency::select(
                 'id',
-                'code',
-                'name_' . app()->getLocale() . ' as name'
+                'name_' . app()->getLocale() . ' as name',
+                'code'
             )->where('country_id' , $country->id)->first();
             return response()->json([
                 'status' => true,
-                'country' => $country,
-                'currency' => $currency,
+                'data' => $country,
                 'code' => 200,
             ]);
         }catch (\Exception $e){
