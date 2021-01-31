@@ -105,7 +105,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::post('search', 'ProductController@search');
     /* country */
     Route::post('chose_country', 'CountriesController@choose_country');
-    Route::post('change_country', 'CountriesController@change_country');
+    Route::get('check_country', 'CountriesController@check_country');
 
     /************ pay / orders ************/
     Route::post('pay', 'PayController@pay_product');

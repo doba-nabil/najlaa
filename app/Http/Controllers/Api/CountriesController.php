@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\ChooseConuntry;
 use App\Http\Controllers\Controller;
+use App\Models\ChoseCountry;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Currency;
+use App\User;
 use Illuminate\Http\Request;
 
 class CountriesController extends Controller
@@ -49,7 +51,8 @@ class CountriesController extends Controller
             }
             $countries = Country::whereIn('id' , $country_ids)->active()->select(
                 'id',
-                'name_' . app()->getLocale() . ' as name'
+                'name_' . app()->getLocale() . ' as name',
+                'call_code as Calling_code'
             )->with(array('mainImage' => function ($query) {
                     $query->select(
                         'image',
@@ -70,28 +73,37 @@ class CountriesController extends Controller
             ]);
         }
     }
-
-    public function choose_country(Request $request)
+    public function check_country(Request $request)
     {
         try{
-            $old_chose = ChooseConuntry::where('device_token' , $request->header('device_token'))->first();
+            $user = User::where('api_token', $request->bearerToken())->first();
+            $old_chose = ChoseCountry::where('user_id' , $user->id)->first();
             if(isset($old_chose)){
-                return response()->json([
-                    'status' => false,
-                    'msg' => 'تم اختيار اللغة مسبقا',
-                    'code' => 400,
-                ]);
+                $country = Country::select(
+                    'id',
+                    'code',
+                    'call_code as calling_code',
+                    'name_' . app()->getLocale() . ' as name'
+                )->where('id' , $old_chose->country_id)->first();
             }else{
-                $chose_country = new ChooseConuntry();
-                $chose_country->device_token = $request->header('device_token');
-                $chose_country->country_id = $request->header('country_id');
-                $chose_country->save();
-                return response()->json([
-                    'status' => true,
-                    'data' => $chose_country,
-                    'code' => 200,
-                ]);
+                $country = Country::select(
+                    'id',
+                    'code',
+                    'call_code as calling_code',
+                    'name_' . app()->getLocale() . ' as name'
+                )->where('id' , 1)->first();
             }
+            $currency = Currency::select(
+                'id',
+                'code',
+                'name_' . app()->getLocale() . ' as name'
+            )->where('country_id' , $country->id)->first();
+            return response()->json([
+                'status' => true,
+                'country' => $country,
+                'currency' => $currency,
+                'code' => 200,
+            ]);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
@@ -100,17 +112,30 @@ class CountriesController extends Controller
             ]);
         }
     }
-    public function change_country(Request $request)
+    public function choose_country(Request $request)
     {
         try{
-            $chose_country = ChooseConuntry::where('device_token' , $request->header('device_token'))->first();
-            $chose_country->country_id = $request->header('country_id');
-            $chose_country->save();
-            return response()->json([
-                'status' => true,
-                'data' => $chose_country,
-                'code' => 200,
-            ]);
+            $user = User::where('api_token', $request->bearerToken())->first();
+            $old_chose = ChoseCountry::where('user_id' , $user->id)->first();
+            if(isset($old_chose)){
+                $old_chose->country_id = $request->country_id;
+                $old_chose->save();
+                return response()->json([
+                    'status' => true,
+                    'msg' => 'تم تغيير الدولة بنجاح',
+                    'code' => 200,
+                ]);
+            }else{
+                $chose_country = new ChoseCountry();
+                $chose_country->user_id = $user->id;
+                $chose_country->country_id = $request->country_id;
+                $chose_country->save();
+                return response()->json([
+                    'status' => true,
+                    'msg' => 'تم اختيار الدولة بنجاح',
+                    'code' => 200,
+                ]);
+            }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,

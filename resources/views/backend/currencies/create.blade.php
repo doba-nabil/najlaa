@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="code">Currency Code<small> <a href="{{ asset('backend/assets/files/codes.xlsx') }}">( click to visit codes file )</a> </small></label>
+                                    <label for="code">Currency Code<small> <a target="_blank" href="https://www.iban.com/currency-codes">( click to visit Currencies codes )</a></small></label>
                                     <input type="text" name="code" class="form-control" id="code" placeholder="Country Code" value="{{ old('code') }}" required>
                                     @error('code')
                                     <span class="text-danger">{{ $message }}</span>

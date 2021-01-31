@@ -53,6 +53,7 @@ class CountryController extends Controller
             $country->name_ar = $request->name_ar;
             $country->name_en = $request->name_en;
             $country->code = $request->code;
+            $country->call_code = $request->call_code;
             if ($request->active) {
                 $country->active = 1;
             } else {
@@ -109,6 +110,7 @@ class CountryController extends Controller
             $country->name_ar = $request->name_ar;
             $country->name_en = $request->name_en;
             $country->code = $request->code;
+            $country->call_code = $request->call_code;
             if ($request->active) {
                 $country->active = 1;
             } else {

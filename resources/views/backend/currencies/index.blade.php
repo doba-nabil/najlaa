@@ -42,22 +42,23 @@
                                 <td>{{ $currency->country->name_ar }} / {{ $currency->country->name_en }}</td>
                                 <td>
                                     @if(!empty($currency->equal))
-                                        {{ $currency->equal }} QAR
+                                        {{ $currency->equal }}
                                     @else
                                         <?php
                                         $fromCurrency = $currency->code;
                                         $toCurrency = 'QAR';
                                         if($fromCurrency == $toCurrency){
                                             $result =  1;
-                                            echo $result . ' QAR';
+                                            echo $result . ' <strong style="color:green">QAR</strong>';
                                         }else{
                                             try{
-                                                $url = "https://www.google.com/search?q=".$fromCurrency."+to+".$toCurrency;
-                                                $get = file_get_contents($url);
-                                                $data = preg_split('/\D\s(.*?)\s=\s/',$get);
-                                                $exhangeRate = (float) substr($data[1],0,7);
-                                                $result = round($exhangeRate , 3);
-                                                echo $result . ' QAR';
+                                                $apikey = 'd1ded944220ca6b0c442';
+                                                $from_Currency = $currency->code;
+                                                $to_Currency = 'QAR';
+                                                $query = "{$from_Currency}_{$to_Currency}";
+                                                $json = file_get_contents("https://free.currconv.com/api/v7/convert?q={$query}&compact=ultra&apiKey={$apikey}");
+                                                $obj = json_decode($json, true);
+                                                echo round($obj[$query], 3)  .' <strong style="color:red">QAR</strong>';
                                             }catch (\Exception $e){
                                                 echo 'Please add it manually';
                                             }

@@ -1,5 +1,23 @@
 @extends('backend.layout.master')
 @section('backend-head')
+    <style>
+        #map-canvas {
+            width: 100%;
+            height: 350px;
+        }
+        #pac-input {
+            z-index: 0 !important;
+            position: absolute !important;
+            top: 0px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 40px !important;
+            padding: 0 6px !important;
+            border: 2px solid #ce8483 !important;
+            border-radius: 3px!important;
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAbukNOXKPE1M-2Duze7aLXcRLguKXbJQ&libraries=places&sensor=false"></script>
 @endsection
 @section('backend-main')
     <div class="row">
@@ -76,6 +94,28 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Location</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="map-canvas"></div>
+                                                <input id="pac-input"  type="text" placeholder="Search here....">
+                                                <input type="hidden" id="lat" name="lat" value="{{ $address->lat }}" required>
+                                                <input type="hidden" id="lng" name="lng" value="{{ $address->lng }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="custom-control custom-checkbox mb-3">
@@ -100,4 +140,39 @@
     <script src="{{ asset('backend') }}/mine.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/form-element.init.js"></script>
+    <script>
+        var map = new google.maps.Map(document.getElementById('map-canvas'),{
+            center:{
+                lat: {{ $address->lat }},
+                lng: {{ $address->lng }},
+            },
+            zoom:15
+        });
+        var marker = new google.maps.Marker({
+            position: {
+                lat: {{ $address->lat }},
+                lng: {{ $address->lng }},
+            },
+            map: map,
+            draggable: true
+        });
+        var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
+        google.maps.event.addListener(searchBox,'places_changed',function(){
+            var places = searchBox.getPlaces();
+            var bounds = new google.maps.LatLngBounds();
+            var i, place;
+            for(i=0; place=places[i];i++){
+                bounds.extend(place.geometry.location);
+                marker.setPosition(place.geometry.location); //set marker position new...
+            }
+            map.fitBounds(bounds);
+            map.setZoom(15);
+        });
+        google.maps.event.addListener(marker,'position_changed',function(){
+            var lat = marker.getPosition().lat();
+            var lng = marker.getPosition().lng();
+            $('#lat').val(lat);
+            $('#lng').val(lng);
+        });
+    </script>
 @endsection

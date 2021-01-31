@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ChooseConuntry extends Model
+class ChoseCountry extends Model
 {
     protected $fillable = [
-        'device_token', 'country_id','created_at','updated_at'
+        'user_id', 'country_id','created_at','updated_at'
     ];
     protected $hidden = [
         'created_at', 'updated_at'

@@ -35,9 +35,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="code">Country Code<small> <a href="{{ asset('backend/assets/files/codes.xlsx') }}">( click to visit codes file )</a> </small></label>
+                                    <label for="code">Country Code<small> <a target="_blank" href="https://www.iban.com/country-codes">( click to visit codes )</a> </small></label>
                                     <input type="text" name="code" class="form-control" id="code" placeholder="Country Code" value="{{ $country->code }}" required>
                                     @error('code')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="call_code">Calling Code<small> <a target="_blank" href="https://countrycode.org/">( click to visit codes )</a> </small></label>
+                                    <input type="text" name="call_code" class="form-control" id="call_code" placeholder="Calling Code" value="{{ $country->call_code }}" required>
+                                    @error('call_code')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
