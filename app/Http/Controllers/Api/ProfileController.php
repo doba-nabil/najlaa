@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChoseCountry;
+use App\Models\Country;
 use App\User;
 use Darryldecode\Cart\Validators\Validator;
 use Illuminate\Http\Request;
@@ -15,6 +17,52 @@ class ProfileController extends Controller
     {
         $this->middleware('auth:api');
     }
+    public function get_info(Request $request)
+    {
+        try{
+            $user = User::where('api_token', $request->bearerToken())->first();
+            $old_chose = ChoseCountry::where('user_id' , $user->id)->first();
+            if(isset($old_chose)){
+                $user['country'] = Country::where('id' , $old_chose->country_id)->select(
+                    'id',
+                    'code',
+                    'call_code as calling_code',
+                    'name_' . app()->getLocale() . ' as name'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->first();
+            }else{
+                $user['country'] = Country::where('id' , 1)->select(
+                    'id',
+                    'code',
+                    'call_code as calling_code',
+                    'name_' . app()->getLocale() . ' as name'
+                )->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->first();
+            }
+
+            return response()->json([
+                'status' =>true,
+                'data' => $user,
+                'code' =>200,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'code' => 400,
+            ]);
+        }
+    }
 
     public function edit_info(Request $request)
     {
@@ -24,7 +72,30 @@ class ProfileController extends Controller
             $user->email = $request->email;
             $user->phone = $request->phone;
             $user->birth = $request->birth;
+            $old_chose = ChoseCountry::where('user_id' , $user->id)->first();
+            if(isset($old_chose)){
+                $old_chose->country_id = $request->country_id;
+                $old_chose->save();
+                $chose_country = $old_chose;
+            }else{
+                $chose_country = new ChoseCountry();
+                $chose_country->user_id = $user->id;
+                $chose_country->country_id = $request->country_id;
+                $chose_country->save();
+            }
             $user->save();
+            $user['country'] = Country::where('id' , $chose_country->country_id)->select(
+                'id',
+                'code',
+                'call_code as calling_code',
+                'name_' . app()->getLocale() . ' as name'
+            )->with(array('mainImage' => function ($query) {
+                    $query->select(
+                        'image',
+                        'imageable_id'
+                    );
+                })
+            )->first();
             return response()->json([
                 'status' => true,
                 'data' => $user,

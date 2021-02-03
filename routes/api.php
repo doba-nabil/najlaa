@@ -95,6 +95,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::post('main/address/{id}', 'AddressController@main');
     /* profile */
     Route::post('edit/profile', 'ProfileController@edit_info');
+    Route::get('get/profile', 'ProfileController@get_info');
     Route::post('contact', 'HomeController@contact');
     /************* order feedback *************/
     Route::post('order/feedback', 'ContactOrderController@contact');

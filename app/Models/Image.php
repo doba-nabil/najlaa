@@ -30,7 +30,8 @@ class Image extends Model
                 return  \URL::asset('/pictures/sliders/'.$this->image);
             }elseif(\Request::is('api/cat-slider')){
                 return  \URL::asset('/pictures/categories_slider/'.$this->image);
-            }elseif(\Request::is('api/all-countries') || \Request::is('api/check_country')|| \Request::is('api/register')){
+            }elseif(\Request::is('api/all-countries') || \Request::is('api/check_country') || \Request::is('api/register')
+                || \Request::is('api/get/profile') || \Request::is('api/edit/profile')){
                 return  \URL::asset('/pictures/countries/'.$this->image);
             }
         }else{
