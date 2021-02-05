@@ -20,7 +20,7 @@ class ProfileController extends Controller
     public function get_info(Request $request)
     {
         try{
-            $user = User::where('api_token', $request->bearerToken())->first();
+            $user = User::where('api_token', $request->bearerToken())->withCount('orders','notifications','wishLists')->first();
             $old_chose = ChoseCountry::where('user_id' , $user->id)->first();
             if(isset($old_chose)){
                 $user['country'] = Country::where('id' , $old_chose->country_id)->select(
