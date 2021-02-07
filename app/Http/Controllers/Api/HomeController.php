@@ -556,7 +556,13 @@ class HomeController extends Controller
 
     public function contact(Request $request)
     {
-        try{
+
+            $this->validate($request , [
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required|min:10',
+                'message' => 'required',
+            ]);
             $contact = new Contact();
             $contact->name = $request->name;
             $contact->email = $request->email;
@@ -572,13 +578,7 @@ class HomeController extends Controller
                 'data' => $contact,
                 'code' => 200,
             ]);
-        }catch (\Exception $e){
-            return response()->json([
-                'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
-                'code' => 400,
-            ]);
-        }
+
     }
     public function contact_address()
     {

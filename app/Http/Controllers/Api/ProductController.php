@@ -709,11 +709,19 @@ class ProductController extends Controller
                     );
                 })
             )->active()->get();
-            return response()->json([
-                'status' => true,
-                'data' => $products,
-                'code' => 200,
-            ]);
+            if(count($products) > 0){
+                return response()->json([
+                    'status' => true,
+                    'data' => $products,
+                    'code' => 200,
+                ]);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'لم يتم العثور على نتائج',
+                    'code' => 400,
+                ]);
+            }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
