@@ -560,13 +560,17 @@ class HomeController extends Controller
             $this->validate($request , [
                 'name' => 'required',
                 'email' => 'required|email',
-                'phone' => 'required|min:10',
+                'phone' => 'min:10',
                 'message' => 'required',
             ]);
             $contact = new Contact();
             $contact->name = $request->name;
             $contact->email = $request->email;
-            $contact->phone = $request->phone;
+            if(isset($request->phone)){
+                $contact->phone = $request->phone;
+            }else{
+                $contact->phone = '-';
+            }
             $contact->message = $request->message;
             $contact->save();
             $admins = Moderator::where('status' , 1)->get();
