@@ -28,8 +28,16 @@ class Product extends Model
         'created_at', 'updated_at','subcategory_id' , 'brand_id' , 'material_id','category_id'
     ];
 
-    protected $appends = ['currency_code' , 'currency_value', 'isFav'];
+    protected $appends = ['in_stock','currency_code' , 'currency_value' , 'isFav'];
 
+    public function getInStockAttribute()
+    {
+        if($this->max_qty > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function getCurrencyCodeAttribute()
     {
         $user = User::where('api_token', \request()->bearerToken())->first();

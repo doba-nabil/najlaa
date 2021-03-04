@@ -29,7 +29,7 @@ class OptionsController extends Controller
     public function social()
     {
         try{
-            $option = Option::select('face as facebook' , 'whats as whatsApp' , 'insta as instagram')->where('id' , 1)->get();
+            $option = Option::select('face as facebook' , 'whats as whatsApp' , 'insta as instagram' , 'twitter' , 'snapchat')->where('id' , 1)->get();
             return response()->json([
                 'status' => true,
                 'data' => $option,

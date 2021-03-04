@@ -195,30 +195,74 @@ class CartController extends Controller
         try{
             $token = \Request::header('token');
             $product = Product::where('id' , $request->product_id)->first();
-            $cart = new Cart();
             $api_token = $request->bearerToken();
             if(isset($api_token)){
                 $user = User::where('api_token' , $request->bearerToken())->first();
                 if(isset($user)){
-                    $cart->user_id = $user->id;
+                    $found = Cart::where('product_id' , $request->product_id)->where('user_id',$user->id)->first();
                 }
             }else{
-                $cart->token = $token;
+                $found = Cart::where('product_id' , $request->product_id)->where('token',$token)->first();
             }
-            if(empty($product->discount_price)){
-                $cart->price = $request->count * $product->price;
-            }elseif(!empty($product->discount_price)){
-                $cart->price = $request->count * $product->discount_price;
-            }
-            $cart->product_id = $request->product_id;
-            $cart->size_id = $request->size_id;
-            $cart->color_id = $request->color_id;
-            $cart->count = $request->count;
-            $cart->save();
-            if(isset($api_token)){
-                $user = User::where('api_token' , $request->bearerToken())->first();
-                if(isset($user)){
-                    $cartt = Cart::where('id',$cart->id)->where('user_id' , $user->id)->with(array('color' => function ($query) {
+            if(isset($found)){
+                $found->count = $found->count + $request->count;
+                $found->price = $found->count * $product->price;
+                $found->save();
+            }else{
+                $cart = new Cart();
+
+                if(isset($api_token)){
+                    if(isset($user)){
+                        $cart->user_id = $user->id;
+                    }
+                }else{
+                    $cart->token = $token;
+                }
+                if(empty($product->discount_price)){
+                    $cart->price = $request->count * $product->price;
+                }elseif(!empty($product->discount_price)){
+                    $cart->price = $request->count * $product->discount_price;
+                }
+                $cart->product_id = $request->product_id;
+                $cart->size_id = $request->size_id;
+                $cart->color_id = $request->color_id;
+                $cart->count = $request->count;
+                $cart->save();
+                if(isset($api_token)){
+                    $user = User::where('api_token' , $request->bearerToken())->first();
+                    if(isset($user)){
+                        $cartt = Cart::where('id',$cart->id)->where('user_id' , $user->id)->with(array('color' => function ($query) {
+                                $query->select(
+                                    'id',
+                                    'color',
+                                    'name_' . app()->getLocale() . ' as name'
+                                );
+                            })
+                        )->with(array('size' => function ($query) {
+                                $query->select(
+                                    'id',
+                                    'code'
+                                );
+                            })
+                        )->with(array('product' => function ($query) {
+                                $query->select(
+                                    'id',
+                                    'name_' . app()->getLocale() . ' as name',
+                                    'price',
+                                    'discount_price',
+                                    'percentage_discount'
+                                )->with(array('mainImage' => function ($query) {
+                                        $query->select(
+                                            'image',
+                                            'imageable_id'
+                                        );
+                                    })
+                                );
+                            })
+                        )->first();
+                    }
+                }else{
+                    $cartt = Cart::where('id',$cart->id)->where('token' , $token)->with(array('color' => function ($query) {
                             $query->select(
                                 'id',
                                 'color',
@@ -248,42 +292,12 @@ class CartController extends Controller
                         })
                     )->first();
                 }
-            }else{
-                $cartt = Cart::where('id',$cart->id)->where('token' , $token)->with(array('color' => function ($query) {
-                        $query->select(
-                            'id',
-                            'color',
-                            'name_' . app()->getLocale() . ' as name'
-                        );
-                    })
-                )->with(array('size' => function ($query) {
-                        $query->select(
-                            'id',
-                            'code'
-                        );
-                    })
-                )->with(array('product' => function ($query) {
-                        $query->select(
-                            'id',
-                            'name_' . app()->getLocale() . ' as name',
-                            'price',
-                            'discount_price',
-                            'percentage_discount'
-                        )->with(array('mainImage' => function ($query) {
-                                $query->select(
-                                    'image',
-                                    'imageable_id'
-                                );
-                            })
-                        );
-                    })
-                )->first();
+                return response()->json([
+                    'status' => true,
+                    'data' => $cartt,
+                    'code' => 200,
+                ]);
             }
-            return response()->json([
-                'status' => true,
-                'data' => $cartt,
-                'code' => 200,
-            ]);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,

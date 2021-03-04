@@ -32,6 +32,24 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="twitter">Twitter</label>
+                                    <input type="text" name="twitter" class="form-control" id="twitter" placeholder="Twitter" value="{{ $option->twitter }}" required>
+                                    @error('twitter')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="snapchat">SnapChat</label>
+                                    <input type="text" name="snapchat" class="form-control" id="snapchat" placeholder="SnapChat" value="{{ $option->snapchat }}" required>
+                                    @error('snapchat')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="validationCustom02">Whatsapp number</label>
                                     <input type="text" name="whats" class="form-control" id="validationCustom02" placeholder="whatsapp number" value="{{ $option->whats }}" required>
                                     @error('whats')
