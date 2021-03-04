@@ -7,10 +7,16 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Menu</li>
                 <li>
-                    <a href="/" class="waves-effect">
+                    <a href="{{ route('backend-home') }}" class="waves-effect">
                         <i class="ri-dashboard-line"></i>
                         {{--<span class="badge badge-pill badge-success float-right">3</span>--}}
                         <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('deliveries.index') }}" class="waves-effect">
+                        <i class="fas fa-truck"></i>
+                        <span>Deliveries</span>
                     </a>
                 </li>
                 <li>
@@ -117,7 +123,14 @@
                 <li>
                     <a href="{{ route('contacts.index') }}" class="waves-effect">
                         <i class="fas fa-envelope"></i>
-                        <span>User Messages</span>
+                        <span>Messages ( contact form )</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('subscribers.index') }}" class="waves-effect">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span class="badge badge-pill badge-success float-right">{{ \App\Models\Subscribe::count() }}</span>
+                        Subscribers
                     </a>
                 </li>
                 <li>

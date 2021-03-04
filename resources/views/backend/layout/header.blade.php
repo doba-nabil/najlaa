@@ -119,7 +119,7 @@
                                         </div>
                                     </a>
                                 @endif
-                                @if(isset($notification->data['user']))
+                                @if(isset($notification->data['user']) && !isset($notification->data['order']))
                                     <?php
                                         $user = \App\User::where('email' , $notification->data['user']['email'])->first();
                                     ?>

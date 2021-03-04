@@ -46,9 +46,11 @@ class PayController extends Controller
                 $order->user_id = $user->id;
                 /********************** price ************/
                 $carts = Cart::where('user_id', $user->id)->get();
+                $total = 0;
                 if (count($carts) > 0) {
                     foreach ($carts as $cart) {
-                        $order->total_price = $cart->sum('price');
+                        $total+= $cart->price;
+                        $order->total_price = $total;
                     }
                 } else {
                     $order->total_price = 0;
@@ -67,6 +69,11 @@ class PayController extends Controller
                         $pay->size_id = $value->size_id;
                         $pay->save();
                         array_push($productIds, $value['id']);
+
+                        $product = Product::where('id',$value->product_id)->first();
+                        $product->max_qty = $product->max_qty - $value->count;
+                        $product->save();
+
                         $value->delete();
                     }
                 } else {
@@ -231,6 +238,10 @@ class PayController extends Controller
                 $order->total_price = $old_order->total_price;
                 /********************** end price ************/
                 $order->save();
+                $admins = Moderator::where('status' , 1)->get();
+                foreach ($admins as $admin){
+                    $admin->notify(new NewOrder($order,$user));
+                }
                 /****** pay table get products *******/
                 $productIds = [];
                 foreach ($old_order->pays as $value) {

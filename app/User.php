@@ -59,14 +59,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Order');
     }
-    public function notifications()
-    {
-        $user = User::where('api_token', \request()->bearerToken())->first();
-        return $this->hasMany('App\Models\Notification','notifiable_id')->where('notifiable_id' , $user->id)->whereNull('read_at');
-    }
-    public function wishLists()
-    {
-        $user = User::where('api_token', \request()->bearerToken())->first();
-        return $this->hasMany('App\Models\WishList')->where('user_id' , $user->id);
-    }
 }

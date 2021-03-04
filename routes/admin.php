@@ -28,11 +28,19 @@ Route::post('admin/login', 'Admin\AdminauthController@login');
 Route::get('admin', 'Admin\AdminauthController@showLoginFrom');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth:moderator'], function () {
     /****************** auth routes ****************/
-    Route::get('/', 'AdminController@index')->name('backend-home');
+    Route::get('home', 'AdminController@index')->name('backend-home');
     /*********** category route ***********/
     Route::resource('categories', 'CategoryController', ['except' => ['show']]);
     Route::delete('delete_categories', 'CategoryController@delete_categories')->name('delete_categories');
     /*********** end category route ***********/
+    /*********** subscribers route ***********/
+    Route::resource('subscribers', 'SubscriberController', ['only' => ['index' , 'destroy']]);
+    Route::delete('delete_subscribers', 'SubscriberController@delete_subscribers')->name('delete_subscribers');
+    /*********** end subscribers route ***********/
+    /*********** deliveries route ***********/
+    Route::resource('deliveries', 'DeliveryController', ['except' => ['show']]);
+    Route::delete('delete_deliveries', 'DeliveryController@delete_deliveries')->name('delete_deliveries');
+    /*********** end deliveries route ***********/
     /*********** subcategory route ***********/
     Route::resource('subcategories', 'SubcategoryController', ['except' => ['show']]);
     Route::delete('delete_subcategories', 'SubcategoryController@delete_categories')->name('delete_subcategories');

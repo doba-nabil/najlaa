@@ -1,6 +1,24 @@
 @extends('backend.layout.master')
 @section('backend-head')
     <link href="{{ asset('backend') }}/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css"/>
+    <style>
+        #map-canvas {
+            width: 100%;
+            height: 350px;
+        }
+        #pac-input {
+            z-index: 0 !important;
+            position: absolute !important;
+            top: 0px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 40px !important;
+            padding: 0 6px !important;
+            border: 2px solid #ce8483 !important;
+            border-radius: 3px!important;
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAbukNOXKPE1M-2Duze7aLXcRLguKXbJQ&libraries=places&sensor=false"></script>
 @endsection
 @section('backend-main')
     <div class="row">
@@ -124,6 +142,31 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="row">
+                        <?php
+                            $address = \App\Models\Address::where('user_id' , $order->user_id)->where('building_no',$order->building_no)->where('street_address',$order->street_address)->first();
+                        ?>
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Location</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @if(isset($address))
+                                            <div id="map-canvas"></div>
+                                            <input id="pac-input"  type="text" placeholder="Search here....">
+                                            <input type="hidden" id="lat" name="lat" value="{{ $address->lat }}" required>
+                                            <input type="hidden" id="lng" name="lng" value="{{ $address->lng }}" required>
+                                                @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
                     <hr>
                     <form method="post" action="{{ route('orders.update' , $order->id) }}" class="needs-validation" novalidate>
                         @csrf
@@ -154,8 +197,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="delivery_id">Delivery Captain</label>
+                                    <select name="delivery_id" class="form-control" id="delivery_id" required>
+                                        <option value="" disabled="" hidden @if(empty($order->delivery_id)) selected @endif>Choose delivery</option>
+                                        @foreach($dels as $del)
+                                            <option
+                                                    @if($del->id == $order->delivery_id) selected @endif
+                                            value="{{ $del->id }}">{{ $del->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('delivery_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Save</button>
+                        <a style="float: right" href="{{ route('orders.index') }}" class="btn btn-warning" type="submit">Back</a>
                     </form>
                 </div>
             </div>
@@ -191,5 +251,41 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
-
+    @if(isset($address))
+    <script>
+        var map = new google.maps.Map(document.getElementById('map-canvas'),{
+            center:{
+                lat: {{ $address->lat }},
+                lng: {{ $address->lng }},
+            },
+            zoom:15
+        });
+        var marker = new google.maps.Marker({
+            position: {
+                lat: {{ $address->lat }},
+                lng: {{ $address->lng }},
+            },
+            map: map,
+            draggable: true
+        });
+        var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
+        google.maps.event.addListener(searchBox,'places_changed',function(){
+            var places = searchBox.getPlaces();
+            var bounds = new google.maps.LatLngBounds();
+            var i, place;
+            for(i=0; place=places[i];i++){
+                bounds.extend(place.geometry.location);
+                marker.setPosition(place.geometry.location); //set marker position new...
+            }
+            map.fitBounds(bounds);
+            map.setZoom(15);
+        });
+        google.maps.event.addListener(marker,'position_changed',function(){
+            var lat = marker.getPosition().lat();
+            var lng = marker.getPosition().lng();
+            $('#lat').val(lat);
+            $('#lng').val(lng);
+        });
+    </script>
+    @endif
 @endsection

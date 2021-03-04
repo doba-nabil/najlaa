@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delivery;
 use App\Models\Notification;
 use App\Models\Order;
 use App\Models\Pay;
@@ -85,7 +86,9 @@ class OrderController extends Controller
             $order->save();
 
             $pays = Pay::where('order_id' , $id)->get();
-            return view('backend.orders.show' , compact('order','pays'));
+
+            $dels = Delivery::active()->orderBy('id','desc')->get();
+            return view('backend.orders.show' , compact('order','pays','dels'));
         }catch (\Exception $e){
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -111,7 +114,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
+
             $order = Order::find($id);
             $order->status = $request->status;
             if($request->status == 0){
@@ -134,6 +137,7 @@ class OrderController extends Controller
             }elseif($request->status == 4){
                 $order->delivered =  Carbon::now();
             }
+            $order->delivery_id = $request->delivery_id;
             $order->save();
 
            $firebaseToken = DB::table('token_users')->where('user_id' , $order->user_id)->pluck('device_token')->all();
@@ -180,9 +184,7 @@ class OrderController extends Controller
 
             $user->notify(new OrderSatusNot($order));
             return redirect()->back()->with('done' , 'Order Updated Successfully');
-        }catch (\Exception $e){
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
     }
 
     /**
