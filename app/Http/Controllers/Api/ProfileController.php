@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\ChoseCountry;
 use App\Models\Country;
+use App\Models\Notification;
+use App\Models\WishList;
 use App\User;
 use Darryldecode\Cart\Validators\Validator;
 use Illuminate\Http\Request;
@@ -20,7 +22,10 @@ class ProfileController extends Controller
     public function get_info(Request $request)
     {
         try{
-            $user = User::where('api_token', $request->bearerToken())->withCount('orders','notifications','wishLists')->first();
+
+            $user = User::where('api_token', $request->bearerToken())->withCount('orders')->first();
+            $notifications = Notification::where('notifiable_id' , $user->id)->whereNull('read_at')->orderBy('created_at' , 'desc')->get();
+            $wishLists = WishList::where('user_id' , $user->id)->orderBy('id' , 'desc')->get();
             $old_chose = ChoseCountry::where('user_id' , $user->id)->first();
             if(isset($old_chose)){
                 $user['country'] = Country::where('id' , $old_chose->country_id)->select(
@@ -49,7 +54,8 @@ class ProfileController extends Controller
                     })
                 )->first();
             }
-
+            $user['notifications_count'] = $notifications->count();
+            $user['wish_lists_count'] = $wishLists->count();
             return response()->json([
                 'status' =>true,
                 'data' => $user,

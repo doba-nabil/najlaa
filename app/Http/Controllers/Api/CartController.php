@@ -206,8 +206,13 @@ class CartController extends Controller
             }
             if(isset($found)){
                 $found->count = $found->count + $request->count;
-                $found->price = $found->count * $product->price;
+                if(empty($product->discount_price)){
+                    $found->price = $found->count * $product->price;
+                }else{
+                    $found->price = $found->count * $product->discount_price;
+                }
                 $found->save();
+                $cart = $found;
             }else{
                 $cart = new Cart();
 
@@ -228,41 +233,11 @@ class CartController extends Controller
                 $cart->color_id = $request->color_id;
                 $cart->count = $request->count;
                 $cart->save();
-                if(isset($api_token)){
-                    $user = User::where('api_token' , $request->bearerToken())->first();
-                    if(isset($user)){
-                        $cartt = Cart::where('id',$cart->id)->where('user_id' , $user->id)->with(array('color' => function ($query) {
-                                $query->select(
-                                    'id',
-                                    'color',
-                                    'name_' . app()->getLocale() . ' as name'
-                                );
-                            })
-                        )->with(array('size' => function ($query) {
-                                $query->select(
-                                    'id',
-                                    'code'
-                                );
-                            })
-                        )->with(array('product' => function ($query) {
-                                $query->select(
-                                    'id',
-                                    'name_' . app()->getLocale() . ' as name',
-                                    'price',
-                                    'discount_price',
-                                    'percentage_discount'
-                                )->with(array('mainImage' => function ($query) {
-                                        $query->select(
-                                            'image',
-                                            'imageable_id'
-                                        );
-                                    })
-                                );
-                            })
-                        )->first();
-                    }
-                }else{
-                    $cartt = Cart::where('id',$cart->id)->where('token' , $token)->with(array('color' => function ($query) {
+            }
+            if(isset($api_token)){
+                $user = User::where('api_token' , $request->bearerToken())->first();
+                if(isset($user)){
+                    $cartt = Cart::where('id',$cart->id)->where('user_id' , $user->id)->with(array('color' => function ($query) {
                             $query->select(
                                 'id',
                                 'color',
@@ -292,12 +267,42 @@ class CartController extends Controller
                         })
                     )->first();
                 }
-                return response()->json([
-                    'status' => true,
-                    'data' => $cartt,
-                    'code' => 200,
-                ]);
+            }else{
+                $cartt = Cart::where('id',$cart->id)->where('token' , $token)->with(array('color' => function ($query) {
+                        $query->select(
+                            'id',
+                            'color',
+                            'name_' . app()->getLocale() . ' as name'
+                        );
+                    })
+                )->with(array('size' => function ($query) {
+                        $query->select(
+                            'id',
+                            'code'
+                        );
+                    })
+                )->with(array('product' => function ($query) {
+                        $query->select(
+                            'id',
+                            'name_' . app()->getLocale() . ' as name',
+                            'price',
+                            'discount_price',
+                            'percentage_discount'
+                        )->with(array('mainImage' => function ($query) {
+                                $query->select(
+                                    'image',
+                                    'imageable_id'
+                                );
+                            })
+                        );
+                    })
+                )->first();
             }
+            return response()->json([
+                'status' => true,
+                'data' => $cartt,
+                'code' => 200,
+            ]);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
