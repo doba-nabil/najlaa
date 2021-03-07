@@ -11,12 +11,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{{ $user->name }}'s Addresses</h4>
+                    <h4 class="card-title">{{ $user->name }} {{ __('dashboard.s_addresses') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
-                        <a href="{{ route('addresses_create' , $user->id) }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> Add
-                            New</a>
+                        <a href="{{ route('addresses_create' , $user->id) }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i>{{ __('dashboard.add_new') }}</a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_addresses/{{ $user->id }}"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
+                           delete_url="/delete_addresses/{{ $user->id }}"><i class="mdi mdi-trash-can-outline mr-2"></i>{{ __('dashboard.delete_all') }}</a>
                     </div>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
@@ -24,12 +23,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>City</th>
-                            <th>phone</th>
-                            <th>Street Address</th>
-                            <th>Main Address</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.name') }}</th>
+                            <th>{{ __('dashboard.city') }}</th>
+                            <th>{{ __('dashboard.phone') }}</th>
+                            <th>{{ __('dashboard.street_address') }}</th>
+                            <th>{{ __('dashboard.main_address') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,7 +36,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $address->fullname }}</td>
-                                <td>{{ $address->city->name_ar }} / {{ $address->city->name_en }}</td>
+                                <td>{{ $address->city['name_'.app()->getLocale()] }}</td>
                                 <td>{{ $address->phone }}</td>
                                 <td>{{ $address->street_address }}</td>
                                 <td class="text-success">{{ $address->getActive() }}</td>
@@ -75,6 +74,10 @@
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
-    <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @if(app()->getLocale() == 'en')
+        <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @else
+        <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
+    @endif
     <script src="{{ asset('backend') }}/mine.js"></script>
 @endsection

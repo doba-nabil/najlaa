@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Advertising banner " {{ $slider->title_en }} "</h4>
+                    <h4 class="card-title">{{ __('dashboard.edit') }} {{ __('dashboard.ad_banners') }} " {{ $slider['title_'.app()->getLocale()] }} "</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('sliders.update' , $slider->id) }}" class="needs-validation" novalidate
                           enctype="multipart/form-data">
@@ -15,8 +15,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="title_ar">Title in Arabic</label>
-                                    <input type="text" name="title_ar" class="form-control" id="title_ar" placeholder="Title in Arabic" value="{{ $slider->title_ar }}" required>
+                                    <label for="title_ar">{{ __('dashboard.title_ar') }}</label>
+                                    <input type="text" name="title_ar" class="form-control" id="title_ar" placeholder="{{ __('dashboard.title_ar') }}" value="{{ $slider->title_ar }}" required>
                                     @error('title_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -24,8 +24,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="title_en">Title in English</label>
-                                    <input type="text" name="title_en" class="form-control" id="title_en" placeholder="Title in English" value="{{ $slider->title_en }}" required>
+                                    <label for="title_en">{{ __('dashboard.title_en') }}</label>
+                                    <input type="text" name="title_en" class="form-control" id="title_en" placeholder="{{ __('dashboard.title_en') }}" value="{{ $slider->title_en }}" required>
                                     @error('title_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -35,8 +35,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="subtitle_ar">Subtitle in Arabic (Optional)</label>
-                                    <input type="text" name="subtitle_ar" class="form-control" id="subtitle_ar" placeholder="Subtitle in Arabic" value="{{ $slider->subtitle_ar }}">
+                                    <label for="subtitle_ar">{{ __('dashboard.subtitle_ar') }} ({{ __('dashboard.optional') }})</label>
+                                    <input type="text" name="subtitle_ar" class="form-control" id="subtitle_ar" placeholder="{{ __('dashboard.subtitle_ar') }}" value="{{ $slider->subtitle_ar }}">
                                     @error('subtitle_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -44,8 +44,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="subtitle_en">Subtitle in English (Optional)</label>
-                                    <input type="text" name="subtitle_en" class="form-control" id="subtitle_en" placeholder="Subtitle in English" value="{{ $slider->subtitle_en }}">
+                                    <label for="subtitle_en">{{ __('dashboard.subtitle_en') }} ({{ __('dashboard.optional') }})</label>
+                                    <input type="text" name="subtitle_en" class="form-control" id="subtitle_en" placeholder="{{ __('dashboard.subtitle_en') }}" value="{{ $slider->subtitle_en }}">
                                     @error('subtitle_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -55,8 +55,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="link">Link (Optional)</label>
-                                    <input type="text" name="link" class="form-control" id="link" placeholder="Link" value="{{ $slider->link }}">
+                                    <label for="link">{{ __('dashboard.link') }} ({{ __('dashboard.optional') }})</label>
+                                    <input type="text" name="link" class="form-control" id="link" placeholder="{{ __('dashboard.link') }}" value="{{ $slider->link }}">
                                     @error('link')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -67,7 +67,7 @@
                             <div class="col-md-12">
                                 <div class="custom-file">
                                     <input type="file" name="image" class="custom-file-input" id="customFile" onchange="readURL(this);">
-                                    <label class="custom-file-label" for="customFile">Image</label>
+                                    <label class="custom-file-label" for="customFile">{{ __('dashboard.image') }}</label>
                                     @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -88,11 +88,11 @@
                                     <input type="checkbox"
                                            @if($slider->active == 1) checked="" @endif
                                            name="active" class="custom-control-input" id="customCheck1" >
-                                    <label class="custom-control-label" for="customCheck1">Active</label>
+                                    <label class="custom-control-label" for="customCheck1">{{ __('dashboard.active') }}</label>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
             </div>

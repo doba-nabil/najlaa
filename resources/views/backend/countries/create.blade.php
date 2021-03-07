@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add New Country</h4>
+                    <h4 class="card-title">{{ __('dashboard.add_new') }}</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('countries.store') }}" class="needs-validation" novalidate
                           enctype="multipart/form-data">
@@ -14,8 +14,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom01">Name in Arabic</label>
-                                    <input type="text" name="name_ar" class="form-control" id="validationCustom01" placeholder="Name in Arabic" value="{{ old('name_ar') }}" required>
+                                    <label for="validationCustom01">{{ __('dashboard.name_ar') }}</label>
+                                    <input type="text" name="name_ar" class="form-control" id="validationCustom01" placeholder="{{ __('dashboard.name_ar') }}" value="{{ old('name_ar') }}" required>
                                     @error('name_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -23,8 +23,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom02">Name in English</label>
-                                    <input type="text" name="name_en" class="form-control" id="validationCustom02" placeholder="Name in English" value="{{ old('name_en') }}" required>
+                                    <label for="validationCustom02">{{ __('dashboard.name_en') }}</label>
+                                    <input type="text" name="name_en" class="form-control" id="validationCustom02" placeholder="{{ __('dashboard.name_en') }}" value="{{ old('name_en') }}" required>
                                     @error('name_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -34,8 +34,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="code">Country Code<small> <a target="_blank" href="https://www.iban.com/country-codes">( click to visit codes )</a> </small></label>
-                                    <input type="text" name="code" class="form-control" id="code" placeholder="Country Code" value="{{ old('code') }}" required>
+                                    <label for="code">{{ __('dashboard.country_code') }}<small> <a target="_blank" href="https://www.iban.com/country-codes">"
+                                                @if(app()->getLocale() == 'ar')
+                                                    قم بالضغط لزيارة اكواد المدن
+                                                @else
+                                                    click to visit codes
+                                                @endif
+                                                "</a> </small></label>
+                                    <input type="text" name="code" class="form-control" id="code" placeholder="{{ __('dashboard.country_code') }}" value="{{ old('code') }}" required>
                                     @error('code')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -45,7 +51,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="call_code">Calling Code<small> <a target="_blank" href="https://countrycode.org/">( click to visit codes )</a> </small></label>
+                                    <label for="call_code">{{ __('dashboard.country_calling_code') }}<small> <a target="_blank" href="https://countrycode.org/">"
+                                                @if(app()->getLocale() == 'ar')
+                                                    قم بالضغط لزيارة اكواد المدن
+                                                @else
+                                                    click to visit codes
+                                                @endif
+                                                "</a> </small></label>
                                     <input type="text" name="call_code" class="form-control" id="call_code" placeholder="Calling Code" value="{{ old('call_code') }}" required>
                                     @error('call_code')
                                     <span class="text-danger">{{ $message }}</span>
@@ -55,10 +67,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="image">Country Flag</label>
+                                <label for="image">{{ __('dashboard.country_flag') }}</label>
                                 <div class="custom-file">
                                     <input type="file" name="image" class="custom-file-input" id="customFile" onchange="readURL(this);" >
-                                    <label class="custom-file-label" for="customFile">Choose Flag</label>
+                                    <label class="custom-file-label" for="customFile">{{ __('dashboard.country_flag') }}</label>
                                     @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -74,11 +86,11 @@
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" checked=""
                                            name="active" class="custom-control-input" id="customCheck1" >
-                                    <label class="custom-control-label" for="customCheck1">Active</label>
+                                    <label class="custom-control-label" for="customCheck1">{{ __('dashboard.active') }}</label>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
             </div>

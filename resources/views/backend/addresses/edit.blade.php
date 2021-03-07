@@ -24,7 +24,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Address " {{ $address->street_address }} "</h4>
+                    <h4 class="card-title">{{ __('dashboard.edit') }} {{ __('dashboard.address') }} " {{ $address->street_address }} "</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('edit_form' , $address->id) }}" class="needs-validation" novalidate>
                         @csrf
@@ -32,8 +32,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom01">Full Name</label>
-                                    <input type="text" name="fullname" class="form-control" id="validationCustom01" placeholder="Full Name" value="{{ $address->fullname }}" required>
+                                    <label for="validationCustom01">{{ __('dashboard.fullname') }}</label>
+                                    <input type="text" name="fullname" class="form-control" id="validationCustom01" placeholder="{{ __('dashboard.fullname') }}" value="{{ $address->fullname }}" required>
                                     @error('fullname')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -41,8 +41,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom02">Street Address</label>
-                                    <input type="text" name="street_address" class="form-control" id="validationCustom02" placeholder="Street Address" value="{{ $address->street_address }}" required>
+                                    <label for="validationCustom02">{{ __('dashboard.street_address') }}</label>
+                                    <input type="text" name="street_address" class="form-control" id="validationCustom02" placeholder="{{ __('dashboard.street_address') }}" value="{{ $address->street_address }}" required>
                                     @error('street_address')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -50,8 +50,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom03">building no</label>
-                                    <input type="number" name="building_no" class="form-control" id="validationCustom03" placeholder="building no" value="{{ $address->building_no }}" required>
+                                    <label for="validationCustom03">{{ __('dashboard.building_no') }}</label>
+                                    <input type="number" name="building_no" class="form-control" id="validationCustom03" placeholder="{{ __('dashboard.building_no') }}" value="{{ $address->building_no }}" required>
                                     @error('building_no')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -59,8 +59,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom04">Area</label>
-                                    <input type="text" name="area" class="form-control" id="validationCustom04" placeholder="Area" value="{{ $address->area }}" required>
+                                    <label for="validationCustom04">{{ __('dashboard.area') }}</label>
+                                    <input type="text" name="area" class="form-control" id="validationCustom04" placeholder="{{ __('dashboard.area') }}" value="{{ $address->area }}" required>
                                     @error('area')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -68,8 +68,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom05">phone</label>
-                                    <input type="text" name="phone" class="form-control" id="validationCustom05" placeholder="phone" value="{{ $address->phone }}" required>
+                                    <label for="validationCustom05">{{ __('dashboard.phone') }}</label>
+                                    <input type="text" name="phone" class="form-control" id="validationCustom05" placeholder="{{ __('dashboard.phone') }}" value="{{ $address->phone }}" required>
                                     @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -79,13 +79,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom03">City</label>
+                                    <label for="validationCustom03">{{ __('dashboard.city') }}</label>
                                     <select name="city_id" class="form-control" id="validationCustom03" required>
-                                        <option selected disabled hidden value="">---- Select City ----</option>
+                                        <option selected disabled hidden value="">---- {{ __('dashboard.select_city') }} ----</option>
                                         @foreach($cities as $city)
                                             <option
                                                     @if($city->id == $address->city_id) selected @endif
-                                                    value="{{ $city->id }}">{{ $city->name_ar }} / {{ $city->name_en }}</option>
+                                                    value="{{ $city->id }}">{{ $city['name_'.app()->getLocale()] }}</option>
                                         @endforeach
                                     </select>
                                     @error('city_id')
@@ -99,13 +99,13 @@
                             <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Location</h3>
+                                        <h3 class="panel-title">{{ __('dashboard.location') }}</h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div id="map-canvas"></div>
-                                                <input id="pac-input"  type="text" placeholder="Search here....">
+                                                <input id="pac-input"  type="text" placeholder="{{ __('dashboard.search_here') }}....">
                                                 <input type="hidden" id="lat" name="lat" value="{{ $address->lat }}" required>
                                                 <input type="hidden" id="lng" name="lng" value="{{ $address->lng }}" required>
                                             </div>
@@ -121,11 +121,11 @@
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" name="active" class="custom-control-input" id="customCheck1"
                                            @if( $address->active == 1 ) checked="" @endif>
-                                    <label class="custom-control-label" for="customCheck1">Selected a Main Address</label>
+                                    <label class="custom-control-label" for="customCheck1">{{ __('dashboard.main_address') }}</label>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
             </div>

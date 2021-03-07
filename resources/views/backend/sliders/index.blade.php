@@ -11,12 +11,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Advertising banners</h4>
+                    <h4 class="card-title">{{ __('dashboard.ad_banners') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
-                        <a href="{{ route('sliders.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> Add
-                            New</a>
+                        <a href="{{ route('sliders.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> {{ __('dashboard.add_new') }}</a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_sliders/"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
+                           delete_url="/delete_sliders/"><i class="mdi mdi-trash-can-outline mr-2"></i>
+                            {{ __('dashboard.delete_all') }}
+                        </a>
                     </div>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
@@ -24,12 +25,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Image</th>
-                            <th>Title</th>
-                            <th>Subtitle</th>
-                            <th>Active</th>
-                            <th>Link</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.image') }}</th>
+                            <th>{{ __('dashboard.title') }}</th>
+                            <th>{{ __('dashboard.subtitle') }}</th>
+                            <th>{{ __('dashboard.active') }}</th>
+                            <th>{{ __('dashboard.link') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,8 +44,8 @@
                                         <img style="width: 100%;border-radius: 10px" src="{{ asset('backend/assets/images/empty.jpg') }}"/>
                                     @endif
                                 </td>
-                                <td>{{ $slider->title_ar }} / {{ $slider->title_en }}</td>
-                                <td>{{ $slider->subtitle_ar }} / {{ $slider->subtitle_en }}</td>
+                                <td>{{ $slider['title_'.app()->getLocale()] }}</td>
+                                <td>{{ $slider['subtitle_'.app()->getLocale()] }}</td>
                                 <td>{{ $slider->getActive() }}</td>
                                 <td>
                                     <a href="{{ $slider->link }}">
@@ -81,6 +82,10 @@
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
-    <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @if(app()->getLocale() == 'en')
+        <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @else
+        <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
+    @endif
     <script src="{{ asset('backend') }}/mine.js"></script>
 @endsection

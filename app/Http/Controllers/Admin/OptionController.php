@@ -8,10 +8,10 @@ use App\Models\Option;
 
 class OptionController extends Controller
 {
-//    function __construct()
-//    {
-//        $this->middleware('permission:option-edit', ['only' => ['edit','update']]);
-//    }
+    function __construct()
+    {
+        $this->middleware('permission:option-edit', ['only' => ['edit','update']]);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -11,11 +11,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">All Old Orders</h4>
+                    <h4 class="card-title">{{ __('dashboard.shown_orders') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
                            delete_url="/delete_old_orders/"><i class="mdi mdi-trash-can-outline mr-2"></i>
-                            Delete All
+                            {{ __('dashboard.delete_all') }}
                         </a>
                     </div>
                     <hr>
@@ -24,13 +24,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>User Name</th>
-                            <th>Paid</th>
-                            <th>Phone</th>
-                            <th>Shipping status</th>
-                            <th>Order Time</th>
-                            <th>Order no</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.user') }}</th>
+                            <th>{{ __('dashboard.paid') }}</th>
+                            <th>{{ __('dashboard.shipping_status') }}</th>
+                            <th>{{ __('dashboard.order_time') }}</th>
+                            <th>{{ __('dashboard.order_no') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,7 +38,6 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $order->user->name }}</td>
                                 <td>{{ $order->getPaidType() }}</td>
-                                <td>{{ $order->phone }}</td>
                                 <td style="background:
                                     @if($order->status == 0)
                                         #33AFFF
@@ -54,15 +52,15 @@
                                     @endif"
                                 >
                                     @if($order->status == 0)
-                                        signed
+                                        {{ __('dashboard.signed') }}
                                     @elseif($order->status == 1)
-                                        processed
+                                        {{ __('dashboard.processed') }}
                                     @elseif($order->status == 2)
-                                        shipped
+                                        {{ __('dashboard.shipped') }}
                                     @elseif($order->status == 3)
-                                        out to delivery
+                                        {{ __('dashboard.out_to_delivery') }}
                                     @elseif($order->status == 4)
-                                        delivered
+                                        {{ __('dashboard.delivered') }}
                                     @endif
                                 </td>
                                 <td>

@@ -8,6 +8,14 @@ use App\Models\Color;
 
 class ColorController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:property-list|property-create|property-edit|property-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:property-list', ['only' => ['index','show']]);
+        $this->middleware('permission:property-create', ['only' => ['create','store']]);
+        $this->middleware('permission:property-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:property-delete', ['only' => ['destroy' , 'delete_colors']]);
+    }
     /**
      * Display a listing of the resource.
      *

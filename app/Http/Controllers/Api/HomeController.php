@@ -560,7 +560,6 @@ class HomeController extends Controller
             $this->validate($request , [
                 'name' => 'required',
                 'email' => 'required|email',
-                'phone' => 'min:10',
                 'message' => 'required',
             ]);
             $contact = new Contact();

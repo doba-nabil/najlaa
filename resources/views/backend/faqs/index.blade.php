@@ -11,14 +11,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Faq Elements</h4>
+                    <h4 class="card-title">{{ __('dashboard.faqs') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
                         <a href="{{ route('faqs.create') }}" class="btn btn-success mb-2">
                             <i class="mdi mdi-plus mr-2"></i>
-                            Add New</a>
+                            {{ __('dashboard.add_new') }}</a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
                            delete_url="/delete_faqs/"><i class="mdi mdi-trash-can-outline mr-2"></i>
-                            Delete All
+                            {{ __('dashboard.delete_all') }}
                         </a>
                     </div>
                     <hr>
@@ -27,24 +27,33 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Title <small>OR</small> Question</th>
-                            <th>kind</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.title') }} <small>/</small> {{ __('dashboard.question') }}</th>
+                            <th>{{ __('dashboard.kind') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($faqs as $faq)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $faq->title_ar }} / {{ $faq->title_en }}</td>
+                                <td>{{ $faq['title_'.app()->getLocale()] }}</td>
                                 <td>
                                     @if($faq->kind==1)
                                         <span class="text-primary">
-                                            Faq Topics <small>( Title )</small>
+                                            @if(app()->getLocale() == 'en')
+                                                Faq Topics <small>( Title )</small>
+                                            @else
+                                                الأسئلة الشائعة <small>( العنوان )</small>
+                                            @endif
                                         </span>
                                     @else
                                         <span class="text-danger">
-                                            Popular Faq <small>( Question )</small>
+                                             @if(app()->getLocale() == 'en')
+                                                Popular Faq <small>( Question )</small>
+                                            @else
+                                                الاسئلة الاكثر شيوعا <small>( الاسئلة )</small>
+                                            @endif
+
                                         </span>
                                     @endif
                                 </td>
@@ -78,6 +87,10 @@
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
-    <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @if(app()->getLocale() == 'en')
+        <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @else
+        <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
+    @endif
     <script src="{{ asset('backend') }}/mine.js"></script>
 @endsection

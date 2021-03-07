@@ -136,6 +136,9 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('delete/recently/products', 'HomeController@delete_recently_products');
 
     Route::get('delete/recently/{id}', 'HomeController@delete_recently');
+
+    Route::post('add_coupon', 'CouponController@check_coupon');
+    Route::post('delete_coupon/{id}', 'CouponController@delete_coupon');
     /******** notifications **********/
     Route::get('notifications', 'NotificationController@notifications');
     Route::get('new/notifications', 'NotificationController@new_notifications');

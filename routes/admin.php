@@ -38,7 +38,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::delete('delete_subscribers', 'SubscriberController@delete_subscribers')->name('delete_subscribers');
     /*********** end subscribers route ***********/
     /*********** deliveries route ***********/
-    Route::resource('deliveries', 'DeliveryController', ['except' => ['show']]);
+    Route::resource('deliveries', 'DeliveryController');
     Route::delete('delete_deliveries', 'DeliveryController@delete_deliveries')->name('delete_deliveries');
     /*********** end deliveries route ***********/
     /*********** subcategory route ***********/
@@ -53,6 +53,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('colors', 'ColorController', ['except' => ['show']]);
     Route::delete('delete_colors', 'ColorController@delete_colors')->name('delete_colors');
     /*********** end colors route ***********/
+    /*********** coupons route ***********/
+    Route::resource('coupons', 'CouponController', ['except' => ['show']]);
+    Route::delete('delete_coupons', 'CouponController@delete_coupons')->name('delete_coupons');
+    /*********** end coupons route ***********/
     /*********** sizes route ***********/
     Route::resource('sizes', 'SizeController', ['except' => ['show']]);
     Route::delete('delete_sizes', 'SizeController@delete_sizes')->name('delete_sizes');
@@ -64,7 +68,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     /*********** products route ***********/
     Route::resource('products', 'ProductController');
     Route::get('products/post/{slug}', 'ProductController@accept')->name('post_product');
-    Route::delete('delete_products', 'ProductController@delete_products')->name('delete_products');
+    Route::post('delete_products', 'ProductController@delete_products')->name('delete_products');
     Route::get('delete_product_image/{imgID}', 'ProductController@delete_images')->name('delete_product_image');
     /*********** end products route ***********/
     /***********  countries route ***********/
@@ -72,7 +76,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::delete('delete_countries', 'CountryController@delete_countries')->name('delete_countries');
     /*********** end countries route ***********/
     /***********  cities route ***********/
-    Route::resource('cities', 'CityController', ['except' => ['show']]);
+    Route::resource('cities', 'CityController');
     Route::delete('delete_cities', 'CityController@delete_cities')->name('delete_cities');
     /*********** end cities route ***********/
     /***********  currencies route ***********/
@@ -106,6 +110,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     /*********** end addresses route ***********/
     /***********  users route ***********/
     Route::resource('users', 'UserController');
+    Route::get('user_orders/{id}', 'UserController@orders')->name('user_orders');
     Route::get('blocked', 'UserController@blocked')->name('blocked');
     Route::get('users/blocked_btn/{id}', 'UserController@block_user')->name('blocked_btn');
     Route::delete('delete_users', 'UserController@delete_users')->name('delete_users');
@@ -113,6 +118,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     /***********  orders route ***********/
     Route::resource('orders', 'OrderController', ['only' => ['index','show' ,'update' ,'destroy']]);
     Route::get('old/orders', 'OrderController@old')->name('old_orders');
+    Route::get('send_whats_message/{id}', 'OrderController@send_message')->name('send_whats_message');
     Route::get('new/orders', 'OrderController@new')->name('new_orders');
     Route::delete('delete_orders', 'OrderController@delete_orders')->name('delete_orders');
     Route::delete('delete_old_orders', 'OrderController@delete_old_orders')->name('delete_old_orders');
@@ -130,16 +136,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('options', 'OptionController', ['only' => ['edit', 'update']]);
     /*********** end options route ***********/
     //*********** start  moderator route ***********/
+    /********** amoderators***********/
     Route::resource('moderators', 'ModeratorController', ['except' => ['show']]);
+    Route::resource('roles','RoleController');
     //*********** end  moderator route ***********/
     //*********** send message route ***********/
     Route::get('send/page', 'MessageController@message')->name('send_form');
     Route::post('send/message', 'MessageController@send_message')->name('send');
     //*********** end send message route ***********/
+
+    Route::get('chart', 'ChartController@index');
 });
 /************* ajax select routes ******************/
 Route::get('/ajax-subcats', 'Admin\AdminController@getsubcategories');
 Route::post('read', 'Admin\AdminController@readNotification');
 
+Route::get('lang/{locale}', 'Admin\AdminController@language')->name('language');
 
 

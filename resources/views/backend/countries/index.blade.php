@@ -11,12 +11,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Countries</h4>
+                    <h4 class="card-title">{{ __('dashboard.countries') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
-                        <a href="{{ route('countries.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> Add
-                            New</a>
+                        <a href="{{ route('countries.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i>
+                            {{ __('dashboard.add_new') }}
+                        </a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_countries/"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
+                           delete_url="/delete_countries/"><i class="mdi mdi-trash-can-outline mr-2"></i>{{ __('dashboard.delete_all') }}</a>
                     </div>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
@@ -24,12 +25,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Active</th>
-                            <th>Country Code</th>
-                            <th>Country Calling Code</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.country_flag') }}</th>
+                            <th>{{ __('dashboard.name') }}</th>
+                            <th>{{ __('dashboard.active') }}</th>
+                            <th>{{ __('dashboard.country_code') }}</th>
+                            <th>{{ __('dashboard.country_calling_code') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,7 +44,7 @@
                                         <img style="width: 100%;border-radius: 10px" src="{{ asset('backend/assets/images/empty.jpg') }}"/>
                                     @endif
                                 </td>
-                                <td>{{ $country->name_ar }} / {{ $country->name_en }}</td>
+                                <td>{{ $country['name_'.app()->getLocale()] }}</td>
                                 <td>{{ $country->getActive() }}</td>
                                 <td>{{ $country->code }}</td>
                                 <td>{{ $country->call_code }}</td>
@@ -77,6 +78,10 @@
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
-    <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @if(app()->getLocale() == 'en')
+        <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @else
+        <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
+    @endif
     <script src="{{ asset('backend') }}/mine.js"></script>
 @endsection

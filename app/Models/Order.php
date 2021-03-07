@@ -9,10 +9,34 @@ class Order extends Model
 {
     use Notifiable;
     protected $hidden = [
-        'created_at', 'updated_at','user_id','city_id','new','paid','processed','shipped','out_to_delivery','delivered'
+        'created_at', 'updated_at','user_id','city_id','new','paid','processed','shipped','out_to_delivery','delivered','delivery_id',
+        'cobone_id','cobone_code','cobone_value'
     ];
 
-    protected $appends = ['currency_code' , 'currency_value'];
+    protected $appends = ['currency_code' , 'currency_value','old_price','use_coupon'];
+
+    public function getOldPriceAttribute(){
+        if(!empty($this->cobone_code)){
+            $total = 0;
+            foreach($this->pays as $pay){
+                if(!empty($pay->product->discount_price)){
+                    $total+= $pay->product->discount_price * $pay->count;
+                }else{
+                    $total+= $pay->product->price * $pay->count;
+                }
+            }
+            return $total;
+        }else{
+            return null;
+        }
+    }
+    public function getUseCouponAttribute(){
+        if(!empty($this->cobone_code)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public function getCurrencyCodeAttribute()
     {

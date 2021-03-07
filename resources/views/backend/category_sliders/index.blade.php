@@ -11,12 +11,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Category banners</h4>
+                    <h4 class="card-title">{{ __('dashboard.banner') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
-                        <a href="{{ route('category_sliders.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> Add
-                            New</a>
+                        <a href="{{ route('category_sliders.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> {{ __('dashboard.add_new') }}</a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_category_sliders/"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
+                           delete_url="/delete_category_sliders/"><i class="mdi mdi-trash-can-outline mr-2"></i>{{ __('dashboard.delete_all') }}</a>
                     </div>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
@@ -24,11 +23,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Image</th>
-                            <th>Title</th>
-                            <th>Active</th>
-                            <th>Category</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.image') }}</th>
+                            <th>{{ __('dashboard.title') }}</th>
+                            <th>{{ __('dashboard.active') }}</th>
+                            <th>{{ __('dashboard.category') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -42,13 +41,19 @@
                                         <img style="width: 100%;border-radius: 10px" src="{{ asset('backend/assets/images/empty.jpg') }}"/>
                                     @endif
                                 </td>
-                                <td>{{ $slider->title_ar }} / {{ $slider->title_en }}</td>
+                                <td>{{ $slider['title_'.app()->getLocale()] }}</td>
                                 <td>{{ $slider->getActive() }}</td>
                                 <td>
                                     @if(!empty($slider->category_id))
-                                        {{ $slider->category->name_ar }} / {{ $slider->category->name_en }}
+                                        {{ $slider->category['name_'.app()->getLocale()] }}
                                     @else
-                                        <span class="text-danger">Without</span>
+                                        <span class="text-danger">
+                                            @if(app()->getLocale() == 'en')
+                                                Without
+                                            @else
+                                                بدون
+                                            @endif
+                                        </span>
                                     @endif
                                 </td>
                                 <td>
@@ -81,6 +86,10 @@
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
-    <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @if(app()->getLocale() == 'en')
+        <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @else
+        <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
+    @endif
     <script src="{{ asset('backend') }}/mine.js"></script>
 @endsection

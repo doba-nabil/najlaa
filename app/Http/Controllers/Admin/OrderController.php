@@ -18,6 +18,13 @@ use Kreait\Firebase\ServiceAccount;
 
 class OrderController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:order-list|order-create|order-edit|order-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:order-list', ['only' => ['index','show']]);
+        $this->middleware('permission:order-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:order-delete', ['only' => ['destroy' , 'delete_orders']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -70,6 +77,21 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
+    }
+    public function send_message(Request $request,$id)
+    {
+        $order = Order::find($id);
+        $order->new = 0;
+        $order->save();
+
+        $pays = Pay::where('order_id' , $id)->get();
+
+        $dels = Delivery::active()->orderBy('id','desc')->get();
+
+        $phone = $request->phone;
+        return view('backend.orders.show' , compact('order','pays','dels','phone'));
+
+
     }
 
     /**

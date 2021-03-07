@@ -6,10 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CityRequest;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:location-list|location-create|location-edit|location-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:location-list', ['only' => ['index','show']]);
+        $this->middleware('permission:location-create', ['only' => ['create','store']]);
+        $this->middleware('permission:location-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:location-delete', ['only' => ['destroy' , 'delete_cities']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -69,7 +78,17 @@ class CityController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            $city = City::find($id);
+            if (isset($city)) {
+                $orders = Order::where('city_id',$id)->orderBy('id', 'desc')->get();
+                return view('backend.cities.orders', compact('orders','city'));
+            } else {
+                return redirect()->back()->with('error', 'Error Try Again !!');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error Try Again !!');
+        }
     }
 
     /**

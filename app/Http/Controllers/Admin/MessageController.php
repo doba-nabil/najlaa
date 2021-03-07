@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:message-list', ['only' => ['message','send_message']]);
+    }
     public function message()
     {
         return view('backend.sendmessage.form');

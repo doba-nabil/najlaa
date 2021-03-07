@@ -55,6 +55,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            if(app()->getLocale() == 'en'){
+                return redirect()->route('backend-home')->with('error' , 'Don\'t have permission to entre this section.....' );
+            }else{
+                return redirect()->route('backend-home')->with('error' , 'لا يمكنك تصفح هذا القسم لعدم وجود الاذن .....' );
+            }
+        }
         return parent::render($request, $exception);
     }
 

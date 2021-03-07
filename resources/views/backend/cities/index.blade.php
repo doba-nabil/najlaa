@@ -11,14 +11,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Cities</h4>
+                    <h4 class="card-title">{{ __('dashboard.cities') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
                         <a href="{{ route('cities.create') }}" class="btn btn-success mb-2">
                             <i class="mdi mdi-plus mr-2"></i>
-                            Add New</a>
+                            {{ __('dashboard.add_new') }}</a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
                            delete_url="/delete_cities/"><i class="mdi mdi-trash-can-outline mr-2"></i>
-                            Delete All
+                            {{ __('dashboard.delete_all') }}
                         </a>
                     </div>
                     <hr>
@@ -27,10 +27,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Country</th>
-                            <th>Active</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.name') }}</th>
+                            <th>{{ __('dashboard.country') }}</th>
+                            <th>{{ __('dashboard.active') }}</th>
+                            <th>{{ __('dashboard.orders') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -38,9 +39,12 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $city->name_ar }} / {{ $city->name_en }}</td>
-                                <td>{{ $city->country->name_ar }} / {{ $city->country->name_en }}</td>
+                                <td>{{ $city->country['name_'.app()->getLocale()] }}</td>
                                 <td>{{ $city->getActive() }}</td>
+                                <td>{{ $city->orders->count() }}</td>
                                 <td>
+                                    <a title="{{ __('dashboard.orders') }}" href="{{ route('cities.show' , $city->id) }}"
+                                       class="mr-3 text-info"><i class="fas fa-box-open font-size-18"></i></a>
                                     <a href="{{ route('cities.edit' , $city->id) }}"
                                        class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
                                     <a title="" onclick="return false;" object_id="{{ $city->id }}"
@@ -70,6 +74,10 @@
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
-    <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @if(app()->getLocale() == 'en')
+        <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @else
+        <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
+    @endif
     <script src="{{ asset('backend') }}/mine.js"></script>
 @endsection

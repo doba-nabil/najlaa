@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Country;
+use App\Models\Coupon;
 use App\Models\Currency;
 use App\Models\Moderator;
 use App\Models\Option;
 use App\Models\Page;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -30,6 +32,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $coupons = Coupon::all();
+        foreach ($coupons as $coupon){
+            if($coupon->end_date < Carbon::now()){
+                $coupon->active = 0;
+                $coupon->save();
+            }
+        }
+
         Schema::defaultStringLength(191);
         if(\Schema::hasTable('options')){
             $option = Option::find(1);
@@ -48,16 +58,16 @@ class AppServiceProvider extends ServiceProvider
                 $option->active = 1;
                 $option->save();
             }
-            $admin = Moderator::find(1);
-            if(!isset($admin)){
-                $admin = new Moderator();
-                $admin->id = 1;
-                $admin->name = 'Admin';
-                $admin->email = 'admin@gmail.com';
-                $admin->password = Hash::make('123456789');
-                $admin->status = 1;
-                $admin->save();
-            }
+//            $admin = Moderator::find(1);
+//            if(!isset($admin)){
+//                $admin = new Moderator();
+//                $admin->id = 1;
+//                $admin->name = 'Admin';
+//                $admin->email = 'admin@gmail.com';
+//                $admin->password = Hash::make('123456789');
+//                $admin->status = 1;
+//                $admin->save();
+//            }
             $page = Page::find(1);
             $page2 = Page::find(2);
             $page3 = Page::find(3);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Subscribe;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,17 @@ class HomeController extends Controller
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
+
+    public function share_order($order_id)
+    {
+        try {
+            $order = Order::find($order_id);
+            return view('frontend.sahre_order.show',compact('order'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error Try Again !!');
+        }
+    }
+
     public function send_email(Request $request)
     {
 
