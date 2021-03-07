@@ -7,87 +7,49 @@ $('#category_id').on('change',function(e){
         $('#subcategory_id').empty();
         /*$('#subcategory_id').append('<option value="">-- choose / اختر --</option>');*/
         $.each(data,function(index, subcatObj){
-            $('#subcategory_id').append('<option value="'+subcatObj.id+'">'+ subcatObj.name_ar + '/'+ subcatObj.name_en +'</option>');
+            $('#subcategory_id').append('<option value="'+subcatObj.id+'">'+ subcatObj.name +'</option>');
+        });
+    });
+});
+$('#subcategory_id').on('change',function(e){
+    console.log(e);
+    var subcategory_id = e.target.value;
+    $.get( base_url + '/ajax-subsubcats?subcategory_id='+ subcategory_id,function(data){
+        $('#subsubcategory_id').empty();
+        /*$('#subcategory_id').append('<option value="">-- choose / اختر --</option>');*/
+        $.each(data,function(index, subSubcatObj){
+            $('#subsubcategory_id').append('<option value="'+subSubcatObj.id+'">'+ subSubcatObj.name +'</option>');
         });
     });
 });
 $('#country_id').on('change',function(e){
     console.log(e);
     var country_id = e.target.value;
-    $.get( base_url + '/ajax-city?country_id='+ country_id,function(data){
-        $('#city_id').empty();
+    $.get( base_url + '/ajax-states?country_id='+ country_id,function(data){
+        $('#state_id').empty();
         /*$('#city_id').append('<option value="">-- choose / اختر --</option>');*/
-        $.each(data,function(index, subcatObj){
-            $('#city_id').append('<option value="'+subcatObj.id+'">'+subcatObj.name_ar +'/'+ subcatObj.name_en+'</option>');
+        $.each(data,function(index, stateObj){
+            $('#state_id').append('<option value="'+stateObj.id+'">'+ stateObj.name+'</option>');
         });
     });
 });
-
+$('#state_id').on('change',function(e){
+    console.log(e);
+    var state_id = e.target.value;
+    $.get( base_url + '/ajax-cities?state_id='+ state_id,function(data){
+        $('#city_id').empty();
+        /*$('#city_id').append('<option value="">-- choose / اختر --</option>');*/
+        $.each(data,function(index, cityObj){
+            $('#city_id').append('<option value="'+cityObj.id+'">'+ cityObj.name+'</option>');
+        });
+    });
+});
 /******************************/
 $(document).ready(function() {
     $('.alert-danger').fadeIn('fast').delay(1200).fadeOut('slow');
     $('.alert-success').fadeIn('fast').delay(1200).fadeOut('slow');
 });
-$(document).ready(function() {
-    var base_url = $('#base_url').val();
-    $('.delete_event_image').click(function () {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: true
-        })
-        swalWithBootstrapButtons.fire({
-            icon: 'question',
-            title: 'Are You Sure ?',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'YES',
-            cancelButtonText: 'NO',
-        }).then((result) => {
-            if (result.value) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                })
-                var id = $(this).attr('object_id');
-                var d_url = $(this).attr('delete_url');
-                var elem = $(this).parent('td').parent('tr');
 
-                $.ajax({
-                    type: 'get',
-                    url: '/admin' + d_url + id,
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content')
-                    },
-                    dataType: 'json',
-                    success: function(result) {
-                        $('.image_class' + id).remove();
-                        swalWithBootstrapButtons.fire({
-                            icon: 'success',
-                            title: 'Image Deleted Successfully',
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    }
-                });
-            } else if (
-                // / Read more about handling dismissals below /
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire({
-                    icon: 'error',
-                    title: 'Canceled',
-                    showConfirmButton: false,
-                    timer: 1000
-                });
-
-            }
-        })
-    });
-});
 /********** start upload image ****************/
 function readURL(input) {
     $('#blah').fadeIn();
@@ -139,6 +101,7 @@ function init() {
 
 //the handler for file upload event
 function handleFileSelect(e) {
+    $('.col-image_class').fadeOut();
     //to make sure the user select file/files
     if (!e.target.files) return;
 
@@ -251,7 +214,7 @@ function ApplyFileValidationRules(readerEvt) {
         if (!filesCounterAlertStatus) {
             filesCounterAlertStatus = true;
             alert(
-                "You have added more than 10 files. According to upload conditions you can upload 10 files maximum"
+                "You have added more than 6 files. According to upload conditions you can upload 6 files maximum"
             );
         }
         e.preventDefault();
@@ -294,7 +257,7 @@ function CheckFilesCount(AttachmentArray) {
         }
     }
     //To check the length does not exceed 10 files maximum
-    if (len > 9) {
+    if (len > 5) {
         return false;
     } else {
         return true;

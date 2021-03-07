@@ -22,20 +22,20 @@
     <div class="card" style="width:100%;">
         <div class="card-body">
             <h6>
-                Message frome email ( {{ $contact->email }} )
+                {{ __('dashboard.message') }} ( {{ $contact->email }} )
             </h6>
-            <h5 class="card-title">Name : {{ $contact->name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Email : {{ $contact->email }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Phone : {{ $contact->email }}</h6>
+            <h5 class="card-title">{{ __('dashboard.name') }} : {{ $contact->name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.email') }} : {{ $contact->email }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.phone') }} : {{ $contact->email }}</h6>
             <hr>
             <p class="card-text">
-                Message :
+                {{ __('dashboard.message') }} :
                 {{ $contact->message }}
             </p>
         </div>
     </div>
     <div class="col-md-12">
-        <a href="{{ route('contacts.index') }}" style="width: 100%" class="btn btn-primary">Back</a>
+        <a href="{{ route('contacts.index') }}" style="width: 100%" class="btn btn-primary">{{ __('dashboard.back') }}</a>
     </div>
 @endsection
 @section('backend-footer')

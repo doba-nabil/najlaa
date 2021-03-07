@@ -9,7 +9,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add New Product</h4>
+                    <h4 class="card-title">{{ __('dashboard.add_new') }}</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('products.store') }}" class="needs-validation" novalidate
                           enctype="multipart/form-data">
@@ -17,9 +17,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom01">Name in Arabic</label>
+                                    <label for="validationCustom01">{{ __('dashboard.name_ar') }}</label>
                                     <input type="text" name="name_ar" class="form-control" id="validationCustom01"
-                                           placeholder="Name in Arabic" value="{{ old('name_ar') }}" required>
+                                           placeholder="{{ __('dashboard.name_ar') }}" value="{{ old('name_ar') }}" required>
                                     @error('name_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -27,9 +27,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom02">Name in English</label>
+                                    <label for="validationCustom02">{{ __('dashboard.name_en') }}</label>
                                     <input type="text" name="name_en" class="form-control" id="validationCustom02"
-                                           placeholder="Name in English" value="{{ old('name_en') }}" required>
+                                           placeholder="{{ __('dashboard.name_en') }}" value="{{ old('name_en') }}" required>
                                     @error('name_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -39,9 +39,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="code">Code of Product</label>
+                                    <label for="code">{{ __('dashboard.code') }}</label>
                                     <input type="text" name="code" class="form-control" id="code"
-                                           placeholder="Code of Product" value="{{ old('code') }}" required>
+                                           placeholder="{{ __('dashboard.code') }}" value="{{ old('code') }}" required>
                                     @error('code')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -51,9 +51,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="price">Price "QAR"</label>
+                                    <label for="price">{{ __('dashboard.price') }} "QAR"</label>
                                     <input min="0" step="0.1" type="number" name="price" class="form-control" id="price"
-                                           placeholder="Price" value="{{ old('price') }}" required>
+                                           placeholder="{{ __('dashboard.price') }}" value="{{ old('price') }}" required>
                                     @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -61,9 +61,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="discount_price">Price after Discount "QAR" ( Optional ) </label>
+                                    <label for="discount_price">{{ __('dashboard.discount') }} "QAR" ( {{ __('dashboard.optional') }} ) </label>
                                     <input min="0" step="0.1" type="number" name="discount_price" class="form-control"
-                                           id="discount_price" placeholder="Price after Discount ( Optional )"
+                                           id="discount_price" placeholder="{{ __('dashboard.discount') }} ( {{ __('dashboard.optional') }} ) "
                                            value="{{ old('discount_price') }}">
                                     @error('discount_price')
                                     <span class="text-danger">{{ $message }}</span>
@@ -74,8 +74,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="max_qty">Number of parts in stock</label>
-                                    <input min="0" step="1" type="number" name="max_qty" class="form-control"
+                                    <label for="max_qty">{{ __('dashboard.in_stock') }}</label>
+                                    <input min="0" step="1" type="number" name="{{ __('dashboard.in_stock') }}" class="form-control"
                                            id="max_qty" placeholder="Number of parts in stock"
                                            value="{{ old('max_qty') }}">
                                     @error('max_qty')
@@ -85,9 +85,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="min_qty">Minimum number of order</label>
+                                    <label for="min_qty">{{ __('dashboard.min_order') }}</label>
                                     <input min="0" step="1" type="number" name="min_qty" class="form-control"
-                                           id="min_qty" placeholder="Minimum number of order"
+                                           id="min_qty" placeholder="{{ __('dashboard.min_order') }}"
                                            value="{{ old('min_qty') }}" required>
                                     @error('min_qty')
                                     <span class="text-danger">{{ $message }}</span>
@@ -98,9 +98,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="body_ar">Descreption in Arabic</label>
+                                    <label for="body_ar">{{ __('dashboard.desc_ar') }}</label>
                                     <textarea rows="10" type="text" name="body_ar" class="form-control summernote"
-                                              id="body_ar" placeholder="Descreption in Arabic"
+                                              id="body_ar" placeholder="{{ __('dashboard.desc_ar') }}"
                                               required>{{ old('body_ar') }}</textarea>
                                     @error('body_ar')
                                     <span class="text-danger">{{ $message }}</span>
@@ -109,9 +109,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="body_en">Descreption in English</label>
+                                    <label for="body_en">{{ __('dashboard.desc_en') }}</label>
                                     <textarea rows="10" type="text" name="body_en" class="form-control summernote"
-                                              id="body_en" placeholder="Descreption in English"
+                                              id="body_en" placeholder="{{ __('dashboard.desc_en') }}"
                                               required>{{ old('body_en') }}</textarea>
                                     @error('body_en')
                                     <span class="text-danger">{{ $message }}</span>
@@ -122,9 +122,9 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label">Select Category</label>
+                                    <label class="control-label">{{ __('dashboard.select_cat') }}</label>
                                     <select name="category_id" class="form-control select2" id="category_id">
-                                        <option>Select</option>
+                                        <option>{{ __('dashboard.select_cat') }}</option>
                                         @foreach($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name_en }}
                                                 / {{ $category->name_ar }}</option>
@@ -134,9 +134,9 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label">Select Subcategory</label>
+                                    <label class="control-label">{{ __('dashboard.select_subcat') }}</label>
                                     <select name="subcategory_id" class="form-control select2" id="subcategory_id">
-                                        <option>Select category first</option>
+                                        <option>{{ __('dashboard.select_cat_first') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -144,9 +144,9 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label">Select Material</label>
+                                    <label class="control-label">{{ __('dashboard.material') }}</label>
                                     <select name="material_id" class="form-control select2">
-                                        <option>Select</option>
+                                        <option>{{ __('dashboard.select_material') }}</option>
                                         @foreach($materials as $material)
                                             <option value="{{ $material->id }}">{{ $material->name_en }}
                                                 / {{ $material->name_ar }}</option>
@@ -176,7 +176,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Select Colors</label>
+                                    <label class="control-label">{{ __('dashboard.color') }}</label>
                                     <div>
                                         @foreach($colors as $color)
                                             <input value="{{ $color->id }}" id="checkboxid{{ $loop->index }}" name="colors[]" type="checkbox"
@@ -192,7 +192,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group color">
-                                    <label class="control-label">Select Sizes</label>
+                                    <label class="control-label">{{ __('dashboard.sizes') }}</label>
                                     <div>
                                         @foreach($sizes as $size)
                                             <input value="{{ $size->id }}" id="checkid{{ $loop->index }}" type="checkbox" name="sizes[]"
@@ -213,11 +213,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="control-label">Main Image</label>
+                                    <label class="control-label">{{ __('dashboard.main_image') }}</label>
                                     <div class="custom-file">
                                         <input type="file" name="image" class="custom-file-input" id="customFile"
                                                onchange="readURL(this);" required>
-                                        <label class="custom-file-label" for="customFile">Main Image</label>
+                                        <label class="custom-file-label" for="customFile">{{ __('dashboard.image') }}</label>
                                         @error('image')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -231,9 +231,9 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 images mt-3">
                                 <div class="form-group">
-                                    <label class="control-label">Sub Images</label>
+                                    <label class="control-label">{{ __('dashboard.sub_images') }}</label>
                                     <span class="btn btn-success fileinput-button">
-                                <span>Select Images</span>
+                                <span>{{ __('dashboard.sub_images') }}</span>
                                 <input type="file" name="images[]" id="files" multiple
                                        accept="image/jpeg, image/png, image/gif,"><br/>
                                 </span>
@@ -248,11 +248,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="control-label">Sizes Image</label>
+                                    <label class="control-label">{{ __('dashboard.sizes_image') }}</label>
                                     <div class="custom-file">
                                         <input type="file" name="size_image" class="custom-file-input" id="customFile2"
                                                onchange="readURL2(this);" required>
-                                        <label class="custom-file-label" for="customFile2">Sizes Image</label>
+                                        <label class="custom-file-label" for="customFile2">{{ __('dashboard.sizes_image') }}</label>
                                         @error('size_image')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -269,11 +269,11 @@
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" name="chosen" class="custom-control-input" id="customCheck2"
                                            checked="" value="1">
-                                    <label class="custom-control-label" for="customCheck2">Chosen</label>
+                                    <label class="custom-control-label" for="customCheck2">{{ __('dashboard.chosen') }}</label>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
             </div>

@@ -22,16 +22,16 @@
     <div class="card" style="width:100%;">
         <div class="card-body">
             <h6>
-                Message frome email ( {{ $contact->email }} ) ---- User Name ( {{ $contact->user->name }} )
+                {{ __('dashboard.message_frome_email') }} ( {{ $contact->email }} ) ---- {{ __('dashboard.username') }} ( {{ $contact->user->name }} )
             </h6>
-            <h5 class="card-title">Name : {{ $contact->name }}</h5>
-            <h5 class="card-title">Type : {{ $contact->getType() }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Email : {{ $contact->email }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Phone : {{ $contact->phone }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Order no : <a target="_blank" href="{{ route('orders.show' , $contact->order->id) }}">{{ $contact->order->order_no }}</a> </h6>
+            <h5 class="card-title">{{ __('dashboard.name') }} : {{ $contact->name }}</h5>
+            <h5 class="card-title">{{ __('dashboard.type') }} : {{ $contact->getType() }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.email') }} : {{ $contact->email }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.phone') }} : {{ $contact->phone }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.order_no') }} : <a target="_blank" href="{{ route('orders.show' , $contact->order->id) }}">{{ $contact->order->order_no }}</a> </h6>
             <hr>
             <p class="card-text">
-                Message :
+                {{ __('dashboard.message') }} :
                 {{ $contact->message }}
             </p>
         </div>
@@ -40,18 +40,18 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Replay BY Mail Message</h4>
+                    <h4 class="card-title">{{ __('dashboard.replay_msg') }}</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{route('send')}}" class="needs-validation" novalidate>
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">{{ __('dashboard.email') }}</label>
                                     <select name="email" class="form-control select2" id="email">
-                                        <option selected disabled hidden value="">Select Email</option>
-                                            <option value="{{ $contact->user->email }}">User login Email : {{ $contact->user->email }}</option>
-                                            <option value="{{ $contact->email }}">Sender Email : {{ $contact->email }}</option>
+                                        <option selected disabled hidden value="">{{ __('dashboard.email') }}</option>
+                                            <option value="{{ $contact->user->email }}">{{ __('dashboard.login_email') }} : {{ $contact->user->email }}</option>
+                                            <option value="{{ $contact->email }}">{{ __('dashboard.sender_email') }} : {{ $contact->email }}</option>
                                     </select>
                                     @error('email')
                                     <span class="text-danger">{{ $message }}</span>
@@ -60,9 +60,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom02">Title</label>
+                                    <label for="validationCustom02">{{ __('dashboard.title') }}</label>
                                     <input type="text" name="title" class="form-control" id="validationCustom02"
-                                           placeholder="Title of Message" value="{{ old('title') }}" required>
+                                           placeholder="{{ __('dashboard.title') }}" value="{{ old('title') }}" required>
                                     @error('title')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -72,9 +72,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom05">Message</label>
+                                    <label for="validationCustom05">{{ __('dashboard.message') }}</label>
                                     <textarea type="text" name="msg" class="form-control" id="validationCustom05"
-                                              placeholder="Message" value="{{ old('msg') }}" required></textarea>
+                                              placeholder="{{ __('dashboard.message') }}" value="{{ old('msg') }}" required></textarea>
                                     @error('msg')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         <hr>
-                        <button class="btn btn-primary" type="submit">SEND</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.click') }}</button>
                     </form>
                 </div>
             </div>
@@ -91,7 +91,7 @@
     </div>
     <br>
     <div class="col-md-12">
-        <a href="{{ route('ordercontacts.index') }}" style="width: 100%" class="btn btn-primary">Back</a>
+        <a href="{{ route('ordercontacts.index') }}" style="width: 100%" class="btn btn-primary">{{ __('dashboard.back') }}</a>
     </div>
 @endsection
 @section('backend-footer')

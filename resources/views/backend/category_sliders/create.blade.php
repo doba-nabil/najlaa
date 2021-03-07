@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add New Category banner</h4>
+                    <h4 class="card-title">{{ __('dashboard.add_new') }}</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('category_sliders.store') }}" class="needs-validation" novalidate
                           enctype="multipart/form-data">
@@ -14,8 +14,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="title_ar">Title in Arabic</label>
-                                    <input type="text" name="title_ar" class="form-control" id="title_ar" placeholder="Title in Arabic" value="{{ old('title_ar') }}" required>
+                                    <label for="title_ar">{{ __('dashboard.title_ar') }}</label>
+                                    <input type="text" name="title_ar" class="form-control" id="title_ar" placeholder="{{ __('dashboard.title_ar') }}" value="{{ old('title_ar') }}" required>
                                     @error('title_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -23,8 +23,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="title_en">Title in English</label>
-                                    <input type="text" name="title_en" class="form-control" id="title_en" placeholder="Title in English" value="{{ old('title_en') }}" required>
+                                    <label for="title_en">{{ __('dashboard.title_en') }}</label>
+                                    <input type="text" name="title_en" class="form-control" id="title_en" placeholder="{{ __('dashboard.title_en') }}" value="{{ old('title_en') }}" required>
                                     @error('title_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -34,8 +34,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="subtitle_ar">Subtitle in Arabic</label>
-                                    <input type="text" name="subtitle_ar" class="form-control" id="subtitle_ar" placeholder="Subtitle in Arabic" value="{{ old('subtitle_ar') }}" required>
+                                    <label for="subtitle_ar">{{ __('dashboard.subtitle_ar') }}</label>
+                                    <input type="text" name="subtitle_ar" class="form-control" id="subtitle_ar" placeholder="{{ __('dashboard.subtitle_ar') }}" value="{{ old('subtitle_ar') }}" required>
                                     @error('subtitle_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -43,8 +43,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="subtitle_en">Subtitle in English</label>
-                                    <input type="text" name="subtitle_en" class="form-control" id="subtitle_en" placeholder="Subtitle in English" value="{{ old('subtitle_en') }}" required>
+                                    <label for="subtitle_en">{{ __('dashboard.subtitle_en') }}</label>
+                                    <input type="text" name="subtitle_en" class="form-control" id="subtitle_en" placeholder="{{ __('dashboard.subtitle_en') }}" value="{{ old('subtitle_en') }}" required>
                                     @error('subtitle_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -54,11 +54,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom03">Category (Optional)</label>
+                                    <label for="validationCustom03">{{ __('dashboard.category') }} ({{ __('dashboard.options') }})</label>
                                     <select name="category_id" class="form-control select2" id="validationCustom03">
-                                        <option selected disabled hidden value="">---- Select Category ----</option>
+                                        <option selected disabled hidden value="">---- {{ __('dashboard.select_cat') }} ----</option>
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name_ar }} / {{ $category->name_en }}</option>
+                                            <option value="{{ $category->id }}">{{ $category['name_'.app()->getLocale()] }}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')
@@ -69,10 +69,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="image">Banner</label>
+                                <label for="image">{{ __('dashboard.banner') }}</label>
                                 <div class="custom-file">
                                     <input type="file" name="image" class="custom-file-input" id="customFile" onchange="readURL(this);" required>
-                                    <label class="custom-file-label" for="customFile">Image</label>
+                                    <label class="custom-file-label" for="customFile">{{ __('dashboard.image') }}</label>
                                     @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -88,11 +88,11 @@
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" checked=""
                                            name="active" class="custom-control-input" id="customCheck1" >
-                                    <label class="custom-control-label" for="customCheck1">Active</label>
+                                    <label class="custom-control-label" for="customCheck1">{{ __('dashboard.active') }}</label>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
             </div>

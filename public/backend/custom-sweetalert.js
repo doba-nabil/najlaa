@@ -1,4 +1,73 @@
+$(document).ready(function() {
 
+    $('#master').on('click', function(e) {
+        if($(this).is(':checked',true))
+        {
+            $(".sub_chk").prop('checked', true);
+        } else {
+            $(".sub_chk").prop('checked',false);
+        }
+    });
+
+    var base_url = $('#base_url').val();
+    $('.delete_event_image').click(function () {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: true
+        })
+        swalWithBootstrapButtons.fire({
+            icon: 'question',
+            title: 'Are You Sure ?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'YES',
+            cancelButtonText: 'NO',
+        }).then((result) => {
+            if (result.value) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+                var id = $(this).attr('object_id');
+                var d_url = $(this).attr('delete_url');
+                var elem = $(this).parent('td').parent('tr');
+
+                $.ajax({
+                    type: 'get',
+                    url: '/admin' + d_url + id,
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('.image_class' + id).remove();
+                        swalWithBootstrapButtons.fire({
+                            icon: 'success',
+                            title: 'Image Deleted Successfully',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
+                });
+            } else if (
+                // / Read more about handling dismissals below /
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    icon: 'error',
+                    title: 'Canceled',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+
+            }
+        })
+    });
+});
 //confirm-copy
 $(document).on('click', '.confirm-copy', function(e) {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -108,17 +177,9 @@ $(document).on('click', '.remove-alert', function(e) {
                     elem.remove();
                     swalWithBootstrapButtons.fire({
                         icon: 'success',
-                        title: result.success,
+                        title: 'Deleted Successfully....',
                         showConfirmButton: false,
                         timer: 1000
-                    });
-                },
-                error: function (xhr) {
-                    swalWithBootstrapButtons.fire({
-                        icon: 'error',
-                        title: JSON.parse(xhr.responseText).error,
-                        showConfirmButton: false,
-                        timer: 3000
                     });
                 }
             });
@@ -238,17 +299,9 @@ $(document).on('click', '.delete-all', function(e) {
                     $(".pagination").remove();
                     swalWithBootstrapButtons.fire({
                         icon: 'success',
-                        title: result.success,
+                        title: 'Deleted Successfully....',
                         showConfirmButton: false,
-                        timer: 2000
-                    });
-                },
-                error: function (xhr) {
-                    swalWithBootstrapButtons.fire({
-                        icon: 'error',
-                        title: JSON.parse(xhr.responseText).error,
-                        showConfirmButton: false,
-                        timer: 3000
+                        timer: 1000
                     });
                 }
             });

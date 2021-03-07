@@ -18,7 +18,14 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     use UploadTrait;
-
+    function __construct()
+    {
+        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:product-list', ['only' => ['index','show']]);
+        $this->middleware('permission:product-create', ['only' => ['create','store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy' , 'delete_products']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -284,29 +291,22 @@ class ProductController extends Controller
         }
     }
 
-    public function delete_products()
+    public function delete_products(Request $request)
     {
         try {
-            $products = Product::all();
-            if (count($products) > 0) {
-                foreach ($products as $product) {
-                    if (count($product->pays) == 0) {
-                        $this->deleteimages($product->id, 'pictures/products/', Product::class);
-                        foreach ($product->subImages as $image) {
-                            @unlink('pictures/products/' . $image->image);
-                            $image->delete();
-                        }
-                        $product->delete();
-                    }
+            $ids = $request->ids;
+            $products = Product::whereIn('id',explode(",",$ids))->get();
+            foreach ($products as $product){
+                $this->deleteimages($product->id, 'pictures/products/', Product::class);
+                foreach ($product->subImages as $image) {
+                    @unlink('pictures/products/' . $image->image);
+                    $image->delete();
                 }
-                return response()->json([
-                    'success' => 'Deleted Not purchased Porducts'
-                ]);
-            } else {
-                return response()->json([
-                    'error' => 'NO Record TO DELETE'
-                ],422);
+                $product->delete();
             }
+            return response()->json([
+                'success' => 'Record deleted successfully!'
+            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Error Try Again !!'

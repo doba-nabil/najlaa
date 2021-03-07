@@ -7,16 +7,16 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Send New Mail Message</h4>
+                    <h4 class="card-title">{{ __('dashboard.send_email') }}</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{route('send')}}" class="needs-validation" novalidate>
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom01">Email</label>
+                                    <label for="validationCustom01">{{ __('dashboard.email') }}</label>
                                     <input type="email" name="email" class="form-control" id="validationCustom01"
-                                           placeholder="Email" value="{{ old('email') }}" required>
+                                           placeholder="{{ __('dashboard.email') }}" value="{{ old('email') }}" required>
                                     @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -24,9 +24,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom02">Title</label>
+                                    <label for="validationCustom02">{{ __('dashboard.title') }}</label>
                                     <input type="text" name="title" class="form-control" id="validationCustom02"
-                                           placeholder="Title of Message" value="{{ old('title') }}" required>
+                                           placeholder="{{ __('dashboard.title') }}" value="{{ old('title') }}" required>
                                     @error('title')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -36,9 +36,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom05">Message</label>
+                                    <label for="validationCustom05">{{ __('dashboard.message') }}</label>
                                     <textarea type="text" name="msg" class="form-control" id="validationCustom05"
-                                              placeholder="Message" value="{{ old('msg') }}" required></textarea>
+                                              placeholder="{{ __('dashboard.message') }}" value="{{ old('msg') }}" required></textarea>
                                     @error('msg')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <hr>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
             </div>

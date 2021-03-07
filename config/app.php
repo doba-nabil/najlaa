@@ -80,7 +80,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar',
+    'locales' => ['ar', 'en'],
 
     /*
     |--------------------------------------------------------------------------
@@ -167,6 +168,7 @@ return [
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
         Kreait\Laravel\Firebase\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
          */

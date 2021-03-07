@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\Address;
+use App\Models\Order;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,14 +13,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-//    function __construct()
-//    {
-//        $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index','show' , 'tree']]);
-//        $this->middleware('permission:category-list', ['only' => ['index','show' , 'tree']]);
-//        $this->middleware('permission:category-create', ['only' => ['create','store']]);
-//        $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
-//        $this->middleware('permission:category-delete', ['only' => ['destroy' , 'delete_categories']]);
-//    }
+    function __construct()
+    {
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:user-list', ['only' => ['index','show']]);
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy' , 'delete_users']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -123,6 +124,20 @@ class UserController extends Controller
             $user = User::find($id);
             $addresses = Address::where('user_id' , $id)->orderBy('id', 'desc')->get();
             return view('backend.addresses.index',compact('addresses' , 'user'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error Try Again !!');
+        }
+    }
+    public function orders($id)
+    {
+        try{
+            $user = User::find($id);
+            if (isset($user)) {
+                $orders = Order::where('user_id',$id)->orderBy('id', 'desc')->get();
+                return view('backend.users.orders', compact('orders','user'));
+            } else {
+                return redirect()->back()->with('error', 'Error Try Again !!');
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }

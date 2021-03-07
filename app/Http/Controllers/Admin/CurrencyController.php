@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:location-list|location-create|location-edit|location-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:location-list', ['only' => ['index','show']]);
+        $this->middleware('permission:location-create', ['only' => ['create','store']]);
+        $this->middleware('permission:location-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:location-delete', ['only' => ['destroy' , 'delete_currencies']]);
+    }
     /**
      * Display a listing of the resource.
      *

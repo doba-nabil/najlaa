@@ -11,10 +11,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Order Feedbacks</h4>
+                    <h4 class="card-title">{{ __('dashboard.feedback') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_ordercontacts/"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete All</a>
+                           delete_url="/delete_ordercontacts/"><i class="mdi mdi-trash-can-outline mr-2"></i>{{ __('dashboard.delete_all') }}</a>
                     </div>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
@@ -22,13 +22,13 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Created At</th>
-                            <th>Order no</th>
-                            <th>Type</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.name') }}</th>
+                            <th>{{ __('dashboard.email') }}</th>
+                            <th>{{ __('dashboard.phone') }}</th>
+                            <th>{{ __('dashboard.created_at') }}</th>
+                            <th>{{ __('dashboard.order_no') }}</th>
+                            <th>{{ __('dashboard.type') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -73,6 +73,10 @@
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
-    <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @if(app()->getLocale() == 'en')
+        <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @else
+        <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
+    @endif
     <script src="{{ asset('backend') }}/mine.js"></script>
 @endsection

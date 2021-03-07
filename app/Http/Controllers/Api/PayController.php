@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\CartCoupon;
+use App\Models\Coupon;
+use App\Models\CouponUse;
 use App\Models\Moderator;
 use App\Models\Product;
 use App\Notifications\NewOrder;
@@ -50,7 +53,16 @@ class PayController extends Controller
                 if (count($carts) > 0) {
                     foreach ($carts as $cart) {
                         $total+= $cart->price;
-                        $order->total_price = $total;
+                        if(empty($cart->cobone_id)){
+                            $order->total_price = $total;
+                        }else{
+                            $cobone = Coupon::where('id' , $cart->cobone_id)->first();
+                            $dis = ($cobone->value / 100) * $total;
+                            $order->total_price = $total - $dis;
+                            $order->cobone_id = $cart->cobone_id;
+                            $order->cobone_code = $cobone->code;
+                            $order->cobone_value = $cobone->value;
+                        }
                     }
                 } else {
                     $order->total_price = 0;
@@ -235,7 +247,11 @@ class PayController extends Controller
                 $order->date = $mytime->toDateString();
                 $order->user_id = $user->id;
                 /********************** price ************/
-                $order->total_price = $old_order->total_price;
+                if(isset($old_order->old_price)){
+                    $order->total_price = $old_order->old_price;
+                }else{
+                    $order->total_price = $old_order->total_price;
+                }
                 /********************** end price ************/
                 $order->save();
                 $admins = Moderator::where('status' , 1)->get();

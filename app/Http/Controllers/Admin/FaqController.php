@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:faq-list|faq-create|faq-edit|faq-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:faq-list', ['only' => ['index','show']]);
+        $this->middleware('permission:faq-create', ['only' => ['create','store']]);
+        $this->middleware('permission:faq-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:faq-delete', ['only' => ['destroy' , 'delete_faqs']]);
+    }
     /**
      * Display a listing of the resource.
      *

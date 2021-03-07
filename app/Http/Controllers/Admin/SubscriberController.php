@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class SubscriberController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:subscribe-list|subscribe-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:subscribe-list', ['only' => ['index','show']]);
+        $this->middleware('permission:subscribe-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

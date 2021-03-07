@@ -11,14 +11,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Colors</h4>
+                    <h4 class="card-title">{{ __('dashboard.colors') }}</h4>
                     <div style="display: flex;justify-content: space-between;">
                         <a href="{{ route('colors.create') }}" class="btn btn-success mb-2">
                             <i class="mdi mdi-plus mr-2"></i>
-                            Add New</a>
+                            {{ __('dashboard.add_new') }}</a>
                         <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
                            delete_url="/delete_colors/"><i class="mdi mdi-trash-can-outline mr-2"></i>
-                            Delete All
+                            {{ __('dashboard.delete_all') }}
                         </a>
                     </div>
                     <hr>
@@ -27,17 +27,17 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Active</th>
-                            <th>Color</th>
-                            <th>Options</th>
+                            <th>{{ __('dashboard.name') }}</th>
+                            <th>{{ __('dashboard.active') }}</th>
+                            <th>{{ __('dashboard.color') }}</th>
+                            <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($colors as $color)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $color->name_ar }} / {{ $color->name_en }}</td>
+                                <td>{{ $color['name_'.app()->getLocale()] }}</td>
                                 <td>{{ $color->getActive() }}</td>
                                 <td style="background: {{ $color->color }}"></td>
                                 <td>
@@ -70,6 +70,10 @@
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
-    <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @if(app()->getLocale() == 'en')
+        <script src="{{ asset('backend') }}/custom-sweetalert.js"></script>
+    @else
+        <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
+    @endif
     <script src="{{ asset('backend') }}/mine.js"></script>
 @endsection

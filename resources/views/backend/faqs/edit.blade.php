@@ -7,7 +7,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Faq element " {{ $faq->title_en }} "</h4>
+                    <h4 class="card-title">{{ __('dashboard.edit') }} " {{ $faq['title_'.app()->getLocale() ]}} "</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('faqs.update' , $faq->id) }}" class="needs-validation"
                           novalidate>
@@ -16,9 +16,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom01">Title in Arabic</label>
+                                    <label for="validationCustom01">{{ __('dashboard.title_ar') }}</label>
                                     <input type="text" name="title_ar" class="form-control" id="validationCustom01"
-                                           placeholder="Name in Arabic" value="{{ $faq->title_ar }}" required>
+                                           placeholder="{{ __('dashboard.title_ar') }}" value="{{ $faq->title_ar }}" required>
                                     @error('title_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -26,9 +26,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom02">Title in English</label>
+                                    <label for="validationCustom02">{{ __('dashboard.title_en') }}</label>
                                     <input type="text" name="title_en" class="form-control" id="validationCustom02"
-                                           placeholder="Name in English" value="{{ $faq->title_en }}" required>
+                                           placeholder="{{ __('dashboard.title_en') }}" value="{{ $faq->title_en }}" required>
                                     @error('title_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -38,9 +38,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="body_ar">Description in Arabic</label>
+                                    <label for="body_ar">{{ __('dashboard.desc_ar') }}</label>
                                     <input type="text" name="body_ar" class="form-control" id="body_ar"
-                                           placeholder="Description in Arabic" value="{{ $faq->body_ar }}" required>
+                                           placeholder="{{ __('dashboard.desc_ar') }}" value="{{ $faq->body_ar }}" required>
                                     @error('body_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -50,9 +50,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="body_en">Description in English</label>
+                                    <label for="body_en">{{ __('dashboard.desc_en') }}</label>
                                     <input type="text" name="body_en" class="form-control" id="body_en"
-                                           placeholder="Description in Arabic" value="{{ $faq->body_en }}" required>
+                                           placeholder="{{ __('dashboard.desc_en') }}" value="{{ $faq->body_en }}" required>
                                     @error('body_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="validationCustom03">Kind</label>
+                                    <label for="validationCustom03">{{ __('dashboard.kind') }}</label>
                                     <select name="kind" class="form-control select2" id="validationCustom03"
                                             required>
                                             <option
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <hr>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
             </div>

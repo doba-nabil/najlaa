@@ -29,8 +29,25 @@
                 <i class="ri-menu-2-line align-middle"></i>
             </button>
         </div>
-        <div class="d-flex">
 
+        <div class="d-flex">
+            @if(\App::getLocale() == 'ar')
+                <div class="dropdown d-none d-lg-inline-block ml-1">
+                    <button class="btn header-item noti-icon waves-effect">
+                        <a href="{{url('lang/en')}}">
+                            EN
+                        </a>
+                    </button>
+                </div>
+            @elseif(\App::getLocale() == 'en')
+                <div class="dropdown d-none d-lg-inline-block ml-1">
+                    <button class="btn header-item noti-icon waves-effect">
+                        <a href="{{url('lang/ar')}}">
+                            عربي
+                        </a>
+                    </button>
+                </div>
+            @endif
             <div class="dropdown d-none d-lg-inline-block ml-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                     <i class="ri-fullscreen-line"></i>
@@ -51,7 +68,13 @@
                     <div class="p-3">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-0"> Notifications </h6>
+                                <h6 class="m-0">
+                                    @if(app()->getLocale() == 'ar')
+                                        الاشعارات
+                                    @else
+                                        Notifications
+                                    @endif
+                                </h6>
                             </div>
                         </div>
                     </div>
@@ -70,9 +93,23 @@
                                         </span>
                                         </div>
                                         <div class="media-body">
-                                            <h6 class="mt-0 mb-1">New Order From User " {{ $user->name ?? '' }} "</h6>
+                                            <h6 class="mt-0 mb-1">
+                                                @if(app()->getLocale() == 'ar')
+                                                    طلب جديد من المستخدم
+                                                @else
+                                                    New Order From User
+                                                @endif
+                                                 " {{ $user->name ?? '' }} "
+                                            </h6>
                                             <div class="font-size-12 text-muted">
-                                                <p class="mb-1">Click To Visit order Information</p>
+                                                <p class="mb-1">
+                                                    @if(app()->getLocale() == 'ar')
+                                                        قم بالضغط لزيارة الطلب
+                                                    @else
+                                                        Click To Visit order Information
+                                                    @endif
+
+                                                </p>
                                                 <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
                                             </div>
                                         </div>
@@ -88,9 +125,23 @@
                                                     </span>
                                             </div>
                                             <div class="media-body">
-                                                <h6 class="mt-0 mb-1">New Message From " {{ $notification->data['contact']['name'] }} "</h6>
+                                                <h6 class="mt-0 mb-1">
+                                                    @if(app()->getLocale() == 'ar')
+                                                        رسالة جديدة من
+                                                    @else
+                                                        New Message From
+                                                    @endif
+                                                     " {{ $notification->data['contact']['name'] }} "
+                                                </h6>
                                                 <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">Click To Visit order Information</p>
+                                                    <p class="mb-1">
+                                                        @if(app()->getLocale() == 'ar')
+                                                            قم بالضغط لزيارة الرسالة
+                                                        @else
+                                                            Click To Visit Message Information
+                                                        @endif
+
+                                                    </p>
                                                     <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
                                                 </div>
                                             </div>
@@ -110,9 +161,23 @@
                                                     </span>
                                             </div>
                                             <div class="media-body">
-                                                <h6 class="mt-0 mb-1">New Order FeedBack From " {{ $user->name ?? '' }} "</h6>
+                                                <h6 class="mt-0 mb-1">
+                                                    @if(app()->getLocale() == 'ar')
+                                                        ملاحظات على الطلب الجديد من
+                                                    @else
+                                                        New Order Feed Back From
+                                                    @endif
+                                                     " {{ $user->name ?? '' }} "
+                                                </h6>
                                                 <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">Click To Show FeedBack Information</p>
+                                                    <p class="mb-1">
+                                                        @if(app()->getLocale() == 'ar')
+                                                            قم بالضغط لزيارة الملاحظات
+                                                        @else
+                                                            Click To Show FeedBack Information
+                                                        @endif
+
+                                                    </p>
                                                     <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
                                                 </div>
                                             </div>
@@ -131,9 +196,24 @@
                                                     </span>
                                             </div>
                                             <div class="media-body">
-                                                <h6 class="mt-0 mb-1">New User " {{ $user->name ?? '' }} "</h6>
+                                                <h6 class="mt-0 mb-1">
+                                                    @if(app()->getLocale() == 'ar')
+                                                        مستخدم جديد
+                                                    @else
+                                                        New User
+                                                    @endif
+
+                                                    " {{ $user->name ?? '' }} "
+                                                </h6>
                                                 <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">Click Show User Information</p>
+                                                    <p class="mb-1">
+                                                        @if(app()->getLocale() == 'ar')
+                                                            قم بالضغط لزيارة المستخدم
+                                                        @else
+                                                            Click Show User Information
+                                                        @endif
+
+                                                    </p>
                                                     <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
                                                 </div>
                                             </div>
@@ -142,7 +222,14 @@
                                 @endif
                         @endforeach
                         @else
-                            <h5 class="alert alert-warning text-center">Nothing New .... </h5>
+                            <h5 class="alert alert-warning text-center">
+                                @if(app()->getLocale() == 'ar')
+                                    لا يوجد جديد....
+                                @else
+                                    Nothing New ....
+                                @endif
+
+                            </h5>
                         @endif
                     </div>
                 </div>

@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-//    function __construct()
-//    {
-//        $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index','show' , 'tree']]);
-//        $this->middleware('permission:category-list', ['only' => ['index','show' , 'tree']]);
-//        $this->middleware('permission:category-create', ['only' => ['create','store']]);
-//        $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
-//        $this->middleware('permission:category-delete', ['only' => ['destroy' , 'delete_categories']]);
-//    }
+    function __construct()
+    {
+        $this->middleware('permission:page-list|page-create|page-edit|page-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:page-list', ['only' => ['index','show']]);
+        $this->middleware('permission:page-create', ['only' => ['create','store']]);
+        $this->middleware('permission:page-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:page-delete', ['only' => ['destroy' , 'delete_pages']]);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:contact-list|contact-create|contact-edit|contact-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:contact-list', ['only' => ['index','show']]);
+        $this->middleware('permission:contact-delete', ['only' => ['destroy' , 'delete_contacts']]);
+    }
     /**
      * Display a listing of the resource.
      *

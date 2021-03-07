@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Store Option</h4>
+                    <h4 class="card-title">{{ __('dashboard.edit') }} {{ __('dashboard.settings') }}</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('options.update' , 1) }}" class="needs-validation" novalidate>
                         @csrf
@@ -59,8 +59,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom03">Phone</label>
-                                    <input type="text" name="phone" class="form-control" id="validationCustom03" placeholder="phone" value="{{ $option->phone }}" required>
+                                    <label for="validationCustom03">{{ __('dashboard.phone') }}</label>
+                                    <input type="text" name="phone" class="form-control" id="validationCustom03" placeholder="{{ __('dashboard.phone') }}" value="{{ $option->phone }}" required>
                                     @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -68,8 +68,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="email">email</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="email" value="{{ $option->email }}" required>
+                                    <label for="email">{{ __('dashboard.email') }}</label>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('dashboard.email') }}" value="{{ $option->email }}" required>
                                     @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -77,8 +77,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="address_ar">address in arabic</label>
-                                    <input type="address" name="address_ar" class="form-control" id="address_ar" placeholder="address in arabic" value="{{ $option->address_ar }}" required>
+                                    <label for="address_ar">{{ __('dashboard.address_ar') }}</label>
+                                    <input type="address" name="address_ar" class="form-control" id="address_ar" placeholder="{{ __('dashboard.address_ar') }}" value="{{ $option->address_ar }}" required>
                                     @error('address_ar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -86,8 +86,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="address_en">address in english</label>
-                                    <input type="address" name="address_en" class="form-control" id="address_en" placeholder="address in english" value="{{ $option->address_en }}" required>
+                                    <label for="address_en">{{ __('dashboard.address_en') }}</label>
+                                    <input type="address" name="address_en" class="form-control" id="address_en" placeholder="{{ __('dashboard.address_en') }}" value="{{ $option->address_en }}" required>
                                     @error('address_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -97,8 +97,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="ios">Ios APP Link</label>
-                                    <input type="text" name="ios" class="form-control" id="ios" placeholder="Facebook" value="{{ $option->ios }}">
+                                    <label for="ios">Ios</label>
+                                    <input type="text" name="ios" class="form-control" id="ios" placeholder="Ios" value="{{ $option->ios }}">
                                     @error('ios')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -106,15 +106,15 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="ios">Andriod APP Link</label>
-                                    <input type="text" name="andriod" class="form-control" id="andriod" placeholder="Facebook" value="{{ $option->andriod }}">
+                                    <label for="ios">Andriod</label>
+                                    <input type="text" name="andriod" class="form-control" id="andriod" placeholder="Andriod" value="{{ $option->andriod }}">
                                     @error('andriod')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
             </div>
