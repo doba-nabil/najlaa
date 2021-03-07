@@ -3,9 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App;
-use Config;
-use Session;
+
 
 class Local
 {
@@ -18,12 +16,10 @@ class Local
      */
     public function handle($request, Closure $next)
     {
-        $raw_locale = Session::get('locale');
-        if (in_array($raw_locale, Config::get('app.locales'))) {
-            $locale = $raw_locale;
+        if(\Session::has('locale'))
+        {
+            \App::setlocale(\Session::get('locale'));
         }
-        else $locale = Config::get('app.locale');
-        App::setLocale($locale);
         return $next($request);
     }
 }
