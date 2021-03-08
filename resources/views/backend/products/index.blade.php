@@ -25,6 +25,7 @@
                             <th style="width: 28px;" ><input type="checkbox" id="master"></th>
                             <th>{{ __('dashboard.image') }}</th>
                             <th>{{ __('dashboard.name') }}</th>
+                            <th>{{ __('dashboard.in_stock') }}</th>
                             <th>{{ __('dashboard.active') }}</th>
                             <th>{{ __('dashboard.options') }}</th>
                         </tr>
@@ -41,6 +42,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $product['name_'.app()->getLocale()] }}</td>
+                                <td>{{ $product->max_qty }}</td>
                                 <td>{{ $product->getActive() }}</td>
                                 <td>
                                     <a title="edit" href="{{ route('products.edit' , $product->slug) }}"
