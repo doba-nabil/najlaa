@@ -335,43 +335,111 @@
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">
-                        @if(app()->getLocale() == 'en')
-                            Registed Users This Year
-                        @else
-                            عمليات التسجيل الجديدة السنة الحالية
-                        @endif
-                    </h4>
-                    <div style="width: 80%;margin: 0 auto;">
-                        {!! $chart->container() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">
-                        @if(app()->getLocale() == 'en')
-                            Orders in This Year
-                        @else
-                            عمليات الشراء الجديدة السنة الحالية
-                        @endif
-                    </h4>
-                    <div style="width: 80%;margin: 0 auto;">
-                        {!! $chartt->container() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- end row -->
     <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div style="padding-bottom: 8px;" class="card-body">
+                    <h4 class="card-title mb-3">
+                        @if(app()->getLocale() == 'en')
+                            More Visited Products
+                        @else
+                            المنتجات الاكثر زيارة
+                        @endif
+                    </h4>
+                    <div>
+                        <div class="table-responsive mt-4">
+                            <table class="table table-hover mb-0 table-centered table-nowrap">
+                                <tbody>
+                                <tr style="background: rgba(3,3,3,0.2)">
+                                    <td style="width: 60px;">
+                                        <div class="avatar-xs">
+                                            <div class="avatar-title rounded-circle bg-light">
+                                                #
+                                            </div>
+                                        </div>
+                                    </td>
 
+                                    <td>
+                                        <h5 class="font-size-14 mb-0">{{ __('dashboard.name') }}</h5>
+                                    </td>
+                                    <td><div id="spak-chart1"></div></td>
+                                    <td>
+                                        <p class="text-muted mb-0">
+                                            @if(app()->getLocale() == 'en')
+                                                views
+                                            @else
+                                                 زيارة
+                                            @endif
+                                        </p>
+                                    </td>
+                                </tr>
+                                @foreach(\App\Models\Product::orderBy('views' , 'desc')->paginate(5) as $product)
+                                    <tr>
+                                    <td style="width: 60px;">
+                                        <div class="avatar-xs">
+                                            <div class="avatar-title rounded-circle bg-light">
+                                                @if(isset($product->mainImage->image))
+                                                    <img src="{{ asset('pictures/products/' . $product->mainImage->image) }}" alt="image"  height="20"/>
+                                                @else
+                                                    <img src="{{ asset('backend/assets/images/empty.jpg') }}" alt="no image" height="20">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <h5 class="font-size-14 mb-0">{{ $product['name_'.app()->getLocale()] }}</h5>
+                                    </td>
+                                    <td><div id="spak-chart1"><a href="{{ route('products.show' , $product->id) }}"><i class="fa fa-eye"></i> </a> </div></td>
+                                    <td>
+                                        <p class="text-muted mb-0">{{ $product->views }}</p>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">
+                        @if(app()->getLocale() == 'en')
+                            Recent Registed Users
+                        @else
+                            اخر عمليات التسجيل
+                        @endif
+                    </h4>
+                    <div data-simplebar style="max-height: 330px;">
+                        <ul class="list-unstyled activity-wid">
+                            @foreach(\App\User::orderBy('id' ,'desc')->paginate(6) as $user)
+                            <li class="activity-list">
+                                <div class="activity-icon avatar-xs">
+                                    <span class="avatar-title bg-soft-primary text-primary rounded-circle">
+                                        <i class="ri-user-2-fill"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <div>
+                                        <h5 class="font-size-13">{{ $user->created_at->format('d M Y') }} <small class="text-muted">{{ $user->created_at->format('H:i A') }}</small></h5>
+                                    </div>
+
+                                    <div>
+                                        <p class="text-muted mb-0">{{ $user->name }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-12">

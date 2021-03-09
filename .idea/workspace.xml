@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/home.blade.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +29,8 @@
       <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/backend/home.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="547" column="18" lean-forward="true" selection-start-line="547" selection-start-column="18" selection-end-line="547" selection-end-column="18" />
+            <state relative-caret-position="128">
+              <caret line="373" selection-start-line="373" selection-end-line="373" />
             </state>
           </provider>
         </entry>
@@ -446,15 +449,15 @@
       <workItem from="1615119449260" duration="693000" />
       <workItem from="1615140593633" duration="3977000" />
       <workItem from="1615201716834" duration="64000" />
-      <workItem from="1615227442779" duration="2162000" />
+      <workItem from="1615227442779" duration="2437000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="608676000" />
+    <option name="totallyTimeSpent" value="608951000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17776097" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
@@ -851,8 +854,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="547" column="18" lean-forward="true" selection-start-line="547" selection-start-column="18" selection-end-line="547" selection-end-column="18" />
+        <state relative-caret-position="128">
+          <caret line="373" selection-start-line="373" selection-end-line="373" />
         </state>
       </provider>
     </entry>
