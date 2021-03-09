@@ -2,7 +2,7 @@
 
 namespace App\Charts;
 
-use consoletvs\charts\Classes\ChartJs\Chart;
+use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 
 class UserChart extends Chart
 {
