@@ -6,28 +6,7 @@
 
     </div>
     <!-- start page title -->
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0">{{ __('dashboard.dash') }}</h4>
 
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">
-                                @if(app()->getLocale() == 'en')
-                                    NAJLA
-                                @else
-                                    نجلاء
-                                @endif
-
-                            </a></li>
-                        <li class="breadcrumb-item active">{{ __('dashboard.dash') }}</li>
-                    </ol>
-                </div>
-
-            </div>
-        </div>
-    </div>
     <!-- end page title -->
     <div class="row">
         <div class="col-xl-8">
@@ -335,7 +314,40 @@
         </div>
     </div>
     <hr>
-
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">
+                        @if(app()->getLocale() == 'en')
+                            Registed Users This Year
+                        @else
+                            عمليات التسجيل الجديدة السنة الحالية
+                        @endif
+                    </h4>
+                    <div style="width: 80%;margin: 0 auto;">
+                        {!! $chart->container() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">
+                        @if(app()->getLocale() == 'en')
+                            Orders in This Year
+                        @else
+                            عمليات الشراء الجديدة السنة الحالية
+                        @endif
+                    </h4>
+                    <div style="width: 80%;margin: 0 auto;">
+                        {!! $chartt->container() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- end row -->
     <div class="row">
         <div class="col-lg-6">
