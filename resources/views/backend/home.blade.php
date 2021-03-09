@@ -474,78 +474,78 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div style="padding-bottom: 8px;" class="card-body">
-                    <h4 class="card-title mb-3">
-                        @if(app()->getLocale() == 'en')
-                            Annual sales income
-                        @else
-                            الدخل السنوي للمبيعات
-                        @endif
-                    </h4>
-                    <div>
-                        <table class="table table-hover mb-0 table-centered table-nowrap" style="width:100%">
-                            @foreach($uniqueCollection as $u)
-                            <tr>
-                                <th>{{ $u }}</th>
-                                <td>
-                                    <?php
-                                        $orders = \App\Models\Order::where('created_at',  'LIKE' , '%' . $u . '%')->get();
-                                        $total = 0;
-                                        foreach ($orders as $order){
-                                            $total+= $order->total_price;
-                                        }
-                                    ?>
-                                    {{ $total }} <small style="color: lightblue">QAR</small>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div style="padding-bottom: 8px;" class="card-body">
-                    <h4 class="card-title mb-3">
-                        @if(app()->getLocale() == 'en')
-                            Monthly sales income
-                        @else
-                            الدخل الشهري للمبيعات
-                        @endif
-                    </h4>
-                    <div>
-                        <table class="table table-hover mb-0 table-centered table-nowrap" style="width:100%">
-                            <?php
-                            $months = \App\Models\Order::select(
-                                DB::raw('sum(total_price) as `sums`'),
-                                DB::raw("DATE_FORMAT(created_at,'%M %Y') as months"),
-                                DB::raw('max(created_at) as createdAt')
-                            )
-                                ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1000))
-                                ->orderBy('createdAt', 'desc')
-                                ->groupBy('months')
-                                ->get();
-                            ?>
-                            @foreach($months as $month)
-                            <tr>
-                                <th>{{ $month->months }}</th>
-                                <td>
-                                    {{ $month->sums }} <small style="color: lightblue">QAR</small>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{--<div class="row">--}}
+        {{--<div class="col-lg-12">--}}
+            {{--<div class="card">--}}
+                {{--<div style="padding-bottom: 8px;" class="card-body">--}}
+                    {{--<h4 class="card-title mb-3">--}}
+                        {{--@if(app()->getLocale() == 'en')--}}
+                            {{--Annual sales income--}}
+                        {{--@else--}}
+                            {{--الدخل السنوي للمبيعات--}}
+                        {{--@endif--}}
+                    {{--</h4>--}}
+                    {{--<div>--}}
+                        {{--<table class="table table-hover mb-0 table-centered table-nowrap" style="width:100%">--}}
+                            {{--@foreach($uniqueCollection as $u)--}}
+                            {{--<tr>--}}
+                                {{--<th>{{ $u }}</th>--}}
+                                {{--<td>--}}
+                                    {{--<?php--}}
+                                        {{--$orders = \App\Models\Order::where('created_at',  'LIKE' , '%' . $u . '%')->get();--}}
+                                        {{--$total = 0;--}}
+                                        {{--foreach ($orders as $order){--}}
+                                            {{--$total+= $order->total_price;--}}
+                                        {{--}--}}
+                                    {{--?>--}}
+                                    {{--{{ $total }} <small style="color: lightblue">QAR</small>--}}
+                                {{--</td>--}}
+                            {{--</tr>--}}
+                            {{--@endforeach--}}
+                        {{--</table>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+    {{--<div class="row">--}}
+        {{--<div class="col-lg-12">--}}
+            {{--<div class="card">--}}
+                {{--<div style="padding-bottom: 8px;" class="card-body">--}}
+                    {{--<h4 class="card-title mb-3">--}}
+                        {{--@if(app()->getLocale() == 'en')--}}
+                            {{--Monthly sales income--}}
+                        {{--@else--}}
+                            {{--الدخل الشهري للمبيعات--}}
+                        {{--@endif--}}
+                    {{--</h4>--}}
+                    {{--<div>--}}
+                        {{--<table class="table table-hover mb-0 table-centered table-nowrap" style="width:100%">--}}
+                            {{--<?php--}}
+                            {{--$months = \App\Models\Order::select(--}}
+                                {{--DB::raw('sum(total_price) as `sums`'),--}}
+                                {{--DB::raw("DATE_FORMAT(created_at,'%M %Y') as months"),--}}
+                                {{--DB::raw('max(created_at) as createdAt')--}}
+                            {{--)--}}
+                                {{--->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1000))--}}
+                                {{--->orderBy('createdAt', 'desc')--}}
+                                {{--->groupBy('months')--}}
+                                {{--->get();--}}
+                            {{--?>--}}
+                            {{--@foreach($months as $month)--}}
+                            {{--<tr>--}}
+                                {{--<th>{{ $month->months }}</th>--}}
+                                {{--<td>--}}
+                                    {{--{{ $month->sums }} <small style="color: lightblue">QAR</small>--}}
+                                {{--</td>--}}
+                            {{--</tr>--}}
+                            {{--@endforeach--}}
+                        {{--</table>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <!-- end row -->
 @endsection
 @section('backend-footer')
