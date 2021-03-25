@@ -5,23 +5,23 @@
             <div class="navbar-brand-box">
                 <a href="/" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="{{ asset('backend') }}/assets/images/logo-sm-light.png" alt=""
-                                         height="22">
+                                    {{--<img src="{{ asset('backend') }}/assets/images/logo-sm-light.png" alt=""--}}
+                                         {{--height="22">--}}
                                 </span>
                     <span class="logo-lg">
-                                    <img src="{{ asset('backend') }}/assets/images/logo-dark.png" alt=""
-                                         style="width: 95%;height: 10%;border-radius: 5px;opacity: 0.7">
+                                    {{--<img src="{{ asset('backend') }}/assets/images/logo-dark.png" alt=""--}}
+                                         {{--style="width: 95%;height: 10%;border-radius: 5px;opacity: 0.7">--}}
                                 </span>
                 </a>
 
                 <a href="/" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="{{ asset('backend') }}/assets/images/logo-sm-light.png" alt=""
-                                         height="22">
+                                    {{--<img src="{{ asset('backend') }}/assets/images/logo-sm-light.png" alt=""--}}
+                                         {{--height="22">--}}
                                 </span>
                     <span class="logo-lg">
-                                    <img src="{{ asset('backend') }}/assets/images/logo-light.png" alt=""
-                                         style="width: 95%;height: 10%;border-radius: 5px;opacity: 0.7">
+                                    {{--<img src="{{ asset('backend') }}/assets/images/logo-light.png" alt=""--}}
+                                         {{--style="width: 95%;height: 10%;border-radius: 5px;opacity: 0.7">--}}
                                 </span>
                 </a>
             </div>

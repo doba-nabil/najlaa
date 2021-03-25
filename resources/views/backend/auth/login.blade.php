@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Najla | Dashboard</title>
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    {{--<link rel="shortcut icon" href="assets/images/favicon.ico">--}}
     <!-- Bootstrap Css -->
     <link href="{{ asset('backend') }}/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css"/>
     <!-- Icons Css -->
@@ -33,7 +33,8 @@
                                     <div class="text-center">
                                         <div>
                                             <a class="logo">
-                                                <img src="{{ asset('backend') }}/assets/images/logo.png" width="50" alt="logo"></a>
+                                                {{--<img src="{{ asset('backend') }}/assets/images/logo.png" width="50" alt="logo">--}}
+                                            </a>
                                         </div>
 
                                         <h4 class="font-size-18 mt-4">Welcome Back !</h4>
