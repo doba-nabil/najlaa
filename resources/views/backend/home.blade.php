@@ -335,40 +335,40 @@
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">
-                        @if(app()->getLocale() == 'en')
-                            Registed Users This Year
-                        @else
-                            عمليات التسجيل الجديدة السنة الحالية
-                        @endif
-                    </h4>
-                    <div style="width: 80%;margin: 0 auto;">
-                        {!! $chart->container() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">
-                        @if(app()->getLocale() == 'en')
-                            Orders in This Year
-                        @else
-                            عمليات الشراء الجديدة السنة الحالية
-                        @endif
-                    </h4>
-                    <div style="width: 80%;margin: 0 auto;">
-                        {!! $chartt->container() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{--<div class="row">--}}
+        {{--<div class="col-sm-12 col-md-6">--}}
+            {{--<div class="card">--}}
+                {{--<div class="card-body">--}}
+                    {{--<h4 class="card-title mb-3">--}}
+                        {{--@if(app()->getLocale() == 'en')--}}
+                            {{--Registed Users This Year--}}
+                        {{--@else--}}
+                            {{--عمليات التسجيل الجديدة السنة الحالية--}}
+                        {{--@endif--}}
+                    {{--</h4>--}}
+                    {{--<div style="width: 80%;margin: 0 auto;">--}}
+                        {{--{!! $chart->container() !!}--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="col-sm-12 col-md-6">--}}
+            {{--<div class="card">--}}
+                {{--<div class="card-body">--}}
+                    {{--<h4 class="card-title mb-3">--}}
+                        {{--@if(app()->getLocale() == 'en')--}}
+                            {{--Orders in This Year--}}
+                        {{--@else--}}
+                            {{--عمليات الشراء الجديدة السنة الحالية--}}
+                        {{--@endif--}}
+                    {{--</h4>--}}
+                    {{--<div style="width: 80%;margin: 0 auto;">--}}
+                        {{--{!! $chartt->container() !!}--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <!-- end row -->
     <div class="row">
         <div class="col-lg-6">
@@ -549,7 +549,7 @@
     <!-- end row -->
 @endsection
 @section('backend-footer')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
-    {!! $chart->script() !!}
-    {!! $chartt->script() !!}
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>--}}
+    {{--{!! $chart->script() !!}--}}
+    {{--{!! $chartt->script() !!}--}}
 @endsection
