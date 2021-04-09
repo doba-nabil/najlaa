@@ -76,14 +76,14 @@ class ContactOrderController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'تسجيل دخول خاطئ',
+                    'msg' => trans('api.wrong_login'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -112,7 +112,7 @@ class ContactOrderController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }

@@ -158,11 +158,41 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('send_form') }}" class="waves-effect">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-paper-plane"></i>
                         <span>{{ __('dashboard.send_email') }}</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('send_form') }}">
+                                @if(app()->getLocale() == 'en')
+                                    Send Random Email
+                                @else
+                                    ارسال بريد عشوائي
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('send_users_form') }}">
+                                @if(app()->getLocale() == 'en')
+                                    Send Email To Users
+                                @else
+                                    ارسال بريد للمستخدمين
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('send_subscribers_form') }}">
+                                @if(app()->getLocale() == 'en')
+                                    Send Email To Subscribers
+                                @else
+                                    ارسال بريد للمتابعين
+                                @endif
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
             </ul>
         </div>
         <!-- Sidebar -->

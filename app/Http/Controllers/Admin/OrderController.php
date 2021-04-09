@@ -191,15 +191,15 @@ class OrderController extends Controller
             curl_exec($ch);
 
             if($request->status == 0){
-                $code =  'signed';
+                $code =  'signed / تم الاستلام';
             }elseif($request->status == 1){
-                $code =  'processed';
+                $code =  'processed / تحت المعالجة';
             }elseif($request->status == 2){
-                $code =  'shipped';
+                $code =  'shipped / تم الشحن';
             }elseif($request->status == 3){
-                $code =  'out_to_delivery';
+                $code =  'out to delivery / في الطريق اليك';
             }elseif($request->status == 4){
-                $code =  'delivered';
+                $code =  'delivered / تم التوصيل';
             }
             $user = User::find($order->user_id);
             $user->notify(new OrderStatus($code));

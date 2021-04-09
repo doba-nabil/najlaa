@@ -57,42 +57,42 @@ class CouponController extends Controller
                                 }else{
                                     return response()->json([
                                         'status' => false,
-                                        'msg' => 'تم استنفاذ مرات استخدام الكوبون',
+                                        'msg' => trans('api.coupon_used_many'),
                                         'code' => 400,
                                     ]);
                                 }
                             }else{
                                 return response()->json([
                                     'status' => false,
-                                    'msg' => 'كوبون غير فعال',
+                                    'msg' => trans('api.coupon_not_active'),
                                     'code' => 400,
                                 ]);
                             }
                         }else{
                             return response()->json([
                                 'status' => false,
-                                'msg' => 'تم نفاذ المرات المحددة لك لاستخدام الكوبون',
+                                'msg' => trans('api.coupon_used_many_you'),
                                 'code' => 400,
                             ]);
                         }
                     }else{
                         return response()->json([
                             'status' => false,
-                            'msg' => 'كوبون منتهي',
+                            'msg' => trans('api.coupon_expires'),
                             'code' => 400,
                         ]);
                     }
                 }else{
                     return response()->json([
                         'status' => false,
-                        'msg' => 'كود خاطئ',
+                        'msg' => trans('api.wrong_code'),
                         'code' => 400,
                     ]);
                 }
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'السلة فارغة',
+                    'msg' => trans('api.empty_cart'),
                     'code' => 400,
                 ]);
             }
@@ -100,7 +100,7 @@ class CouponController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -129,20 +129,20 @@ class CouponController extends Controller
 
                     return response()->json([
                         'status' => true,
-                        'data' => 'تم حذف الكوبون بنجاح',
+                        'data' => trans('api.deleted'),
                         'code' => 200,
                     ]);
                 }else{
                     return response()->json([
                         'status' => false,
-                        'msg' => 'كود خاطئ',
+                        'data' => trans('api.wrong_code'),
                         'code' => 400,
                     ]);
                 }
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'السلة فارغة',
+                    'data' => trans('api.empty_cart'),
                     'code' => 400,
                 ]);
             }
@@ -150,7 +150,7 @@ class CouponController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }

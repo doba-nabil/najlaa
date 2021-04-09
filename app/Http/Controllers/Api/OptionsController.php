@@ -21,7 +21,7 @@ class OptionsController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                "msg" => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -38,7 +38,7 @@ class OptionsController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                "msg" => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -56,7 +56,7 @@ class OptionsController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                "msg" => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -74,7 +74,7 @@ class OptionsController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                "msg" => trans('api.err'),
                 'code' => 400,
             ]);
         }

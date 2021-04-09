@@ -47,7 +47,7 @@ class WishListController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد منتجات في المفضلة',
+                    'msg' => trans('api.no_fav_products'),
                     'code' => 400,
                 ]);
             }
@@ -55,7 +55,7 @@ class WishListController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -82,14 +82,14 @@ class WishListController extends Controller
                 $wish->save();
                 return response()->json([
                     'status' => true,
-                    'msg' => 'Product Added to wishlist.',
+                    'msg' => trans('api.fav_product'),
                     'code' => 200,
                 ], 200);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }

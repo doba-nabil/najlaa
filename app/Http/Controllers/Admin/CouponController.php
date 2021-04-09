@@ -40,11 +40,11 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'code' => 'required|max:255|unique:cobones',
+            'value' => 'required|numeric|min:1',
+        ]);
         try{
-            $this->validate($request, [
-                'code' => 'required|max:255|unique:cobones',
-                'value' => 'required|numeric|min:5',
-            ]);
             $cobone = new Coupon();
             $cobone->code = $request->code;
             $cobone->value = $request->value;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,6 +83,16 @@ class LoginController extends Controller
                 'data' => $user,
                 'code' => 200,
             ]);
+        }
+        $user_emails = User::pluck('email');
+        foreach ($user_emails as $user_email){
+            if($user_email == $request->email){
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'خطأ في كلمة المرور',
+                    'code' => 400,
+                ]);
+            }
         }
         return response()->json([
             'status' => false,

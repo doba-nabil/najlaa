@@ -42,7 +42,7 @@ class PageController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                "msg" => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -65,7 +65,7 @@ class PageController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                "msg" => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -87,7 +87,7 @@ class PageController extends Controller
         }else{
             return response()->json([
                 'status' => false,
-                'msg' => 'صفحة غير موجودة',
+                'msg' => trans('api.no_page'),
                 'code' => 400,
             ]);
         }

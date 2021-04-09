@@ -46,14 +46,14 @@ class AddressController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد عناوين خاصة بكـ',
+                    'msg' => trans('api.not_have_addresses'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -86,14 +86,14 @@ class AddressController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'عنوان غير موجود',
+                    'msg' => trans('api.wrong_address'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -147,7 +147,7 @@ class AddressController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -195,7 +195,7 @@ class AddressController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -249,7 +249,7 @@ class AddressController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -268,13 +268,13 @@ class AddressController extends Controller
             $address->delete();
             return response()->json([
                 'status' => true,
-                'msg' => 'تم الحذف بنجاح',
+                'msg' => trans('api.deleted'),
                 'code' => 200,
             ]);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -315,7 +315,7 @@ class AddressController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -330,13 +330,13 @@ class AddressController extends Controller
             }
             return response()->json([
                 'status' => true,
-                'msg' => 'تم الحذف بنجاح',
+                'msg' => trans('api.deleted'),
                 'code' => 200,
             ]);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }

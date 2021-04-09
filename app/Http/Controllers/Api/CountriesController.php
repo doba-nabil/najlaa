@@ -35,7 +35,7 @@ class CountriesController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -68,7 +68,7 @@ class CountriesController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -118,7 +118,7 @@ class CountriesController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -133,7 +133,7 @@ class CountriesController extends Controller
                 $old_chose->save();
                 return response()->json([
                     'status' => true,
-                    'msg' => 'تم تغيير الدولة بنجاح',
+                    'msg' => trans('api.country_changed'),
                     'code' => 200,
                 ]);
             }else{
@@ -143,14 +143,14 @@ class CountriesController extends Controller
                 $chose_country->save();
                 return response()->json([
                     'status' => true,
-                    'msg' => 'تم اختيار الدولة بنجاح',
+                    'msg' => trans('api.country_selected'),
                     'code' => 200,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -167,7 +167,7 @@ class CountriesController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }

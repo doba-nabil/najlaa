@@ -75,8 +75,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="max_qty">{{ __('dashboard.in_stock') }}</label>
-                                    <input min="0" step="1" type="number" name="{{ __('dashboard.in_stock') }}" class="form-control"
-                                           id="max_qty" placeholder="Number of parts in stock"
+                                    <input min="0" step="1" type="number" name="max_qty" class="form-control"
+                                           id="max_qty" placeholder="{{ __('dashboard.in_stock') }}"
                                            value="{{ old('max_qty') }}">
                                     @error('max_qty')
                                     <span class="text-danger">{{ $message }}</span>

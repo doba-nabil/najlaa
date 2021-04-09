@@ -45,7 +45,7 @@ class OrderStatus extends Notification
             ->greeting('مرحبا / Hello')
             ->line('تم تغيير حالة الطلب الخاص بك / Status of Your order changed')
             ->line($this->code)
-            ->line('شكرا لتعاملكم معنا! / Thanks For Used Najla');
+            ->line('شكرا لتعاملكم معنا / Thanks For Used Najla');
     }
 
     /**
