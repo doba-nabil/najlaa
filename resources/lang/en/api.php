@@ -46,4 +46,7 @@ return [
     'already_activated' => 'Already activated',
     'no_fav_products' => 'No Products In WishList',
     'fav_product' => 'Added to WishList successfully',
+    'wrong_pass' => 'Wrong Password',
+    'no_user' => 'User not found',
+    'succ_logout' => 'Successful Logout',
 ];

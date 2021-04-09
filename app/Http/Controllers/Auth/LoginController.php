@@ -89,14 +89,14 @@ class LoginController extends Controller
             if($user_email == $request->email){
                 return response()->json([
                     'status' => false,
-                    'msg' => 'خطأ في كلمة المرور',
+                    'msg' => trans('api.wrong_pass'),
                     'code' => 400,
                 ]);
             }
         }
         return response()->json([
             'status' => false,
-            'msg' => 'مستخدم غير موجود',
+            'msg' => trans('api.no_user'),
             'code' => 400,
         ]);
     }
@@ -105,13 +105,13 @@ class LoginController extends Controller
             Auth::logout();
             return response()->json([
                 'status' => true,
-                'msg' => 'تم تسجيل الخروج',
+                'msg' => trans('api.succ_logout'),
                 'code' => 200,
             ]);
         }else{
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
