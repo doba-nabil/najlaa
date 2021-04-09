@@ -75,7 +75,7 @@ class NotificationController extends Controller
                 ]);
             }else{
                 return response()->json([
-                    "msg" => 'لا يوجد اشعارات',
+                    "msg" => trans('api.no_nots'),
                     'status' => false,
                     'code' => 400,
                 ]);
@@ -148,7 +148,7 @@ class NotificationController extends Controller
                 ]);
             }else{
                 return response()->json([
-                    "msg" => 'لا يوجد اشعارات',
+                    "msg" => trans('api.no_nots'),
                     'status' => false,
                     'code' => 400,
                 ]);
@@ -221,7 +221,7 @@ class NotificationController extends Controller
                 ]);
             }else{
                 return response()->json([
-                    "msg" => 'لا يوجد اشعارات',
+                    "msg" => trans('api.no_nots'),
                     'status' => false,
                     'code' => 400,
                 ]);

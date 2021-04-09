@@ -58,14 +58,14 @@ class HomeController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد بنرات اعلانية',
+                    'msg' => trans('api.no_banners'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -94,14 +94,14 @@ class HomeController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد تصنيفات في الرئيسية',
+                    'msg' => trans('api.no_categories'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -149,13 +149,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'msg' => 'لا يوجد منتجات',
+                'data' => trans('api.no_products'),
                 'code' => 400,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -201,13 +201,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'msg' => 'لا يوجد منتجات',
+                'data' => trans('api.no_products'),
                 'code' => 400,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -249,7 +249,7 @@ class HomeController extends Controller
                 }else{
                     return response()->json([
                         'status' => false,
-                        'msg' => 'لا يوجد منتجات',
+                        'data' => trans('api.no_products'),
                         'code' => 400,
                     ]);
                 }
@@ -293,14 +293,14 @@ class HomeController extends Controller
                 }
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد منتجات',
+                    'data' => trans('api.no_products'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -339,7 +339,7 @@ class HomeController extends Controller
                 }else{
                     return response()->json([
                         'status' => false,
-                        'msg' => 'لا يوجد منتجات',
+                        'data' => trans('api.no_products'),
                         'code' => 400,
                     ]);
                 }
@@ -382,14 +382,14 @@ class HomeController extends Controller
                 }
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد منتجات',
+                    'data' => trans('api.no_products'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -438,13 +438,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'msg' => 'لا يوجد منتجات',
+                'data' => trans('api.no_products'),
                 'code' => 400,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -490,13 +490,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'msg' => 'لا يوجد منتجات',
+                'data' => trans('api.no_products'),
                 'code' => 400,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -514,7 +514,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -531,7 +531,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -548,7 +548,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -600,7 +600,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -618,7 +618,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -636,7 +636,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -693,14 +693,14 @@ class HomeController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لم يتم العثور على منتجات',
+                    'data' => trans('api.no_products'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -722,14 +722,14 @@ class HomeController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد عمليات بحث بعد',
+                    'msg' => trans('api.no_search'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -744,13 +744,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => true,
-                'msg' => 'تم الحذف بنجاح',
+                'data' => trans('api.deleted'),
                 'code' => 200,
             ]);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -790,14 +790,14 @@ class HomeController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد منتجات تم زيارتها بعد',
+                    'msg' => trans('api.no_products'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -812,13 +812,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => true,
-                'msg' => 'تم الحذف بنجاح',
+                'data' => trans('api.deleted'),
                 'code' => 200,
             ]);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -832,13 +832,13 @@ class HomeController extends Controller
                 $recently->delete();
                 return response()->json([
                     'status' => true,
-                    'msg' => 'تم الحذف بنجاح',
+                    'data' => trans('api.deleted'),
                     'code' => 200,
                 ]);
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد قيمة لحذفها',
+                    'msg' => trans('api.no_delete'),
                     'code' => 400,
                 ]);
             }
@@ -846,7 +846,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'data' => trans('api.err'),
                 'code' => 400,
             ]);
         }

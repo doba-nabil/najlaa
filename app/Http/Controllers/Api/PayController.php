@@ -92,7 +92,7 @@ class PayController extends Controller
                     $order->delete();
                     return response()->json([
                         'status' => false,
-                        'msg' => 'عفوا السلة فارغة',
+                        'msg' => trans('api.empty_cart'),
                         'code' => 400,
                     ]);
                 }
@@ -209,14 +209,14 @@ class PayController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد عنوان محدد',
+                    'msg' => trans('api.no_selected_address'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -379,14 +379,14 @@ class PayController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد عنوان محدد',
+                    'msg' => trans('api.no_selected_address'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -508,14 +508,14 @@ class PayController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد طلبات',
+                    'msg' => trans('api.no_orders'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -637,14 +637,14 @@ class PayController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد طلبات',
+                    'msg' => trans('api.no_orders'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -766,14 +766,14 @@ class PayController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد طلبات',
+                    'msg' => trans('api.no_orders'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -893,14 +893,14 @@ class PayController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'msg' => 'طلب غير موجود',
+                    'msg' => trans('api.no_order'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -939,14 +939,14 @@ class PayController extends Controller
             } else {
                 return response()->json([
                     'status' => false,
-                    'msg' => 'طلب غير موجود',
+                    'msg' => trans('api.no_order'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }

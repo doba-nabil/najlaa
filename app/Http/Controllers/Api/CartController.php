@@ -55,7 +55,7 @@ class CartController extends Controller
                 }else{
                     return response()->json([
                         'status' => false,
-                        'msg' => 'السلة فارغة',
+                        'msg' => trans('api.empty_cart'),
                         'code' => 400,
                     ]);
                 }
@@ -98,7 +98,7 @@ class CartController extends Controller
                 }else{
                     return response()->json([
                         'status' => false,
-                        'msg' => 'السلة فارغة',
+                        'msg' => trans('api.empty_cart'),
                         'code' => 400,
                     ]);
                 }
@@ -106,7 +106,7 @@ class CartController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -178,14 +178,14 @@ class CartController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد ما يتم التعديل علية',
+                    'msg' => trans('api.empty_cart'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -306,7 +306,7 @@ class CartController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -324,7 +324,7 @@ class CartController extends Controller
                 }else{
                     return response()->json([
                         'status' => false,
-                        'msg' => 'لا يوجد مايتم حذفة',
+                        'msg' => trans('api.empty_cart'),
                         'code' => 400,
                     ]);
                 }
@@ -335,20 +335,20 @@ class CartController extends Controller
                 }else{
                     return response()->json([
                         'status' => false,
-                        'msg' => 'لا يوجد مايتم حذفة',
+                        'msg' => trans('api.empty_cart'),
                         'code' => 400,
                     ]);
                 }
             }
             return response()->json([
                 'status' => true,
-                'msg' => 'تم الحذف من السلة بنجاح',
+                'msg' => trans('api.deleted'),
                 'code' => 200,
             ], 200);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -371,13 +371,13 @@ class CartController extends Controller
             }
             return response()->json([
                 'status' => true,
-                'msg' => 'تم حذف محتوى العربة بنجاح',
+                'msg' => trans('api.deleted'),
                 'code' => 200,
             ], 200);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }

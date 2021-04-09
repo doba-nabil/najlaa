@@ -27,14 +27,14 @@ class VerifiedController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'يرجى تفعيل العضوية',
+                    'msg' => trans('api.pls_verify'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -53,14 +53,14 @@ class VerifiedController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'كود خاطئ',
+                    'msg' => trans('api.wrong_code'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -78,20 +78,20 @@ class VerifiedController extends Controller
                 }
                 return response()->json([
                     'status' => true,
-                    'msg' => 'تم ارسال الكود بنجاح',
+                    'msg' => trans('api.code_sent'),
                     'code' => 200,
                 ]);
             }else{
                 return response()->json([
                     'status' => true,
-                    'msg' => 'عضوية مفعلة من قبل',
+                    'msg' => trans('api.already_activated'),
                     'code' => 200,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }

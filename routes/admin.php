@@ -143,6 +143,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     //*********** send message route ***********/
     Route::get('send/page', 'MessageController@message')->name('send_form');
     Route::post('send/message', 'MessageController@send_message')->name('send');
+
+    Route::get('send/users/page', 'MessageController@users_message')->name('send_users_form');
+    Route::post('send/users/message', 'MessageController@send_users_message')->name('send_users');
+
+    Route::get('send/subscribers/page', 'MessageController@subscribers_message')->name('send_subscribers_form');
+    Route::post('send/subscribers/message', 'MessageController@send_subscribers_message')->name('send_subscribers');
     //*********** end send message route ***********/
 
     Route::get('chart', 'ChartController@index');

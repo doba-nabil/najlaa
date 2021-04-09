@@ -85,7 +85,7 @@ class AccountsController extends Controller
         try{
             $user = User::where('email',$request->email)->first();
             if(isset($user)){
-                if($request->password == $request->password_confirmation && !empty($request->password)){
+                if($request->password == $request->password_confirmation){
                     $user->password = Hash::make($request->password);
                     $user->save();
                     return response()->json([

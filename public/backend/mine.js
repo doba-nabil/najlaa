@@ -7,7 +7,7 @@ $('#category_id').on('change',function(e){
         $('#subcategory_id').empty();
         /*$('#subcategory_id').append('<option value="">-- choose / اختر --</option>');*/
         $.each(data,function(index, subcatObj){
-            $('#subcategory_id').append('<option value="'+subcatObj.id+'">'+ subcatObj.name +'</option>');
+            $('#subcategory_id').append('<option value="'+subcatObj.id+'">'+ subcatObj.name_ar + ' / ' + subcatObj.name_en +'</option>');
         });
     });
 });
@@ -18,7 +18,7 @@ $('#subcategory_id').on('change',function(e){
         $('#subsubcategory_id').empty();
         /*$('#subcategory_id').append('<option value="">-- choose / اختر --</option>');*/
         $.each(data,function(index, subSubcatObj){
-            $('#subsubcategory_id').append('<option value="'+subSubcatObj.id+'">'+ subSubcatObj.name +'</option>');
+            $('#subsubcategory_id').append('<option value="'+subSubcatObj.id+'">'+ subcatObj.name_ar + ' / ' + subcatObj.name_en +'</option>');
         });
     });
 });
@@ -29,7 +29,7 @@ $('#country_id').on('change',function(e){
         $('#state_id').empty();
         /*$('#city_id').append('<option value="">-- choose / اختر --</option>');*/
         $.each(data,function(index, stateObj){
-            $('#state_id').append('<option value="'+stateObj.id+'">'+ stateObj.name+'</option>');
+            $('#state_id').append('<option value="'+stateObj.id+'">'+ stateObj.name_ar + ' / ' + stateObj.name_en +'</option>');
         });
     });
 });
@@ -40,7 +40,7 @@ $('#state_id').on('change',function(e){
         $('#city_id').empty();
         /*$('#city_id').append('<option value="">-- choose / اختر --</option>');*/
         $.each(data,function(index, cityObj){
-            $('#city_id').append('<option value="'+cityObj.id+'">'+ cityObj.name+'</option>');
+            $('#city_id').append('<option value="'+cityObj.id+'">'+ cityObj.name_ar+'</option>');
         });
     });
 });

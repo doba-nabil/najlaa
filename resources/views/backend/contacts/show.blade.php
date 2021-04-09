@@ -26,7 +26,7 @@
             </h6>
             <h5 class="card-title">{{ __('dashboard.name') }} : {{ $contact->name }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.email') }} : {{ $contact->email }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.phone') }} : {{ $contact->email }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.phone') }} : {{ $contact->phone }}</h6>
             <hr>
             <p class="card-text">
                 {{ __('dashboard.message') }} :

@@ -57,14 +57,14 @@ class CategoryController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'لا يوجد عروض متوفرة',
+                    'msg' => trans('api.no_offers'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -91,7 +91,7 @@ class CategoryController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -130,7 +130,7 @@ class CategoryController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -161,7 +161,7 @@ class CategoryController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -188,7 +188,7 @@ class CategoryController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'تصنيف غير موجودة',
+                    'msg' => trans('api.no_category'),
                     'code' => 400,
                 ]);
             }
@@ -226,14 +226,14 @@ class CategoryController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'msg' => 'تصنيف غير موجودة',
+                    'msg' => trans('api.no_category'),
                     'code' => 400,
                 ]);
             }
         }else{
             return response()->json([
                 'status' => false,
-                'msg' => 'لا يوجد محتوى',
+                'msg' => trans('api.no_content'),
                 'code' => 400,
             ]);
         }
@@ -309,13 +309,13 @@ class CategoryController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'msg' => 'تصنيف غير موجود',
+                'msg' => trans('api.no_category'),
                 'code' => 400,
             ]);
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
