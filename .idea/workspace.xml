@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,10 +16,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
+            <state relative-caret-position="2300">
               <caret line="107" column="47" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="47" />
             </state>
           </provider>
@@ -26,8 +28,26 @@
       <file leaf-file-name="localization.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Middleware/localization.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
+            <state relative-caret-position="345">
               <caret line="15" column="43" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="api.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/api.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="41" column="23" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-869">
+              <caret line="644" column="26" selection-start-line="644" selection-start-column="20" selection-end-line="644" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -36,9 +56,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>moderator</find>
-      <find>'moderator'</find>
-      <find>conf</find>
       <find>deli</find>
       <find>signed</find>
       <find>main</find>
@@ -66,6 +83,9 @@
       <find>face</find>
       <find>send</find>
       <find>proc</find>
+      <find>filte</find>
+      <find>price</find>
+      <find>filter</find>
     </findStrings>
     <replaceStrings>
       <replace>assets/</replace>
@@ -99,7 +119,6 @@
         <option value="$PROJECT_DIR$/resources/views/backend/auth/login.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/layout/head.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/layout/header.blade.php" />
-        <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/AccountsController.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/home.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/CouponController.php" />
@@ -131,6 +150,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
         <option value="$PROJECT_DIR$/resources/lang/ar/api.php" />
         <option value="$PROJECT_DIR$/resources/lang/en/api.php" />
+        <option value="$PROJECT_DIR$/routes/api.php" />
       </list>
     </option>
   </component>
@@ -290,7 +310,20 @@
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="najlaa" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="najlaa" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -439,18 +472,19 @@
       <workItem from="1616780719050" duration="630000" />
       <workItem from="1617498422793" duration="770000" />
       <workItem from="1617536944401" duration="1014000" />
-      <workItem from="1617976293524" duration="10968000" />
+      <workItem from="1617976293524" duration="11155000" />
+      <workItem from="1618071134795" duration="1389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="629102000" />
+    <option name="totallyTimeSpent" value="630678000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19742814" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20045386" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -459,7 +493,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32994923" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3248731" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3248731" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -475,12 +509,12 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16111952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32994923" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="12" weight="0.32994923" />
@@ -488,7 +522,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3248731" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -506,13 +540,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Charts/UserChart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/consoletvs/charts/src/Classes/Chartjs/Chart.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -558,13 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1004">
-          <caret line="73" column="20" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -589,14 +609,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="920">
           <caret line="560" column="14" lean-forward="true" selection-start-line="560" selection-start-column="14" selection-end-line="560" selection-end-column="14" />
-          <folding>
-            <element signature="e#1312#12956#0#HTML" />
-            <element signature="e#12970#16429#0#HTML" />
-            <element signature="e#16443#17997#1#HTML" />
-            <element signature="e#18002#23467#0#HTML" />
-            <element signature="e#23472#25003#0#HTML" />
-            <element signature="e#25008#26755#0#HTML" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -706,9 +718,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="31" column="68" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
-          <folding>
-            <element signature="e#43#50#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -751,13 +760,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2871">
           <caret line="152" column="40" selection-start-line="152" selection-start-column="40" selection-end-line="152" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="840" column="49" selection-start-line="840" selection-start-column="49" selection-end-line="840" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -838,17 +840,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/localization.php">
+    <entry file="file://$PROJECT_DIR$/resources/lang/ar/validation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="15" column="43" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="43" />
-        </state>
+        <state relative-caret-position="-2070" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
+        <state relative-caret-position="2300">
           <caret line="107" column="47" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/localization.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" column="43" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="41" column="23" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-869">
+          <caret line="644" column="26" selection-start-line="644" selection-start-column="20" selection-end-line="644" selection-end-column="26" />
         </state>
       </provider>
     </entry>
