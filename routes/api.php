@@ -145,4 +145,8 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('new/notifications', 'NotificationController@new_notifications');
     Route::get('recent/notifications', 'NotificationController@recent_notifications');
     Route::get('notification/single/{notId}', 'NotificationController@notification_single');
+
+
+//    try apis
+    Route::get('try/users', 'TryController@users');
 });
