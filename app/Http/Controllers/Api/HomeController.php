@@ -647,6 +647,8 @@ class HomeController extends Controller
         try{
             $products = Product::active();
 
+
+
             $min_value = $request->min_price;
             $max_value = $request->max_price;
             if (! (is_null($min_value) && is_null($max_value))) {
@@ -683,7 +685,16 @@ class HomeController extends Controller
                 }
                 $products = $products->whereIn('id' , $product_size_ids);
             }
-            $productss = $products->get();
+
+            $sort = $request->sort;
+            if($sort == 0){
+                $productss = $products->orderBy('price' , 'asc')->get();
+            }elseif($sort == 1){
+                $productss = $products->orderBy('price' , 'desc')->get();
+            }else{
+                $productss = $products->get();
+            }
+
             if(count($productss) > 0){
                 return response()->json([
                     'status' => true,
