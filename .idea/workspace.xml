@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ar/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/api.php" afterDir="false" />
-    </list>
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,29 +14,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="98" column="39" selection-start-line="98" selection-start-column="32" selection-end-line="98" selection-end-column="39" />
+            <state relative-caret-position="112">
+              <caret line="107" column="47" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="api.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/lang/ar/api.php">
+      <file leaf-file-name="localization.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Middleware/localization.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="49" column="36" lean-forward="true" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/lang/en/api.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="49" column="34" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="34" />
+            <state relative-caret-position="138">
+              <caret line="15" column="43" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -290,27 +277,20 @@
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="lang" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="lang" type="462c0819:PsiDirectoryNode" />
-              <item name="ar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="lang" type="462c0819:PsiDirectoryNode" />
-              <item name="en" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -459,12 +439,12 @@
       <workItem from="1616780719050" duration="630000" />
       <workItem from="1617498422793" duration="770000" />
       <workItem from="1617536944401" duration="1014000" />
-      <workItem from="1617976293524" duration="10717000" />
+      <workItem from="1617976293524" duration="10968000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="628851000" />
+    <option name="totallyTimeSpent" value="629102000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -479,7 +459,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32994923" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3248731" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3248731" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -526,20 +506,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="170" column="59" selection-start-line="170" selection-start-column="59" selection-end-line="170" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Charts/UserChart.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -851,24 +817,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Local.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="98" column="39" selection-start-line="98" selection-start-column="32" selection-end-line="98" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lang/ar/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="49" column="36" lean-forward="true" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="36" />
+        <state relative-caret-position="138">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/lang/en/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="49" column="34" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="34" />
+        <state relative-caret-position="149">
+          <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lang/ar/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="50" column="39" lean-forward="true" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/localization.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="15" column="43" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="107" column="47" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="47" />
         </state>
       </provider>
     </entry>

@@ -18,8 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', 'Auth\LoginController@loginapi');
+
 Route::group(['middleware' => 'localization'], function () {
+    Route::post('login', 'Auth\LoginController@loginapi');
     Route::post('register', 'Auth\RegisterController@registerapi');
     /********* logout **************/
     Route::post('/logout', 'Auth\LoginController@logoutapi');
