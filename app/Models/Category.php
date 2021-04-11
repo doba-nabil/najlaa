@@ -23,7 +23,11 @@ class Category extends Model
     protected $hidden = [
         'created_at', 'updated_at',
     ];
-
+    protected $appends = ['subcategories_count'];
+    public function getSubcategoriesCountAttribute()
+    {
+        return $this->subCategories->count();
+    }
     public function scopeActive($query)
     {
         return $query->where('active' , 1);
