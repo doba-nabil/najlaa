@@ -84,9 +84,9 @@ class LoginController extends Controller
                 'code' => 200,
             ]);
         }
-        $user_emails = User::pluck('email');
-        foreach ($user_emails as $user_email){
-            if($user_email == $request->email){
+        $users = User::all();
+        foreach ($users as $user){
+            if($user->email == $request->email || $user->phone == $request->email){
                 return response()->json([
                     'status' => false,
                     'msg' => trans('api.wrong_pass'),
