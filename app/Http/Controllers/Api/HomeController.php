@@ -688,11 +688,47 @@ class HomeController extends Controller
 
             $sort = $request->sort;
             if($sort == 0){
-                $productss = $products->orderBy('price' , 'asc')->get();
+                $productss = $products->select(
+                    'id',
+                    'name_' . app()->getLocale() . ' as name',
+                    'price',
+                    'discount_price',
+                    'percentage_discount'
+                )->active()->orderBy('percentage_discount', 'desc')->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->orderBy('price' , 'asc')->get();
             }elseif($sort == 1){
-                $productss = $products->orderBy('price' , 'desc')->get();
+                $productss = $products->select(
+                    'id',
+                    'name_' . app()->getLocale() . ' as name',
+                    'price',
+                    'discount_price',
+                    'percentage_discount'
+                )->active()->orderBy('percentage_discount', 'desc')->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->orderBy('price' , 'desc')->get();
             }else{
-                $productss = $products->get();
+                $productss = $products->select(
+                    'id',
+                    'name_' . app()->getLocale() . ' as name',
+                    'price',
+                    'discount_price',
+                    'percentage_discount'
+                )->active()->orderBy('percentage_discount', 'desc')->with(array('mainImage' => function ($query) {
+                        $query->select(
+                            'image',
+                            'imageable_id'
+                        );
+                    })
+                )->get();
             }
 
             if(count($productss) > 0){
