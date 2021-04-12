@@ -49,4 +49,5 @@ return [
     'wrong_pass' => 'Wrong Password',
     'no_user' => 'User not found',
     'succ_logout' => 'Successful Logout',
+    'no_pass_email' => 'Wrong Phone or Email',
 ];

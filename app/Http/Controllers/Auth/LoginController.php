@@ -96,7 +96,7 @@ class LoginController extends Controller
         }
         return response()->json([
             'status' => false,
-            'msg' => trans('api.no_user'),
+            'msg' => trans('api.no_pass_email'),
             'code' => 400,
         ]);
     }
