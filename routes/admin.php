@@ -167,6 +167,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::get('best_selling', 'ReportController@best_selling')->name('best_selling');
     Route::post('best_selling', 'ReportController@best_selling_post')->name('best_selling_post');
 
+// notifications
+    Route::get('send/all/notification', 'FcmController@fcm')->name('fcm');
+    Route::post('send-push-all', 'FcmController@sendPushAll')->name('send_push_all');
+
+    Route::get('send/users/notification', 'FcmController@fcm_users')->name('fcm_users');
+    Route::post('send-push-users', 'FcmController@sendPushUsers')->name('send_push_users');
+
+    Route::get('send/not_users/notification', 'FcmController@fcm_not_users')->name('fcm_not_users');
+    Route::post('send-push-notusers', 'FcmController@sendPushNotUsers')->name('send_push_not_users');
+
 });
 /************* ajax select routes ******************/
 Route::get('/ajax-subcats', 'Admin\AdminController@getsubcategories');
