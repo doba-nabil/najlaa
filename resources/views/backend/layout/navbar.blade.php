@@ -252,6 +252,47 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-bell"></i>
+                        <span>
+                            @if(app()->getLocale() == 'en')
+                                Send Notifications
+                            @else
+                                ارسال اشعارات
+                            @endif
+                        </span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('fcm_users') }}">
+                                @if(app()->getLocale() == 'en')
+                                    To Users
+                                @else
+                                    الى المستخدمين
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('fcm') }}">
+                                @if(app()->getLocale() == 'en')
+                                    To All Devices
+                                @else
+                                    الى جميع الهواتف
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('fcm_not_users') }}">
+                                @if(app()->getLocale() == 'en')
+                                    To Devices Without Register
+                                @else
+                                    الى الهواتف غير المسجلة
+                                @endif
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <hr>
 
             </ul>
