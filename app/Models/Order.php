@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use Notifiable;
+    use Notifiable , \Reportable\Traits\Reportable;
     protected $hidden = [
         'created_at', 'updated_at','user_id','city_id','new','paid','processed','shipped','out_to_delivery','delivered','delivery_id',
         'cobone_id','cobone_code','cobone_value'
