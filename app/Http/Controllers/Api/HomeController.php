@@ -65,7 +65,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -101,7 +101,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -149,13 +149,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'data' => trans('api.no_products'),
+                'msg' => trans('api.no_products'),
                 'code' => 400,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -201,13 +201,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'data' => trans('api.no_products'),
+                'msg' => trans('api.no_products'),
                 'code' => 400,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -249,7 +249,7 @@ class HomeController extends Controller
                 }else{
                     return response()->json([
                         'status' => false,
-                        'data' => trans('api.no_products'),
+                        'msg' => trans('api.no_products'),
                         'code' => 400,
                     ]);
                 }
@@ -293,14 +293,14 @@ class HomeController extends Controller
                 }
                 return response()->json([
                     'status' => false,
-                    'data' => trans('api.no_products'),
+                    'msg' => trans('api.no_products'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -339,7 +339,7 @@ class HomeController extends Controller
                 }else{
                     return response()->json([
                         'status' => false,
-                        'data' => trans('api.no_products'),
+                        'msg' => trans('api.no_products'),
                         'code' => 400,
                     ]);
                 }
@@ -382,14 +382,14 @@ class HomeController extends Controller
                 }
                 return response()->json([
                     'status' => false,
-                    'data' => trans('api.no_products'),
+                    'msg' => trans('api.no_products'),
                     'code' => 400,
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -438,13 +438,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'data' => trans('api.no_products'),
+                'msg' => trans('api.no_products'),
                 'code' => 400,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -490,13 +490,13 @@ class HomeController extends Controller
             }
             return response()->json([
                 'status' => false,
-                'data' => trans('api.no_products'),
+                'msg' => trans('api.no_products'),
                 'code' => 400,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -514,7 +514,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -531,7 +531,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -548,7 +548,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -600,7 +600,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -618,7 +618,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -636,7 +636,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -740,14 +740,14 @@ class HomeController extends Controller
             }else{
                 return response()->json([
                     'status' => false,
-                    'data' => trans('api.no_products'),
+                    'msg' => trans('api.no_products'),
                     'code' => 400,
                 ]);
             }
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -776,7 +776,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -797,7 +797,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -844,7 +844,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -865,7 +865,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
@@ -893,7 +893,7 @@ class HomeController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => false,
-                'data' => trans('api.err'),
+                'msg' => trans('api.err'),
                 'code' => 400,
             ]);
         }
