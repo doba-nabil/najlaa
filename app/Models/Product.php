@@ -167,10 +167,14 @@ class Product extends Model
     {
         if (\request()->bearerToken()) {
             $user = User::where('api_token', \request()->bearerToken())->first();
-            $found = WishList::where('product_id', $this->id)->where('user_id', $user->id)->first();
-            if (isset($found)) {
-                return true;
-            } else {
+            if(isset($user)){
+                $found = WishList::where('product_id', $this->id)->where('user_id', $user->id)->first();
+                if (isset($found)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }else{
                 return false;
             }
         } else {

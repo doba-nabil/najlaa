@@ -117,7 +117,7 @@ class CategoryController extends Controller
                             'imageable_id'
                         );
                     })
-                )->active()->get();
+                )->active()->withCount('category_products')->get();
             }))->select(
                 'id',
                 'name_'.app()->getLocale().' as name'
