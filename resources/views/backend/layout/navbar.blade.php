@@ -192,6 +192,67 @@
                         </li>
                     </ul>
                 </li>
+                <hr>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-scroll"></i>
+                        <span>
+                            @if(app()->getLocale() == 'en')
+                                Reports
+                            @else
+                                التقارير
+                            @endif
+                        </span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('daily_report') }}">
+                                @if(app()->getLocale() == 'en')
+                                    Daily Reports
+                                @else
+                                    التقارير اليومية
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('monthly_report') }}">
+                                @if(app()->getLocale() == 'en')
+                                    Monthly Reports
+                                @else
+                                    التقارير الشهرية
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('yearly_report') }}">
+                                @if(app()->getLocale() == 'en')
+                                    Yearly Reports
+                                @else
+                                    التقارير السنوية
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('all_report') }}">
+                                @if(app()->getLocale() == 'en')
+                                     Reports
+                                @else
+                                    التقارير
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('best_selling') }}">
+                                @if(app()->getLocale() == 'en')
+                                    Best selling
+                                @else
+                                    الافضل مبيعا
+                                @endif
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <hr>
 
             </ul>
         </div>

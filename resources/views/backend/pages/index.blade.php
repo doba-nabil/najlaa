@@ -32,8 +32,7 @@
                         <tr>
                             <td>1</td>
                             <td>{{ __('dashboard.faqs') }}</td>
-                            <td>{{ __('dashboard.active
-                            ') }}</td>
+                            <td>{{ __('dashboard.active') }}</td>
                             <td>
                                 <a href="{{ route('faqs.index') }}"
                                    class="mr-3 text-primary"><i class="mdi mdi-eye font-size-18"></i></a>

@@ -152,6 +152,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     //*********** end send message route ***********/
 
     Route::get('chart', 'ChartController@index');
+
+//    reports
+    Route::get('yearly/report', 'ReportController@yearlyReport')->name('yearly_report');
+    Route::post('yearly/report', 'ReportController@yearlyReport_post')->name('yearly_report_post');
+    Route::get('monthly/report', 'ReportController@monthlyReport')->name('monthly_report');
+    Route::post('monthly/report', 'ReportController@monthlyReport_post')->name('monthly_report_post');
+    Route::get('daily/report', 'ReportController@dailyReport')->name('daily_report');
+    Route::post('daily/report', 'ReportController@dailyReport_post')->name('daily_report_post');
+
+    Route::get('all/report', 'ReportController@allReport')->name('all_report');
+    Route::post('all/report', 'ReportController@allReport_post')->name('all_report_post');
+
+    Route::get('best_selling', 'ReportController@best_selling')->name('best_selling');
+    Route::post('best_selling', 'ReportController@best_selling_post')->name('best_selling_post');
+
 });
 /************* ajax select routes ******************/
 Route::get('/ajax-subcats', 'Admin\AdminController@getsubcategories');
