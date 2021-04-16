@@ -99,29 +99,10 @@ class CategoryController extends Controller
     public function all_cats()
     {
         try{
-            $categories = Category::whereNull('parent_id')->with(array('category_products'=>function($query){
-                $query->select(
-                    'id',
-                    'category_id',
-                    'price',
-                    'discount_price',
-                    'percentage_discount',
-                    'min_qty',
-                    'max_qty',
-                    'code',
-                    'name_'.app()->getLocale().' as name',
-                    'chosen'
-                )->with(array('mainImage' => function ($query) {
-                        $query->select(
-                            'image',
-                            'imageable_id'
-                        );
-                    })
-                )->active()->get();
-            }))->select(
+            $categories = Category::whereNull('parent_id')->select(
                 'id',
                 'name_'.app()->getLocale().' as name'
-            )->active()->get();
+            )->active()->withCount('category_products')->get();
             return response()->json([
                 'status' => true,
                 'data' => $categories,

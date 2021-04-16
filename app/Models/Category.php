@@ -60,8 +60,6 @@ class Category extends Model
     {
         return $this->morphOne('App\Models\Image', 'imageable', 'imageable_type', 'imageable_id')->where('type' , 'main');
     }
-
-
     public function category_products()
     {
         return $this->hasMany('App\Models\Product' , 'category_id' , 'id')->active();
