@@ -38,7 +38,7 @@ class FcmController extends Controller
             $dataString = json_encode($data);
 
             $headers = [
-                'Authorization: key=AAAA46z3lxk:APA91bGF7acxyBgWfhXkHiUUYDasurOeVt1j88IuTfDkHPk_t27DjF0I_Yhfn-VMYEVyOQxiQBuLZyp4Y-hrMUq2iKi9G8QK1_xoDvHx9tRmEnxM76Y3V50_sQ3bVf-qU9a8ZiykdvDJ',
+                'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
                 'Content-Type: application/json',
             ];
             $ch = curl_init();
@@ -83,7 +83,7 @@ class FcmController extends Controller
                 $dataString = json_encode($data);
 
                 $headers = [
-                    'Authorization: key=AAAA46z3lxk:APA91bGF7acxyBgWfhXkHiUUYDasurOeVt1j88IuTfDkHPk_t27DjF0I_Yhfn-VMYEVyOQxiQBuLZyp4Y-hrMUq2iKi9G8QK1_xoDvHx9tRmEnxM76Y3V50_sQ3bVf-qU9a8ZiykdvDJ',
+                    'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
                     'Content-Type: application/json',
                 ];
                 $ch = curl_init();
@@ -125,7 +125,7 @@ class FcmController extends Controller
             $dataString = json_encode($data);
 
             $headers = [
-                'Authorization: key=AAAA46z3lxk:APA91bGF7acxyBgWfhXkHiUUYDasurOeVt1j88IuTfDkHPk_t27DjF0I_Yhfn-VMYEVyOQxiQBuLZyp4Y-hrMUq2iKi9G8QK1_xoDvHx9tRmEnxM76Y3V50_sQ3bVf-qU9a8ZiykdvDJ',
+                'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
                 'Content-Type: application/json',
             ];
             $ch = curl_init();
