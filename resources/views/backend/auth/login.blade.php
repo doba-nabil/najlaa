@@ -38,11 +38,12 @@
                                         </div>
 
                                         <h4 class="font-size-18 mt-4">Welcome Back !</h4>
-                                        <p class="text-muted">Sign in to continue to Nazox.</p>
+                                        <p class="text-muted">Sign in to continue to Najlaa Dashboard.</p>
                                     </div>
 
                                     <div class="p-2 mt-5">
                                         @include('common.done')
+                                        @include('common.errors')
                                         <form method="POST" action="{{ route('backendLogin') }}">
                                             {{ csrf_field() }}
                                             <div class="form-group auth-form-group-custom mb-4">

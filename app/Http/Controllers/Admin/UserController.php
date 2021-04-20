@@ -200,19 +200,39 @@ class UserController extends Controller
         try {
             $user = User::find($id);
             if(count($user->orders) > 0){
-                return response()->json([
-                    'error' => 'Cannot delete,Existing Orders To This User',
-                ],422);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'error' => 'لا يمكن حذ المستخدم بسبب وجود طلبات شراء'
+                    ],422);
+                }else{
+                    return response()->json([
+                        'error' => 'Cannot delete,Existing Orders To This User',
+                    ],422);
+                }
+
             }else{
                 $user->delete();
-                return response()->json([
-                    'success' => 'User deleted successfully!',
-                ],200);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'success' => 'تم حذف المستخدم بنجاح',
+                    ],200);
+                }else{
+                    return response()->json([
+                        'success' => 'User deleted successfully!',
+                    ],200);
+                }
+
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Error Try Again !!'
-            ],422);
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
 
     }
@@ -236,9 +256,15 @@ class UserController extends Controller
                 ],422);
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Error Try Again !!'
-            ],422);
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
     }
 }

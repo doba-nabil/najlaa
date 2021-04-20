@@ -30,25 +30,25 @@ $(document).ready(function () {
                             Swal.fire({
                                 icon: 'success',
                                 type: 'success',
-                                title: 'Deleted Successfully',
+                                title: data['success'],
                                 showConfirmButton: false,
-                                timer: 1500
+                                timer: 2000
                             })
                         } else if (data['error']) {
                             Swal.fire({
                                 icon: 'error',
                                 type: 'error',
-                                title: 'Error , Please Try Again .....',
+                                title: data['error'],
                                 showConfirmButton: false,
-                                timer: 1500
+                                timer: 2000
                             })
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 type: 'error',
-                                title: 'Error , Please Try Again .....',
+                                title: data['error'],
                                 showConfirmButton: false,
-                                timer: 1500
+                                timer: 2000
                             })
                         }
                     },
@@ -56,9 +56,9 @@ $(document).ready(function () {
                         Swal.fire({
                             icon: 'error',
                             type: 'error',
-                            title: 'Error , Please Try Again .....',
+                            title: data['error'],
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 2000
                         })
                     }
                 });

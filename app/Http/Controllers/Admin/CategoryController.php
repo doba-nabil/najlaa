@@ -151,19 +151,41 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::find($id);
-            if(count($category->category_products) > 0){
-                return response()->json([
-                    'error' => 'Cannot delete,Existing products in this category',
-                ],422);
+            if(count($category->category_products) > 0 || count($category->subCategories) > 0 ){
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'error' => 'لا يمكن حذف التصنيف بسبب وجود منتجات او تصميفات فرعية',
+                    ],422);
+                }else{
+                    return response()->json([
+                        'error' => 'Cannot delete,Existing products in this category or Subcategories',
+                    ],422);
+                }
+
             }else{
                 $this->deleteimages($category->id , 'pictures/categories/' , Category::class);
                 $category->delete();
-                return response()->json([
-                    'success' => 'Category deleted successfully!',
-                ],200);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'success' => 'تم حذف التصنيف بنجاح',
+                    ],200);
+                }else{
+                    return response()->json([
+                        'success' => 'Category deleted successfully!',
+                    ],200);
+                }
+
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
 
     }
@@ -174,21 +196,43 @@ class CategoryController extends Controller
             $categories = Category::whereNull('parent_id')->get();
             if (count($categories) > 0) {
                 foreach ($categories as $category) {
-                   if(count($category->category_products) == 0){
+                   if(count($category->category_products) == 0 || count($category->subCategories) > 0 ){
                         $this->deleteimages($category->id , 'pictures/categories/' , Category::class);
                         $category->delete();
                     }
                 }
-                return response()->json([
-                    'success' => 'Deleted the Empty Categories',
-                ],200);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'success' => 'تم حذف التصنيفات الفارغة',
+                    ],200);
+                }else{
+                    return response()->json([
+                        'success' => 'Deleted the Empty Categories',
+                    ],200);
+                }
+
             } else {
-                return response()->json([
-                    'error' => 'NO Categories TO DELETE'
-                ],422);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'error' => 'لا يوجد تصنيفات لحذفها'
+                    ],422);
+                }else{
+                    return response()->json([
+                        'error' => 'NO Categories TO DELETE'
+                    ],422);
+                }
+
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
     }
 }

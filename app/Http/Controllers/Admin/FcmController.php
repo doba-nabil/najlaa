@@ -14,6 +14,7 @@ class FcmController extends Controller
     public function __construct()
     {
         $this->serverKey = config('app.firebase_server_key');
+        $this->middleware('permission:message-list', ['only' => ['fcm','sendPushAll','fcm_users','sendPushUsers','fcm_not_users','sendPushNotUsers']]);
     }
 
     public function fcm ()

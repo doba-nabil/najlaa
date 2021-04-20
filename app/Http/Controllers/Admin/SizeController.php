@@ -127,17 +127,38 @@ class SizeController extends Controller
         try{
             $size = Size::find($id);
             if(count($size->productDetails) > 0){
-                return response()->json([
-                    'error' => 'Cannot delete,Existing products in It',
-                ],422);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'error' => 'لا يمكن الحذف بسبب وجود منتجات',
+                    ],422);
+                }else{
+                    return response()->json([
+                        'error' => 'Cannot delete,Existing products in It',
+                    ],422);
+                }
+
             }else{
                 $size->delete();
-                return response()->json([
-                    'success' => 'Record deleted successfully!',
-                ],200);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'success' => 'تم حذف المقاس بنجاح',
+                    ],200);
+                }else{
+                    return response()->json([
+                        'success' => 'Size deleted successfully!',
+                    ],200);
+                }
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error', 'Error Try Again !!');
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
     }
     public function delete_sizes()
@@ -150,16 +171,37 @@ class SizeController extends Controller
                         $size->delete();
                     }
                 }
-                return response()->json([
-                    'success' => 'Deleted the Empty Sizes',
-                ],200);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'success' => 'تم حذف المقاسات الفارغة',
+                    ],200);
+                }else{
+                    return response()->json([
+                        'success' => 'Deleted the Empty Sizes',
+                    ],200);
+                }
+
             }else{
-                return response()->json([
-                    'error' => 'NO THING TO DELETE'
-                ],422);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'error' => 'لا يوجد ما يتم حذفة!!'
+                    ],422);
+                }else{
+                    return response()->json([
+                        'error' => 'No Records To delete'
+                    ],422);
+                }
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error', 'Error Try Again !!');
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
     }
 }

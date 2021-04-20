@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:coupon-list|coupon-create|coupon-edit|coupon-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:coupon-list', ['only' => ['index','show']]);
+        $this->middleware('permission:coupon-create', ['only' => ['create','store']]);
+        $this->middleware('permission:coupon-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:coupon-delete', ['only' => ['destroy' , 'delete_coupons']]);
+    }
     public function index()
     {
         try{
@@ -94,11 +103,11 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'code' => 'required|max:255|unique:cobones,id,'.$id,
+            'value' => 'required|numeric|min:1',
+        ]);
         try{
-            $this->validate($request, [
-                'code' => 'required|max:255|unique:cobones,id,'.$id,
-                'value' => 'required|numeric|min:5',
-            ]);
             $cobone = Coupon::find($id);
             $cobone->code = $request->code;
             $cobone->value = $request->value;

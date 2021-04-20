@@ -30,7 +30,7 @@ $(document).ready(function () {
                             Swal.fire({
                                 icon: 'success',
                                 type: 'success',
-                                title: 'تم الحذف بنجاح',
+                                title: data['success'],
                                 showConfirmButton: false,
                                 timer: 1500
                             })
@@ -38,7 +38,7 @@ $(document).ready(function () {
                             Swal.fire({
                                 icon: 'error',
                                 type: 'error',
-                                title: 'يوجد خطأ يرجى المحاولة مرة اخرى .....',
+                                title: data['error'],
                                 showConfirmButton: false,
                                 timer: 1500
                             })
@@ -46,7 +46,7 @@ $(document).ready(function () {
                             Swal.fire({
                                 icon: 'error',
                                 type: 'error',
-                                title: 'يوجد خطأ يرجى المحاولة مرة اخرى .....',
+                                title: data['error'],
                                 showConfirmButton: false,
                                 timer: 1500
                             })
@@ -56,7 +56,7 @@ $(document).ready(function () {
                         Swal.fire({
                             icon: 'error',
                             type: 'error',
-                            title: 'يوجد خطأ يرجى المحاولة مرة اخرى .....',
+                            title: data['error'],
                             showConfirmButton: false,
                             timer: 1500
                         })
