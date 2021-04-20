@@ -181,6 +181,15 @@ $(document).on('click', '.remove-alert', function(e) {
                         showConfirmButton: false,
                         timer: 1000
                     });
+                },
+                error: function(result) {
+                    var errors = result.responseJSON;
+                    swalWithBootstrapButtons.fire({
+                        icon: 'error',
+                        title: errors.error,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
                 }
             });
         } else if (

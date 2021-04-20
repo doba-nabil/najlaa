@@ -131,17 +131,37 @@ class SubcategoryController extends Controller
         try{
             $category = Category::find($id);
             if(count($category->subcategory_products) > 0){
-                return response()->json([
-                    'error' => 'Cannot delete,Existing products in this category',
-                ],422);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'error' => 'لا يمكن حذف التصنيف بسبب وجود منتجات',
+                    ],422);
+                }else{
+                    return response()->json([
+                        'error' => 'Cannot delete,Existing products in this category',
+                    ],422);
+                }
             }else{
                 $category->delete();
-                return response()->json([
-                    'success' => 'Category deleted successfully!',
-                ],200);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'success' => 'تم حذف التصنيف بنجاح',
+                    ],200);
+                }else{
+                    return response()->json([
+                        'success' => 'Category deleted successfully!',
+                    ],200);
+                }
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error' , 'Error Try Again....');
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
 
     }
@@ -156,16 +176,36 @@ class SubcategoryController extends Controller
                         $category->delete();
                     }
                 }
-                return response()->json([
-                    'success' => 'Deleted the Empty Categories',
-                ],200);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'success' => 'تم حذف التصنيفات الفارغة',
+                    ],200);
+                }else{
+                    return response()->json([
+                        'success' => 'Deleted the Empty Categories',
+                    ],200);
+                }
             } else {
-                return response()->json([
-                    'error' => 'NO Categories TO DELETE'
-                ],422);
+                if(app()->getLocale() == 'ar'){
+                    return response()->json([
+                        'error' => 'لا يوجد تصنيفات لحذفها'
+                    ],422);
+                }else{
+                    return response()->json([
+                        'error' => 'NO Categories TO DELETE'
+                    ],422);
+                }
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error' , 'Error Try Again....');
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
     }
 }

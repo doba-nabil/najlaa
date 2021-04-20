@@ -274,20 +274,41 @@ class ProductController extends Controller
                         $image->delete();
                     }
                     $product->delete();
-                    return response()->json([
-                        'success' => 'Record deleted successfully!'
-                    ]);
+                    if(app()->getLocale() == 'ar'){
+                        return response()->json([
+                            'success' => 'تم الحذف بنجاح'
+                        ]);
+                    }else{
+                        return response()->json([
+                            'success' => 'Record deleted successfully!'
+                        ]);
+                    }
                 } else {
-                    return response()->json([
-                        'error' => 'Cannot delete Product, In Order'
-                    ], 422);
+                    if(app()->getLocale() == 'ar'){
+                        return response()->json([
+                            'error' => 'لا يمكن حذف المنتج بسبب وجود طلبات شراء'
+                        ], 422);
+                    }else{
+                        return response()->json([
+                            'error' => 'Cannot delete Product, In Order'
+                        ], 422);
+                    }
+
                 }
 
             } else {
                 return redirect()->back()->with('error', 'Error Try Again !!');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
     }
 
@@ -297,20 +318,34 @@ class ProductController extends Controller
             $ids = $request->ids;
             $products = Product::whereIn('id',explode(",",$ids))->get();
             foreach ($products as $product){
-                $this->deleteimages($product->id, 'pictures/products/', Product::class);
-                foreach ($product->subImages as $image) {
-                    @unlink('pictures/products/' . $image->image);
-                    $image->delete();
+                if (count($product->pays) == 0) {
+                    $this->deleteimages($product->id, 'pictures/products/', Product::class);
+                    foreach ($product->subImages as $image) {
+                        @unlink('pictures/products/' . $image->image);
+                        $image->delete();
+                    }
+                    $product->delete();
                 }
-                $product->delete();
             }
-            return response()->json([
-                'success' => 'Record deleted successfully!'
-            ]);
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'success' => 'تم حذف المنتجات بلا طلبات شراء بنجاح'
+                ]);
+            }else{
+                return response()->json([
+                    'success' => 'Products Without Orders deleted successfully!'
+                ]);
+            }
         } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Error Try Again !!'
-            ],422);
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
     }
 
@@ -324,7 +359,15 @@ class ProductController extends Controller
                 'success' => 'Record deleted successfully!'
             ]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
+            if(app()->getLocale() == 'ar'){
+                return response()->json([
+                    'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
+                ],422);
+            }else{
+                return response()->json([
+                    'error' => 'Error Try Again !!'
+                ],422);
+            }
         }
     }
 }

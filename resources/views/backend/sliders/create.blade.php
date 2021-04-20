@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{{ __('dashboard.ad_banner') }}</h4>
+                    <h4 class="card-title">{{ __('dashboard.add') }} {{ __('dashboard.ad_banners') }}</h4>
                     <p class="card-title-desc"></p>
                     <form method="post" action="{{ route('sliders.store') }}" class="needs-validation" novalidate
                           enctype="multipart/form-data">

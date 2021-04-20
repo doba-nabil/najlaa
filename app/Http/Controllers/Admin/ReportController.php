@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:order-list|order-create|order-edit|order-delete', ['only' => ['yearlyReport','yearlyReport_post','monthlyReport','monthlyReport_post',
+            'dailyReport','dailyReport_post','allReport','allReport_post','best_selling','best_selling_post']]);
+        $this->middleware('permission:order-list',['only' => ['yearlyReport','yearlyReport_post','monthlyReport','monthlyReport_post',
+            'dailyReport','dailyReport_post','allReport','allReport_post','best_selling','best_selling_post']]);
+        $this->middleware('permission:order-edit', ['only' => ['yearlyReport','yearlyReport_post','monthlyReport','monthlyReport_post',
+            'dailyReport','dailyReport_post','allReport','allReport_post','best_selling','best_selling_post']]);
+        $this->middleware('permission:order-delete', ['only' => ['yearlyReport','yearlyReport_post','monthlyReport','monthlyReport_post',
+            'dailyReport','dailyReport_post','allReport','allReport_post','best_selling','best_selling_post']]);
+    }
+
     public function yearlyReport()
     {
         try {
