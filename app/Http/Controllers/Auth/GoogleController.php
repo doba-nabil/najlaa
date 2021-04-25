@@ -27,7 +27,7 @@ class GoogleController extends Controller
      */
     public function handleGoogleCallback()
     {
-        try {
+
 
             $user = Socialite::driver('google')->stateless()->user();
             $finduser = User::where('provider_id', $user->id)->where('provider','google')->first();
@@ -84,12 +84,6 @@ class GoogleController extends Controller
                     'code' => 200,
                 ]);
             }
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'msg' => 'يوجد خطأ يرجى المحاولة مرة اخرى',
-                'code' => 400,
-            ]);
-        }
+
     }
 }
