@@ -148,6 +148,7 @@ return [
 
     'attributes' => [
         'name'                  => 'الاسم',
+        'provider'                  => 'نوع التسجيل',
         'username'              => 'اسم المُستخدم',
         'email'                 => 'البريد الالكتروني',
         'first_name'            => 'الاسم الأول',
