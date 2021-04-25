@@ -30,7 +30,7 @@ class SocialAuth extends FormRequest
             'provider_id'    => 'required',
             'provider'    => [
                 'required',
-                Rule::in(['facebook', 'google','apple']),
+                Rule::in(['facebook', 'google','apple','twitter']),
             ],
         ];
 
