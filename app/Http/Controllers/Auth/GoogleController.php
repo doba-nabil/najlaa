@@ -54,7 +54,7 @@ class GoogleController extends Controller
                 'code' => 200,
             ]);
         } else {
-            $finduserr = User::where('provider_id', $user->id)->where('email', $user->email)->first();
+            $finduserr = User::where('email', $user->email)->first();
             if (isset($finduserr)) {
                 return response()->json([
                     'status' => false,
