@@ -77,7 +77,6 @@ class GoogleController extends Controller
                     'password' => Hash::make($pass),
                 ]);
                 $newUser->generateToken();
-
                 $admins = Moderator::where('status', 1)->get();
                 foreach ($admins as $admin) {
                     $admin->notify(new NewUser($user));

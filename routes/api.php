@@ -147,6 +147,10 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
     Route::get('notification/single/{notId}', 'NotificationController@notification_single');
 
 
+
+    Route::post('social', 'SocialController@social');
+
+
 //    try apis
     Route::get('try/users', 'TryController@users');
 });
