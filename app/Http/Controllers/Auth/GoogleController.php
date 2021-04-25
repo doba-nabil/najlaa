@@ -20,6 +20,7 @@ class GoogleController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
+
     /**
      * Create a new controller instance.
      *
@@ -29,52 +30,65 @@ class GoogleController extends Controller
     {
 
 
-            $user = Socialite::driver('google')->stateless()->user();
-            $finduser = User::where('provider_id', $user->id)->where('provider','google')->first();
+        $user = Socialite::driver('google')->stateless()->user();
+        $finduser = User::where('provider_id', $user->id)->where('provider', 'google')->first();
 
-            if($finduser){
-                $finduser->generateToken();
-                $token = \Request::header('token');
-                if(isset($token)){
-                    $user_token = DB::table('token_users')->where('user_id' , $user->id)->where('device_token' , $token)->first();
-                    if(!isset($user_token)){
-                        DB::table('token_users')->insert(
-                            array(
-                                'user_id'     =>   $user->id,
-                                'device_token'   =>  $token
-                            )
-                        );
-                    }
+        if ($finduser) {
+            $finduser->generateToken();
+            $token = \Request::header('token');
+            if (isset($token)) {
+                $user_token = DB::table('token_users')->where('user_id', $user->id)->where('device_token', $token)->first();
+                if (!isset($user_token)) {
+                    DB::table('token_users')->insert(
+                        array(
+                            'user_id' => $user->id,
+                            'device_token' => $token
+                        )
+                    );
                 }
+            }
 
+            return response()->json([
+                'status' => true,
+                'data' => $finduser,
+                'code' => 200,
+            ]);
+        } else {
+            $finduserr = User::where('provider_id', $user->id)->where('email', $user->email)->first();
+            if (iseet($finduserr)) {
                 return response()->json([
-                    'status' => true,
-                    'data' => $finduser,
-                    'code' => 200,
+                    'status' => false,
+                    'msg' => 'The given data was invalid.',
+                    "errors" => [
+                        "email" => [
+                            "The email has already been taken."
+                        ]
+                    ],
+                    'code' => 422,
                 ]);
-            }else{
+            } else {
                 $pass = '123456789';
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
-                    'provider_id'=> $user->id,
-                    'email_verified_at'=> Carbon::now(),
-                    'provider'=> 'google',
+                    'provider_id' => $user->id,
+                    'email_verified_at' => Carbon::now(),
+                    'provider' => 'google',
                     'password' => Hash::make($pass),
                 ]);
                 $newUser->generateToken();
 
-                $admins = Moderator::where('status' , 1)->get();
-                foreach ($admins as $admin){
+                $admins = Moderator::where('status', 1)->get();
+                foreach ($admins as $admin) {
                     $admin->notify(new NewUser($user));
                 }
 
                 $token = \Request::header('token');
-                if(isset($token)){
+                if (isset($token)) {
                     DB::table('token_users')->insert(
                         array(
-                            'user_id'     =>   $user->id,
-                            'device_token'   =>  $token
+                            'user_id' => $user->id,
+                            'device_token' => $token
                         )
                     );
                 }
@@ -84,6 +98,7 @@ class GoogleController extends Controller
                     'code' => 200,
                 ]);
             }
+        }
 
     }
 }
