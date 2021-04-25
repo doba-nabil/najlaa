@@ -55,7 +55,7 @@ class GoogleController extends Controller
             ]);
         } else {
             $finduserr = User::where('provider_id', $user->id)->where('email', $user->email)->first();
-            if (iseet($finduserr)) {
+            if (isset($finduserr)) {
                 return response()->json([
                     'status' => false,
                     'msg' => 'The given data was invalid.',
