@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/SocialAuth.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/SocialAuth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,19 +44,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SocialController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SocialController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="18" column="94" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="94" />
+            <state relative-caret-position="111">
+              <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SocialAuth.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SocialAuth.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Requests/SocialAuth.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
+            <state relative-caret-position="249">
               <caret line="32" column="63" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
               <folding>
                 <element signature="e#37#80#0#PHP" expanded="true" />
@@ -187,8 +187,8 @@
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/resources/lang/ar/validation.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/GoogleController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/SocialAuth.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php" />
       </list>
     </option>
   </component>
@@ -500,12 +500,12 @@
       <workItem from="1618782647657" duration="209000" />
       <workItem from="1618947407538" duration="12006000" />
       <workItem from="1619000462735" duration="161000" />
-      <workItem from="1619378518916" duration="3691000" />
+      <workItem from="1619378518916" duration="4123000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="688045000" />
+    <option name="totallyTimeSpent" value="688477000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -886,13 +886,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="18" column="94" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
@@ -902,11 +895,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/SocialAuth.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
+        <state relative-caret-position="249">
           <caret line="32" column="63" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
           <folding>
             <element signature="e#37#80#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
         </state>
       </provider>
     </entry>
