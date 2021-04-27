@@ -25,8 +25,8 @@ class SocialAuth extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|min:3',
-             'email'       => 'required|email',
+            'name'        => 'nullable|min:3',
+             'email'       => 'nullable|email',
             'provider_id'    => 'required',
             'provider'    => [
                 'required',
