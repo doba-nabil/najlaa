@@ -19,19 +19,7 @@ class SocialController extends Controller
         $check_user = User::where([['email', $request->email],['provider', $request->provider]])->first();
 
         if (User::where([['email', Request()->email], ['provider', null]])->first()) {
-            return response()->json([
-                "status" => false,
-                "code" => 422,
-                "message" => "The given data was invalid.",
-                "errors" => [
-                    "email" => [
-                        "The email has already been taken."
-                    ]
-                ],
-            ], 422);
-        }
-        if (!isset($check_user)) {
-            if (User::where([['email', Request()->email]])->first()) {
+            if(app()->getLocale() == 'en'){
                 return response()->json([
                     "status" => false,
                     "code" => 422,
@@ -42,6 +30,44 @@ class SocialController extends Controller
                         ]
                     ],
                 ], 422);
+            }else{
+                return response()->json([
+                    "status" => false,
+                    "code" => 422,
+                    "message" => "البيانات المدخلة غير صالحة.",
+                    "errors" => [
+                        "email" => [
+                            "عفوا بريد مستخدم سابقا."
+                        ]
+                    ],
+                ], 422);
+            }
+        }
+        if (!isset($check_user)) {
+            if (User::where([['email', Request()->email]])->first()) {
+                if(app()->getLocale() == 'en'){
+                    return response()->json([
+                        "status" => false,
+                        "code" => 422,
+                        "message" => "The given data was invalid.",
+                        "errors" => [
+                            "email" => [
+                                "The email has already been taken."
+                            ]
+                        ],
+                    ], 422);
+                }else{
+                    return response()->json([
+                        "status" => false,
+                        "code" => 422,
+                        "message" => "البيانات المدخلة غير صالحة.",
+                        "errors" => [
+                            "email" => [
+                                "عفوا بريد مستخدم سابقا."
+                            ]
+                        ],
+                    ], 422);
+                }
             }else{
                 $pass = '123456789';
                 $user = User::create([
@@ -69,17 +95,32 @@ class SocialController extends Controller
                 foreach ($admins as $admin){
                     $admin->notify(new NewUser($user));
                 }
-                return response()->json([
-                    'status' => true,
-                    'code' => 200,
-                    'message' => 'Registered  Successfully',
-                    'data' => [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'api_token'     =>  $user->api_token,
-                    ],
-                ], 200);
+                if(app()->getLocale() == 'en'){
+                    return response()->json([
+                        'status' => true,
+                        'code' => 200,
+                        'message' => 'Registered  Successfully',
+                        'data' => [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'api_token'     =>  $user->api_token,
+                        ],
+                    ], 200);
+                }else{
+                    return response()->json([
+                        'status' => true,
+                        'code' => 200,
+                        'message' => 'تسجيل ناجح',
+                        'data' => [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'api_token'     =>  $user->api_token,
+                        ],
+                    ], 200);
+                }
+
             }
         } else {
             $user = $check_user;
@@ -96,17 +137,31 @@ class SocialController extends Controller
                     );
                 }
             }
-            return response()->json([
-                'status' => true,
-                'code' => 200,
-                'message' => 'Logined  Successfully',
-                'data' => [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'api_token'     =>  $user->api_token,
-                ],
-            ], 200);
+            if(app()->getLocale() == 'en'){
+                return response()->json([
+                    'status' => true,
+                    'code' => 200,
+                    'message' => 'Logined  Successfully',
+                    'data' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'api_token'     =>  $user->api_token,
+                    ],
+                ], 200);
+            }else{
+                return response()->json([
+                    'status' => true,
+                    'code' => 200,
+                    'message' => 'تسجيل دخول ناجح',
+                    'data' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'api_token'     =>  $user->api_token,
+                    ],
+                ], 200);
+            }
         }
     }
 }
