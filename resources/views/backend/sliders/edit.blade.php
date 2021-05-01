@@ -1,5 +1,6 @@
 @extends('backend.layout.master')
 @section('backend-head')
+    <link href="{{ asset('backend') }}/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css"/>
 @endsection
 @section('backend-main')
     <div class="row">
@@ -53,13 +54,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="link">{{ __('dashboard.link') }} ({{ __('dashboard.optional') }})</label>
-                                    <input type="text" name="link" class="form-control" id="link" placeholder="{{ __('dashboard.link') }}" value="{{ $slider->link }}">
-                                    @error('link')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                            <div class="col-md-12 col-12 mb-3">
+                                <label>
+                                    @lang('dashboard.products')
+                                </label>
+                                <div class="form-group" data-select2-id="126">
+                                    <select style="width: 100%" name="product_ids[]" class="select2 form-control select2-hidden-accessible" multiple="" data-select2-id="7" tabindex="-1" aria-hidden="true">
+                                        @foreach($products as $product)
+                                            <option
+                                                    @foreach($usedProducts as $uproduct)
+                                                    @if($uproduct->product_id == $product->id)
+                                                    selected
+                                                    @endif
+                                                    @endforeach
+                                                    value="{{ $product->id }}">{{ $product['name_'.app()->getLocale()] }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -107,4 +117,7 @@
     <script src="{{ asset('backend') }}/mine.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/form-element.init.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/select2/js/select2.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/pages/form-advanced.init.js"></script>
 @endsection
