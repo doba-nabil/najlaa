@@ -84,8 +84,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::delete('delete_currencies', 'CurrencyController@delete_currencies')->name('delete_currencies');
     /*********** end currencies route ***********/
     /***********  ad Banners route ***********/
-    Route::resource('sliders', 'SliderController', ['except' => ['show']]);
+    Route::resource('sliders', 'SliderController');
     Route::delete('delete_sliders', 'SliderController@delete_sliders')->name('delete_sliders');
+    Route::delete('delete_slider_product/{id}', 'SliderController@delete_slider_product')->name('delete_slider_product');
     /*********** end ad Banners route ***********/
     /***********  category Banners route ***********/
     Route::resource('category_sliders', 'CategorySliderController', ['except' => ['show']]);

@@ -35,6 +35,8 @@ class SliderRequest extends FormRequest
                         'subtitle_en' => 'nullable|max:100|min:1|string',
                         'link' => 'nullable|string',
                         'image' => 'required|mimes:jpg,jpeg,png,svg|max:5000',
+                        "product_ids"    => 'required|array|min:1',
+                        "product_ids.*"  => 'required|distinct',
                     ];
                 }
                 break;
@@ -47,6 +49,8 @@ class SliderRequest extends FormRequest
                         'subtitle_en' => 'nullable|max:100|min:1|string',
                         'link' => 'nullable|string',
                         'image' => 'mimes:jpg,jpeg,png,svg|max:5000',
+                        "product_ids"    => 'required|array|min:1',
+                        "product_ids.*"  => 'required|distinct',
                     ];
                 }
                 break;

@@ -143,6 +143,7 @@ class ProductController extends Controller
                     'name_' . app()->getLocale() . ' as name',
                     'price',
                     'discount_price',
+                    'max_qty',
                     'percentage_discount'
                 )->with(array('mainImage' => function ($query) {
                         $query->select(
@@ -204,6 +205,7 @@ class ProductController extends Controller
                 'name_' . app()->getLocale() . ' as name',
                 'price',
                 'discount_price',
+                'max_qty',
                 'percentage_discount'
             )->with(array('mainImage' => function ($query) {
                     $query->select(

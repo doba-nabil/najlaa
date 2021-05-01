@@ -11,14 +11,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{{ __('dashboard.ad_banners') }}</h4>
-                    <div style="display: flex;justify-content: space-between;">
-                        <a href="{{ route('sliders.create') }}" class="btn btn-success mb-2"><i class="mdi mdi-plus mr-2"></i> {{ __('dashboard.add_new') }}</a>
-                        <a class="btn btn-danger mb-2  delete-all text-white" onclick="return false;"
-                           delete_url="/delete_sliders/"><i class="mdi mdi-trash-can-outline mr-2"></i>
-                            {{ __('dashboard.delete_all') }}
-                        </a>
-                    </div>
+                    <h4 style="justify-content: space-between;display: flex" class="card-title">
+                        {{ $slider['title_'.app()->getLocale()] }}
+                        <a class="btn btn-warning" href="{{ route('sliders.index') }}">{{ __('dashboard.back') }}</a>
+                    </h4>
                     <hr>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -26,41 +22,32 @@
                         <tr>
                             <th>#</th>
                             <th>{{ __('dashboard.image') }}</th>
-                            <th>{{ __('dashboard.title') }}</th>
-                            <th>{{ __('dashboard.subtitle') }}</th>
+                            <th>{{ __('dashboard.name') }}</th>
+                            <th>{{ __('dashboard.in_stock') }}</th>
                             <th>{{ __('dashboard.active') }}</th>
-                            <th>{{ __('dashboard.products') }}</th>
                             <th>{{ __('dashboard.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($sliders as $slider)
+                        @foreach($slider->offer_products as $p)
+                            <?php
+                                $product = $p->product;
+                            ?>
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td width="100" height="100">
-                                    @if(isset($slider->mainImage))
-                                        <img style="width: 100%;border-radius: 10px" src="{{ asset('pictures/sliders/' . $slider->mainImage->image) }}"/>
+                                    @if(isset($product->mainImage))
+                                        <img style="width: 100%;border-radius: 10px" src="{{ asset('pictures/products/' . $product->mainImage->image) }}"/>
                                     @else
                                         <img style="width: 100%;border-radius: 10px" src="{{ asset('backend/assets/images/empty.jpg') }}"/>
                                     @endif
                                 </td>
-                                <td>{{ $slider['title_'.app()->getLocale()] ?? '-----' }}</td>
-                                <td>{{ $slider['subtitle_'.app()->getLocale()] ?? '-----' }}</td>
-                                <td>{{ $slider->getActive() }}</td>
+                                <td>{{ $product['name_'.app()->getLocale()] }}</td>
+                                <td>{{ $product->max_qty }}</td>
+                                <td>{{ $product->getActive() }}</td>
                                 <td>
-                                    @if($slider->offer_products->count() > 0)
-                                    <a href="{{ route('sliders.show' , $slider->id) }}">
-                                        <i class="fa fa-eye text-success"></i> <small>({{ $slider->offer_products->count() }})</small>
-                                    </a>
-                                    @else
-                                        <i class="fa fa-times text-danger"></i> <small>({{ $slider->offer_products->count() }})</small>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('sliders.edit' , $slider->id) }}"
-                                       class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                    <a title="" onclick="return false;" object_id="{{ $slider->id }}"
-                                       delete_url="/sliders/" class="text-danger remove-alert" href="#"><i
+                                    <a title="delete" onclick="return false;" object_id="{{ $p->id }}"
+                                       delete_url="/delete_slider_product/" class="text-danger remove-alert" href="#"><i
                                                 class="mdi mdi-trash-can font-size-18"></i></a>
                                 </td>
                             </tr>

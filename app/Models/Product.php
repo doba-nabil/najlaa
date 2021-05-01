@@ -25,7 +25,7 @@ class Product extends Model
         'created_at','updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at','subcategory_id' , 'brand_id' , 'material_id','category_id'
+        'created_at', 'updated_at','subcategory_id' , 'brand_id' , 'material_id','category_id','max_qty','min_qty'
     ];
 
     protected $appends = ['in_stock','currency_code' , 'currency_value' , 'isFav'];

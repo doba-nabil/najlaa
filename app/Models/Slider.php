@@ -10,7 +10,7 @@ class Slider extends Model
         'title_ar', 'title_en','subtitle_ar', 'subtitle_en','image','link', 'active' ,'created_at' , 'updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+        'created_at', 'updated_at','link'
     ];
     public function scopeActive($query)
     {
@@ -23,5 +23,9 @@ class Slider extends Model
     public function mainImage()
     {
         return $this->morphOne('App\Models\Image', 'imageable', 'imageable_type', 'imageable_id')->where('type' , 'main');
+    }
+    public function offer_products()
+    {
+        return $this->hasMany('App\Models\OfferProduct' , 'slider_id' , 'id');
     }
 }

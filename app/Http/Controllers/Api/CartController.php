@@ -36,6 +36,7 @@ class CartController extends Controller
                             'name_' . app()->getLocale() . ' as name',
                             'price',
                             'discount_price',
+                            'max_qty',
                             'percentage_discount'
                         )->with(array('mainImage' => function ($query) {
                                 $query->select(
@@ -78,6 +79,7 @@ class CartController extends Controller
                             'id',
                             'name_' . app()->getLocale() . ' as name',
                             'price',
+                            'max_qty',
                             'discount_price',
                             'percentage_discount'
                         )->with(array('mainImage' => function ($query) {
@@ -160,6 +162,7 @@ class CartController extends Controller
                             'name_' . app()->getLocale() . ' as name',
                             'price',
                             'discount_price',
+                            'max_qty',
                             'percentage_discount'
                         )->with(array('mainImage' => function ($query) {
                                 $query->select(
@@ -255,6 +258,7 @@ class CartController extends Controller
                                 'id',
                                 'name_' . app()->getLocale() . ' as name',
                                 'price',
+                                'max_qty',
                                 'discount_price',
                                 'percentage_discount'
                             )->with(array('mainImage' => function ($query) {
@@ -286,6 +290,7 @@ class CartController extends Controller
                             'id',
                             'name_' . app()->getLocale() . ' as name',
                             'price',
+                            'max_qty',
                             'discount_price',
                             'percentage_discount'
                         )->with(array('mainImage' => function ($query) {

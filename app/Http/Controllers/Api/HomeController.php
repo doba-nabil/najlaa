@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Contact;
 use App\Models\Moderator;
+use App\Models\OfferProduct;
 use App\Models\Option;
 use App\Models\Page;
 use App\Models\Product;
@@ -27,7 +28,7 @@ class HomeController extends Controller
         $this->middleware('auth:api')->except('categories', 'sliders','hot_offers','all_hot_offers',
             'interests','all_interests','contact_phone' ,'contact_email' , 'contact_address' , 'contact' , 'legal' ,
             'privacy' , 'chosen','all_chosen','delivery_return','filter','recently_search' , 'recently_products',
-            'delete_recently_products' , 'delete_recently_search','delete_recently');
+            'delete_recently_products' , 'delete_recently_search','delete_recently','slider_offers');
     }
     /**
      * Display a listing of the resource.
@@ -63,6 +64,78 @@ class HomeController extends Controller
                 ]);
             }
         }catch (\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => trans('api.err'),
+                'code' => 400,
+            ]);
+        }
+    }
+
+    public function slider_offers($slider_id,Request $request)
+    {
+        try {
+            $slider = Slider::find($slider_id);
+            if(isset($slider)){
+                $offers = OfferProduct::where('slider_id' , $slider_id)->get();
+                if($offers->count() > 0){
+                    $product_ids = $offers->pluck('product_id');
+                    $hot_offers = Product::whereIn('id',$product_ids)->whereNotNull('percentage_discount')->orWhere('percentage_discount' , '!=' , 0)->select(
+                        'id',
+                        'name_' . app()->getLocale() . ' as name',
+                        'max_qty',
+                        'price',
+                        'discount_price',
+                        'percentage_discount'
+                    )->active()->orderBy('percentage_discount', 'desc')->with(array('mainImage' => function ($query) {
+                            $query->select(
+                                'image',
+                                'imageable_id'
+                            );
+                        })
+                    )->get();
+                    $products = [];
+                    foreach($hot_offers as $one_product){
+                        $product = $one_product;
+                        if ($request->bearerToken()) {
+                            $user= User::where('api_token', $request->bearerToken())->first();
+                            $found = WishList::where('product_id', $one_product->id)->where('user_id', $user->id)->first();
+                            if (isset($found)) {
+                                $product['isFav'] = true;
+                            } else {
+                                $product['isFav'] = false;
+                            }
+                        } else {
+                            $product['isFav'] = false;
+                        }
+                        array_push($products,$product);
+                        $productss = $hot_offers;
+                    }
+                    if (count($hot_offers) > 0) {
+                        return response()->json([
+                            'status' => true,
+                            'data' => $productss,
+                            'code' => 200,
+                        ]);
+                    }
+                    return response()->json([
+                        'status' => false,
+                        'msg' => trans('api.no_products'),
+                        'code' => 400,
+                    ]);
+                }
+                return response()->json([
+                    'status' => false,
+                    'msg' => trans('api.no_products'),
+                    'code' => 400,
+                ]);
+            }
+            return response()->json([
+                'status' => false,
+                'msg' => trans('api.err'),
+                'code' => 400,
+            ]);
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
                 'msg' => trans('api.err'),
