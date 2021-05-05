@@ -59,6 +59,17 @@ class LoginController extends Controller
             $user->generateToken();
             $userr = $user->select('id' , 'name' , 'email' , 'active','api_token')->first();
             $token = \Request::header('token');
+            if(isset($token)){
+                $user_token = DB::table('token_users')->where('user_id' , $user->id)->where('device_token' , $token)->first();
+                if(!isset($user_token)){
+                    DB::table('token_users')->insert(
+                        array(
+                            'user_id'     =>   $user->id,
+                            'device_token'   =>  $token
+                        )
+                    );
+                }
+            }
             $carts = Cart::where('token' , $token)->get();
             if(count($carts) > 0){
                 foreach ($carts as $cart){

@@ -118,6 +118,18 @@ class RegisterController extends Controller
                 \Mail::to($user->email)->send(new VerifyMail($user , $user->code));
             }
         }
+        $token = \Request::header('token');
+        if(isset($token)){
+            $found = DB::table('token_users')->where('device_token',$token)->first();
+            if(!isset($found)){
+                DB::table('token_users')->insert(
+                    array(
+                        'user_id'     =>   $user->id,
+                        'device_token'   =>  $token
+                    )
+                );
+            }
+        }
         $admins = Moderator::where('status' , 1)->get();
         foreach ($admins as $admin){
             $admin->notify(new NewUser($user));
