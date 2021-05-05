@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/SocialController.php" afterDir="false" />
-    </list>
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -299,7 +296,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="2" />
     <option name="y" value="16" />
     <option name="width" value="1026" />
@@ -499,18 +496,17 @@
       <workItem from="1619609864005" duration="3933000" />
       <workItem from="1619889807946" duration="8546000" />
       <workItem from="1619949274236" duration="2611000" />
-      <workItem from="1620169944762" duration="2713000" />
+      <workItem from="1620169944762" duration="2976000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="709867000" />
+    <option name="totallyTimeSpent" value="710130000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17170954" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17170954" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -519,7 +515,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32994923" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32318106" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32318106" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
