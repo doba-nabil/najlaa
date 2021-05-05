@@ -19,19 +19,32 @@ class localization
         // set laravel localization
         app()->setLocale($local);
         $token = \Request::header('token');
-        if(isset($token)){
-            $user_token = DB::table('token_users')->where('device_token' , $token)->first();
+        if($request->bearerToken()){
+            $user = User::where('api_token', $request->bearerToken())->first();
+            $user_token = DB::table('token_users')->where('user_id' , $user->id)->where('device_token' , $token)->first();
             if(!isset($user_token)){
                 DB::table('token_users')->insert(
                     array(
-                        'device_token'   =>  $token,
-                        'lang'   =>  $local
+                        'user_id'     =>   $user->id,
+                        'device_token'   =>  $token
                     )
                 );
-            }elseif(isset($user_token)){
-                DB::table('token_users')->where('device_token' , $token)->update(array(
-                    'lang'=>$local,
-                ));
+            }
+        }else{
+            if(isset($token)){
+                $user_token = DB::table('token_users')->where('device_token' , $token)->first();
+                if(!isset($user_token)){
+                    DB::table('token_users')->insert(
+                        array(
+                            'device_token'   =>  $token,
+                            'lang'   =>  $local
+                        )
+                    );
+                }elseif(isset($user_token)){
+                    DB::table('token_users')->where('device_token' , $token)->update(array(
+                        'lang'=>$local,
+                    ));
+                }
             }
         }
         // continue request
