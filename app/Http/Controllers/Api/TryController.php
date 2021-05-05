@@ -16,7 +16,7 @@ class TryController extends Controller
             return response()->json([
                 'status' => true,
                 'data' => $users,
-                'tokens' => DB::table('token_users')->get();
+                'tokens' => DB::table('token_users')->get(),
                 'code' => 200,
             ]);
         }catch (\Exception $e){
