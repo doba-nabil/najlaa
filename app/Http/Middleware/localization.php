@@ -18,7 +18,7 @@ class localization
         $local = ($request->hasHeader('lang')) ? $request->header('lang') : 'en';
         // set laravel localization
         app()->setLocale($local);
-        if(\Request::is('api/login') || \Request::is('api/register')){
+        if(!\Request::is('api/login') || !\Request::is('api/register')){
             $token = \Request::header('token');
 
             if($request->bearerToken()){
