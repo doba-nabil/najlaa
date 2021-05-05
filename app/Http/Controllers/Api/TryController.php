@@ -30,8 +30,9 @@ class TryController extends Controller
     public function delete_tokens()
     {
         try{
-            $tokens = DB::table('token_users')->get();
-            $tokens->delete();
+            $tokens = DB::table('token_users')->delete();
+
+
             return response()->json([
                 'status' => true,
                 'msg' => 'scc',
