@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CouponController extends Controller
@@ -114,6 +115,9 @@ class CouponController extends Controller
             $cobone->used_count = $request->used_count;
             $cobone->user_used_count = $request->user_used_count;
             $cobone->end_date = $request->end_date;
+            if($request->end_date > Carbon::now()){
+                $cobone->active = 1;
+            }
             $cobone->save();
             return redirect(route('coupons.index'))->with('done', 'Edited Successfully');
         } catch (\Exception $e) {
