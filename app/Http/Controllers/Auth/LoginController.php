@@ -65,7 +65,8 @@ class LoginController extends Controller
                     DB::table('token_users')->insert(
                         array(
                             'user_id'     =>   $user->id,
-                            'device_token'   =>  $token
+                            'device_token'   =>  $token,
+                            'lang'   =>  app()->getLocale()
                         )
                     );
                 }
