@@ -17,7 +17,7 @@ class SocialController extends Controller
     public function social(SocialAuth $request)
     {
         if(isset($request->provider_id)){
-            $check_user = User::where([['provider_id' , $request->provider_id]])->first();
+            $check_user = User::where([['provider_id' , $request->provider_id] , ['provider' , $request->provider_id]])->first();
 
             if (!isset($check_user)) {
                     $pass = '123456789';
