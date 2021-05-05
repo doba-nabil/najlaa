@@ -154,4 +154,5 @@ Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function ()
 
 //    try apis
     Route::get('try/users', 'TryController@users');
+    Route::get('try/delete_tokens', 'TryController@delete_tokens');
 });
