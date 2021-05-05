@@ -11,7 +11,7 @@ class TryController extends Controller
     public function users()
     {
         try{
-            $users = User::all();
+            $users = User::with('device_tokens')->get();
             return response()->json([
                 'status' => true,
                 'data' => $users,
