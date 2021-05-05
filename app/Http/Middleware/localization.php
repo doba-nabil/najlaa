@@ -20,7 +20,6 @@ class localization
         app()->setLocale($local);
         if(!\Request::is('api/login') || !\Request::is('api/register')){
             $token = \Request::header('token');
-
             if($request->bearerToken()){
                 $user = User::where('api_token', $request->bearerToken())->first();
                 $user_token = DB::table('token_users')->where('user_id' , $user->id)->where('device_token' , $token)->first();
