@@ -31,8 +31,6 @@ class TryController extends Controller
     {
         try{
             $tokens = DB::table('token_users')->delete();
-
-
             return response()->json([
                 'status' => true,
                 'msg' => 'scc',
