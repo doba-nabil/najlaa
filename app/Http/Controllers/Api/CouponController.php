@@ -26,7 +26,7 @@ class CouponController extends Controller
                 if(isset($coupon)){
                     $mytime = Carbon::now();
                     if($coupon->end_date >= $mytime){
-                        $co = $coupon->select('id','code','value as percent')->first();
+                        $co = Coupon::select('id','code','value as percent')->where('id' , $coupon->id)->first();
                         $coupon_user_usess = CouponUse::where('cobone_id' , $coupon->id)->where('user_id' , $user->id)->get();
                         if($coupon->user_used_count >= count($coupon_user_usess)){
                             if($coupon->active == 1){
