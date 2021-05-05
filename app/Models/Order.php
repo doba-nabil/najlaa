@@ -13,7 +13,7 @@ class Order extends Model
         'cobone_id','cobone_code','cobone_value'
     ];
 
-    protected $appends = ['currency_code' , 'currency_value','old_price','use_coupon'];
+    protected $appends = ['currency_code' , 'currency_value','old_price','use_coupon','price_after_discount','discount_value'];
 
     public function getOldPriceAttribute(){
         if(!empty($this->cobone_code)){
@@ -26,6 +26,20 @@ class Order extends Model
                 }
             }
             return $total;
+        }else{
+            return null;
+        }
+    }
+    public function getPriceAfterDiscountAttribute(){
+        if(!empty($this->cobone_code)){
+            return ($this->old_price * $this->cobone_value) / 100;
+        }else{
+            return $this->old_price;
+        }
+    }
+    public function getDiscountValueAttribute(){
+        if(!empty($this->cobone_code)){
+            return $this->cobone_value .'%';
         }else{
             return null;
         }
