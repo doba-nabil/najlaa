@@ -48,7 +48,7 @@ class CouponController extends Controller
                                         $cart->cobone_id = $coupon->id;
                                         $cart->save();
                                     }
-
+                                    $co['percent'] = $co->percent.'%';
                                     return response()->json([
                                         'status' => true,
                                         'data' => $co,
