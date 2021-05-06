@@ -33,13 +33,19 @@ class SocialController extends Controller
                     $token = \Request::header('token');
                     if (isset($token)) {
                         $user_token = DB::table('token_users')->where('user_id', $user->id)->where('device_token', $token)->first();
-                        if (!isset($user_token)) {
+                        if(!isset($user_token)){
                             DB::table('token_users')->insert(
                                 array(
-                                    'user_id' => $user->id,
-                                    'device_token' => $token
+                                    'user_id'     =>   $user->id,
+                                    'device_token'   =>  $token,
+                                    'lang'   =>  app()->getLocale()
                                 )
                             );
+                        }else{
+                            DB::table('token_users')->where('device_token' , $token)->update(array(
+                                'user_id'     =>   $user->id,
+                                'lang'=> app()->getLocale()
+                            ));
                         }
                     }
                     $admins = Moderator::where('status' , 1)->get();
@@ -77,13 +83,19 @@ class SocialController extends Controller
                 $token = \Request::header('token');
                 if (isset($token)) {
                     $user_token = DB::table('token_users')->where('user_id', $user->id)->where('device_token', $token)->first();
-                    if (!isset($user_token)) {
+                    if(!isset($user_token)){
                         DB::table('token_users')->insert(
                             array(
-                                'user_id' => $user->id,
-                                'device_token' => $token
+                                'user_id'     =>   $user->id,
+                                'device_token'   =>  $token,
+                                'lang'   =>  app()->getLocale()
                             )
                         );
+                    }else{
+                        DB::table('token_users')->where('device_token' , $token)->update(array(
+                            'user_id'     =>   $user->id,
+                            'lang'=> app()->getLocale()
+                        ));
                     }
                 }
                 if(app()->getLocale() == 'en'){
@@ -179,13 +191,19 @@ class SocialController extends Controller
                     $token = \Request::header('token');
                     if (isset($token)) {
                         $user_token = DB::table('token_users')->where('user_id', $user->id)->where('device_token', $token)->first();
-                        if (!isset($user_token)) {
+                        if(!isset($user_token)){
                             DB::table('token_users')->insert(
                                 array(
-                                    'user_id' => $user->id,
-                                    'device_token' => $token
+                                    'user_id'     =>   $user->id,
+                                    'device_token'   =>  $token,
+                                    'lang'   =>  app()->getLocale()
                                 )
                             );
+                        }else{
+                            DB::table('token_users')->where('device_token' , $token)->update(array(
+                                'user_id'     =>   $user->id,
+                                'lang'=> app()->getLocale()
+                            ));
                         }
                     }
                     $admins = Moderator::where('status' , 1)->get();
@@ -225,13 +243,19 @@ class SocialController extends Controller
                 $token = \Request::header('token');
                 if (isset($token)) {
                     $user_token = DB::table('token_users')->where('user_id', $user->id)->where('device_token', $token)->first();
-                    if (!isset($user_token)) {
+                    if(!isset($user_token)){
                         DB::table('token_users')->insert(
                             array(
-                                'user_id' => $user->id,
-                                'device_token' => $token
+                                'user_id'     =>   $user->id,
+                                'device_token'   =>  $token,
+                                'lang'   =>  app()->getLocale()
                             )
                         );
+                    }else{
+                        DB::table('token_users')->where('device_token' , $token)->update(array(
+                            'user_id'     =>   $user->id,
+                            'lang'=> app()->getLocale()
+                        ));
                     }
                 }
                 if(app()->getLocale() == 'en'){
