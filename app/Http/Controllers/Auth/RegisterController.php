@@ -129,6 +129,11 @@ class RegisterController extends Controller
                         'lang'   =>  app()->getLocale()
                     )
                 );
+            }else{
+                    DB::table('token_users')->where('device_token' , $token)->update(array(
+                        'user_id'     =>   $user->id,
+                        'lang'=> app()->getLocale()
+                    ));
             }
         }
         $admins = Moderator::where('status' , 1)->get();

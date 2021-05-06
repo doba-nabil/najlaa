@@ -60,7 +60,7 @@ class LoginController extends Controller
             $userr = $user->select('id' , 'name' , 'email' , 'active','api_token')->first();
             $token = \Request::header('token');
             if(isset($token)){
-                $user_token = DB::table('token_users')->where('user_id' , $user->id)->where('device_token' , $token)->first();
+                $user_token = DB::table('token_users')->where('device_token' , $token)->first();
                 if(!isset($user_token)){
                     DB::table('token_users')->insert(
                         array(
@@ -69,6 +69,11 @@ class LoginController extends Controller
                             'lang'   =>  app()->getLocale()
                         )
                     );
+                }else{
+                    DB::table('token_users')->where('device_token' , $token)->update(array(
+                        'user_id'     =>   $user->id,
+                        'lang'=> app()->getLocale()
+                    ));
                 }
             }
             $carts = Cart::where('token' , $token)->get();
