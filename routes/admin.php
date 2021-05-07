@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+if (app()->isLocal()) {
+    URL::forceScheme('http');
+} else {
+    URL::forceScheme('https');
+}
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
