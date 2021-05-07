@@ -84,8 +84,8 @@ class ProductController extends Controller
             $product->material_id = $request->material_id;
 //            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
-            $product->discount_price = $request->discount_price;
-            if ($request->discount_price) {
+            if ($request->discount_price || $request->discount_price!= 0) {
+                $product->discount_price = $request->discount_price;
                 $product->percentage_discount = round($offerRate) . ' % ';
             } else {
                 $product->percentage_discount = 0;
@@ -213,8 +213,8 @@ class ProductController extends Controller
             $product->material_id = $request->material_id;
 //            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
-            $product->discount_price = $request->discount_price;
-            if ($request->discount_price) {
+            if ($request->discount_price || $request->discount_price!= 0) {
+                $product->discount_price = $request->discount_price;
                 $product->percentage_discount = round($offerRate) . ' % ';
             } else {
                 $product->percentage_discount = 0;

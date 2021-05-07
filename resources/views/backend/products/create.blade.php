@@ -146,7 +146,7 @@
                                 <div class="form-group">
                                     <label class="control-label">{{ __('dashboard.material') }}</label>
                                     <select name="material_id" class="form-control select2">
-                                        <option>{{ __('dashboard.select_material') }}</option>
+                                        <option hidden selected value="">{{ __('dashboard.select_material') }}</option>
                                         @foreach($materials as $material)
                                             <option value="{{ $material->id }}">{{ $material->name_en }}
                                                 / {{ $material->name_ar }}</option>
