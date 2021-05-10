@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-    URL::forceScheme('https');
+
+
+    //URL::forceScheme('https');
 
 
 /*
@@ -53,16 +55,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::delete('delete_materials', 'MaterialController@delete_materials')->name('delete_materials');
     /*********** end materials route ***********/
     /*********** colors route ***********/
-    Route::resource('colors', 'ColorController', ['except' => ['show']]);
-    Route::delete('delete_colors', 'ColorController@delete_colors')->name('delete_colors');
+//    Route::resource('colors', 'ColorController', ['except' => ['show']]);
+//    Route::delete('delete_colors', 'ColorController@delete_colors')->name('delete_colors');
     /*********** end colors route ***********/
     /*********** coupons route ***********/
     Route::resource('coupons', 'CouponController', ['except' => ['show']]);
     Route::delete('delete_coupons', 'CouponController@delete_coupons')->name('delete_coupons');
     /*********** end coupons route ***********/
     /*********** sizes route ***********/
-    Route::resource('sizes', 'SizeController', ['except' => ['show']]);
-    Route::delete('delete_sizes', 'SizeController@delete_sizes')->name('delete_sizes');
+//    Route::resource('sizes', 'SizeController', ['except' => ['show']]);
+//    Route::delete('delete_sizes', 'SizeController@delete_sizes')->name('delete_sizes');
     /*********** end sizes route ***********/
     /*********** brands route ***********/
     Route::resource('brands', 'BrandController', ['except' => ['show']]);

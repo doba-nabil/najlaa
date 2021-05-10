@@ -7,9 +7,11 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\ColorSize;
 use App\Models\Image;
 use App\Models\Material;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\Models\ProductDetail;
 use App\Models\Size;
 use App\Traits\UploadTrait;
@@ -52,9 +54,9 @@ class ProductController extends Controller
             $categories = Category::whereNull('parent_id')->get();
             $materials = Material::all();
             $brands = Brand::all();
-            $colors = Color::all();
-            $sizes = Size::all();
-            return view('backend.products.create', compact('categories', 'materials', 'brands', 'colors', 'sizes'));
+//            $colors = Color::all();
+//            $sizes = Size::all();
+            return view('backend.products.create', compact('categories', 'materials', 'brands'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -90,8 +92,6 @@ class ProductController extends Controller
             } else {
                 $product->percentage_discount = 0;
             }
-            $product->max_qty = $request->max_qty;
-            $product->min_qty = $request->min_qty;
             $product->code = $request->code;
             $product->body_ar = $request->body_ar;
             $product->body_en = $request->body_en;
@@ -115,11 +115,26 @@ class ProductController extends Controller
             if ($request->hasFile('images')) {
                 $this->saveimages($request->images, 'pictures/products', $product->id, Product::class, 'sub');
             }
-            if ($request->sizes) {
-                $this->saveDetails($request->sizes, $product->id, 'size');
-            }
-            if ($request->colors) {
-                $this->saveDetails($request->colors, $product->id, 'color');
+//            if ($request->sizes) {
+//                $this->saveDetails($request->sizes, $product->id, 'size');
+//            }
+//            if ($request->colors) {
+//                $this->saveDetails($request->colors, $product->id, 'color');
+//            }
+            foreach($request->colors as $color){
+                $co = new ProductColor();
+                $co->color = $color['color'];
+                $co->stock_qty = $color['qty'];
+                $co->product_id = $product->id;
+                $co->save();
+
+                $sizes = explode('-', $color['sizes']);
+                foreach ($sizes as $size){
+                    $si = new ColorSize();
+                    $si->size = trim($size);
+                    $si->product_color_id = $co->id;
+                    $si->save();
+                }
             }
             return redirect()->route('products.show', $product->slug)->with('done', 'Added Successfully ....');
         } catch (\Exception $e) {
@@ -172,14 +187,14 @@ class ProductController extends Controller
             if (isset($product)) {
                 $categories = Category::whereNull('parent_id')->get();
                 $subcategories = Category::whereNotNull('parent_id')->get();
-                $selected_sizes = ProductDetail::where('product_id', $product->id)->where('type', 'size')->get();
-                $selected_colors = ProductDetail::where('product_id', $product->id)->where('type', 'color')->get();
+//                $selected_sizes = ProductDetail::where('product_id', $product->id)->where('type', 'size')->get();
+//                $selected_colors = ProductDetail::where('product_id', $product->id)->where('type', 'color')->get();
                 $materials = Material::all();
                 $brands = Brand::all();
-                $colors = Color::all();
-                $sizes = Size::all();
-                return view('backend.products.edit', compact('product', 'categories', 'colors',
-                    'materials', 'brands', 'sizes', 'subcategories', 'selected_colors', 'selected_sizes'));
+//                $colors = Color::all();
+//                $sizes = Size::all();
+                return view('backend.products.edit', compact('product', 'categories',
+                    'materials', 'brands', 'subcategories'));
             } else {
                 return redirect()->back()->with('error', 'Error Try Again !!');
             }
@@ -219,8 +234,6 @@ class ProductController extends Controller
             } else {
                 $product->percentage_discount = 0;
             }
-            $product->max_qty = $request->max_qty;
-            $product->min_qty = $request->min_qty;
             $product->code = $request->code;
             $product->body_ar = $request->body_ar;
             $product->body_en = $request->body_en;
@@ -244,12 +257,34 @@ class ProductController extends Controller
             if ($request->hasFile('images')) {
                 $this->saveimages($request->images, 'pictures/products', $product->id, Product::class, 'sub');
             }
-            if ($request->sizes) {
-                $this->editDetails($request->sizes, $product->id, 'size');
+//            if ($request->sizes) {
+//                $this->editDetails($request->sizes, $product->id, 'size');
+//            }
+//            if ($request->colors) {
+//                $this->editDetails($request->colors, $product->id, 'color');
+//            }
+            if($request->colors){
+                foreach ($product->colors as $col){
+                    $col->delete();
+                }
+                foreach($request->colors as $color){
+
+                    $co = new ProductColor();
+                    $co->color = $color['color'];
+                    $co->stock_qty = $color['qty'];
+                    $co->product_id = $product->id;
+                    $co->save();
+
+                    $sizes = explode('-', $color['sizes']);
+                    foreach ($sizes as $size){
+                        $si = new ColorSize();
+                        $si->size = trim($size);
+                        $si->product_color_id = $co->id;
+                        $si->save();
+                    }
+                }
             }
-            if ($request->colors) {
-                $this->editDetails($request->colors, $product->id, 'color');
-            }
+
             return redirect()->route('products.show', $product->slug)->with('done', 'Edited Successfully ....');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');

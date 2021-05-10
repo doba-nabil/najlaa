@@ -208,12 +208,12 @@ class Product extends Model
     }
     public function colors()
     {
-        return $this->hasMany('App\Models\ProductDetail')->where('type' , 'color');
+        return $this->hasMany('App\Models\ProductColor');
     }
-    public function sizes()
-    {
-        return $this->hasMany('App\Models\ProductDetail')->where('type' , 'size');
-    }
+//    public function sizes()
+//    {
+//        return $this->hasMany('App\Models\ProductDetail')->where('type' , 'size');
+//    }
 
     public function mainImage()
     {
