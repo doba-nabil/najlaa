@@ -32,7 +32,7 @@ class Order extends Model
     }
     public function getPriceAfterDiscountAttribute(){
         if(!empty($this->cobone_code)){
-            return ($this->old_price * $this->cobone_value) / 100;
+            return $this->old_price - (($this->old_price * $this->cobone_value) / 100);
         }else{
             return $this->old_price;
         }

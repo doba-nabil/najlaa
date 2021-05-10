@@ -63,9 +63,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="discount_price">{{ __('dashboard.discount') }} "QAR" ( {{ __('dashboard.optional') }} ) </label>
+                                    <label for="discount_price">{{ __('dashboard.discount') }} </label>
                                     <input min="0" step="0.1" type="number" name="discount_price" class="form-control"
-                                           id="discount_price" placeholder="{{ __('dashboard.discount') }} ( {{ __('dashboard.optional') }} )"
+                                           id="discount_price" placeholder="{{ __('dashboard.discount') }} "
                                            value="{{ $product->discount_price }}">
                                     @error('discount_price')
                                     <span class="text-danger">{{ $message }}</span>
