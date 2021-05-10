@@ -42,7 +42,13 @@
                                     @endif
                                 </td>
                                 <td>{{ $product['name_'.app()->getLocale()] }}</td>
-                                <td>{{ $product->max_qty }}</td>
+                                <td>
+                                    @foreach($product->colors as $color)
+                                        <div style="height: 30px;width: 30px;text-align: center;background:{{ $color->color }};display: inline-block;border-radius: 50%;margin: 0 5px">
+                                            <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">{{ $color->stock_qty }}</span>
+                                        </div>
+                                    @endforeach
+                                </td>
                                 <td>{{ $product->getActive() }}</td>
                                 <td>
                                     <a title="edit" href="{{ route('products.edit' , $product->slug) }}"
@@ -82,19 +88,17 @@
                                                     QAR</h6>
                                             @endif
                                             <hr>
-                                            Colors :
+                                            Colors & Sizes :
                                             @foreach($product->colors as $color)
-                                                <div style="height: 40px;width: 40px;background:{{ $color->color->color }};display: inline-block;border-radius: 50%;margin: 0 5px"></div>
+                                                <br>
+                                                <div style="height: 40px;width: 40px;;background:{{ $color->color }};display: inline-block;border-radius: 50%;margin: 0 5px"></div>
+                                                @foreach($color->sizes as $size)
+                                                    {{ $size->size }}
+                                                    @if(!$loop->last) - @endif
+                                                @endforeach
+                                                <br>
                                             @endforeach
                                             <hr>
-                                            Sizes :
-                                            @foreach($product->sizes as $size)
-                                                <span class="mx-1 py-1 px-2" style="background: white;border-radius: 10px;border: 1px solid black;border-radius: 50%">{{ $size->size->code }}</span>
-                                            @endforeach
-                                            <hr>
-                                            {{--Brand :--}}
-                                            {{--{{ $product->brand->name_en }}--}}
-                                            {{--<hr>--}}
                                             Material :
                                             {{ $product->material->name_en }}
                                         </div>

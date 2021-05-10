@@ -163,7 +163,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12 mb-1">
                                                         @foreach($product->colors as $color)
-                                                            <div style="height: 40px;width: 40px;background:{{ $color->color->color }};display: inline-block;border-radius: 50%;margin: 0 5px"></div>
+                                                            <div style="height: 40px;width: 40px;background:{{ $color->color }};display: inline-block;border-radius: 50%;margin: 0 5px"></div>
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -173,8 +173,11 @@
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-1">
-                                                        @foreach($product->sizes as $size)
-                                                            <span class="mx-1 px-4 py-1" style="background: white;border-radius: 10px">{{ $size->size->code }}</span>
+                                                        @foreach($product->colors as $color)
+                                                            @foreach($color->sizes as $size)
+                                                                <span class="mx-1 px-4 py-1"
+                                                                      style="background: white;border-radius: 10px">{{ $size->size }}</span>
+                                                            @endforeach
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -188,9 +191,9 @@
                                                         {{ $product->body_en }}
                                                     </div>
                                                     {{--<div class="col-sm-6 mt-4">--}}
-                                                        {{--BRAND--}}
-                                                        {{--<br>--}}
-                                                        {{--{{ $product->brand->name_en }}--}}
+                                                    {{--BRAND--}}
+                                                    {{--<br>--}}
+                                                    {{--{{ $product->brand->name_en }}--}}
                                                     {{--</div>--}}
                                                     <div class="col-sm-6 mt-4 text-right">
                                                         SKU
@@ -215,9 +218,11 @@
                                                     <div class="col-sm-6 mt-4 text-right">
                                                         FITTING
                                                         <br>
-                                                        @foreach($product->sizes as $size)
-                                                            {{ $size->size->code }}
-                                                            @if(!$loop->last) - @endif
+                                                        @foreach($product->colors as $color)
+                                                            @foreach($color->sizes as $size)
+                                                                {{ $size->size }}
+                                                                @if(!$loop->last) - @endif
+                                                            @endforeach
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -237,11 +242,14 @@
                     <div class="container">
                         <div class="row">
                             <div style="display:flex;justify-content: space-between;" class="col-md-12">
-                                <a href="{{ route('products.edit' , $product->slug) }}" class="btn btn-warning text-white">Back To Edit</a>
+                                <a href="{{ route('products.edit' , $product->slug) }}"
+                                   class="btn btn-warning text-white">Back To Edit</a>
                                 @if($product->active == 0)
-                                    <a href="{{ route('post_product' , $product->slug) }}" class="btn btn-success text-white">Post The Product</a>
+                                    <a href="{{ route('post_product' , $product->slug) }}"
+                                       class="btn btn-success text-white">Post The Product</a>
                                 @else
-                                    <a href="{{ route('post_product' , $product->slug) }}" class="btn btn-danger text-white">Hide from Store</a>
+                                    <a href="{{ route('post_product' , $product->slug) }}"
+                                       class="btn btn-danger text-white">Hide from Store</a>
                                 @endif
                             </div>
                         </div>

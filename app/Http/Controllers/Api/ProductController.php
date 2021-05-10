@@ -7,10 +7,12 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChooseConuntry;
 use App\Models\Color;
+use App\Models\ColorSize;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\Material;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\Models\Recently;
 use App\Models\Size;
 use App\Models\WishList;
@@ -44,17 +46,19 @@ class ProductController extends Controller
                     'id',
                     'name_' . app()->getLocale() . ' as name'
                 )->active();
-            }))->with(array('sizes.size' => function ($query) {
-                $query->select(
-                    'id',
-                    'code'
-                )->active();
-            }))->with(array('colors.color' => function ($query) {
+            }))->with(array('colors' => function ($query) {
                 $query->select(
                     'id',
                     'color',
-                    'name_' . app()->getLocale() . ' as name'
-                )->active();
+                    'product_id',
+                    'stock_qty'
+                )->with(array('sizes' => function ($query) {
+                    $query->select(
+                        'id',
+                        'size',
+                        'product_color_id'
+                    );
+                }));
             }))
                 ->where('id', $id)->select(
                     'id',
@@ -65,8 +69,6 @@ class ProductController extends Controller
                     'price',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_' . app()->getLocale() . ' as name',
                     'body_' . app()->getLocale() . ' as body',
@@ -143,7 +145,6 @@ class ProductController extends Controller
                     'name_' . app()->getLocale() . ' as name',
                     'price',
                     'discount_price',
-                    'max_qty',
                     'percentage_discount'
                 )->with(array('mainImage' => function ($query) {
                         $query->select(
@@ -205,7 +206,6 @@ class ProductController extends Controller
                 'name_' . app()->getLocale() . ' as name',
                 'price',
                 'discount_price',
-                'max_qty',
                 'percentage_discount'
             )->with(array('mainImage' => function ($query) {
                     $query->select(
@@ -246,8 +246,6 @@ class ProductController extends Controller
                     'price',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
@@ -285,8 +283,6 @@ class ProductController extends Controller
                     'price',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
@@ -333,8 +329,6 @@ class ProductController extends Controller
                     'material_id',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
@@ -372,8 +366,6 @@ class ProductController extends Controller
                     'material_id',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
@@ -420,8 +412,6 @@ class ProductController extends Controller
                     'brand_id',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
@@ -459,8 +449,6 @@ class ProductController extends Controller
                     'brand_id',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'
@@ -501,20 +489,13 @@ class ProductController extends Controller
     public function sizes()
     {
         try{
-            $categories = Size::with(array('productDetails'=>function($query){
-                $query->select(
-                    'id',
-                    'product_id',
-                    'size_id'
-                )->with(array('product'=>function($query){
+            $categories = ProductColor::with(array('product'=>function($query){
                     $query->select(
                         'id',
                         'price',
                         'brand_id',
                         'discount_price',
                         'percentage_discount',
-                        'min_qty',
-                        'max_qty',
                         'code',
                         'name_'.app()->getLocale().' as name',
                         'chosen'
@@ -525,8 +506,7 @@ class ProductController extends Controller
                             );
                         })
                     );
-                }));
-            }))->active()->get();
+            }))->get();
             return response()->json([
                 'status' => true,
                 'data' => $categories,
@@ -543,7 +523,7 @@ class ProductController extends Controller
     public function size($id)
     {
         try{
-            $size = Size::where('id' , $id)->with(array('productDetails'=>function($query){
+            $size = ColorSize::where('id' , $id)->with(array('productDetails'=>function($query){
                 $query->select(
                     'id',
                     'product_id',
@@ -594,19 +574,12 @@ class ProductController extends Controller
     public function colors()
     {
         try{
-            $categories = Color::select( 'id', 'name_'.app()->getLocale().' as name' , 'active','color')->with(array('productDetails'=>function($query){
-                $query->select(
-                    'id',
-                    'product_id',
-                    'color_id'
-                )->with(array('product'=>function($query){
+            $categories = ProductColor::select( 'id', 'product_id','color','stock_qty')->with(array('product'=>function($query){
                     $query->select(
                         'id',
                         'price',
                         'discount_price',
                         'percentage_discount',
-                        'min_qty',
-                        'max_qty',
                         'code',
                         'name_'.app()->getLocale().' as name',
                         'chosen'
@@ -617,8 +590,7 @@ class ProductController extends Controller
                             );
                         })
                     );
-                }));
-            }))->active()->get();
+            }))->get();
             return response()->json([
                 'status' => true,
                 'data' => $categories,
@@ -635,12 +607,7 @@ class ProductController extends Controller
     public function color($id)
     {
         try{
-            $color = Color::where('id' , $id)->select( 'id', 'name_'.app()->getLocale().' as name' , 'active','color')->with(array('productDetails'=>function($query){
-                $query->select(
-                    'id',
-                    'product_id',
-                    'color_id'
-                )->with(array('product'=>function($query){
+            $color = ProductColor::where('id' , $id)->select( 'id', 'product_id','color','stock_qty')->with(array('product'=>function($query){
                     $query->select(
                         'id',
                         'price',
@@ -658,8 +625,7 @@ class ProductController extends Controller
                             );
                         })
                     );
-                }));
-            }))->active()->first();
+            }))->first();
             if(isset($color)){
                 return response()->json([
                     'status' => true,

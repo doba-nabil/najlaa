@@ -53,7 +53,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="price">{{ __('dashboard.price') }} "QAR"</label>
+                                    <label for="price">{{ __('dashboard.price') }}</label>
                                     <input min="0" step="0.1" type="number" name="price" class="form-control" id="price"
                                            placeholder="{{ __('dashboard.price') }}" value="{{ $product->price }}" required>
                                     @error('price')
@@ -68,30 +68,6 @@
                                            id="discount_price" placeholder="{{ __('dashboard.discount') }} "
                                            value="{{ $product->discount_price }}">
                                     @error('discount_price')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="max_qty">{{ __('dashboard.in_stock') }}</label>
-                                    <input min="0" step="1" type="number" name="max_qty" class="form-control"
-                                           id="max_qty" placeholder="{{ __('dashboard.in_stock') }}"
-                                           value="{{ $product->max_qty }}" required>
-                                    @error('max_qty')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="min_qty">{{ __('dashboard.min_order') }}</label>
-                                    <input min="0" step="1" type="number" name="min_qty" class="form-control"
-                                           id="min_qty" placeholder="{{ __('dashboard.min_order') }}"
-                                           value="{{ $product->min_qty }}" required>
-                                    @error('min_qty')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -156,7 +132,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('dashboard.material') }}</label>
                                     <select name="material_id" class="form-control select2" required>
@@ -169,68 +145,6 @@
                                         @endforeach
                                     </select>
                                     @error('material_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{--<div class="col-lg-6">--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label class="control-label">Select Brand</label>--}}
-                                    {{--<select name="brand_id" class="form-control select2" required>--}}
-                                        {{--<option>Select</option>--}}
-                                        {{--@foreach($brands as $brand)--}}
-                                            {{--<option--}}
-                                                    {{--@if($brand->id == $product->brand_id) selected @endif--}}
-                                                    {{--value="{{ $brand->id }}">{{ $brand->name_en }}--}}
-                                                {{--/ {{ $brand->name_ar }}</option>--}}
-                                        {{--@endforeach--}}
-                                    {{--</select>--}}
-                                    {{--@error('brand_id')--}}
-                                    {{--<span class="text-danger">{{ $message }}</span>--}}
-                                    {{--@enderror--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">{{ __('dashboard.color') }}</label>
-                                    <div>
-                                        @foreach($colors as $color)
-                                            <input
-                                                    @foreach($selected_colors as $selected_color)
-                                                        @if($selected_color->color_id == $color->id) checked @endif
-                                                    @endforeach
-                                                    value="{{ $color->id }}" id="checkboxid{{ $loop->index }}" name="colors[]" type="checkbox"
-                                                   class="css-checkbox">
-                                            <label style="background: {{ $color->color }}"
-                                                   for="checkboxid{{ $loop->index }}" class="css-label"></label>
-                                        @endforeach
-                                    </div>
-                                    @error('colors')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group color">
-                                    <label class="control-label">{{ __('dashboard.sizes') }}</label>
-                                    <div>
-                                        @foreach($sizes as $size)
-                                            <input
-                                                    @foreach($selected_sizes as $selected_size)
-                                                        @if($selected_size->size_id == $size->id) checked @endif
-                                                    @endforeach
-                                                    value="{{ $size->id }}" id="checkid{{ $loop->index }}" type="checkbox" name="sizes[]"
-                                                   class="css-checkbox">
-                                            <label for="checkid{{ $loop->index }}" class="css-label">
-                                                <h4>
-                                                    {{ $size->code }}
-                                                </h4>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                    @error('sizes')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -311,6 +225,55 @@
                             </div>
                         </div>
                         <br>
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <label class="control-label">{{ __('dashboard.colors') }} & {{ __('dashboard.sizes') }}</label>
+                                <div id="parent">
+                                    @foreach($product->colors as $key => $color)
+                                    <div style="border: 1px solid grey;" class="row mt-2 pt-2">
+                                        <div class="form-group col-md-6 col-xs-12">
+                                            <label for="colors[{{ $key }}][color]">
+                                                {{ __('dashboard.color') }}
+                                            </label>
+                                            <input type="color" placeholder="colors" class="form-control" value="{{ $color->color }}" name="colors[{{ $key }}][color]" required>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-12">
+                                            <label for="colors[{{ $key }}][qty]">
+                                                {{ __('dashboard.in_stock') }}
+                                            </label>
+                                            <input type="number" min="0" placeholder="{{ __('dashboard.in_stock') }}" value="{{ $color->stock_qty }}" class="form-control" name="colors[{{ $key }}][qty]" required>
+                                        </div>
+                                        <div class="form-group col-md-12 col-xs-12">
+                                            <label style="color: red;" for="size[{{ $key }}]">
+                                                {{ __('dashboard.sizes_shape') }}
+                                                <br>
+                                                <small>
+                                                    {{ __('dashboard.sizes_shape_example') }}
+                                                </small>
+                                            </label>
+                                            <input type="text" placeholder="{{ __('dashboard.sizes') }}" class="form-control" value="@foreach($color->sizes as $size){{ $size->size }}@if(!$loop->last)-@endif @endforeach" name="colors[{{ $key }}][sizes]" id="size[{{ $key }}]" required>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+
+                                    <div style="display: flex;justify-content:space-between"
+                                         class="col-md-12 mt-2">
+                                        <a type="submit" onclick="addChild();"
+                                           class="btn btn-success text-white">@lang('dashboard.add_more')</a>
+                                        <a id="removePrice"
+                                           class="btn btn-danger text-white">@lang('dashboard.remove_last')</a>
+                                    </div>
+                                    @error('colors')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="custom-control custom-checkbox mb-3">
@@ -348,4 +311,59 @@
     @else
         <script src="{{ asset('backend') }}/custom-sweetalert-ar.js"></script>
     @endif
+    <script>
+        var childNumber = <?php echo $product->colors->count() ?>;
+        var max_fields = '10';
+
+        function addChild() {
+
+            @if(app()->getLocale() == 'en')
+            if (childNumber == max_fields) {
+                alert('Max Fields Number');
+            }
+            @else
+            if (childNumber == max_fields) {
+                alert('تم الوصول الى الحد الاقصى من الحقول');
+            }
+            @endif
+            if (childNumber < max_fields) {
+                var parent = document.getElementById('parent');
+                var newChild = `
+            <div style="border: 1px solid grey;" class="row mt-2 pt-2">
+            <div class="form-group col-md-6 col-xs-12">
+                     <label for="colors[` + childNumber + `][color]">
+                                                {{ __('dashboard.color') }}
+                    </label>
+                     <input type="color" placeholder="{{ __('dashboard.color') }}" class="form-control" name="colors[` + childNumber + `][color]" required>
+                 </div>
+                             <div class="form-group col-md-6 col-xs-12">
+                              <label for="colors[` + childNumber + `][qty]">
+                                                {{ __('dashboard.in_stock') }}
+                    </label>
+                <input type="number" min="0" placeholder="{{ __('dashboard.in_stock') }}" class="form-control" name="colors[` + childNumber + `][qty]" required>
+
+            </div>
+            <div class="form-group col-md-12 col-xs-12">
+             <label style="color: red;" for="size[` + childNumber + `]">
+                                                {{ __('dashboard.sizes_shape') }}
+                    </label>
+     <input type="text" placeholder=" {{ __('dashboard.sizes') }}" class="form-control" name="colors[` + childNumber + `][sizes]" id="size[` + childNumber + `]" required>
+
+            </div>
+
+            </div>
+            `;
+                parent.insertAdjacentHTML('beforeend', newChild);
+                childNumber++;
+                $('select').niceSelect();
+            }
+        }
+
+        $("#removePrice").on("click", function () {
+            if (childNumber > 1) {
+                $("#parent").children().last().remove();
+                childNumber--;
+            }
+        });
+    </script>
 @endsection

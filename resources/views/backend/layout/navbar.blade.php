@@ -110,8 +110,8 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{ route('materials.index') }}">{{ __('dashboard.materials') }}</a></li>
-                            <li><a href="{{ route('colors.index') }}">{{ __('dashboard.colors') }}</a></li>
-                            <li><a href="{{ route('sizes.index') }}">{{ __('dashboard.sizes') }}</a></li>
+                            {{--<li><a href="{{ route('colors.index') }}">{{ __('dashboard.colors') }}</a></li>--}}
+                            {{--<li><a href="{{ route('sizes.index') }}">{{ __('dashboard.sizes') }}</a></li>--}}
                         </ul>
                     </li>
                 @endif
