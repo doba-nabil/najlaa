@@ -32,6 +32,12 @@
                         </thead>
                         <tbody>
                         @foreach($products as $product)
+                            <?php
+                            $selected_colors = DB::table('product_colors')->where('product_id' ,$product->id )
+                                ->select('color_id')
+                                ->distinct()
+                                ->pluck('color_id');
+                            ?>
                             <tr>
                                 <td><input type="checkbox" class="sub_chk" data-id="{{$product->id}}"></td>
                                 <td width="100" height="100">
@@ -43,11 +49,16 @@
                                 </td>
                                 <td>{{ $product['name_'.app()->getLocale()] }}</td>
                                 <td>
-                                    @foreach($product->colors as $color)
-                                        <div style="height: 30px;width: 30px;text-align: center;background:{{ $color->color }};display: inline-block;border-radius: 50%;margin: 0 5px">
-                                            <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">{{ $color->stock_qty }}</span>
-                                        </div>
-                                    @endforeach
+                                    <div style="width: 100px">
+                                        @foreach($product->colors as $color)
+                                            <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px;border: 1px solid">
+                                                <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">{{ __('dashboard.size') }} : {{ $color->size->code }}</span>
+                                                <br>
+                                                <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">{{ __('dashboard.qty') }} : {{ $color->stock_qty }}</span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
                                 </td>
                                 <td>{{ $product->getActive() }}</td>
                                 <td>
@@ -90,13 +101,11 @@
                                             <hr>
                                             Colors & Sizes :
                                             @foreach($product->colors as $color)
-                                                <br>
-                                                <div style="height: 40px;width: 40px;;background:{{ $color->color }};display: inline-block;border-radius: 50%;margin: 0 5px"></div>
-                                                @foreach($color->sizes as $size)
-                                                    {{ $size->size }}
-                                                    @if(!$loop->last) - @endif
-                                                @endforeach
-                                                <br>
+                                                <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px">
+                                                    <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">size : {{ $color->size->code }}</span>
+                                                    <br>
+                                                    <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">qty : {{ $color->stock_qty }}</span>
+                                                </div>
                                             @endforeach
                                             <hr>
                                             Material :

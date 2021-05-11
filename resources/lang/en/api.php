@@ -14,6 +14,7 @@ return [
     */
 // menu
     'err' => 'There is an error retry Again',
+    'count_big' => 'Sorry, the quantity requested is greater than the available stock for product',
     'deleted' => 'Deleted Successfully',
     'not_have_addresses' => 'There are no addresses for you',
     'wrong_address' => 'Wrong Address',

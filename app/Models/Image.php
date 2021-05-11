@@ -25,7 +25,8 @@ class Image extends Model
                 || \Request::is('api/pending/orders') || \Request::is('api/confirmed/orders') || \Request::is('api/add/cart')
                 || \Request::is('api/cart') || \Request::is('api/edit/cart') || \Request::is('api/edit/cart*') || \Request::is('api/home-category*')
                 || \Request::is('api/re-pay*') || \Request::is('api/categories-nav') || \Request::is('api/recently/products')
-                || \Request::is('api/filter') || \Request::is('api/offers*')  ){
+                || \Request::is('api/filter') || \Request::is('api/offers*') || \Request::is('api/all-colors*') || \Request::is('api/all-colors')
+                || \Request::is('api/all-sizes*') || \Request::is('api/all-sizes')  ){
                 return  \URL::asset('/pictures/products/'.$this->image);
             }elseif(\Request::is('api/home/sliders')){
                 return  \URL::asset('/pictures/sliders/'.$this->image);

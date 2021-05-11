@@ -11,6 +11,7 @@ use App\Models\OfferProduct;
 use App\Models\Option;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\Models\ProductDetail;
 use App\Models\Recently;
 use App\Models\Slider;
@@ -83,7 +84,6 @@ class HomeController extends Controller
                     $hot_offers = Product::whereIn('id',$product_ids)->whereNotNull('percentage_discount')->orWhere('percentage_discount' , '!=' , 0)->select(
                         'id',
                         'name_' . app()->getLocale() . ' as name',
-                        'max_qty',
                         'price',
                         'discount_price',
                         'percentage_discount'
@@ -299,8 +299,6 @@ class HomeController extends Controller
                         'price',
                         'discount_price',
                         'percentage_discount',
-                        'min_qty',
-                        'max_qty',
                         'code',
                         'name_'.app()->getLocale().' as name',
                         'chosen'
@@ -390,8 +388,6 @@ class HomeController extends Controller
                         'price',
                         'discount_price',
                         'percentage_discount',
-                        'min_qty',
-                        'max_qty',
                         'code',
                         'name_'.app()->getLocale().' as name',
                         'chosen'
@@ -743,7 +739,7 @@ class HomeController extends Controller
                 $products = $products->whereIn('material_id' , $request->material_ids);
             }
             if($request->color_ids){
-                $co_pros = ProductDetail::where('type', 'color')->whereIn('color_id', $request->color_ids)->get();
+                $co_pros = ProductColor::whereIn('color_id', $request->color_ids)->get();
                 $product_color_ids = [];
                 foreach ($co_pros as $co_pro){
                     array_push($product_color_ids , $co_pro->product_id);
@@ -751,7 +747,7 @@ class HomeController extends Controller
                 $products = $products->whereIn('id' , $product_color_ids);
             }
             if($request->size_ids){
-                $size_pros = ProductDetail::where('type', 'size')->whereIn('size_id', $request->size_ids)->get();
+                $size_pros = ProductColor::whereIn('size_id', $request->size_ids)->get();
                 $product_size_ids = [];
                 foreach ($size_pros as $size_pro){
                     array_push($product_size_ids , $size_pro->product_id);
@@ -887,8 +883,6 @@ class HomeController extends Controller
                     'price',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_'.app()->getLocale().' as name',
                     'chosen'

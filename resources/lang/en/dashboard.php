@@ -53,6 +53,7 @@ return [
     'sizes_shape' => 'Sizes and the sizes are separated by "-"',
     'sizes_shape_example' => 'Example : xl-lg-m',
     'remove_last' => 'Remove Last',
+    'add_more' => 'Add More',
     'countries' => 'Countries',
     'cities' => 'Cities',
     'currencies' => 'Currencies',

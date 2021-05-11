@@ -10,7 +10,7 @@ class Size extends Model
         'code','active' ,'created_at' , 'updated_at'
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+        'created_at', 'updated_at','active'
     ];
 
     public function scopeActive($query)
@@ -24,7 +24,7 @@ class Size extends Model
 
     public function productDetails()
     {
-        return $this->hasMany('App\Models\ProductDetail','size_id');
+        return $this->hasMany('App\Models\ProductColor','size_id');
     }
 
 }

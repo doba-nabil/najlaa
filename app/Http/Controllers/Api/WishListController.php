@@ -25,8 +25,6 @@ class WishListController extends Controller
                     'price',
                     'discount_price',
                     'percentage_discount',
-                    'min_qty',
-                    'max_qty',
                     'code',
                     'name_' . app()->getLocale() . ' as name',
                     'chosen'

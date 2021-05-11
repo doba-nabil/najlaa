@@ -32,8 +32,14 @@ class Product extends Model
 
     public function getInStockAttribute()
     {
-        if($this->max_qty > 0){
-            return true;
+        $product_colors = ProductColor::where('product_id' , $this->id)->get();
+        if(isset($product_colors)){
+            $qty = $product_colors->sum('stock_qty');
+            if($qty > 0){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
@@ -206,9 +212,13 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Brand' , 'brand_id' , 'id');
     }
-    public function colors()
+    public function colors() //colors and sizes for normal routs
     {
         return $this->hasMany('App\Models\ProductColor');
+    }
+    public function details() //colors and sizes for api
+    {
+        return $this->hasMany('App\Models\ProductColor')->distinct();
     }
 //    public function sizes()
 //    {
