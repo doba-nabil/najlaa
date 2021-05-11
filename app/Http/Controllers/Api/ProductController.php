@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function show($id, Request $request)
     {
-        try{
+        try {
             $product = Product::with(array('category' => function ($query) {
                 $query->select(
                     'id',
@@ -46,18 +46,17 @@ class ProductController extends Controller
                     'id',
                     'name_' . app()->getLocale() . ' as name'
                 )->active();
-            }))->with(array('colors' => function ($query) {
+            }))->with(array('details' => function ($query) {
                 $query->select(
-                    'id',
-                    'color',
-                    'product_id',
-                    'stock_qty'
-                )->with(array('sizes' => function ($query) {
+                    'color_id',
+                    'product_id'
+
+                )->with(array('color' => function ($query) {
                     $query->select(
                         'id',
-                        'size',
-                        'product_color_id'
-                    );
+                        'color',
+                        'name_' . app()->getLocale() . ' as name'
+                    )->active();
                 }));
             }))
                 ->where('id', $id)->select(
@@ -126,7 +125,7 @@ class ProductController extends Controller
                     'code' => 400,
                 ]);
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
                 'msg' => trans('api.err'),
@@ -489,7 +488,12 @@ class ProductController extends Controller
     public function sizes()
     {
         try{
-            $categories = ProductColor::with(array('product'=>function($query){
+            $categories = Size::with(array('productDetails'=>function($query){
+                $query->select(
+                    'id',
+                    'product_id',
+                    'size_id'
+                )->with(array('product'=>function($query){
                     $query->select(
                         'id',
                         'price',
@@ -506,7 +510,8 @@ class ProductController extends Controller
                             );
                         })
                     );
-            }))->get();
+                }));
+            }))->active()->get();
             return response()->json([
                 'status' => true,
                 'data' => $categories,
@@ -523,7 +528,7 @@ class ProductController extends Controller
     public function size($id)
     {
         try{
-            $size = ColorSize::where('id' , $id)->with(array('productDetails'=>function($query){
+            $size = Size::where('id' , $id)->with(array('productDetails'=>function($query){
                 $query->select(
                     'id',
                     'product_id',
@@ -535,8 +540,6 @@ class ProductController extends Controller
                         'brand_id',
                         'discount_price',
                         'percentage_discount',
-                        'min_qty',
-                        'max_qty',
                         'code',
                         'name_'.app()->getLocale().' as name',
                         'chosen'
@@ -574,7 +577,12 @@ class ProductController extends Controller
     public function colors()
     {
         try{
-            $categories = ProductColor::select( 'id', 'product_id','color','stock_qty')->with(array('product'=>function($query){
+            $categories = Color::select( 'id', 'name_'.app()->getLocale().' as name' , 'active','color')->with(array('productDetails'=>function($query){
+                $query->select(
+                    'id',
+                    'product_id',
+                    'color_id'
+                )->with(array('product'=>function($query){
                     $query->select(
                         'id',
                         'price',
@@ -590,7 +598,8 @@ class ProductController extends Controller
                             );
                         })
                     );
-            }))->get();
+                }));
+            }))->active()->get();
             return response()->json([
                 'status' => true,
                 'data' => $categories,
@@ -607,7 +616,12 @@ class ProductController extends Controller
     public function color($id)
     {
         try{
-            $color = ProductColor::where('id' , $id)->select( 'id', 'product_id','color','stock_qty')->with(array('product'=>function($query){
+            $color = Color::where('id' , $id)->select( 'id', 'name_'.app()->getLocale().' as name' , 'active','color')->with(array('productDetails'=>function($query){
+                $query->select(
+                    'id',
+                    'product_id',
+                    'color_id'
+                )->with(array('product'=>function($query){
                     $query->select(
                         'id',
                         'price',
@@ -625,7 +639,8 @@ class ProductController extends Controller
                             );
                         })
                     );
-            }))->first();
+                }));
+            }))->active()->first();
             if(isset($color)){
                 return response()->json([
                     'status' => true,
@@ -665,8 +680,6 @@ class ProductController extends Controller
                 'price',
                 'discount_price',
                 'percentage_discount',
-                'min_qty',
-                'max_qty',
                 'code',
                 'name_'.app()->getLocale().' as name',
                 'chosen'

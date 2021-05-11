@@ -9,6 +9,7 @@ use App\Models\Coupon;
 use App\Models\CouponUse;
 use App\Models\Moderator;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\Notifications\NewOrder;
 use App\User;
 use App\Models\Order;
@@ -52,16 +53,29 @@ class PayController extends Controller
                 $total = 0;
                 if (count($carts) > 0) {
                     foreach ($carts as $cart) {
-                        $total+= $cart->price;
-                        if(empty($cart->cobone_id)){
-                            $order->total_price = $total;
-                        }else{
-                            $cobone = Coupon::where('id' , $cart->cobone_id)->first();
-                            $dis = ($cobone->value / 100) * $total;
-                            $order->total_price = $total - $dis;
-                            $order->cobone_id = $cart->cobone_id;
-                            $order->cobone_code = $cobone->code;
-                            $order->cobone_value = $cobone->value;
+
+                        $color_product = ProductColor::where('color_id' , $cart->color_id)->where('size_id' , $cart->size_id)->where('product_id',$cart->product_id)->first();
+                        if(isset($color_product)){
+                            $product = Product::find($cart->product_id);
+                            if($color_product->stock_qty >= $cart->count){
+                                $total+= $cart->price;
+                                if(empty($cart->cobone_id)){
+                                    $order->total_price = $total;
+                                }else{
+                                    $cobone = Coupon::where('id' , $cart->cobone_id)->first();
+                                    $dis = ($cobone->value / 100) * $total;
+                                    $order->total_price = $total - $dis;
+                                    $order->cobone_id = $cart->cobone_id;
+                                    $order->cobone_code = $cobone->code;
+                                    $order->cobone_value = $cobone->value;
+                                }
+                            }else{
+                                return response()->json([
+                                    'status' => false,
+                                    'msg' => trans('api.product_big')  . ' ' . $product['name_'.app()->getLocale()] ,
+                                    'code' => 400,
+                                ]);
+                            }
                         }
                     }
                 } else {
@@ -80,11 +94,12 @@ class PayController extends Controller
                         $pay->color_id = $value->color_id;
                         $pay->size_id = $value->size_id;
                         $pay->save();
+
                         array_push($productIds, $value['id']);
 
-                        $product = Product::where('id',$value->product_id)->first();
-                        $product->max_qty = $product->max_qty - $value->count;
-                        $product->save();
+                        $color_product_found = ProductColor::where('color_id' , $cart->color_id)->where('size_id' , $cart->size_id)->where('product_id',$cart->product_id)->first();
+                        $color_product_found->stock_qty = $color_product_found->stock_qty - $value->count;
+                        $color_product_found->save();
 
                         $value->delete();
                     }
@@ -230,6 +245,22 @@ class PayController extends Controller
             $mytime = Carbon::now();
             $old_order = Order::find($orderId);
             if (isset($main_address)) {
+
+                foreach ($old_order->pays as $value) {
+                    $color_product = ProductColor::where('color_id' , $value->color_id)->where('size_id' , $value->size_id)->where('product_id',$value->product_id)->first();
+                    if(isset($color_product)) {
+                        $product = Product::find($value->product_id);
+                        if($color_product->stock_qty >= $value->count){
+                        }else{
+                            return response()->json([
+                                'status' => false,
+                                'msg' => trans('api.product_big')  . ' ' . $product['name_'.app()->getLocale()] ,
+                                'code' => 400,
+                            ]);
+                        }
+                    }
+                }
+
                 $order = new Order();
                 $order->order_no = rand();
                 /*******************/
@@ -268,6 +299,11 @@ class PayController extends Controller
                     $pay->color_id = $value->color_id;
                     $pay->size_id = $value->size_id;
                     $pay->save();
+
+                    $color_product_found = ProductColor::where('color_id' , $value->color_id)->where('size_id' , $value->size_id)->where('product_id',$value->product_id)->first();
+                    $color_product_found->stock_qty = $color_product_found->stock_qty - $value->count;
+                    $color_product_found->save();
+
                     array_push($productIds, $value['id']);
                 }
                 $order = Order::where('id', $order->id)->with(array('pays' => function ($query) {

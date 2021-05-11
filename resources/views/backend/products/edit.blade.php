@@ -229,31 +229,42 @@
                             <div class="col-md-12">
                                 <label class="control-label">{{ __('dashboard.colors') }} & {{ __('dashboard.sizes') }}</label>
                                 <div id="parent">
-                                    @foreach($product->colors as $key => $color)
-                                    <div style="border: 1px solid grey;" class="row mt-2 pt-2">
-                                        <div class="form-group col-md-6 col-xs-12">
-                                            <label for="colors[{{ $key }}][color]">
-                                                {{ __('dashboard.color') }}
-                                            </label>
-                                            <input type="color" placeholder="colors" class="form-control" value="{{ $color->color }}" name="colors[{{ $key }}][color]" required>
+                                    @foreach($product->colors as $key => $col)
+                                        <div style="border: 1px solid grey;" class="row pt-2">
+                                            <div class="form-group col-md-12 col-xs-12">
+                                                <label for="colors[0][color]">
+                                                    {{ __('dashboard.color') }}
+                                                </label>
+                                                <div class=" text-center">
+                                                    @foreach($colors as $color)
+                                                        <input value="{{ $color->id }}" id="checkboxidcolor[{{ $key }}]{{ $loop->index }}" name="colors[{{ $key }}][color_id]" type="radio"
+                                                               class="css-checkbox" @if($col->color_id == $color->id) checked @endif >
+                                                        <label style="background: {{ $color->color }}"
+                                                               for="checkboxidcolor[{{ $key }}]{{ $loop->index }}" class="css-label"></label>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-xs-12">
+                                                <label for="colors[{{ $key }}][qty]">
+                                                    {{ __('dashboard.in_stock') }}
+                                                </label>
+                                                <input type="number" min="0" placeholder="{{ __('dashboard.in_stock') }}"
+                                                       class="form-control" name="colors[{{ $key }}][qty]" value="{{ $col->stock_qty }}" required>
+                                            </div>
+                                            <div class="form-group col-md-6 col-xs-12">
+                                                <label for="size[{{ $key }}]">
+                                                    {{ __('dashboard.size') }}
+                                                </label>
+                                                <select name="colors[{{ $key }}][size_id]" class="form-control">
+
+                                                    @foreach($sizes as $size)
+                                                        <option @if($col->size_id == $size->id) selected @endif value="{{ $size->id }}">
+                                                            {{ $size->code }} {{ $color-> size_id}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-6 col-xs-12">
-                                            <label for="colors[{{ $key }}][qty]">
-                                                {{ __('dashboard.in_stock') }}
-                                            </label>
-                                            <input type="number" min="0" placeholder="{{ __('dashboard.in_stock') }}" value="{{ $color->stock_qty }}" class="form-control" name="colors[{{ $key }}][qty]" required>
-                                        </div>
-                                        <div class="form-group col-md-12 col-xs-12">
-                                            <label style="color: red;" for="size[{{ $key }}]">
-                                                {{ __('dashboard.sizes_shape') }}
-                                                <br>
-                                                <small>
-                                                    {{ __('dashboard.sizes_shape_example') }}
-                                                </small>
-                                            </label>
-                                            <input type="text" placeholder="{{ __('dashboard.sizes') }}" class="form-control" value="@foreach($color->sizes as $size){{ $size->size }}@if(!$loop->last)-@endif @endforeach" name="colors[{{ $key }}][sizes]" id="size[{{ $key }}]" required>
-                                        </div>
-                                    </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -330,25 +341,44 @@
                 var parent = document.getElementById('parent');
                 var newChild = `
             <div style="border: 1px solid grey;" class="row mt-2 pt-2">
-            <div class="form-group col-md-6 col-xs-12">
+            <div class="form-group col-md-12 col-xs-12">
                      <label for="colors[` + childNumber + `][color]">
                                                 {{ __('dashboard.color') }}
                     </label>
-                     <input type="color" placeholder="{{ __('dashboard.color') }}" class="form-control" name="colors[` + childNumber + `][color]" required>
-                 </div>
-                             <div class="form-group col-md-6 col-xs-12">
-                              <label for="colors[` + childNumber + `][qty]">
+                    <?php
+                    $colors = \App\Models\Color::active()->get();
+                    ?>
+                    <div class=" text-center">
+                            @foreach($colors as $color)
+                    <input value="{{ $color->id }}" id="checkboxidcolor[` + childNumber + `]{{ $loop->index }}" name="colors[` + childNumber + `][color_id]" type="radio"
+                                                           class="css-checkbox">
+                                                    <label style="background: {{ $color->color }}"
+                                                           for="checkboxidcolor[` + childNumber + `]{{ $loop->index }}" class="css-label"></label>
+                                                @endforeach
+                    </div>
+                </div>
+     <div class="form-group col-md-6 col-xs-12">
+      <label for="colors[` + childNumber + `][qty]">
                                                 {{ __('dashboard.in_stock') }}
                     </label>
                 <input type="number" min="0" placeholder="{{ __('dashboard.in_stock') }}" class="form-control" name="colors[` + childNumber + `][qty]" required>
 
             </div>
-            <div class="form-group col-md-12 col-xs-12">
-             <label style="color: red;" for="size[` + childNumber + `]">
-                                                {{ __('dashboard.sizes_shape') }}
+            <div class="form-group col-md-6 col-xs-12">
+             <label for="size[` + childNumber + `]">
+                                                {{ __('dashboard.size') }}
                     </label>
-     <input type="text" placeholder=" {{ __('dashboard.sizes') }}" class="form-control" name="colors[` + childNumber + `][sizes]" id="size[` + childNumber + `]" required>
-
+                    <select name="colors[` + childNumber + `][size_id]" class="form-control select2">
+                        <option hidden selected value="">{{ __('dashboard.sizes') }}</option>
+                                                <?php
+                    $sizes = \App\Models\Size::active()->get();
+                    ?>
+                        @foreach($sizes as $size)
+                    <option value="{{ $size->id }}">
+                               {{ $size->code }}
+                    </option>
+                    @endforeach
+                    </select>
             </div>
 
             </div>

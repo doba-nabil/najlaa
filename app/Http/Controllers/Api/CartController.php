@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,6 @@ class CartController extends Controller
                             'name_' . app()->getLocale() . ' as name',
                             'price',
                             'discount_price',
-                            'max_qty',
                             'percentage_discount'
                         )->with(array('mainImage' => function ($query) {
                                 $query->select(
@@ -79,7 +79,6 @@ class CartController extends Controller
                             'id',
                             'name_' . app()->getLocale() . ' as name',
                             'price',
-                            'max_qty',
                             'discount_price',
                             'percentage_discount'
                         )->with(array('mainImage' => function ($query) {
@@ -122,24 +121,42 @@ class CartController extends Controller
                 $user = User::where('api_token' , $request->bearerToken())->first();
                 $cart = Cart::where('id' , $cartID)->where('user_id' , $user->id)->first();
                 if(isset($cart)){
-                    $cart->count = $request->count;
-                    if(empty($cart->product->discount_price)){
-                        $cart->price = $request->count * $cart->product->price;
-                    }elseif(!empty($cart->product->discount_price)){
-                        $cart->price = $request->count * $cart->product->discount_price;
+                    $color_size = ProductColor::where('product_id', $cart->product_id)->where('color_id' , $cart->color_id)->where('size_id' ,$cart->size_id)->first();
+                    if($color_size->stock_qty >= $request->count){
+                        $cart->count = $request->count;
+                        if(empty($cart->product->discount_price)){
+                            $cart->price = $request->count * $cart->product->price;
+                        }elseif(!empty($cart->product->discount_price)){
+                            $cart->price = $request->count * $cart->product->discount_price;
+                        }
+                        $cart->save();
+                    }else{
+                        return response()->json([
+                            'status' => false,
+                            'msg' => trans('api.count_big'),
+                            'code' => 400,
+                        ]);
                     }
-                    $cart->save();
                 }
             }else{
                 $cart = Cart::where('id' , $cartID)->where('token' , $token)->first();
                if(isset($cart)){
-                   $cart->count = $request->count;
-                   if(empty($cart->product->discount_price)){
-                       $cart->price = $request->count * $cart->product->price;
-                   }elseif(!empty($cart->product->discount_price)){
-                       $cart->price = $request->count * $cart->product->discount_price;
+                   $color_size = ProductColor::where('product_id', $cart->product_id)->where('color_id' , $cart->color_id)->where('size_id' ,$cart->size_id)->first();
+                   if($color_size->stock_qty >= $request->count){
+                       $cart->count = $request->count;
+                       if(empty($cart->product->discount_price)){
+                           $cart->price = $request->count * $cart->product->price;
+                       }elseif(!empty($cart->product->discount_price)){
+                           $cart->price = $request->count * $cart->product->discount_price;
+                       }
+                       $cart->save();
+                   }else{
+                       return response()->json([
+                           'status' => false,
+                           'msg' => trans('api.count_big'),
+                           'code' => 400,
+                       ]);
                    }
-                   $cart->save();
                }
             }
             if(isset($cart)){
@@ -162,7 +179,6 @@ class CartController extends Controller
                             'name_' . app()->getLocale() . ' as name',
                             'price',
                             'discount_price',
-                            'max_qty',
                             'percentage_discount'
                         )->with(array('mainImage' => function ($query) {
                                 $query->select(
@@ -202,20 +218,29 @@ class CartController extends Controller
             if(isset($api_token)){
                 $user = User::where('api_token' , $request->bearerToken())->first();
                 if(isset($user)){
-                    $found = Cart::where('product_id' , $request->product_id)->where('user_id',$user->id)->first();
+                    $found = Cart::where('product_id' , $request->product_id)->where('color_id' , $request->color_id)->where('size_id' , $request->size_id)->where('user_id',$user->id)->first();
                 }
             }else{
-                $found = Cart::where('product_id' , $request->product_id)->where('token',$token)->first();
+                $found = Cart::where('product_id' , $request->product_id)->where('color_id' , $request->color_id)->where('size_id' , $request->size_id)->where('token',$token)->first();
             }
             if(isset($found)){
-                $found->count = $found->count + $request->count;
-                if(empty($product->discount_price)){
-                    $found->price = $found->count * $product->price;
+                $color_size = ProductColor::where('product_id', $found->product_id)->where('color_id' , $found->color_id)->where('size_id' ,$found->size_id)->first();
+                if($color_size->stock_qty >= $found->count + $request->count){
+                    $found->count = $found->count + $request->count;
+                    if(empty($product->discount_price)){
+                        $found->price = $found->count * $product->price;
+                    }else{
+                        $found->price = $found->count * $product->discount_price;
+                    }
+                    $found->save();
+                    $cart = $found;
                 }else{
-                    $found->price = $found->count * $product->discount_price;
+                    return response()->json([
+                        'status' => false,
+                        'msg' => trans('api.count_big'),
+                        'code' => 400,
+                    ]);
                 }
-                $found->save();
-                $cart = $found;
             }else{
                 $cart = new Cart();
 
@@ -235,7 +260,17 @@ class CartController extends Controller
                 $cart->size_id = $request->size_id;
                 $cart->color_id = $request->color_id;
                 $cart->count = $request->count;
-                $cart->save();
+                $color_size = ProductColor::where('product_id', $request->product_id)->where('color_id' , $request->color_id)->where('size_id' ,$request->size_id)->first();
+                if($color_size->stock_qty >= $request->count){
+                    $cart->save();
+                }else{
+                    return response()->json([
+                        'status' => false,
+                        'msg' => trans('api.count_big'),
+                        'code' => 400,
+                    ]);
+                }
+
             }
             if(isset($api_token)){
                 $user = User::where('api_token' , $request->bearerToken())->first();
@@ -258,7 +293,6 @@ class CartController extends Controller
                                 'id',
                                 'name_' . app()->getLocale() . ' as name',
                                 'price',
-                                'max_qty',
                                 'discount_price',
                                 'percentage_discount'
                             )->with(array('mainImage' => function ($query) {
@@ -290,7 +324,7 @@ class CartController extends Controller
                             'id',
                             'name_' . app()->getLocale() . ' as name',
                             'price',
-                            'max_qty',
+
                             'discount_price',
                             'percentage_discount'
                         )->with(array('mainImage' => function ($query) {

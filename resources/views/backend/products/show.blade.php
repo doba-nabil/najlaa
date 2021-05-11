@@ -162,8 +162,12 @@
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-1">
-                                                        @foreach($product->colors as $color)
-                                                            <div style="height: 40px;width: 40px;background:{{ $color->color }};display: inline-block;border-radius: 50%;margin: 0 5px"></div>
+                                                        <?php
+                                                        $colors = \App\Models\ProductColor::whereIn('color_id' , $selected_colors)->where('product_id' , $product->id)->get();
+                                                        $unique = $colors->unique('color_id');
+                                                        ?>
+                                                        @foreach($unique as $color)
+                                                            <div style="height: 40px;width: 40px;background:{{ $color->color->color }};display: inline-block;border-radius: 50%;margin: 0 5px"></div>
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -173,12 +177,16 @@
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-1">
-                                                        @foreach($product->colors as $color)
-                                                            @foreach($color->sizes as $size)
+                                                        <?php
+                                                            $sizes = \App\Models\ProductColor::whereIn('color_id' , $selected_colors)->where('product_id' , $product->id)->get();
+                                                            $unique2 = $colors->unique('size_id');
+                                                        ?>
+
+                                                            @foreach($unique2 as $size)
                                                                 <span class="mx-1 px-4 py-1"
-                                                                      style="background: white;border-radius: 10px">{{ $size->size }}</span>
+                                                                      style="background: white;border-radius: 10px">{{ $size->size->code }}</span>
                                                             @endforeach
-                                                        @endforeach
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,11 +226,9 @@
                                                     <div class="col-sm-6 mt-4 text-right">
                                                         FITTING
                                                         <br>
-                                                        @foreach($product->colors as $color)
-                                                            @foreach($color->sizes as $size)
-                                                                {{ $size->size }}
-                                                                @if(!$loop->last) - @endif
-                                                            @endforeach
+                                                        @foreach($product->colors->unique('size_id') as $color)
+                                                            {{ $color->size->code }}
+                                                            @if(!$loop->last) - @endif
                                                         @endforeach
                                                     </div>
                                                 </div>
