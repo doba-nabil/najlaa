@@ -49,7 +49,7 @@
                                 </td>
                                 <td>{{ $product['name_'.app()->getLocale()] }}</td>
                                 <td>
-                                    <div style="width: 100px">
+                                    <div>
                                         @foreach($product->colors as $color)
                                             <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px;border: 1px solid">
                                                 <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">{{ __('dashboard.size') }} : {{ $color->size->code }}</span>

@@ -164,6 +164,7 @@ class ReportController extends Controller
         }
         $product_ids;
         $products = Product::whereIn('id' , $product_ids)->withCount('pays as cnt')->orderBy('cnt', 'DESC')->get();
+
         return view('backend.reports.best', compact('products' , 'pays'));
     }
     public function best_selling_post(Request $request)
