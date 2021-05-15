@@ -16,7 +16,6 @@ class Order extends Model
     protected $appends = ['currency_code' , 'currency_value','old_price','use_coupon','price_after_discount','discount_value'];
 
     public function getOldPriceAttribute(){
-        if(!empty($this->cobone_code)){
             $total = 0;
             foreach($this->pays as $pay){
                 if(!empty($pay->product->discount_price)){
@@ -26,9 +25,6 @@ class Order extends Model
                 }
             }
             return $total;
-        }else{
-            return null;
-        }
     }
     public function getPriceAfterDiscountAttribute(){
         if(!empty($this->cobone_code)){
