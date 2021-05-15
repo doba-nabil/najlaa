@@ -92,6 +92,7 @@ class ProductController extends Controller
                 $product->percentage_discount = round($offerRate) . ' % ';
             } else {
                 $product->percentage_discount = 0;
+                $product->discount_price = 0;
             }
             $product->code = $request->code;
             $product->body_ar = $request->body_ar;
@@ -230,6 +231,7 @@ class ProductController extends Controller
                 $product->percentage_discount = round($offerRate) . ' % ';
             } else {
                 $product->percentage_discount = 0;
+                $product->discount_price = 0;
             }
             $product->code = $request->code;
             $product->body_ar = $request->body_ar;
