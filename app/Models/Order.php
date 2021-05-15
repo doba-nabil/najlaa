@@ -37,7 +37,7 @@ class Order extends Model
         if(!empty($this->cobone_code)){
             return $this->cobone_value .'%';
         }else{
-            return null;
+            return 0 .'%';
         }
     }
     public function getUseCouponAttribute(){
