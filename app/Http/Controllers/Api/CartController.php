@@ -227,7 +227,7 @@ class CartController extends Controller
                 $color_size = ProductColor::where('product_id', $found->product_id)->where('color_id' , $found->color_id)->where('size_id' ,$found->size_id)->first();
                 if($color_size->stock_qty >= $found->count + $request->count){
                     $found->count = $found->count + $request->count;
-                    if(empty($product->discount_price)){
+                    if(empty($product->discount_price) || $product->discount_price == 0){
                         $found->price = $found->count * $product->price;
                     }else{
                         $found->price = $found->count * $product->discount_price;
@@ -251,9 +251,9 @@ class CartController extends Controller
                 }else{
                     $cart->token = $token;
                 }
-                if(empty($product->discount_price)){
+                if(empty($product->discount_price) || $product->discount_price == 0){
                     $cart->price = $request->count * $product->price;
-                }elseif(!empty($product->discount_price)){
+                }else{
                     $cart->price = $request->count * $product->discount_price;
                 }
                 $cart->product_id = $request->product_id;
