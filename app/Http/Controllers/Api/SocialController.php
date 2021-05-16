@@ -19,7 +19,7 @@ class SocialController extends Controller
         if(isset($request->provider_id)){
             $check_user = User::where([['provider_id' , $request->provider_id] , ['provider' , $request->provider]])->first();
             if (!isset($check_user)) {
-                $checkoo = User::where([['provider_id' , $request->provider_id]])->first();
+                $checkoo = User::where([['email' , $request->email]])->first();
                 if(isset($checkoo)){
                     if(app()->getLocale() == 'en'){
                         return response()->json([
@@ -173,6 +173,22 @@ class SocialController extends Controller
                         ], 422);
                     }
                 }else{
+                    $checkoo = User::where([['email' , $request->email]])->first();
+                    if(isset($checkoo)){
+                        if(app()->getLocale() == 'en'){
+                            return response()->json([
+                                "status" => false,
+                                "code" => 400,
+                                "msg" => "The email has already been taken.",
+                            ], 400);
+                        }else{
+                            return response()->json([
+                                "status" => false,
+                                "code" => 400,
+                                "msg" => "عفوا بريد مستخدم سابقا.",
+                            ], 400);
+                        }
+                    }
                     $pass = '123456789';
                     $user = User::create([
                         'name' => $request->name,
