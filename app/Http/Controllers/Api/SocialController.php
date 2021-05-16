@@ -16,7 +16,6 @@ class SocialController extends Controller
 {
     public function social(SocialAuth $request)
     {
-
         if(isset($request->provider_id)){
             $check_user = User::where([['provider_id' , $request->provider_id] , ['provider' , $request->provider]])->first();
             if (!isset($check_user)) {
@@ -25,25 +24,15 @@ class SocialController extends Controller
                     if(app()->getLocale() == 'en'){
                         return response()->json([
                             "status" => false,
-                            "code" => 422,
-                            "msg" => "The given data was invalid.",
-                            "errors" => [
-                                "email" => [
-                                    "The email has already been taken."
-                                ]
-                            ],
-                        ], 422);
+                            "code" => 400,
+                            "msg" => "The email has already been taken.",
+                        ], 400);
                     }else{
                         return response()->json([
                             "status" => false,
-                            "code" => 422,
-                            "msg" => "البيانات المدخلة غير صالحة.",
-                            "errors" => [
-                                "email" => [
-                                    "عفوا بريد مستخدم سابقا."
-                                ]
-                            ],
-                        ], 422);
+                            "code" => 400,
+                            "msg" => "عفوا بريد مستخدم سابقا.",
+                        ], 400);
                     }
                 }
                     $pass = '123456789';
@@ -157,25 +146,15 @@ class SocialController extends Controller
                 if(app()->getLocale() == 'en'){
                     return response()->json([
                         "status" => false,
-                        "code" => 422,
-                        "msg" => "The given data was invalid.",
-                        "errors" => [
-                            "email" => [
-                                "The email has already been taken."
-                            ]
-                        ],
-                    ], 422);
+                        "code" => 400,
+                        "msg" => "The email has already been taken.",
+                    ], 400);
                 }else{
                     return response()->json([
                         "status" => false,
-                        "code" => 422,
-                        "msg" => "البيانات المدخلة غير صالحة.",
-                        "errors" => [
-                            "email" => [
-                                "عفوا بريد مستخدم سابقا."
-                            ]
-                        ],
-                    ], 422);
+                        "code" => 400,
+                        "msg" => "عفوا بريد مستخدم سابقا.",
+                    ], 400);
                 }
             }
             if (!isset($check_user)) {
@@ -184,23 +163,13 @@ class SocialController extends Controller
                         return response()->json([
                             "status" => false,
                             "code" => 422,
-                            "msg" => "The given data was invalid.",
-                            "errors" => [
-                                "email" => [
-                                    "The email has already been taken."
-                                ]
-                            ],
+                            "msg" => "The email has already been taken.",
                         ], 422);
                     }else{
                         return response()->json([
                             "status" => false,
                             "code" => 422,
-                            "msg" => "البيانات المدخلة غير صالحة.",
-                            "errors" => [
-                                "email" => [
-                                    "عفوا بريد مستخدم سابقا."
-                                ]
-                            ],
+                            "msg" => "عفوا بريد مستخدم سابقا.",
                         ], 422);
                     }
                 }else{
@@ -311,6 +280,5 @@ class SocialController extends Controller
                 }
             }
         }
-
     }
 }
