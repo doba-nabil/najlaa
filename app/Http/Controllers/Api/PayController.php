@@ -53,7 +53,6 @@ class PayController extends Controller
                 $total = 0;
                 if (count($carts) > 0) {
                     foreach ($carts as $cart) {
-
                         $color_product = ProductColor::where('color_id' , $cart->color_id)->where('size_id' , $cart->size_id)->where('product_id',$cart->product_id)->first();
                         if(isset($color_product)){
                             $product = Product::find($cart->product_id);

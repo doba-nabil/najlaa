@@ -16,10 +16,36 @@ class SocialController extends Controller
 {
     public function social(SocialAuth $request)
     {
+
         if(isset($request->provider_id)){
             $check_user = User::where([['provider_id' , $request->provider_id] , ['provider' , $request->provider]])->first();
-
             if (!isset($check_user)) {
+                $checkoo = User::where([['provider_id' , $request->provider_id]])->first();
+                if(isset($checkoo)){
+                    if(app()->getLocale() == 'en'){
+                        return response()->json([
+                            "status" => false,
+                            "code" => 422,
+                            "message" => "The given data was invalid.",
+                            "errors" => [
+                                "email" => [
+                                    "The email has already been taken."
+                                ]
+                            ],
+                        ], 422);
+                    }else{
+                        return response()->json([
+                            "status" => false,
+                            "code" => 422,
+                            "message" => "البيانات المدخلة غير صالحة.",
+                            "errors" => [
+                                "email" => [
+                                    "عفوا بريد مستخدم سابقا."
+                                ]
+                            ],
+                        ], 422);
+                    }
+                }
                     $pass = '123456789';
                     $user = User::create([
                         'name' => $request->name,
