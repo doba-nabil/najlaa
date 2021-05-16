@@ -227,7 +227,7 @@ class CartController extends Controller
                 $color_size = ProductColor::where('product_id', $found->product_id)->where('color_id' , $found->color_id)->where('size_id' ,$found->size_id)->first();
                 if($color_size->stock_qty >= $found->count + $request->count){
                     $found->count = $found->count + $request->count;
-                    if($product->discount_price == 0){
+                    if(empty($product->discount_price) || $product->discount_price == 0){
                         $found->price = $found->count * $product->price;
                     }else{
                         $found->price = $found->count * $product->discount_price;
