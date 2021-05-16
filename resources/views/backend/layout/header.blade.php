@@ -151,7 +151,9 @@
                                 @if(isset($notification->data['ordercontact']))
                                     <?php
                                     $contact = \App\Models\ContactOrder::find($notification->data['ordercontact']['id']);
-                                    $user = \App\User::find($contact->user_id);
+                                    if(isset($contact)){
+                                        $user = \App\User::find($contact->user_id);
+                                    }
                                     ?>
                                     <a href="{{ route('ordercontacts.show' ,$notification->data['ordercontact']['id'] ) }}" class="text-reset notification-item deletenot" notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
                                         <div class="media">
