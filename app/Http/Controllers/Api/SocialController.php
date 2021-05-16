@@ -26,7 +26,7 @@ class SocialController extends Controller
                         return response()->json([
                             "status" => false,
                             "code" => 422,
-                            "message" => "The given data was invalid.",
+                            "msg" => "The given data was invalid.",
                             "errors" => [
                                 "email" => [
                                     "The email has already been taken."
@@ -37,7 +37,7 @@ class SocialController extends Controller
                         return response()->json([
                             "status" => false,
                             "code" => 422,
-                            "message" => "البيانات المدخلة غير صالحة.",
+                            "msg" => "البيانات المدخلة غير صالحة.",
                             "errors" => [
                                 "email" => [
                                     "عفوا بريد مستخدم سابقا."
@@ -82,7 +82,7 @@ class SocialController extends Controller
                         return response()->json([
                             'status' => true,
                             'code' => 200,
-                            'message' => 'Registered  Successfully',
+                            'msg' => 'Registered  Successfully',
                             'data' => [
                                 'id' => $user->id,
                                 'name' => $user->name,
@@ -94,7 +94,7 @@ class SocialController extends Controller
                         return response()->json([
                             'status' => true,
                             'code' => 200,
-                            'message' => 'تسجيل ناجح',
+                            'msg' => 'تسجيل ناجح',
                             'data' => [
                                 'id' => $user->id,
                                 'name' => $user->name,
@@ -128,7 +128,7 @@ class SocialController extends Controller
                     return response()->json([
                         'status' => true,
                         'code' => 200,
-                        'message' => 'Logined  Successfully',
+                        'msg' => 'Logined  Successfully',
                         'data' => [
                             'id' => $user->id,
                             'name' => $user->name,
@@ -140,7 +140,7 @@ class SocialController extends Controller
                     return response()->json([
                         'status' => true,
                         'code' => 200,
-                        'message' => 'تسجيل دخول ناجح',
+                        'msg' => 'تسجيل دخول ناجح',
                         'data' => [
                             'id' => $user->id,
                             'name' => $user->name,
@@ -158,7 +158,7 @@ class SocialController extends Controller
                     return response()->json([
                         "status" => false,
                         "code" => 422,
-                        "message" => "The given data was invalid.",
+                        "msg" => "The given data was invalid.",
                         "errors" => [
                             "email" => [
                                 "The email has already been taken."
@@ -169,7 +169,7 @@ class SocialController extends Controller
                     return response()->json([
                         "status" => false,
                         "code" => 422,
-                        "message" => "البيانات المدخلة غير صالحة.",
+                        "msg" => "البيانات المدخلة غير صالحة.",
                         "errors" => [
                             "email" => [
                                 "عفوا بريد مستخدم سابقا."
@@ -184,7 +184,7 @@ class SocialController extends Controller
                         return response()->json([
                             "status" => false,
                             "code" => 422,
-                            "message" => "The given data was invalid.",
+                            "msg" => "The given data was invalid.",
                             "errors" => [
                                 "email" => [
                                     "The email has already been taken."
@@ -195,7 +195,7 @@ class SocialController extends Controller
                         return response()->json([
                             "status" => false,
                             "code" => 422,
-                            "message" => "البيانات المدخلة غير صالحة.",
+                            "msg" => "البيانات المدخلة غير صالحة.",
                             "errors" => [
                                 "email" => [
                                     "عفوا بريد مستخدم سابقا."
@@ -240,7 +240,7 @@ class SocialController extends Controller
                         return response()->json([
                             'status' => true,
                             'code' => 200,
-                            'message' => 'Registered  Successfully',
+                            'msg' => 'Registered  Successfully',
                             'data' => [
                                 'id' => $user->id,
                                 'name' => $user->name,
@@ -252,7 +252,7 @@ class SocialController extends Controller
                         return response()->json([
                             'status' => true,
                             'code' => 200,
-                            'message' => 'تسجيل ناجح',
+                            'msg' => 'تسجيل ناجح',
                             'data' => [
                                 'id' => $user->id,
                                 'name' => $user->name,
@@ -288,7 +288,7 @@ class SocialController extends Controller
                     return response()->json([
                         'status' => true,
                         'code' => 200,
-                        'message' => 'Logined  Successfully',
+                        'msg' => 'Logined  Successfully',
                         'data' => [
                             'id' => $user->id,
                             'name' => $user->name,
@@ -300,7 +300,7 @@ class SocialController extends Controller
                     return response()->json([
                         'status' => true,
                         'code' => 200,
-                        'message' => 'تسجيل دخول ناجح',
+                        'msg' => 'تسجيل دخول ناجح',
                         'data' => [
                             'id' => $user->id,
                             'name' => $user->name,
