@@ -162,26 +162,25 @@ class OrderController extends Controller
             $order->delivery_id = $request->delivery_id;
             $order->save();
 
-           $firebaseToken = DB::table('token_users')->where('user_id' , $order->user_id)->pluck('device_token')->all();
-
-            $SERVER_API_KEY = 'AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr';
-
+        $firebaseTokens = DB::table('token_users')->where('user_id' , $order->user_id)->get();
+        foreach ($firebaseTokens as $firebaseToken){
             $data = [
-                "registration_ids" => $firebaseToken,
-                "notification" => [
-                    "title" => 'Najlaa Boutique',
-                    "body" => 'Your Order Status Changed' . $order->code,
-                ]
+                "to" => $firebaseToken->device_token,
+                "notification" =>
+                    [
+                        "title" => 'تغيير حالة طلب الشراء',
+                        "body" => 'تم تغيير حالة طلب الشراء الخاصة بك',
+                        "icon" => url('/logo.png'),
+                        "sound" => 'default',
+                    ],
             ];
             $dataString = json_encode($data);
 
             $headers = [
-                'Authorization: key=' . $SERVER_API_KEY,
+                'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
                 'Content-Type: application/json',
             ];
-
             $ch = curl_init();
-
             curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -189,6 +188,7 @@ class OrderController extends Controller
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
             curl_exec($ch);
+        }
 
             if($request->status == 0){
                 $code =  'signed / تم الاستلام';

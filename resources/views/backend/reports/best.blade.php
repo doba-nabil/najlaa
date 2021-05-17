@@ -101,12 +101,18 @@
                             <th>{{ __('dashboard.name') }}</th>
                             <th>
                                 @if(app()->getLocale() == 'en')
-                                    times of sale
+                                    times of sale for colors
                                 @else
-                                    مرات البيع
+                                    مرات البيع بالنسبة للالوان
                                 @endif
                             </th>
-                            <th>{{ __('dashboard.in_stock') }}</th>
+                            <th>
+                                @if(app()->getLocale() == 'en')
+                                   total times of sale
+                                @else
+                                     مجمل مرات البيع
+                                @endif
+                            </th>
                             <th>{{ __('dashboard.active') }}</th>
                             <th>{{ __('dashboard.options') }}</th>
                         </tr>
@@ -124,10 +130,32 @@
                                 </td>
                                 <td>{{ $product['name_'.app()->getLocale()] }}</td>
                                 <td>
-                                   {{ $pays->where('product_id' , $product->id)->count() }}
-
+                                    <div>
+                                        @foreach($product->colors as $color)
+                                            <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px;border: 1px solid">
+                                                <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">{{ __('dashboard.size') }} : {{ $color->size->code }}</span>
+                                                <br>
+                                                <?php
+                                                    $pays = \App\Models\Pay::where('size_id' , $color->size_id)->where('color_id',$color->color_id)->where('product_id' , $product->id)->get();
+                                                ?>
+                                                <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">
+                                                    @if(app()->getLocale() == 'en')
+                                                        times of sale
+                                                    @else
+                                                        مرات البيع
+                                                    @endif
+                                                    : {{ $pays->count() }}
+                                                </span>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </td>
-                                <td>{{ $product->max_qty }}</td>
+                                <td>
+                                    <?php
+                                        $pays = \App\Models\Pay::where('product_id', $product->id)->get();
+                                    ?>
+                                    {{ $pays->count() }}
+                                </td>
                                 <td>{{ $product->getActive() }}</td>
                                 <td>
                                     <a style="cursor: pointer" title="information" class="mr-3 text-warning" data-toggle="modal" data-target="#exampleModalCenter{{ $loop->index }}">
@@ -161,15 +189,15 @@
                                                     QAR</h6>
                                             @endif
                                             <hr>
-                                            Colors :
+                                            Colors & Sizes :
                                             @foreach($product->colors as $color)
-                                                <div style="height: 40px;width: 40px;background:{{ $color->color->color }};display: inline-block;border-radius: 50%;margin: 0 5px"></div>
+                                                <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px">
+                                                    <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">size : {{ $color->size->code }}</span>
+                                                    <br>
+                                                    <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">qty : {{ $color->stock_qty }}</span>
+                                                </div>
                                             @endforeach
-                                            <hr>
-                                            Sizes :
-                                            @foreach($product->sizes as $size)
-                                                <span class="mx-1 py-1 px-2" style="background: white;border-radius: 10px;border: 1px solid black;border-radius: 50%">{{ $size->size->code }}</span>
-                                            @endforeach
+
                                             <hr>
                                             {{--Brand :--}}
                                             {{--{{ $product->brand->name_en }}--}}

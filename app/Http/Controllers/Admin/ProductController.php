@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\ColorSize;
+use App\Models\EmptyProductNotification;
 use App\Models\Image;
 use App\Models\Material;
 use App\Models\Product;
@@ -16,6 +17,7 @@ use App\Models\ProductDetail;
 use App\Models\Size;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -24,9 +26,9 @@ class ProductController extends Controller
     function __construct()
     {
         $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:product-list', ['only' => ['index','show']]);
+        $this->middleware('permission:product-list', ['only' => ['index','show','see_empty_not']]);
         $this->middleware('permission:product-create', ['only' => ['create','store']]);
-        $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit','update','see_empty_not']]);
         $this->middleware('permission:product-delete', ['only' => ['destroy' , 'delete_products']]);
     }
     /**
@@ -72,11 +74,11 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         try {
-            if ($request->discount_price) {
+            if($request->percentage_discount){
                 $offerprice = $request->price;
-                $offerdisc = $request->discount_price;
-                $offerRate = $offerdisc / $offerprice * 100;
-                $offerRate = 100 - $offerRate;
+                $offerdisc = $request->percentage_discount;
+                $offerRate = ($offerprice * $offerdisc) / 100;
+                $offerRate = $request->price - $offerRate;
             }
 
             $product = new Product();
@@ -87,9 +89,9 @@ class ProductController extends Controller
             $product->material_id = $request->material_id;
 //            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
-            if ($request->discount_price || $request->discount_price!= 0) {
-                $product->discount_price = $request->discount_price;
-                $product->percentage_discount = round($offerRate) . ' % ';
+            if ($request->percentage_discount || $request->percentage_discount!= 0) {
+                $product->discount_price = $offerRate;
+                $product->percentage_discount = $request->percentage_discount . ' % ';
             } else {
                 $product->percentage_discount = 0;
                 $product->discount_price = 0;
@@ -200,6 +202,31 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
+    public function see_empty_not($slug)
+    {
+        try {
+            $product = Product::where('slug', $slug)->first();
+            $empties = EmptyProductNotification::where('product_id' , $product->id)->where('moderator_id' , Auth::user()->id)->get();
+            foreach($empties as $empty){
+                $empty->delete();
+            }
+            if (isset($product)) {
+                $categories = Category::whereNull('parent_id')->get();
+                $subcategories = Category::whereNotNull('parent_id')->get();
+                $selected_colors = DB::table('product_colors')->where('product_id' ,$product->id )->get();
+                $materials = Material::all();
+                $brands = Brand::all();
+                $colors = Color::all();
+                $sizes = Size::all();
+                return view('backend.products.edit', compact('product', 'categories',
+                    'materials', 'brands', 'subcategories','colors' , 'sizes' ,'selected_colors'));
+            } else {
+                return redirect()->back()->with('error', 'Error Try Again !!');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error Try Again !!');
+        }
+    }
 
     /**
      * Update the specified resource in storage.
@@ -211,11 +238,12 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         try {
-            if ($request->discount_price) {
+            if($request->percentage_discount){
                 $offerprice = $request->price;
-                $offerdisc = $request->discount_price;
-                $offerRate = $offerdisc / $offerprice * 100;
-                $offerRate = 100 - $offerRate;
+                $offerdisc = $request->percentage_discount;
+
+                $offerRate = ($offerprice * $offerdisc) / 100;
+                $offerRate = $request->price - $offerRate;
             }
 
             $product = Product::find($id);
@@ -226,9 +254,9 @@ class ProductController extends Controller
             $product->material_id = $request->material_id;
 //            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
-            if ($request->discount_price || $request->discount_price!= 0) {
-                $product->discount_price = $request->discount_price;
-                $product->percentage_discount = round($offerRate) . ' % ';
+            if ($request->percentage_discount || $request->percentage_discount!= 0) {
+                $product->discount_price = $offerRate;
+                $product->percentage_discount = $request->percentage_discount . ' % ';
             } else {
                 $product->percentage_discount = 0;
                 $product->discount_price = 0;
@@ -267,12 +295,18 @@ class ProductController extends Controller
                     $col->delete();
                 }
                 foreach($request->colors as $color){
+                    $found_emps = EmptyProductNotification::where('product_id' ,$product->id)->where('color_id' , $color['color_id'])->where('size_id', $color['size_id'])->get();
                     $co = new ProductColor();
                     $co->color_id = $color['color_id'];
                     $co->size_id = $color['size_id'];
                     $co->stock_qty = $color['qty'];
                     $co->product_id = $product->id;
                     $co->save();
+                    if($co->stock_qty > 0){
+                        foreach ($found_emps as $found){
+                            $found->delete();
+                        }
+                    }
                 }
             }
 
@@ -394,6 +428,57 @@ class ProductController extends Controller
                     'error' => 'Error Try Again !!'
                 ],422);
             }
+        }
+    }
+
+
+    public function discount()
+    {
+        try {
+            $products = Product::orderBy('id', 'desc')->get();
+            return view('backend.products.discount', compact('products'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error Try Again !!');
+        }
+    }
+    public function discount_form(Request $request)
+    {
+        try {
+            $ids = $request->ids;
+            $dis = $request->percentage_discount;
+            if($request->ids){
+                $products = Product::whereIn('id',$ids)->get();
+                foreach ($products as $product){
+                    if($request->percentage_discount){
+                        $offerprice = $product->price;
+                        $offerdisc = $dis;
+
+                        $offerRate = ($offerprice * $offerdisc) / 100;
+                        $offerRate = $product->price - $offerRate;
+
+                        $product->discount_price = $offerRate;
+                        $product->percentage_discount = $dis . ' % ';
+                        $product->save();
+                    }
+                }
+                if(app()->getLocale() == 'ar'){
+                    return redirect()->back()->with('done','تم تطبيق الخصم بنجاح .....');
+                }else{
+                    return redirect()->back()->with('done','Discount applied successfully.....');
+                }
+            }
+            if(app()->getLocale() == 'ar'){
+                return redirect()->back()->with('error','يرجى تحديد المنتجات .....');
+            }else{
+                return redirect()->back()->with('error','Please select the products.....');
+            }
+        } catch (\Exception $e) {
+            if(app()->getLocale() == 'ar'){
+                return redirect()->back()->with('error','خطأ يرجى المحاولة مرة اخرى.....');
+            }else{
+                return redirect()->back()->with('error','Error Please Try Again.....');
+            }
+
         }
     }
 }

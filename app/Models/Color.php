@@ -27,4 +27,9 @@ class Color extends Model
         return $this->hasMany('App\Models\ProductColor','color_id');
     }
 
+    public function pays()
+    {
+        return $this->hasMany('App\Models\Pay');
+    }
+
 }

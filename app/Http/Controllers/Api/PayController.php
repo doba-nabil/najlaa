@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Mail\Orderscc;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\CartCoupon;
@@ -215,6 +216,8 @@ class PayController extends Controller
                     $order['delivered_date'] = Carbon::parse($order->delivered)->format('d M Y');
                     $order['delivered_time'] = Carbon::parse($order->delivered)->format('h:i A');
                 }
+                $userr = User::find($order->user_id);
+                \Mail::to($userr->email)->send(new Orderscc($order));
                 return response()->json([
                     'status' => true,
                     'data' => $order,

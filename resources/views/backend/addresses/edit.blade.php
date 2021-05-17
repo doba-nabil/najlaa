@@ -99,7 +99,20 @@
                             <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">{{ __('dashboard.location') }}</h3>
+                                        <h3 class="panel-title">{{ __('dashboard.location') }}
+                                            <strong style="font-size: 12px;color: red;">
+                                                @if(app()->getLocale() == 'en')
+                                                    @if(!isset($address->lat))
+                                                        No Location To This Address
+                                                    @endif
+                                                @else
+                                                    @if(!isset($address->lat))
+                                                        لا يوجد تحديد على الخريطة لذلك العنوان
+                                                    @endif
+                                                @endif
+
+                                            </strong>
+                                        </h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
@@ -140,39 +153,77 @@
     <script src="{{ asset('backend') }}/mine.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/form-element.init.js"></script>
-    <script>
-        var map = new google.maps.Map(document.getElementById('map-canvas'),{
-            center:{
-                lat: {{ $address->lat }},
-                lng: {{ $address->lng }},
-            },
-            zoom:15
-        });
-        var marker = new google.maps.Marker({
-            position: {
-                lat: {{ $address->lat }},
-                lng: {{ $address->lng }},
-            },
-            map: map,
-            draggable: true
-        });
-        var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
-        google.maps.event.addListener(searchBox,'places_changed',function(){
-            var places = searchBox.getPlaces();
-            var bounds = new google.maps.LatLngBounds();
-            var i, place;
-            for(i=0; place=places[i];i++){
-                bounds.extend(place.geometry.location);
-                marker.setPosition(place.geometry.location); //set marker position new...
-            }
-            map.fitBounds(bounds);
-            map.setZoom(15);
-        });
-        google.maps.event.addListener(marker,'position_changed',function(){
-            var lat = marker.getPosition().lat();
-            var lng = marker.getPosition().lng();
-            $('#lat').val(lat);
-            $('#lng').val(lng);
-        });
-    </script>
+    @if(isset($address->lat))
+        <script>
+            var map = new google.maps.Map(document.getElementById('map-canvas'),{
+                center:{
+                    lat: {{ $address->lat }},
+                    lng: {{ $address->lng }},
+                },
+                zoom:15
+            });
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: {{ $address->lat }},
+                    lng: {{ $address->lng }},
+                },
+                map: map,
+                draggable: true
+            });
+            var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
+            google.maps.event.addListener(searchBox,'places_changed',function(){
+                var places = searchBox.getPlaces();
+                var bounds = new google.maps.LatLngBounds();
+                var i, place;
+                for(i=0; place=places[i];i++){
+                    bounds.extend(place.geometry.location);
+                    marker.setPosition(place.geometry.location); //set marker position new...
+                }
+                map.fitBounds(bounds);
+                map.setZoom(15);
+            });
+            google.maps.event.addListener(marker,'position_changed',function(){
+                var lat = marker.getPosition().lat();
+                var lng = marker.getPosition().lng();
+                $('#lat').val(lat);
+                $('#lng').val(lng);
+            });
+        </script>
+    @else
+        <script>
+            var map = new google.maps.Map(document.getElementById('map-canvas'),{
+                center:{
+                    lat: 25.286106,
+                    lng: 51.534817,
+                },
+                zoom:15
+            });
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: 25.286106,
+                    lng: 51.534817,
+                },
+                map: map,
+                draggable: true
+            });
+            var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
+            google.maps.event.addListener(searchBox,'places_changed',function(){
+                var places = searchBox.getPlaces();
+                var bounds = new google.maps.LatLngBounds();
+                var i, place;
+                for(i=0; place=places[i];i++){
+                    bounds.extend(place.geometry.location);
+                    marker.setPosition(place.geometry.location); //set marker position new...
+                }
+                map.fitBounds(bounds);
+                map.setZoom(15);
+            });
+            google.maps.event.addListener(marker,'position_changed',function(){
+                var lat = marker.getPosition().lat();
+                var lng = marker.getPosition().lng();
+                $('#lat').val(lat);
+                $('#lng').val(lng);
+            });
+        </script>
+    @endif
 @endsection

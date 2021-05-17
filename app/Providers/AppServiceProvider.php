@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Models\Country;
 use App\Models\Coupon;
 use App\Models\Currency;
+use App\Models\EmptyProductNotification;
 use App\Models\Moderator;
 use App\Models\Option;
 use App\Models\Page;
+use App\Models\ProductColor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
@@ -124,6 +126,24 @@ class AppServiceProvider extends ServiceProvider
                 $currency->active = 1;
                 $currency->country_id = 1;
                 $currency->save();
+            }
+        }
+        if(\Schema::hasTable('empty_product_notifications')){
+            $pros = ProductColor::where('stock_qty' , 0)->get();
+            foreach ($pros as $pro){
+                $found = EmptyProductNotification::where('product_id' , $pro->product_id)->where('color_id' , $pro->color_id)->where('size_id' , $pro->size_id)->first();
+                if(!isset($found)){
+                    $moderators = Moderator::all();
+                    foreach ($moderators as $moderator){
+                        $not = new EmptyProductNotification();
+                        $not->color_id = $pro->color_id;
+                        $not->size_id = $pro->size_id;
+                        $not->product_id = $pro->product_id;
+                        $not->moderator_id = $moderator->id;
+
+                        $not->save();
+                    }
+                }
             }
         }
     }
