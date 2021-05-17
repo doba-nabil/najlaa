@@ -158,14 +158,27 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">{{ __('dashboard.location') }}</h3>
+                                    <h3 class="panel-title">
+                                        {{ __('dashboard.location') }}
+                                        <strong style="font-size: 12px;color: red;">
+                                            @if(app()->getLocale() == 'en')
+                                                @if(!isset($address->lat))
+                                                    No Location To This Address
+                                                @endif
+                                            @else
+                                                @if(!isset($address->lat))
+                                                    لا يوجد تحديد على الخريطة لذلك العنوان
+                                                @endif
+                                            @endif
+
+                                        </strong>
+                                    </h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
                                             @if(isset($address))
                                             <div id="map-canvas"></div>
-                                            <input id="pac-input"  type="text" placeholder="{{ __('dashboard.search_here') }}....">
                                             <input type="hidden" id="lat" name="lat" value="{{ $address->lat }}" required>
                                             <input type="hidden" id="lng" name="lng" value="{{ $address->lng }}" required>
                                                 @endif
@@ -269,28 +282,7 @@
     <script src="{{ asset('backend') }}/mine.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/select2/js/select2.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/pages/form-advanced.init.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
-    <script>
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        var firebaseConfig = {
-            apiKey: "AIzaSyDq86Bkx3Y2zaZbAQCNSc6FeeJ_8A_fwzo",
-            authDomain: "najlaboutique2021.firebaseapp.com",
-            databaseURL: "https://najlaboutique2021.firebaseio.com",
-            projectId: "najlaboutique2021",
-            storageBucket: "najlaboutique2021.appspot.com",
-            messagingSenderId: "134240189270",
-            appId: "1:134240189270:web:b2caa55ba1151926e634f7",
-            measurementId: "G-WVYRCNK7DK"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-    </script>
-    @if(isset($address))
+    @if(isset($address->lat))
     <script>
         var map = new google.maps.Map(document.getElementById('map-canvas'),{
             center:{
@@ -305,26 +297,26 @@
                 lng: {{ $address->lng }},
             },
             map: map,
-            draggable: true
-        });
-        var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
-        google.maps.event.addListener(searchBox,'places_changed',function(){
-            var places = searchBox.getPlaces();
-            var bounds = new google.maps.LatLngBounds();
-            var i, place;
-            for(i=0; place=places[i];i++){
-                bounds.extend(place.geometry.location);
-                marker.setPosition(place.geometry.location); //set marker position new...
-            }
-            map.fitBounds(bounds);
-            map.setZoom(15);
-        });
-        google.maps.event.addListener(marker,'position_changed',function(){
-            var lat = marker.getPosition().lat();
-            var lng = marker.getPosition().lng();
-            $('#lat').val(lat);
-            $('#lng').val(lng);
+            draggable: false
         });
     </script>
+    @else
+        <script>
+            var map = new google.maps.Map(document.getElementById('map-canvas'),{
+                center:{
+                    lat: 25.286106,
+                    lng: 51.534817,
+                },
+                zoom:15
+            });
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: 25.286106,
+                    lng: 51.534817,
+                },
+                map: map,
+                draggable: false
+            });
+        </script>
     @endif
 @endsection

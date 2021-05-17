@@ -27,4 +27,9 @@ class Size extends Model
         return $this->hasMany('App\Models\ProductColor','size_id');
     }
 
+    public function pays()
+    {
+        return $this->hasMany('App\Models\Pay');
+    }
+
 }

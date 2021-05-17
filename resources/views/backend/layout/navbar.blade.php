@@ -61,6 +61,12 @@
                             <span>{{ __('dashboard.products') }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('pro_desc') }}" class="waves-effect">
+                            <i class="fas fa-percentage"></i>
+                            <span>{{ __('dashboard.discounts') }}</span>
+                        </a>
+                    </li>
                 @endif
                 @if(Auth::user()->can('order-list') || Auth::user()->can('order-edit') || Auth::user()->can('order-delete'))
                     <li>

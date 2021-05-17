@@ -63,11 +63,14 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="discount_price">{{ __('dashboard.discount') }} </label>
-                                    <input min="0" step="0.1" type="number" name="discount_price" class="form-control"
-                                           id="discount_price" placeholder="{{ __('dashboard.discount') }} "
-                                           value="{{ $product->discount_price }}">
-                                    @error('discount_price')
+                                    <label for="percentage_discount">{{ __('dashboard.percent') }} </label>
+                                    <?php
+                                        $dis = filter_var($product->percentage_discount, FILTER_SANITIZE_NUMBER_INT);
+                                    ?>
+                                    <input style="width: 95%;display: inline-block;" min="0" step="5" max="100" type="number" name="percentage_discount" class="form-control"
+                                           id="percentage_discount" placeholder="{{ __('dashboard.percent') }} "
+                                           value="{{ $dis }}"> %
+                                    @error('percentage_discount')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

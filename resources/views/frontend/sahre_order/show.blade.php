@@ -20,22 +20,6 @@
     <link href="{{ asset('backend') }}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
     <link href="{{ asset('backend') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-
-    @if(app()->getLocale() == 'en')
-        <link href="{{ asset('backend') }}/assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    @else
-        <link href="{{ asset('backend') }}/assets/css/app-rtl.min.css" rel="stylesheet" type="text/css" />
-    @endif
-    <link href="{{ asset('backend') }}/mine.css" rel="stylesheet" type="text/css" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-
-<body data-sidebar="dark">
-
-<input type="hidden" value="{{URL::to('/')}}" id="base_url">
-<div id="layout-wrapper">
-    <link href="{{ asset('backend') }}/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css"/>
     <style>
         #map-canvas {
             width: 100%;
@@ -54,7 +38,21 @@
         }
     </style>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAbukNOXKPE1M-2Duze7aLXcRLguKXbJQ&libraries=places&sensor=false"></script>
+    <!-- App Css-->
 
+    @if(app()->getLocale() == 'en')
+        <link href="{{ asset('backend') }}/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    @else
+        <link href="{{ asset('backend') }}/assets/css/app-rtl.min.css" rel="stylesheet" type="text/css" />
+    @endif
+    <link href="{{ asset('backend') }}/mine.css" rel="stylesheet" type="text/css" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+
+<body data-sidebar="dark">
+
+<input type="hidden" value="{{URL::to('/')}}" id="base_url">
+<div id="layout-wrapper">
     <div style="margin-left: 0;margin-right: 0" class="main-content">
         <div class="page-content">
             <div class="container-fluid">
@@ -176,13 +174,58 @@
                                                     {{ $pay->count }}
                                                 </td>
                                                 <td>
-                                                    {{ $pay->product->price }} QAR
+                                                    @if($pay->product->price == 0 || empty($pay->product->price ))
+                                                     {{ $pay->product->price }} QAR
+                                                    @else
+                                                        {{ $pay->product->discount_price }} QAR
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="row">
+                                    <?php
+                                    $address = \App\Models\Address::where('user_id' , $order->user_id)->where('building_no',$order->building_no)->where('street_address',$order->street_address)->first();
+                                    ?>
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">
+                                                    {{ __('dashboard.location') }}
+                                                    <strong style="font-size: 12px;color: red;">
+                                                        @if(app()->getLocale() == 'en')
+                                                            @if(!isset($address->lat))
+                                                                No Location To This Address
+                                                            @endif
+                                                        @else
+                                                            @if(!isset($address->lat))
+                                                                لا يوجد تحديد على الخريطة لذلك العنوان
+                                                            @endif
+                                                        @endif
+
+                                                    </strong>
+                                                </h3>
+                                            </div>
+                                            @if(isset($address->lat))
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @if(isset($address))
+                                                            <div id="map-canvas"></div>
+                                                            <input type="hidden" id="lat" name="lat" value="{{ $address->lat }}" required>
+                                                            <input type="hidden" id="lng" name="lng" value="{{ $address->lng }}" required>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                                <hr>
                             </div>
                         </div>
                         <!-- end card -->
@@ -197,6 +240,25 @@
     </div>
     <!-- END layout-wrapper -->
 </div>
+@if(isset($address->lat))
+    <script>
+        var map = new google.maps.Map(document.getElementById('map-canvas'),{
+            center:{
+                lat: {{ $address->lat }},
+                lng: {{ $address->lng }},
+            },
+            zoom:15
+        });
+        var marker = new google.maps.Marker({
+            position: {
+                lat: {{ $address->lat }},
+                lng: {{ $address->lng }},
+            },
+            map: map,
+            draggable: false
+        });
+    </script>
+@endif
 </body>
 </html>
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-    URL::forceScheme('https');
+   // URL::forceScheme('https');
 
 
 /*
@@ -72,6 +72,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     /*********** end brands route ***********/
     /*********** products route ***********/
     Route::resource('products', 'ProductController');
+    Route::get('show/product/{id}', 'ProductController@see_empty_not')->name('see_empty_not');
+    Route::get('discounts', 'ProductController@discount')->name('pro_desc');
+    Route::post('discounts', 'ProductController@discount_form')->name('pro_desc_form');
     Route::get('products/post/{slug}', 'ProductController@accept')->name('post_product');
     Route::post('delete_products', 'ProductController@delete_products')->name('delete_products');
     Route::get('delete_product_image/{imgID}', 'ProductController@delete_images')->name('delete_product_image');
