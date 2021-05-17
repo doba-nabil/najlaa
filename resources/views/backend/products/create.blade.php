@@ -65,7 +65,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="discount_price">{{ __('dashboard.percent') }} </label>
-                                    <input style="width: 95%;display: inline-block;" min="0" step="5" max="100" type="number" name="percentage_discount" class="form-control"
+                                    <input style="width: 95%;display: inline-block;" min="0" max="100" type="number" name="percentage_discount" class="form-control"
                                            id="percentage_discount" placeholder="{{ __('dashboard.percent') }}"
                                            value="{{ old('percentage_discount') }}"> %
                                     @error('percentage_discount')
