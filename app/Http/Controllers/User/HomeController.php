@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function share_order($order_id)
     {
         try {
-            $order = Order::find($order_id);
+            $order = Order::where('order_no',$order_id)->first();
             return view('frontend.sahre_order.show',compact('order'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');

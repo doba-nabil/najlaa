@@ -78,7 +78,7 @@
                                     {{ $order->date }} / {{ $order->time }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('orders.show' , $order->id) }}"
+                                    <a href="{{ route('orders.show' , $order->order_no) }}"
                                        class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
                                     <a title="" onclick="return false;" object_id="{{ $order->id }}"
                                        delete_url="/orders/" class="text-danger remove-alert" href="#"><i

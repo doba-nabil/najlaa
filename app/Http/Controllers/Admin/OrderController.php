@@ -100,14 +100,14 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($order_no)
     {
         try{
-            $order = Order::find($id);
+            $order = Order::where('order_no',$order_no)->first();
             $order->new = 0;
             $order->save();
 
-            $pays = Pay::where('order_id' , $id)->get();
+            $pays = Pay::where('order_id' , $order->id)->get();
 
             $dels = Delivery::active()->orderBy('id','desc')->get();
             return view('backend.orders.show' , compact('order','pays','dels'));

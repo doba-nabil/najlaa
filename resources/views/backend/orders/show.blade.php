@@ -253,7 +253,7 @@
         <h3>
             {{ __('dashboard.click_whats') }}
         </h3>
-        <a href="https://api.whatsapp.com/send?phone={{ $phone ?? '' }}&text={{ route('share_order' , $order->id) }}" data-action="share/whatsapp/share" class="mr-3 text-success"><i style="font-size:40px" class="mdi mdi-whatsapp"></i></a>
+        <a href="https://api.whatsapp.com/send?phone={{ $phone ?? '' }}&text={{ route('share_order' , $order->order_no) }}" data-action="share/whatsapp/share" class="mr-3 text-success"><i style="font-size:40px" class="mdi mdi-whatsapp"></i></a>
     @endif
     @if(!isset($phone))
         <h3>
