@@ -86,7 +86,7 @@
                                         <?php
                                         $user = \App\User::find($notification->data['user']['id']);
                                         ?>
-                                        <a href="{{ route('orders.show' ,$notification->data['order']['id'] ) }}"
+                                        <a href="{{ route('orders.show' ,$notification->data['order']['order_no'] ) }}"
                                            class="text-reset notification-item deletenot"
                                            notification="{{ $notification->id }}" data-token="{{ csrf_token() }}">
                                             <div class="media">

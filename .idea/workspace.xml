@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/User/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/User/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/orders/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/orders/new.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/orders/new.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/orders/old.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/orders/old.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/orders/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/orders/show.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,27 +16,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/backend/products/index.blade.php">
+      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-              <folding>
-                <element signature="e#4928#4951#0#HTML" expanded="true" />
-                <element signature="e#9673#9680#1#HTML" expanded="true" />
-                <element signature="e#9255#9429#0#HTML" expanded="true" />
-                <element signature="e#11488#11594#0#HTML" expanded="true" />
-                <element signature="e#11749#11855#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="-414">
+              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/backend/orders/show.blade.php">
+      <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="255" column="118" selection-start-line="255" selection-start-column="110" selection-end-line="255" selection-end-column="118" />
+            <state relative-caret-position="-211">
+              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -50,8 +37,8 @@
       <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/frontend/sahre_order/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1024">
-              <caret line="176" column="129" selection-start-line="176" selection-start-column="129" selection-end-line="176" selection-end-column="129" />
+            <state relative-caret-position="253">
+              <caret line="62" column="67" selection-start-line="62" selection-start-column="67" selection-end-line="62" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -59,8 +46,8 @@
       <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-207">
-              <caret line="105" column="54" selection-start-line="105" selection-start-column="54" selection-end-line="105" selection-end-column="54" />
+            <state relative-caret-position="230">
+              <caret line="109" column="54" selection-start-line="109" selection-start-column="54" selection-end-line="109" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -69,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/backend/orders/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="69">
-              <caret line="80" column="86" lean-forward="true" selection-start-line="80" selection-start-column="70" selection-end-line="80" selection-end-column="86" />
+              <caret line="80" column="86" selection-start-line="80" selection-start-column="70" selection-end-line="80" selection-end-column="86" />
             </state>
           </provider>
         </entry>
@@ -83,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="old.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="old.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/backend/orders/old.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="230">
@@ -101,11 +88,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="header.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/header.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="88" column="103" lean-forward="true" selection-start-line="88" selection-start-column="103" selection-end-line="88" selection-end-column="105" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/User/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="184">
-              <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="64" />
+              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -209,14 +205,14 @@
         <option value="$PROJECT_DIR$/resources/views/backend/sliders/show.blade.php" />
         <option value="$PROJECT_DIR$/routes/admin.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/products/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/frontend/sahre_order/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/PayController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/User/HomeController.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/orders/show.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/orders/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/orders/new.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/orders/old.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" />
+        <option value="$PROJECT_DIR$/resources/views/frontend/sahre_order/show.blade.php" />
       </list>
     </option>
   </component>
@@ -385,7 +381,7 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="orders" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -580,12 +576,12 @@
       <workItem from="1621328885772" duration="961000" />
       <workItem from="1621330186398" duration="432000" />
       <workItem from="1621332493403" duration="1274000" />
-      <workItem from="1621370393309" duration="9926000" />
+      <workItem from="1621370393309" duration="10520000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="815115000" />
+    <option name="totallyTimeSpent" value="815709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -740,20 +736,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/navbar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1288">
-          <caret line="56" column="169" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="169" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7843">
-          <caret line="341" column="22" selection-start-line="341" selection-start-column="22" selection-end-line="341" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://F:/github/BussnissProduction/routes/admin.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2829" />
@@ -881,20 +863,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="150" column="65" selection-start-line="150" selection-start-column="65" selection-end-line="150" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-869">
@@ -902,13 +870,6 @@
           <folding>
             <element signature="e#46#82#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -943,20 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/frontend/sahre_order/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1024">
-          <caret line="176" column="129" selection-start-line="176" selection-start-column="129" selection-end-line="176" selection-end-column="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/User/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/PayController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-20796">
@@ -964,17 +911,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-207">
-          <caret line="105" column="54" selection-start-line="105" selection-start-column="54" selection-end-line="105" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/orders/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
-          <caret line="80" column="86" lean-forward="true" selection-start-line="80" selection-start-column="70" selection-end-line="80" selection-end-column="86" />
+          <caret line="80" column="86" selection-start-line="80" selection-start-column="70" selection-end-line="80" selection-end-column="86" />
         </state>
       </provider>
     </entry>
@@ -989,6 +929,62 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="72" column="86" selection-start-line="72" selection-start-column="86" selection-end-line="72" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/frontend/sahre_order/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="62" column="67" selection-start-line="62" selection-start-column="67" selection-end-line="62" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-414">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3055">
+          <caret line="150" column="65" selection-start-line="150" selection-start-column="65" selection-end-line="150" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-211">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="109" column="54" selection-start-line="109" selection-start-column="54" selection-end-line="109" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/navbar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="56" column="169" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="169" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/User/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="88" column="103" lean-forward="true" selection-start-line="88" selection-start-column="103" selection-end-line="88" selection-end-column="105" />
         </state>
       </provider>
     </entry>
