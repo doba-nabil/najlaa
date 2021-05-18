@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ar/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ar/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/products/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/products/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/products/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-    </list>
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,29 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="100" selection-start-line="100" selection-end-line="100" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/lang/ar/dashboard.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="185" column="30" selection-start-line="185" selection-start-column="30" selection-end-line="185" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/lang/en/dashboard.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="186" column="18" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
+            <state relative-caret-position="2852">
+              <caret line="173" column="79" lean-forward="true" selection-start-line="173" selection-start-column="79" selection-end-line="173" selection-end-column="79" />
             </state>
           </provider>
         </entry>
@@ -81,7 +50,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/backend/products/edit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="295">
@@ -93,7 +62,7 @@
       <file leaf-file-name="NotificationController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-671">
+            <state relative-caret-position="7291">
               <caret line="344" column="40" selection-start-line="344" selection-start-column="40" selection-end-line="344" selection-end-column="40" />
             </state>
           </provider>
@@ -220,10 +189,10 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" />
         <option value="$PROJECT_DIR$/routes/admin.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/products/create.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" />
         <option value="$PROJECT_DIR$/resources/lang/ar/dashboard.php" />
         <option value="$PROJECT_DIR$/resources/lang/en/dashboard.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/products/edit.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" />
       </list>
     </option>
   </component>
@@ -371,28 +340,13 @@
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="products" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -587,18 +541,17 @@
       <workItem from="1621328885772" duration="961000" />
       <workItem from="1621330186398" duration="432000" />
       <workItem from="1621332493403" duration="1274000" />
-      <workItem from="1621370393309" duration="4904000" />
+      <workItem from="1621370393309" duration="5213000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="810093000" />
+    <option name="totallyTimeSpent" value="810402000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18532526" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18532526" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -607,7 +560,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32994923" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.31641287" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.31641287" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -867,20 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2021_05_18_235335_add_nots_to_products_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2021_05_18_234244_add_nots_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -947,17 +886,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/products/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-671">
-          <caret line="344" column="40" selection-start-line="344" selection-start-column="40" selection-end-line="344" selection-end-column="40" />
+        <state relative-caret-position="295">
+          <caret line="309" column="114" selection-start-line="309" selection-start-column="114" selection-end-line="309" selection-end-column="114" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lang/en/dashboard.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="186" column="18" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
+        <state relative-caret-position="7291">
+          <caret line="344" column="40" selection-start-line="344" selection-start-column="40" selection-end-line="344" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -968,13 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="100" selection-start-line="100" selection-end-line="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/products/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="479">
@@ -982,10 +914,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/products/edit.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/lang/en/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="309" column="114" selection-start-line="309" selection-start-column="114" selection-end-line="309" selection-end-column="114" />
+        <state relative-caret-position="364">
+          <caret line="186" column="18" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_05_18_234244_add_nots_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_05_18_235335_add_nots_to_products_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2852">
+          <caret line="173" column="79" lean-forward="true" selection-start-line="173" selection-start-column="79" selection-end-line="173" selection-end-column="79" />
         </state>
       </provider>
     </entry>
