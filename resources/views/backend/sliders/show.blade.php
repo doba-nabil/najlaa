@@ -23,7 +23,6 @@
                             <th>#</th>
                             <th>{{ __('dashboard.image') }}</th>
                             <th>{{ __('dashboard.name') }}</th>
-                            <th>{{ __('dashboard.in_stock') }}</th>
                             <th>{{ __('dashboard.active') }}</th>
                             <th>{{ __('dashboard.options') }}</th>
                         </tr>
@@ -43,7 +42,6 @@
                                     @endif
                                 </td>
                                 <td>{{ $product['name_'.app()->getLocale()] }}</td>
-                                <td>{{ $product->max_qty }}</td>
                                 <td>{{ $product->getActive() }}</td>
                                 <td>
                                     <a title="delete" onclick="return false;" object_id="{{ $p->id }}"
