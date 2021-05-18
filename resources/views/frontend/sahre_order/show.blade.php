@@ -60,7 +60,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Order No {{ $order->order_no }}</h4>
+                                <h4 class="card-title">Order Code : {{ $order->order_no }}</h4>
                                 <p class="card-title-desc"></p>
                                 <hr>
                                 <div class="table-responsive">
