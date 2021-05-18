@@ -13,9 +13,9 @@ use App\Models\Image;
 use App\Models\Material;
 use App\Models\Product;
 use App\Models\ProductColor;
-use App\Models\ProductDetail;
 use App\Models\Size;
 use App\Traits\UploadTrait;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,14 +23,16 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     use UploadTrait;
+
     function __construct()
     {
-        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:product-list', ['only' => ['index','show','see_empty_not']]);
-        $this->middleware('permission:product-create', ['only' => ['create','store']]);
-        $this->middleware('permission:product-edit', ['only' => ['edit','update','see_empty_not']]);
-        $this->middleware('permission:product-delete', ['only' => ['destroy' , 'delete_products']]);
+        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:product-list', ['only' => ['index', 'show', 'see_empty_not']]);
+        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit', 'update', 'see_empty_not']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy', 'delete_products']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +61,7 @@ class ProductController extends Controller
             $brands = Brand::all();
             $colors = Color::all();
             $sizes = Size::all();
-            return view('backend.products.create', compact('categories', 'materials', 'brands','colors','sizes'));
+            return view('backend.products.create', compact('categories', 'materials', 'brands', 'colors', 'sizes'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -74,7 +76,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         try {
-            if($request->percentage_discount){
+            if ($request->percentage_discount) {
                 $offerprice = $request->price;
                 $offerdisc = $request->percentage_discount;
                 $offerRate = ($offerprice * $offerdisc) / 100;
@@ -89,7 +91,7 @@ class ProductController extends Controller
             $product->material_id = $request->material_id;
 //            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
-            if ($request->percentage_discount || $request->percentage_discount!= 0) {
+            if ($request->percentage_discount || $request->percentage_discount != 0) {
                 $product->discount_price = $offerRate;
                 $product->percentage_discount = $request->percentage_discount . ' % ';
 
@@ -126,7 +128,7 @@ class ProductController extends Controller
             if ($request->hasFile('images')) {
                 $this->saveimages($request->images, 'pictures/products', $product->id, Product::class, 'sub');
             }
-            foreach($request->colors as $color){
+            foreach ($request->colors as $color) {
                 $co = new ProductColor();
                 $co->color_id = $color['color_id'];
                 $co->size_id = $color['size_id'];
@@ -150,11 +152,11 @@ class ProductController extends Controller
     {
         try {
             $product = Product::where('slug', $slug)->first();
-             $selected_colors = DB::table('product_colors')->where('product_id' ,$product->id )
+            $selected_colors = DB::table('product_colors')->where('product_id', $product->id)
                 ->select('color_id')
                 ->distinct()
                 ->pluck('color_id');
-            return view('backend.products.show', compact('product','selected_colors'));
+            return view('backend.products.show', compact('product', 'selected_colors'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
@@ -171,15 +173,15 @@ class ProductController extends Controller
                 $product->active = 1;
                 $product->save();
 
-                if($product->percentage_discount > 0 && $product->notify == 1){
-                    $users = User::where('products_notify' , 1)->pluck('id');
-                    if($users->count() > 0){
-                        $firebaseTokens = DB::table('token_users')->whereIn('user_id' , $users)->get();
-                        foreach ($firebaseTokens as $firebaseToken){
-                            if($firebaseToken->lang == 'en'){
+                if ($product->percentage_discount > 0 && $product->notify == 1) {
+                    $users = User::where('products_notify', 1)->pluck('id');
+                    if ($users->count() > 0) {
+                        $firebaseTokens = DB::table('token_users')->whereIn('user_id', $users)->get();
+                        foreach ($firebaseTokens as $firebaseToken) {
+                            if ($firebaseToken->lang == 'en') {
                                 $title = 'New offer';
                                 $body = 'Discounts on ' . $product->name_en;
-                            }else{
+                            } else {
                                 $title = 'عرض تخفيض جديد';
                                 $body = 'تخفيضات على ' . $product->name_ar;
                             }
@@ -231,13 +233,13 @@ class ProductController extends Controller
             if (isset($product)) {
                 $categories = Category::whereNull('parent_id')->get();
                 $subcategories = Category::whereNotNull('parent_id')->get();
-                $selected_colors = DB::table('product_colors')->where('product_id' ,$product->id )->get();
+                $selected_colors = DB::table('product_colors')->where('product_id', $product->id)->get();
                 $materials = Material::all();
                 $brands = Brand::all();
                 $colors = Color::all();
                 $sizes = Size::all();
                 return view('backend.products.edit', compact('product', 'categories',
-                    'materials', 'brands', 'subcategories','colors' , 'sizes' ,'selected_colors'));
+                    'materials', 'brands', 'subcategories', 'colors', 'sizes', 'selected_colors'));
             } else {
                 return redirect()->back()->with('error', 'Error Try Again !!');
             }
@@ -245,24 +247,25 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
+
     public function see_empty_not($slug)
     {
         try {
             $product = Product::where('slug', $slug)->first();
-            $empties = EmptyProductNotification::where('product_id' , $product->id)->where('moderator_id' , Auth::user()->id)->get();
-            foreach($empties as $empty){
+            $empties = EmptyProductNotification::where('product_id', $product->id)->where('moderator_id', Auth::user()->id)->get();
+            foreach ($empties as $empty) {
                 $empty->delete();
             }
             if (isset($product)) {
                 $categories = Category::whereNull('parent_id')->get();
                 $subcategories = Category::whereNotNull('parent_id')->get();
-                $selected_colors = DB::table('product_colors')->where('product_id' ,$product->id )->get();
+                $selected_colors = DB::table('product_colors')->where('product_id', $product->id)->get();
                 $materials = Material::all();
                 $brands = Brand::all();
                 $colors = Color::all();
                 $sizes = Size::all();
                 return view('backend.products.edit', compact('product', 'categories',
-                    'materials', 'brands', 'subcategories','colors' , 'sizes' ,'selected_colors'));
+                    'materials', 'brands', 'subcategories', 'colors', 'sizes', 'selected_colors'));
             } else {
                 return redirect()->back()->with('error', 'Error Try Again !!');
             }
@@ -281,7 +284,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         try {
-            if($request->percentage_discount){
+            if ($request->percentage_discount) {
                 $offerprice = $request->price;
                 $offerdisc = $request->percentage_discount;
 
@@ -297,7 +300,7 @@ class ProductController extends Controller
             $product->material_id = $request->material_id;
 //            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
-            if ($request->percentage_discount || $request->percentage_discount!= 0) {
+            if ($request->percentage_discount || $request->percentage_discount != 0) {
                 $product->discount_price = $offerRate;
                 $product->percentage_discount = $request->percentage_discount . ' % ';
                 if ($request->notify == 1) {
@@ -332,20 +335,20 @@ class ProductController extends Controller
             if ($request->hasFile('images')) {
                 $this->saveimages($request->images, 'pictures/products', $product->id, Product::class, 'sub');
             }
-            if($request->colors){
-                foreach ($product->colors as $col){
+            if ($request->colors) {
+                foreach ($product->colors as $col) {
                     $col->delete();
                 }
-                foreach($request->colors as $color){
-                    $found_emps = EmptyProductNotification::where('product_id' ,$product->id)->where('color_id' , $color['color_id'])->where('size_id', $color['size_id'])->get();
+                foreach ($request->colors as $color) {
+                    $found_emps = EmptyProductNotification::where('product_id', $product->id)->where('color_id', $color['color_id'])->where('size_id', $color['size_id'])->get();
                     $co = new ProductColor();
                     $co->color_id = $color['color_id'];
                     $co->size_id = $color['size_id'];
                     $co->stock_qty = $color['qty'];
                     $co->product_id = $product->id;
                     $co->save();
-                    if($co->stock_qty > 0){
-                        foreach ($found_emps as $found){
+                    if ($co->stock_qty > 0) {
+                        foreach ($found_emps as $found) {
                             $found->delete();
                         }
                     }
@@ -376,21 +379,21 @@ class ProductController extends Controller
                         $image->delete();
                     }
                     $product->delete();
-                    if(app()->getLocale() == 'ar'){
+                    if (app()->getLocale() == 'ar') {
                         return response()->json([
                             'success' => 'تم الحذف بنجاح'
                         ]);
-                    }else{
+                    } else {
                         return response()->json([
                             'success' => 'Record deleted successfully!'
                         ]);
                     }
                 } else {
-                    if(app()->getLocale() == 'ar'){
+                    if (app()->getLocale() == 'ar') {
                         return response()->json([
                             'error' => 'لا يمكن حذف المنتج بسبب وجود طلبات شراء'
                         ], 422);
-                    }else{
+                    } else {
                         return response()->json([
                             'error' => 'Cannot delete Product, In Order'
                         ], 422);
@@ -402,14 +405,14 @@ class ProductController extends Controller
                 return redirect()->back()->with('error', 'Error Try Again !!');
             }
         } catch (\Exception $e) {
-            if(app()->getLocale() == 'ar'){
+            if (app()->getLocale() == 'ar') {
                 return response()->json([
                     'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
-                ],422);
-            }else{
+                ], 422);
+            } else {
                 return response()->json([
                     'error' => 'Error Try Again !!'
-                ],422);
+                ], 422);
             }
         }
     }
@@ -418,8 +421,8 @@ class ProductController extends Controller
     {
         try {
             $ids = $request->ids;
-            $products = Product::whereIn('id',explode(",",$ids))->get();
-            foreach ($products as $product){
+            $products = Product::whereIn('id', explode(",", $ids))->get();
+            foreach ($products as $product) {
                 if (count($product->pays) == 0) {
                     $this->deleteimages($product->id, 'pictures/products/', Product::class);
                     foreach ($product->subImages as $image) {
@@ -429,24 +432,24 @@ class ProductController extends Controller
                     $product->delete();
                 }
             }
-            if(app()->getLocale() == 'ar'){
+            if (app()->getLocale() == 'ar') {
                 return response()->json([
                     'success' => 'تم حذف المنتجات بلا طلبات شراء بنجاح'
                 ]);
-            }else{
+            } else {
                 return response()->json([
                     'success' => 'Products Without Orders deleted successfully!'
                 ]);
             }
         } catch (\Exception $e) {
-            if(app()->getLocale() == 'ar'){
+            if (app()->getLocale() == 'ar') {
                 return response()->json([
                     'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
-                ],422);
-            }else{
+                ], 422);
+            } else {
                 return response()->json([
                     'error' => 'Error Try Again !!'
-                ],422);
+                ], 422);
             }
         }
     }
@@ -461,14 +464,14 @@ class ProductController extends Controller
                 'success' => 'Record deleted successfully!'
             ]);
         } catch (\Exception $e) {
-            if(app()->getLocale() == 'ar'){
+            if (app()->getLocale() == 'ar') {
                 return response()->json([
                     'error' => 'يوجد خطأ يرجى المحاولة في وقت لاحق!!'
-                ],422);
-            }else{
+                ], 422);
+            } else {
                 return response()->json([
                     'error' => 'Error Try Again !!'
-                ],422);
+                ], 422);
             }
         }
     }
@@ -483,15 +486,16 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Error Try Again !!');
         }
     }
+
     public function discount_form(Request $request)
     {
         try {
             $ids = $request->ids;
             $dis = $request->percentage_discount;
-            if($request->ids){
-                $products = Product::whereIn('id',$ids)->get();
-                foreach ($products as $product){
-                    if($request->percentage_discount){
+            if ($request->ids) {
+                $products = Product::whereIn('id', $ids)->get();
+                foreach ($products as $product) {
+                    if ($request->percentage_discount) {
                         $offerprice = $product->price;
                         $offerdisc = $dis;
 
@@ -503,22 +507,61 @@ class ProductController extends Controller
                         $product->save();
                     }
                 }
-                if(app()->getLocale() == 'ar'){
-                    return redirect()->back()->with('done','تم تطبيق الخصم بنجاح .....');
-                }else{
-                    return redirect()->back()->with('done','Discount applied successfully.....');
+
+                $users = User::where('products_notify', 1)->pluck('id');
+                if ($users->count() > 0) {
+                    $firebaseTokens = DB::table('token_users')->whereIn('user_id', $users)->get();
+                    foreach ($firebaseTokens as $firebaseToken) {
+                        if ($firebaseToken->lang == 'en') {
+                            $title = 'New discounts on some products';
+                            $body = 'Many discounts have been applied. Visit the application to browse the latest discounts';
+                        } else {
+                            $title = 'تخفيضات جديدة على بعض المنتجات';
+                            $body = 'تم تطبيق العديد من التخفيضات قم بزيارة التطبيق لتصفح اخر التخفيضات';
+                        }
+                        $data = [
+                            "to" => $firebaseToken->device_token,
+                            "notification" =>
+                                [
+                                    "title" => $title,
+                                    "body" => $body,
+                                    "icon" => url('/logo.png'),
+                                    "sound" => 'default',
+                                ],
+                        ];
+                        $dataString = json_encode($data);
+
+                        $headers = [
+                            'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
+                            'Content-Type: application/json',
+                        ];
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                        curl_setopt($ch, CURLOPT_POST, true);
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+                        curl_exec($ch);
+                    }
+                }
+
+                if (app()->getLocale() == 'ar') {
+                    return redirect()->back()->with('done', 'تم تطبيق الخصم بنجاح .....');
+                } else {
+                    return redirect()->back()->with('done', 'Discount applied successfully.....');
                 }
             }
-            if(app()->getLocale() == 'ar'){
-                return redirect()->back()->with('error','يرجى تحديد المنتجات .....');
-            }else{
-                return redirect()->back()->with('error','Please select the products.....');
+            if (app()->getLocale() == 'ar') {
+                return redirect()->back()->with('error', 'يرجى تحديد المنتجات .....');
+            } else {
+                return redirect()->back()->with('error', 'Please select the products.....');
             }
         } catch (\Exception $e) {
-            if(app()->getLocale() == 'ar'){
-                return redirect()->back()->with('error','خطأ يرجى المحاولة مرة اخرى.....');
-            }else{
-                return redirect()->back()->with('error','Error Please Try Again.....');
+            if (app()->getLocale() == 'ar') {
+                return redirect()->back()->with('error', 'خطأ يرجى المحاولة مرة اخرى.....');
+            } else {
+                return redirect()->back()->with('error', 'Error Please Try Again.....');
             }
 
         }
