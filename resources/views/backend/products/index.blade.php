@@ -25,7 +25,6 @@
                             <th style="width: 28px;" ><input type="checkbox" id="master"></th>
                             <th>{{ __('dashboard.image') }}</th>
                             <th>{{ __('dashboard.name') }}</th>
-                            <th>{{ __('dashboard.in_stock') }}</th>
                             <th>{{ __('dashboard.active') }}</th>
                             <th>{{ __('dashboard.options') }}</th>
                         </tr>
@@ -48,24 +47,15 @@
                                     @endif
                                 </td>
                                 <td>{{ $product['name_'.app()->getLocale()] }}</td>
-                                <td>
-                                    <div>
-                                        @foreach($product->colors as $color)
-                                            <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px;border: 1px solid">
-                                                <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">{{ __('dashboard.size') }} : {{ $color->size->code }}</span>
-                                                <br>
-                                                <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">{{ __('dashboard.qty') }} : {{ $color->stock_qty }}</span>
-                                            </div>
-                                        @endforeach
-                                    </div>
-
-                                </td>
                                 <td>{{ $product->getActive() }}</td>
                                 <td>
                                     <a title="edit" href="{{ route('products.edit' , $product->slug) }}"
                                        class="mr-3 text-primary"><i class="mdi mdi-pencil font-size-18"></i></a>
                                     <a style="cursor: pointer" title="information" class="mr-3 text-warning" data-toggle="modal" data-target="#exampleModalCenter{{ $loop->index }}">
                                         <i class="fas fa-info-circle font-size-18"></i>
+                                    </a>
+                                    <a style="cursor: pointer" title="information" class="mr-3 text-dark" data-toggle="modal" data-target="#exampleModalCenter2{{ $loop->index }}">
+                                        <i class="fas fa-palette  font-size-18"></i>
                                     </a>
                                     <a href="{{ route('products.show' , $product->slug) }}" title="mobile show" class="mr-3 text-success"><i class="fas fa-eye font-size-18"></i></a>
                                     <a title="delete" onclick="return false;" object_id="{{ $product->id }}"
@@ -110,6 +100,27 @@
                                             <hr>
                                             Material :
                                             {{ $product->material->name_en }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="exampleModalCenter2{{ $loop->index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2{{ $loop->index }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle2{{ $loop->index }}">"{{ $product['name_'.app()->getLocale()] }}" {{ __('dashboard.in_stock') }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @foreach($product->colors as $color)
+                                                <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px">
+                                                    <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">size : {{ $color->size->code }}</span>
+                                                    <br>
+                                                    <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">qty : {{ $color->stock_qty }}</span>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
