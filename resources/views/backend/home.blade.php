@@ -506,7 +506,7 @@
                                                 <td>
                                                     <h5 class="font-size-14 mb-0">{{ $product['name_'.app()->getLocale()] }}</h5>
                                                 </td>
-                                                <td><div id="spak-chart1"><a href="{{ route('products.show' , $product->id) }}"><i class="fa fa-eye"></i> </a> </div></td>
+                                                <td><div id="spak-chart1"><a href="{{ route('products.show' , $product->slug) }}"><i class="fa fa-eye"></i> </a> </div></td>
                                                 <td>
                                                     <p class="text-muted mb-0">{{ $product->views }}</p>
                                                 </td>

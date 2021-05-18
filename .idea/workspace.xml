@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="admin.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-211">
-              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            <state relative-caret-position="138">
+              <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -88,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="header.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/header.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="88" column="103" lean-forward="true" selection-start-line="88" selection-start-column="103" selection-end-line="88" selection-end-column="105" />
+            <state relative-caret-position="-142">
+              <caret line="88" column="111" selection-start-line="88" selection-start-column="111" selection-end-line="88" selection-end-column="111" />
             </state>
           </provider>
         </entry>
@@ -190,7 +188,6 @@
         <option value="$PROJECT_DIR$/database/migrations/2021_05_17_025520_create_empty_product_notifications_table.php" />
         <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
         <option value="$PROJECT_DIR$/app/Models/EmptyProductNotification.php" />
-        <option value="$PROJECT_DIR$/resources/views/backend/layout/header.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2021_05_18_235335_add_nots_to_products_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2021_05_18_234244_add_nots_to_users_table.php" />
         <option value="$PROJECT_DIR$/resources/lang/ar/api.php" />
@@ -203,7 +200,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/sliders/show.blade.php" />
-        <option value="$PROJECT_DIR$/routes/admin.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/products/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/PayController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/User/HomeController.php" />
@@ -213,6 +209,8 @@
         <option value="$PROJECT_DIR$/resources/views/backend/orders/old.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/sahre_order/show.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/backend/layout/header.blade.php" />
+        <option value="$PROJECT_DIR$/routes/admin.php" />
       </list>
     </option>
   </component>
@@ -360,28 +358,7 @@
             <path>
               <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
               <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="najlaa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="najlaa" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -576,18 +553,17 @@
       <workItem from="1621328885772" duration="961000" />
       <workItem from="1621330186398" duration="432000" />
       <workItem from="1621332493403" duration="1274000" />
-      <workItem from="1621370393309" duration="10520000" />
+      <workItem from="1621370393309" duration="10741000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="815709000" />
+    <option name="totallyTimeSpent" value="815930000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18532526" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18532526" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -596,7 +572,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32994923" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.31641287" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.31641287" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -939,24 +915,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3055">
           <caret line="150" column="65" selection-start-line="150" selection-start-column="65" selection-end-line="150" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-211">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -983,8 +945,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/layout/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="88" column="103" lean-forward="true" selection-start-line="88" selection-start-column="103" selection-end-line="88" selection-end-column="105" />
+        <state relative-caret-position="-142">
+          <caret line="88" column="111" selection-start-line="88" selection-start-column="111" selection-end-line="88" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-414">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
         </state>
       </provider>
     </entry>
