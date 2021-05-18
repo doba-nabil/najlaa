@@ -25,6 +25,7 @@
                             <th style="width: 28px;" ><input type="checkbox" id="master"></th>
                             <th>{{ __('dashboard.image') }}</th>
                             <th>{{ __('dashboard.name') }}</th>
+                            <th>{{ __('dashboard.in_stock') }}</th>
                             <th>{{ __('dashboard.active') }}</th>
                             <th>{{ __('dashboard.options') }}</th>
                         </tr>
@@ -36,6 +37,11 @@
                                 ->select('color_id')
                                 ->distinct()
                                 ->pluck('color_id');
+                            $selected_stocks = DB::table('product_colors')->where('product_id' ,$product->id )->pluck('stock_qty');
+                            $sum=0;
+                            foreach ($selected_stocks as $selected_stock){
+                                $sum += $selected_stock;
+                            }
                             ?>
                             <tr>
                                 <td><input type="checkbox" class="sub_chk" data-id="{{$product->id}}"></td>
@@ -47,6 +53,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $product['name_'.app()->getLocale()] }}</td>
+                                <td>{{ $sum }}</td>
                                 <td>{{ $product->getActive() }}</td>
                                 <td>
                                     <a title="edit" href="{{ route('products.edit' , $product->slug) }}"
@@ -113,7 +120,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body text-center">
                                             @foreach($product->colors as $color)
                                                 <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px;margin-top: 10px">
                                                     <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">size : {{ $color->size->code }}</span>
