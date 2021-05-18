@@ -58,7 +58,7 @@ class PayController extends Controller
                         if(isset($color_product)){
                             $product = Product::find($cart->product_id);
                             if($color_product->stock_qty >= $cart->count){
-                                $total+= $cart->price;
+                                $total+= $cart->price * $cart->count;
                                 if(empty($cart->cobone_id)){
                                     $order->total_price = $total;
                                 }else{
