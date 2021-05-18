@@ -115,7 +115,7 @@
                                         </div>
                                         <div class="modal-body">
                                             @foreach($product->colors as $color)
-                                                <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px">
+                                                <div style="height: auto;width: auto;text-align: center;background:{{ $color->color->color }};display: inline-block;border-radius: 3px;margin: 0 5px;padding: 5px;margin-top: 10px">
                                                     <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">size : {{ $color->size->code }}</span>
                                                     <br>
                                                     <span style="vertical-align: sub;color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">qty : {{ $color->stock_qty }}</span>
