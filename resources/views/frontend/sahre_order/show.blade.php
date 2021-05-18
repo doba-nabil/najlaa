@@ -174,7 +174,7 @@
                                                     {{ $pay->count }}
                                                 </td>
                                                 <td>
-                                                    @if($pay->product->price == 0 || empty($pay->product->price ))
+                                                    @if($pay->product->discount_price == 0 || empty($pay->product->discount_price ))
                                                      {{ $pay->product->price }} QAR
                                                     @else
                                                         {{ $pay->product->discount_price }} QAR
