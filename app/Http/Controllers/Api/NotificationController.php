@@ -336,6 +336,44 @@ class NotificationController extends Controller
             if($user->orders_notify == 0){
                 $user->orders_notify = 1;
                 $user->save();
+
+                $firebaseTokens = DB::table('token_users')->where('user_id' , $user->id)->get();
+                if($firebaseTokens->count() > 0){
+                    foreach ($firebaseTokens as $firebaseToken){
+                        if($firebaseToken->lang == 'en'){
+                            $title = 'Activate Notifications';
+                            $body = 'Activate Sales Notifications Successfully.';
+                        }else{
+                            $title = 'تفعيل الاشعارات';
+                            $body = 'تم تفعيل اشعارات التخفيضات بنجاح.';
+                        }
+                        $data = [
+                            "to" => $firebaseToken->device_token,
+                            "notification" =>
+                                [
+                                    "title" => $title,
+                                    "body" => $body,
+                                    "icon" => url('/logo.png'),
+                                    "sound" => 'default',
+                                ],
+                        ];
+                        $dataString = json_encode($data);
+
+                        $headers = [
+                            'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
+                            'Content-Type: application/json',
+                        ];
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                        curl_setopt($ch, CURLOPT_POST, true);
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+                        curl_exec($ch);
+                    }
+                }
+
                 return response()->json([
                     "msg" => trans('api.activated'),
                     'status' => true,
@@ -365,6 +403,43 @@ class NotificationController extends Controller
             if($user->products_notify == 0){
                 $user->products_notify = 1;
                 $user->save();
+
+                $firebaseTokens = DB::table('token_users')->where('user_id' , $user->id)->get();
+                if($firebaseTokens->count() > 0){
+                    foreach ($firebaseTokens as $firebaseToken){
+                        if($firebaseToken->lang == 'en'){
+                            $title = 'Activate Notifications';
+                            $body = 'Activate Orders Notifications Successfully.';
+                        }else{
+                            $title = 'تفعيل الاشعارات';
+                            $body = 'تم تفعيل اشعارات طلبات الشراء بنجاح.';
+                        }
+                        $data = [
+                            "to" => $firebaseToken->device_token,
+                            "notification" =>
+                                [
+                                    "title" => $title,
+                                    "body" => $body,
+                                    "icon" => url('/logo.png'),
+                                    "sound" => 'default',
+                                ],
+                        ];
+                        $dataString = json_encode($data);
+
+                        $headers = [
+                            'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
+                            'Content-Type: application/json',
+                        ];
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                        curl_setopt($ch, CURLOPT_POST, true);
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+                        curl_exec($ch);
+                    }
+                }
                 return response()->json([
                     "msg" => trans('api.activated'),
                     'status' => true,

@@ -179,12 +179,19 @@ class OrderController extends Controller
                 $user->notify(new OrderSatusNot($order));
                 $firebaseTokens = DB::table('token_users')->where('user_id' , $user->id)->get();
                 foreach ($firebaseTokens as $firebaseToken){
+                    if($firebaseToken->lang == 'en'){
+                        $title = 'Change the status of the purchase requisition';
+                        $body = 'The status of your purchase has changed . Order Code : '.$order->order_no;
+                    }else{
+                        $title = 'تغيير حالة طلب الشراء';
+                        $body =  ' تم تغيير حالة طلب الشراء الخاص بك . كود الطلب :'.$order->order_no;
+                    }
                     $data = [
                         "to" => $firebaseToken->device_token,
                         "notification" =>
                             [
-                                "title" => 'تغيير حالة طلب الشراء',
-                                "body" => 'تم تغيير حالة طلب الشراء الخاصة بك',
+                                "title" => $title,
+                                "body" => $body,
                                 "icon" => url('/logo.png'),
                                 "sound" => 'default',
                             ],

@@ -178,10 +178,10 @@ class ProductController extends Controller
                         foreach ($firebaseTokens as $firebaseToken){
                             if($firebaseToken->lang == 'en'){
                                 $title = 'New offer';
-                                $body = 'Discounts on the product in the name of' . $product->name_en;
+                                $body = 'Discounts on ' . $product->name_en;
                             }else{
                                 $title = 'عرض تخفيض جديد';
-                                $body = 'تخفيضات على المنتج بأسم' . $product->name_ar;
+                                $body = 'تخفيضات على ' . $product->name_ar;
                             }
                             $data = [
                                 "to" => $firebaseToken->device_token,

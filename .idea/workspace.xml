@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="" />
+    <list default="true" id="d44c226e-9873-4c6d-a0d1-68591a8f361b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2852">
-              <caret line="173" column="79" lean-forward="true" selection-start-line="173" selection-start-column="79" selection-end-line="173" selection-end-column="79" />
+            <state relative-caret-position="322">
+              <caret line="183" column="52" selection-start-line="183" selection-start-column="52" selection-end-line="183" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -32,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="191" column="53" selection-start-line="191" selection-start-column="53" selection-end-line="191" selection-end-column="53" />
+            <state relative-caret-position="138">
+              <caret line="183" column="71" selection-start-line="183" selection-start-column="67" selection-end-line="183" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -44,8 +48,8 @@
       <file leaf-file-name="FcmController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/FcmController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="79" column="55" lean-forward="true" selection-start-line="79" selection-start-column="55" selection-end-line="79" selection-end-column="55" />
+            <state relative-caret-position="184">
+              <caret line="74" column="45" lean-forward="true" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -62,8 +66,8 @@
       <file leaf-file-name="NotificationController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7291">
-              <caret line="344" column="40" selection-start-line="344" selection-start-column="40" selection-end-line="344" selection-end-column="40" />
+            <state relative-caret-position="456">
+              <caret line="348" column="25" lean-forward="true" selection-start-line="342" selection-start-column="24" selection-end-line="348" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -72,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/backend/products/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="479">
-              <caret line="387" column="9" lean-forward="true" selection-start-line="372" selection-start-column="8" selection-end-line="387" selection-end-column="9" />
+              <caret line="387" column="9" selection-start-line="372" selection-start-column="8" selection-end-line="387" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -184,15 +188,15 @@
         <option value="$PROJECT_DIR$/database/migrations/2021_05_18_234244_add_nots_to_users_table.php" />
         <option value="$PROJECT_DIR$/resources/lang/ar/api.php" />
         <option value="$PROJECT_DIR$/resources/lang/en/api.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" />
         <option value="$PROJECT_DIR$/routes/admin.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/products/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/lang/ar/dashboard.php" />
         <option value="$PROJECT_DIR$/resources/lang/en/dashboard.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/products/edit.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php" />
       </list>
     </option>
   </component>
@@ -541,17 +545,18 @@
       <workItem from="1621328885772" duration="961000" />
       <workItem from="1621330186398" duration="432000" />
       <workItem from="1621332493403" duration="1274000" />
-      <workItem from="1621370393309" duration="5213000" />
+      <workItem from="1621370393309" duration="6098000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="810402000" />
+    <option name="totallyTimeSpent" value="811287000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18532526" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18532526" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32994923" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -560,7 +565,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32994923" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.31641287" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.31641287" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -865,20 +870,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/FcmController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="79" column="55" lean-forward="true" selection-start-line="79" selection-start-column="55" selection-end-line="79" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="191" column="53" selection-start-line="191" selection-start-column="53" selection-end-line="191" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/admin.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -893,13 +884,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7291">
-          <caret line="344" column="40" selection-start-line="344" selection-start-column="40" selection-end-line="344" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/lang/ar/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -910,7 +894,7 @@
     <entry file="file://$PROJECT_DIR$/resources/views/backend/products/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="479">
-          <caret line="387" column="9" lean-forward="true" selection-start-line="372" selection-start-column="8" selection-end-line="387" selection-end-column="9" />
+          <caret line="387" column="9" selection-start-line="372" selection-start-column="8" selection-end-line="387" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -937,8 +921,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2852">
-          <caret line="173" column="79" lean-forward="true" selection-start-line="173" selection-start-column="79" selection-end-line="173" selection-end-column="79" />
+        <state relative-caret-position="322">
+          <caret line="183" column="52" selection-start-line="183" selection-start-column="52" selection-end-line="183" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/FcmController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="74" column="45" lean-forward="true" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="348" column="25" lean-forward="true" selection-start-line="342" selection-start-column="24" selection-end-line="348" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="183" column="71" selection-start-line="183" selection-start-column="67" selection-end-line="183" selection-end-column="71" />
         </state>
       </provider>
     </entry>
