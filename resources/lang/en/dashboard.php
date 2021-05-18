@@ -184,4 +184,5 @@ return [
     'chose_delivery' => 'Chose Delivery',
     'save' => 'Save',
     'back' => 'Back',
+    'notify' => 'Send notifications for this product',
 ];

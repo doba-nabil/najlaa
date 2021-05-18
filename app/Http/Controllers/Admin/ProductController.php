@@ -92,6 +92,13 @@ class ProductController extends Controller
             if ($request->percentage_discount || $request->percentage_discount!= 0) {
                 $product->discount_price = $offerRate;
                 $product->percentage_discount = $request->percentage_discount . ' % ';
+
+                if ($request->notify == 1) {
+                    $product->notify = 1;
+                } else {
+                    $product->notify = 0;
+                }
+
             } else {
                 $product->percentage_discount = 0;
                 $product->discount_price = 0;
@@ -119,12 +126,6 @@ class ProductController extends Controller
             if ($request->hasFile('images')) {
                 $this->saveimages($request->images, 'pictures/products', $product->id, Product::class, 'sub');
             }
-//            if ($request->sizes) {
-//                $this->saveDetails($request->sizes, $product->id, 'size');
-//            }
-//            if ($request->colors) {
-//                $this->saveDetails($request->colors, $product->id, 'color');
-//            }
             foreach($request->colors as $color){
                 $co = new ProductColor();
                 $co->color_id = $color['color_id'];
@@ -165,10 +166,52 @@ class ProductController extends Controller
             $product = Product::where('slug', $slug)->first();
             if ($product->active == 1) {
                 $product->active = 0;
+                $product->save();
             } else {
                 $product->active = 1;
+                $product->save();
+
+                if($product->percentage_discount > 0 && $product->notify == 1){
+                    $users = User::where('products_notify' , 1)->pluck('id');
+                    if($users->count() > 0){
+                        $firebaseTokens = DB::table('token_users')->whereIn('user_id' , $users)->get();
+                        foreach ($firebaseTokens as $firebaseToken){
+                            if($firebaseToken->lang == 'en'){
+                                $title = 'New offer';
+                                $body = 'Discounts on the product in the name of' . $product->name_en;
+                            }else{
+                                $title = 'عرض تخفيض جديد';
+                                $body = 'تخفيضات على المنتج بأسم' . $product->name_ar;
+                            }
+                            $data = [
+                                "to" => $firebaseToken->device_token,
+                                "notification" =>
+                                    [
+                                        "title" => $title,
+                                        "body" => $body,
+                                        "icon" => url('/logo.png'),
+                                        "sound" => 'default',
+                                    ],
+                            ];
+                            $dataString = json_encode($data);
+
+                            $headers = [
+                                'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
+                                'Content-Type: application/json',
+                            ];
+                            $ch = curl_init();
+                            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                            curl_setopt($ch, CURLOPT_POST, true);
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+                            curl_exec($ch);
+                        }
+                    }
+                }
             }
-            $product->save();
+
             return redirect()->route('products.index')->with('done', 'Posted Successfully ....');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
@@ -257,6 +300,11 @@ class ProductController extends Controller
             if ($request->percentage_discount || $request->percentage_discount!= 0) {
                 $product->discount_price = $offerRate;
                 $product->percentage_discount = $request->percentage_discount . ' % ';
+                if ($request->notify == 1) {
+                    $product->notify = 1;
+                } else {
+                    $product->notify = 0;
+                }
             } else {
                 $product->percentage_discount = 0;
                 $product->discount_price = 0;
@@ -284,12 +332,6 @@ class ProductController extends Controller
             if ($request->hasFile('images')) {
                 $this->saveimages($request->images, 'pictures/products', $product->id, Product::class, 'sub');
             }
-//            if ($request->sizes) {
-//                $this->editDetails($request->sizes, $product->id, 'size');
-//            }
-//            if ($request->colors) {
-//                $this->editDetails($request->colors, $product->id, 'color');
-//            }
             if($request->colors){
                 foreach ($product->colors as $col){
                     $col->delete();

@@ -65,7 +65,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="discount_price">{{ __('dashboard.percent') }} </label>
-                                    <input style="width: 95%;display: inline-block;" min="0" max="100" type="number" name="percentage_discount" class="form-control"
+                                    <input style="width: 95%;display: inline-block;" min="0" max="100" type="number" name="percentage_discount" class="form-control save-sale"
                                            id="percentage_discount" placeholder="{{ __('dashboard.percent') }}"
                                            value="{{ old('percentage_discount') }}"> %
                                     @error('percentage_discount')
@@ -268,6 +268,18 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
+                        <div class="row notify">
+                            <div class="col-md-4">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" name="chosen" class="custom-control-input" id="customCheck3"
+                                           checked="" value="1">
+                                    <label class="custom-control-label"
+                                           for="customCheck3">{{ __('dashboard.notify') }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
                         <button class="btn btn-primary" type="submit">{{ __('dashboard.submit') }}</button>
                     </form>
                 </div>
@@ -357,5 +369,22 @@
                 childNumber--;
             }
         });
+
+        $('.save-sale').on('change', function() {
+            if ($(".save-sale").val() == 0) {
+                $(".notify").hide();
+            }else if($(".save-sale").val() > 0){
+                $(".notify").show();
+            }else if($(".save-sale").val() == ''){
+                $(".notify").hide();
+            }
+        });
+        if ($(".save-sale").val() == 0) {
+            $(".notify").hide();
+        }else if($(".save-sale").val() > 0){
+            $(".notify").show();
+        }else if($(".save-sale").val() == ''){
+            $(".notify").hide();
+        }
     </script>
 @endsection

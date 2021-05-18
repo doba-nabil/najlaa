@@ -162,34 +162,6 @@ class OrderController extends Controller
             $order->delivery_id = $request->delivery_id;
             $order->save();
 
-        $firebaseTokens = DB::table('token_users')->where('user_id' , $order->user_id)->get();
-        foreach ($firebaseTokens as $firebaseToken){
-            $data = [
-                "to" => $firebaseToken->device_token,
-                "notification" =>
-                    [
-                        "title" => 'تغيير حالة طلب الشراء',
-                        "body" => 'تم تغيير حالة طلب الشراء الخاصة بك',
-                        "icon" => url('/logo.png'),
-                        "sound" => 'default',
-                    ],
-            ];
-            $dataString = json_encode($data);
-
-            $headers = [
-                'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
-                'Content-Type: application/json',
-            ];
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-            curl_exec($ch);
-        }
-
             if($request->status == 0){
                 $code =  'signed / تم الاستلام';
             }elseif($request->status == 1){
@@ -202,9 +174,37 @@ class OrderController extends Controller
                 $code =  'delivered / تم التوصيل';
             }
             $user = User::find($order->user_id);
-            $user->notify(new OrderStatus($code));
+            if($user->orders_notify == 1){
+                $user->notify(new OrderStatus($code));
+                $user->notify(new OrderSatusNot($order));
+                $firebaseTokens = DB::table('token_users')->where('user_id' , $user->id)->get();
+                foreach ($firebaseTokens as $firebaseToken){
+                    $data = [
+                        "to" => $firebaseToken->device_token,
+                        "notification" =>
+                            [
+                                "title" => 'تغيير حالة طلب الشراء',
+                                "body" => 'تم تغيير حالة طلب الشراء الخاصة بك',
+                                "icon" => url('/logo.png'),
+                                "sound" => 'default',
+                            ],
+                    ];
+                    $dataString = json_encode($data);
+                    $headers = [
+                        'Authorization: key=AAAAH0FWu1Y:APA91bGf1c3t9BGXv0WoYc1-ycpjl29_g7AKjiyoT4mZyJpYpvvKYDzcj7fqjAYz7nr0s56nQvUPLkdWfqmwyRqszwGCeJ93pO2--evn00sDYb1l5YoIdhPyBH6m5iT0cbaabXBa3ubr',
+                        'Content-Type: application/json',
+                    ];
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+                    curl_exec($ch);
+                }
+            }
 
-            $user->notify(new OrderSatusNot($order));
             return redirect()->back()->with('done' , 'Order Updated Successfully');
 
     }

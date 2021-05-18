@@ -299,4 +299,92 @@ class NotificationController extends Controller
             ]);
         }
     }
+    public function notifications_status(Request $request)
+    {
+        try {
+            $user = User::where('api_token' , $request->bearerToken())->first();
+            if($user->products_notify == 0){
+                $products_notify = false;
+            }else{
+                $products_notify = true;
+            }
+            if($user->orders_notify == 0){
+                $orders_notify = false;
+            }else{
+                $orders_notify = true;
+            }
+            return response()->json([
+                "data" => [
+                    'products_notify' => $products_notify,
+                    'orders_notify' => $orders_notify,
+                ],
+                'status' => true,
+                'code' => 200,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "msg" => trans('validation.error'),
+                'status' => false,
+                'code' => 400,
+            ]);
+        }
+    }
+    public function orders_notify(Request $request)
+    {
+        try {
+            $user = User::where('api_token' , $request->bearerToken())->first();
+            if($user->orders_notify == 0){
+                $user->orders_notify = 1;
+                $user->save();
+                return response()->json([
+                    "msg" => trans('api.activated'),
+                    'status' => true,
+                    'code' => 200,
+                ]);
+            }else{
+                $user->orders_notify = 0;
+                $user->save();
+                return response()->json([
+                    "msg" => trans('api.unactivated'),
+                    'status' => true,
+                    'code' => 200,
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                "msg" => trans('validation.error'),
+                'status' => false,
+                'code' => 400,
+            ]);
+        }
+    }
+    public function products_notify(Request $request)
+    {
+        try {
+            $user = User::where('api_token' , $request->bearerToken())->first();
+            if($user->products_notify == 0){
+                $user->products_notify = 1;
+                $user->save();
+                return response()->json([
+                    "msg" => trans('api.activated'),
+                    'status' => true,
+                    'code' => 200,
+                ]);
+            }else{
+                $user->products_notify = 0;
+                $user->save();
+                return response()->json([
+                    "msg" => trans('api.unactivated'),
+                    'status' => true,
+                    'code' => 200,
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                "msg" => trans('validation.error'),
+                'status' => false,
+                'code' => 400,
+            ]);
+        }
+    }
 }
