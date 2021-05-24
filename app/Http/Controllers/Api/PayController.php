@@ -971,7 +971,7 @@ class PayController extends Controller
             if (isset($order)) {
                 return response()->json([
                     'status' => true,
-                    'data' => $order,
+                    'data' => $order->makeHidden('currency_value','currency_code','old_price','use_coupon','price_after_discount','discount_value','pays'),
                     'code' => 200,
                 ]);
             } else {
