@@ -947,7 +947,7 @@ class PayController extends Controller
     {
         try {
             $user = User::where('api_token', $request->bearerToken())->first();
-            $order = Order::where('user_id', $user->id)->where('id', $orderID)->select('status','order_no')->first();
+            $order = Order::where('user_id', $user->id)->where('id', $orderID)->select('status','order_no','date','time','processed','out_to_delivery','delivered')->first();
             if ($order->status == 0 || $order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4) {
                 $order['signed_date'] = Carbon::parse($order->date)->format('d M Y');
                 $order['signed_time'] = Carbon::parse($order->time)->format('h:i A');
@@ -971,7 +971,7 @@ class PayController extends Controller
             if (isset($order)) {
                 return response()->json([
                     'status' => true,
-                    'data' => $order->makeHidden('currency_value','currency_code','old_price','use_coupon','price_after_discount','discount_value','pays'),
+                    'data' => $order->makeHidden('currency_value','currency_code','old_price','use_coupon','price_after_discount','discount_value','pays','date','time','processed','out_to_delivery','delivered'),
                     'code' => 200,
                 ]);
             } else {
