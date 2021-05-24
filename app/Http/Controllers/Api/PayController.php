@@ -947,7 +947,7 @@ class PayController extends Controller
     {
         try {
             $user = User::where('api_token', $request->bearerToken())->first();
-            $order = Order::where('user_id', $user->id)->where('id', $orderID)->select('status')->first();
+            $order = Order::where('user_id', $user->id)->where('id', $orderID)->select('status','order_no')->first();
             if ($order->status == 0 || $order->status == 1 || $order->status == 2 || $order->status == 3 || $order->status == 4) {
                 $order['signed_date'] = Carbon::parse($order->date)->format('d M Y');
                 $order['signed_time'] = Carbon::parse($order->time)->format('h:i A');

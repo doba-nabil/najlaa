@@ -44,7 +44,7 @@
                             @if(app()->getLocale() == 'ar')
                                 <?php
 
-                                    date_default_timezone_set('UTC+3h');
+                                    date_default_timezone_set('Asia/Qatar');
 
                                 //Here we define out main variables
                                 $welcome_string="Welcome!";
@@ -57,11 +57,7 @@
                                 ?>
                             @else
                                 <?php
-                                if(Auth::user()->id != 1){
-                                    date_default_timezone_set('Africa/Cairo');
-                                }else{
-                                    date_default_timezone_set('Asia/Riyadh');
-                                }
+                                date_default_timezone_set('Asia/Qatar');
                                 //Here we define out main variables
                                 $welcome_string="Welcome!";
                                 $numeric_date=date("G");
