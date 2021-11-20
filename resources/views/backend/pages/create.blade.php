@@ -45,7 +45,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="body_en">{{ __('dashboard.content_en') }}</label>
-                                    <textarea rows="10" type="text" name="body_en" class="form-control" id="body_en" placeholder="{{ __('dashboard.content_en') }}"required>{{ old('name_en') }}</textarea>
+                                    <textarea rows="10" type="text" name="body_en" class="form-control" id="body_en" placeholder="{{ __('dashboard.content_en') }}"required>{{ old('body_en') }}</textarea>
                                     @error('body_en')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

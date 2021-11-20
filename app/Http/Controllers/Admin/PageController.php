@@ -54,12 +54,17 @@ class PageController extends Controller
     public function store(PageRequest $request)
     {
         try {
+            $page = new Page();
+            $page->name_ar = $request->name_ar;
+            $page->name_en = $request->name_en;
+            $page->body_ar = $request->body_ar;
+            $page->body_en = $request->body_en;
             if($request->active){
-                $request->request->add(['active' => 1]);
+                $page->active = 1;
             }else{
-                $request->request->add(['active' => 0]);
+                $page->active = 0;
             }
-            Page::create($request->all());
+            $page->save();
             return redirect()->route('pages.index')->with('done', 'Added Successfully ....');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');
@@ -105,12 +110,16 @@ class PageController extends Controller
     {
         try {
             $page = Page::find($id);
+            $page->name_ar = $request->name_ar;
+            $page->name_en = $request->name_en;
+            $page->body_ar = $request->body_ar;
+            $page->body_en = $request->body_en;
             if($request->active){
-                $request->request->add(['active' => 1]);
+                $page->active = 1;
             }else{
-                $request->request->add(['active' => 0]);
+                $page->active = 0;
             }
-            $page->update($request->all());
+            $page->save();
             return redirect()->route('pages.index')->with('done', 'Edited Successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Try Again !!');

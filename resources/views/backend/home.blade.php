@@ -19,7 +19,6 @@
                                 @else
                                     نجلاء
                                 @endif
-
                             </a></li>
                         <li class="breadcrumb-item active">{{ __('dashboard.dash') }}</li>
                     </ol>
@@ -32,9 +31,8 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <canvas id="canvas" width="200" height="200"
-                            style="">
-                    </canvas>
+                    <br><br>
+                    <div id="digital-clock"></div>
                 </div>
                 <div class="col-md-6 text-center">
                     <br><br>
@@ -629,6 +627,38 @@
     <!-- end row -->
 @endsection
 @section('backend-footer')
+    <script>
+        // Digital Clock
+        setInterval(() => {
+            let time = new Date();
+            let hours = time.getHours();
+            let minutes = time.getMinutes();
+            let seconds = time.getSeconds();
+            let amPm = "";
+
+            // Checking for AM/PM
+            if (hours > 12) {
+                hours = hours - 12;
+                amPm = "PM";
+            } else if (hours == 0) {
+                hours = 12;
+                amPm = "AM";
+            } else {
+                amPm = "AM";
+            }
+
+            // Prepending 0 if less than 10
+            hours = hours > 10 ? hours : "0" + hours;
+            minutes = minutes > 10 ? minutes : "0" + minutes;
+            seconds = seconds > 10 ? seconds : "0" + seconds;
+
+            // Adding the time in the DOM
+            document.getElementById(
+                "digital-clock"
+            ).innerHTML = `${hours}:${minutes}:${seconds} ${amPm}`;
+        }, 1000);
+
+    </script>
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>--}}
     {{--{!! $chart->script() !!}--}}
     {{--{!! $chartt->script() !!}--}}
