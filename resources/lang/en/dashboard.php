@@ -14,6 +14,7 @@ return [
     */
 // menu
     'admin_roles' => 'Admin & Roles',
+    'sys_email' => 'Notification\'s Eamil',
     'user' => 'User',
     'material' => 'Material',
     'settings' => 'App Settings',

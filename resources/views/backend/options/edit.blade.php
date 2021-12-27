@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="validationCustom02">Whatsapp number</label>
+                                    <label for="validationCustom02">Whatsapp</label>
                                     <input type="text" name="whats" class="form-control" id="validationCustom02" placeholder="whatsapp number" value="{{ $option->whats }}" required>
                                     @error('whats')
                                     <span class="text-danger">{{ $message }}</span>
@@ -71,6 +71,15 @@
                                     <label for="email">{{ __('dashboard.email') }}</label>
                                     <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('dashboard.email') }}" value="{{ $option->email }}" required>
                                     @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="sys_email">{{ __('dashboard.sys_email') }}</label>
+                                    <input type="email" name="sys_email" class="form-control" id="sys_email" placeholder="{{ __('dashboard.sys_email') }}" value="{{ $option->sys_email }}" required>
+                                    @error('sys_email')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
