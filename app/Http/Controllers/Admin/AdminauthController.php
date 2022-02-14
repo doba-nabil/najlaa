@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Option;
+use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Moderator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminauthController extends Controller
@@ -52,6 +56,20 @@ class AdminauthController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        if(\Schema::hasTable('options')){
+            $option = Option::find(1);
+            $order_dates = Order::where('status' , '!=' , '4')->whereDate('updated_at',Carbon::now()->subDay()->toDateString())->get();
+            foreach ($order_dates as $order_date){
+                $to_name = 'Admin';
+                $order_no = $order_date->order_no;
+                $to_email = $option->sys_email;
+                $data = array('name'=>"Najlaa App", "body" => $order_no);
+                Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
+                    $message->to($to_email, $to_name)
+                        ->subject('No action on order');
+                });
+            }
+        }
 //        $user->generateToken();
 //        response()->json(['data' => $user->toArray()], 201);
         $moderator = Moderator::find($user->id);

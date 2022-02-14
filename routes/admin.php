@@ -34,6 +34,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     /*********** category route ***********/
     Route::resource('categories', 'CategoryController', ['except' => ['show']]);
     Route::delete('delete_categories', 'CategoryController@delete_categories')->name('delete_categories');
+
+    Route::get('category_discounts/{slug}', 'SubcategoryController@discount')->name('cat_pro_desc');
+    Route::post('category_discounts/{id}', 'SubcategoryController@discount_form')->name('cat_pro_desc_form');
     /*********** end category route ***********/
     /*********** subscribers route ***********/
     Route::resource('subscribers', 'SubscriberController', ['only' => ['index' , 'destroy']]);

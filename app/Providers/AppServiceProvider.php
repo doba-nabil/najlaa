@@ -8,10 +8,12 @@ use App\Models\Currency;
 use App\Models\EmptyProductNotification;
 use App\Models\Moderator;
 use App\Models\Option;
+use App\Models\Order;
 use App\Models\Page;
 use App\Models\ProductColor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -45,6 +47,18 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         if(\Schema::hasTable('options')){
             $option = Option::find(1);
+//            $order_dates = Order::where('status' , '!=' , '4')->whereDate('updated_at',Carbon::now()->subDay()->toDateString())->get();
+//            foreach ($order_dates as $order_date){
+//                $to_name = 'Admin';
+//                $order_no = $order_date->order_no;
+//                $to_email = $option->sys_email;
+//                $data = array('name'=>"Najlaa App", "body" => $order_no);
+//                Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
+//                    $message->to($to_email, $to_name)
+//                        ->subject('No action on order');
+//                });
+//            }
+
             if(!isset($option)){
                 $option = new Option();
                 $option->id = 1;
