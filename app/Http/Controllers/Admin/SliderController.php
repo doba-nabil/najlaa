@@ -50,7 +50,7 @@ class SliderController extends Controller
     }
     public function store(SliderRequest $request)
     {
-        try {
+
             $slider = new Slider();
             $slider->title_ar = $request->title_ar;
             $slider->title_en = $request->title_en;
@@ -74,9 +74,7 @@ class SliderController extends Controller
                 $this->saveimage($request->image, 'pictures/sliders', $slider->id , Slider::class, 'main');
             }
             return redirect()->route('sliders.index')->with('done', 'Added Successfully ....');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error Try Again !!');
-        }
+
     }
 
     public function edit($id)
